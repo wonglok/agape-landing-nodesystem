@@ -4,6 +4,7 @@ import { Float, Preload, useFBO } from '@react-three/drei' //OrbitControls,
 // import { useEffect, useRef } from 'react'
 import {
   Camera,
+  Color,
   DoubleSide,
   NormalBlending,
   Scene,
@@ -27,11 +28,14 @@ const Multiverse = ({ router, children }) => {
         top: 0,
         left: 0,
       }}
+      gl={{ antialias: false, logarithmicDepthBuffer: true }}
       onCreated={(st) => {
+        st.scene.background = new Color('#ffffff')
         st.gl.physicallyCorrectLights = true
         st.gl.outputEncoding = sRGBEncoding
       }}
     >
+      {/*  */}
       <MapContent>{children}</MapContent>
       <ConnectKeyboard></ConnectKeyboard>
       <ConnectCameraControls></ConnectCameraControls>

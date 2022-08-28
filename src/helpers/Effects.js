@@ -120,9 +120,10 @@ export function Effects({}) {
       {enable && (
         <>
           <EffectComposer disableNormalPass>
-            {/* <Noise premultiply={true} opacity={0.35} /> */}
+            <Noise premultiply={true} opacity={1.0} />
 
             <SSR {...props} />
+
             <Bloom
               luminanceThreshold={0.0}
               mipmapBlur
