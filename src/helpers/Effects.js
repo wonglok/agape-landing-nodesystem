@@ -109,18 +109,18 @@ export function Effects({}) {
   //   })
   // }, [])
 
-  useFrame(({ camera, clock }) => {
-    //
-    let t = clock.getElapsedTime()
-    camera.position.y += 0.0000001 * Math.sin(t * 1000)
-  })
+  // useFrame(({ camera, clock }) => {
+  //   //
+  //   let t = clock.getElapsedTime()
+  //   camera.position.y += 0.0000001 * Math.sin(t * 1000)
+  // })
 
   return (
     <>
       {enable && (
         <>
           <EffectComposer disableNormalPass>
-            <Noise premultiply={true} opacity={1.0} />
+            <Noise premultiply={true} opacity={0.8} />
 
             <SSR {...props} />
 

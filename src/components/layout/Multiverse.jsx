@@ -109,24 +109,24 @@ function Screen({ fbo }) {
   let size = useThree((e) => e.size)
   let vp = viewport.getCurrentViewport(
     camera,
-    camera.position.clone().add(new Vector3(0, 0, -0.5)),
+    camera.position.clone().add(new Vector3(0, 0, -1)),
     size
   )
 
   return (
     <>
       {createPortal(
-        <mesh frustumCulled={false} position={[0, 0, -0.5]} scale={1}>
+        <mesh frustumCulled={false} position={[0, 0, -1]} scale={1}>
           <planeBufferGeometry
             args={[vp.width, vp.height]}
           ></planeBufferGeometry>
-          <meshBasicMaterial
+          <meshPhysicalMaterial
             transparent={true}
             map={fbo.texture}
             side={DoubleSide}
             color='#ffffff'
             blending={NormalBlending}
-          ></meshBasicMaterial>
+          ></meshPhysicalMaterial>
         </mesh>,
         camera
       )}
