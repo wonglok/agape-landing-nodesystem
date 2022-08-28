@@ -4,7 +4,6 @@ import { useMultiverse } from './useMultiverse'
 
 export function Floor({ url }) {
   let addNamedScene = useMultiverse((s) => s.addNamedScene)
-  let player = useMultiverse((s) => s.player)
 
   let glb = useGLTF(url)
   useEffect(() => {
@@ -17,11 +16,7 @@ export function Floor({ url }) {
       {/*  */}
       <primitive object={glb.scene}></primitive>
 
-      <primitive object={player}></primitive>
-
       {/*  */}
     </group>
   )
 }
-
-//

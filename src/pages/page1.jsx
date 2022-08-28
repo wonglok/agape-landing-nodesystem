@@ -8,6 +8,7 @@ import { ConnectKeyboard } from '@/helpers/ConnectKeyboard'
 import { ConnectCameraControls } from '@/helpers/ConnectCameraControls'
 import { ConnectSimulation } from '@/helpers/ConnectSimulation'
 import { Effects } from '@/helpers/Effects'
+import { Player } from '@/helpers/Player'
 // import dynamic from 'next/dynamic'
 
 const Page = (props) => {
@@ -18,7 +19,6 @@ const Page = (props) => {
       {/*  */}
 
       <Floor url='/scene/landing/os-effect1.glb'></Floor>
-
       {/* <Box
         position-x={-1}
         onClick={() => {

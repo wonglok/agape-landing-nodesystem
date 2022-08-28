@@ -18,6 +18,8 @@ import { ConnectCameraControls } from '@/helpers/ConnectCameraControls'
 import { useEffect } from 'react'
 import { ConnectSimulation } from '@/helpers/ConnectSimulation'
 import { Effects } from '@/helpers/Effects'
+import { Player } from '@/helpers/Player'
+import { Companion } from '@/helpers/Companion'
 
 const Multiverse = ({ router, children }) => {
   return (
@@ -35,13 +37,16 @@ const Multiverse = ({ router, children }) => {
         st.gl.outputEncoding = sRGBEncoding
       }}
     >
-      {/*  */}
       <MapContent>{children}</MapContent>
       <ConnectKeyboard></ConnectKeyboard>
       <ConnectCameraControls></ConnectCameraControls>
       <ConnectSimulation></ConnectSimulation>
       <Effects></Effects>
+      <Player></Player>
 
+      <Suspense fallback={null}>
+        <Companion></Companion>
+      </Suspense>
       {/* <OverlayContentAdapter></OverlayContentAdapter> */}
     </Canvas>
   )
