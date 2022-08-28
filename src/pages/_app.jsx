@@ -1,29 +1,37 @@
 import { useRouter } from 'next/router'
-import { setState } from '@/helpers/store'
 import { useEffect } from 'react'
 import Header from '@/config'
-import Dom from '@/components/layout/dom'
 import '@/styles/index.css'
-import dynamic from 'next/dynamic'
-
-const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
-  ssr: true,
-})
+import CanvasLayout from '@/components/layout/CanvasLayout'
+import { useSystemStore } from '@/helpers/useSystemStore'
 
 function App({ Component, pageProps = { title: 'index' } }) {
   const router = useRouter()
-
+  const setRouter = useSystemStore((s) => s.setRouter)
   useEffect(() => {
-    setState({ router })
-  }, [router])
+    setRouter({ router })
+  }, [router, setRouter])
 
   return (
     <>
       <Header title={pageProps.title} />
-      <Dom>
-        <Component {...pageProps} />
-      </Dom>
-      {Component?.r3f && <LCanvas>{Component.r3f(pageProps)}</LCanvas>}
+
+      {Component.useCanvasLayout ? (
+        <CanvasLayout>
+          <Component {...pageProps}></Component>
+        </CanvasLayout>
+      ) : (
+        <Component {...pageProps}></Component>
+      )}
+
+      <span
+        style={{
+          display: 'block',
+          position: 'absolute',
+          zIndex: 10,
+        }}
+        id='myroot'
+      ></span>
     </>
   )
 }
