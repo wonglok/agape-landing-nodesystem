@@ -62,77 +62,77 @@ function MapContent({ children }) {
   return <Suspense fallback={<TempScene></TempScene>}>{children}</Suspense>
 }
 
-function OverlayContentAdapter() {
-  let overlayReactContent = useSystemStore((s) => s.overlayReactContent)
-  return (
-    <>
-      {overlayReactContent && (
-        <OverlayContent>{overlayReactContent}</OverlayContent>
-      )}
-    </>
-  )
-}
-function OverlayContent({ children }) {
-  let size = useThree((e) => e.size)
-  let fbo = useFBO(size.width, size.height)
+// function OverlayContentAdapter() {
+//   let overlayReactContent = useSystemStore((s) => s.overlayReactContent)
+//   return (
+//     <>
+//       {overlayReactContent && (
+//         <OverlayContent>{overlayReactContent}</OverlayContent>
+//       )}
+//     </>
+//   )
+// }
+// function OverlayContent({ children }) {
+//   let size = useThree((e) => e.size)
+//   let fbo = useFBO(size.width, size.height)
 
-  let auxScene = useMemo(() => {
-    return new Scene()
-  }, [])
+//   let auxScene = useMemo(() => {
+//     return new Scene()
+//   }, [])
 
-  useFrame(({ camera, gl }) => {
-    if (auxScene && auxScene?.children.length > 0 && camera) {
-      // //
-      gl.setRenderTarget(fbo)
-      gl.setClearColor(0xffffff, 0)
-      gl.setClearAlpha(0)
-      gl.clear()
-      gl.render(auxScene, camera)
-      gl.setRenderTarget(null)
-      gl.setClearAlpha(0)
-    }
-  })
+//   useFrame(({ camera, gl }) => {
+//     if (auxScene && auxScene?.children.length > 0 && camera) {
+//       // //
+//       gl.setRenderTarget(fbo)
+//       gl.setClearColor(0xffffff, 0)
+//       gl.setClearAlpha(0)
+//       gl.clear()
+//       gl.render(auxScene, camera)
+//       gl.setRenderTarget(null)
+//       gl.setClearAlpha(0)
+//     }
+//   })
 
-  return (
-    <group>
-      {createPortal(children, auxScene)}
+//   return (
+//     <group>
+//       {createPortal(children, auxScene)}
 
-      <Screen fbo={fbo}></Screen>
-    </group>
-  )
-  //
-}
+//       <Screen fbo={fbo}></Screen>
+//     </group>
+//   )
+//   //
+// }
 
-function Screen({ fbo }) {
-  let camera = useThree((e) => e.camera)
-  let viewport = useThree((e) => e.viewport)
-  let size = useThree((e) => e.size)
-  let vp = viewport.getCurrentViewport(
-    camera,
-    camera.position.clone().add(new Vector3(0, 0, -1)),
-    size
-  )
+// function Screen({ fbo }) {
+//   let camera = useThree((e) => e.camera)
+//   let viewport = useThree((e) => e.viewport)
+//   let size = useThree((e) => e.size)
+//   let vp = viewport.getCurrentViewport(
+//     camera,
+//     camera.position.clone().add(new Vector3(0, 0, -1)),
+//     size
+//   )
 
-  return (
-    <>
-      {createPortal(
-        <mesh frustumCulled={false} position={[0, 0, -1]} scale={1}>
-          <planeBufferGeometry
-            args={[vp.width, vp.height]}
-          ></planeBufferGeometry>
-          <meshPhysicalMaterial
-            transparent={true}
-            map={fbo.texture}
-            side={DoubleSide}
-            color='#ffffff'
-            blending={NormalBlending}
-          ></meshPhysicalMaterial>
-        </mesh>,
-        camera
-      )}
-      <primitive object={camera}></primitive>
-    </>
-  )
-}
+//   return (
+//     <>
+//       {createPortal(
+//         <mesh frustumCulled={false} position={[0, 0, -1]} scale={1}>
+//           <planeBufferGeometry
+//             args={[vp.width, vp.height]}
+//           ></planeBufferGeometry>
+//           <meshPhysicalMaterial
+//             transparent={true}
+//             map={fbo.texture}
+//             side={DoubleSide}
+//             color='#ffffff'
+//             blending={NormalBlending}
+//           ></meshPhysicalMaterial>
+//         </mesh>,
+//         camera
+//       )}
+//       <primitive object={camera}></primitive>
+//     </>
+//   )
+// }
 
 export { Multiverse }

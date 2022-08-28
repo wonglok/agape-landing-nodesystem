@@ -36,6 +36,10 @@ function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
             <Component router={router} {...pageProps}></Component>
           )}
 
+          {typeof Component.SEO !== 'undefined' && (
+            <Component.SEO router={router} {...pageProps}></Component.SEO>
+          )}
+
           <span
             style={{
               display: 'block',

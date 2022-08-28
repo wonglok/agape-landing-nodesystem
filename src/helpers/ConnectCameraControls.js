@@ -11,10 +11,19 @@ export function ConnectCameraControls() {
 
   let [or, setOR] = useState(false)
   useEffect(() => {
+    let cleans = []
     let orbit = new OrbitControls(camera, gl.domElement)
     setCamera(camera)
     setControls(orbit)
     setOR(orbit)
+
+    cleans.push(() => {
+      orbit.enabled = false
+      orbit.dispose()
+    })
+    return () => {
+      cleans.forEach((s) => s())
+    }
   }, [camera, gl, setCamera, setControls])
 
   useFrame(() => {

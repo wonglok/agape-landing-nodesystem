@@ -1,6 +1,6 @@
 import create from 'zustand'
 import { sceneToCollider } from './sceneToCollider'
-import { BoxBufferGeometry, Scene } from 'three'
+import { BoxBufferGeometry, Color, MeshPhysicalMaterial, Scene } from 'three'
 import { Mesh, MeshBasicMaterial } from 'three'
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry'
 import { Line3, MeshStandardMaterial, Vector3 } from 'three'
@@ -29,7 +29,14 @@ const useMultiverse = create((set, get) => {
   // characters
   let player = new Mesh(
     new RoundedBoxGeometry(1.0, 2.0, 1.0, 10, 0.5),
-    new MeshStandardMaterial()
+    new MeshPhysicalMaterial({
+      color: new Color('#00ffff'),
+      transmission: 1,
+      roughness: 0,
+      metalness: 0,
+      ior: 1.2,
+      reflectivity: 0.5,
+    })
   )
   player.name = 'myavatar'
   player.geometry.translate(0, -0.5, 0)
@@ -38,19 +45,20 @@ const useMultiverse = create((set, get) => {
     segment: new Line3(new Vector3(), new Vector3(0, -1.0, 0.0)),
   }
 
+  let onlineProfile = {
+    // //
+    // avatarURL: `/scene/loklokdemo/glassman_.glb`,
+    // avatarVendor: `rpm`,
+    // //
+    // avatarURLWrap: `/scene/loklokdemo/glassman_.glb`,
+    // avatarActionResumeOnKeyUp: 'stand',
+    // avatarActionName: 'stand',
+    // avatarActionIdleName: 'stand',
+    // avatarActionRepeat: Infinity,
+  }
+
   let self = {
     voiceID: '',
-    //
-    avatarURL: `/scene/loklokdemo/glassman_.glb`,
-    avatarVendor: `rpm`,
-
-    //
-    avatarURLWrap: `/scene/loklokdemo/glassman_.glb`,
-
-    avatarActionResumeOnKeyUp: 'stand',
-    avatarActionName: 'stand',
-    avatarActionIdleName: 'stand',
-    avatarActionRepeat: Infinity,
 
     playerIsOnGround: false,
     player,
@@ -84,9 +92,16 @@ const useMultiverse = create((set, get) => {
 
   return {
     ...self,
+    ...onlineProfile,
+
     colliderPromises,
     controls: false,
-    setControls: (s) => set({ controls: s }),
+    setControls: (s) => {
+      set({ controls: s })
+      return () => {
+        s.dispose()
+      }
+    },
     camera: false,
     setCamera: (s) => set({ camera: s }),
     activeCollider: false,

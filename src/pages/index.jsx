@@ -1,3 +1,5 @@
+import { UIContent } from '@/helpers/UIContent'
+
 const Page = (props) => {
   return (
     <>
@@ -9,6 +11,16 @@ const Page = (props) => {
 }
 Page.layout = 'PromotePage'
 
+Page.SEO = function SEO() {
+  return (
+    <div className='absolute top-0 left-0 z-10'>
+      <div>
+        <a href={'/page1'}>Page1</a>
+        <a href={'/forge'}>Forge Avatar + Motion</a>
+      </div>
+    </div>
+  )
+}
 async function getStaticProps() {
   return {
     props: {
@@ -17,6 +29,7 @@ async function getStaticProps() {
     },
   }
 }
+
 export { getStaticProps }
 export default Page
 
