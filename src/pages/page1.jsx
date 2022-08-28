@@ -11,7 +11,7 @@ import { Effects } from '@/helpers/Effects'
 // import dynamic from 'next/dynamic'
 
 const Page = (props) => {
-  let changePage = useSystemStore((s) => s.changePage)
+  // let changePage = useSystemStore((s) => s.changePage)
 
   return (
     <>
@@ -29,15 +29,6 @@ const Page = (props) => {
       </Box> */}
 
       <Environment background={true} preset='night'></Environment>
-
-      <Box
-        onClick={() => {
-          // let Page2 = dynamic(() => .then((s) => s.default), {
-          //   ssr: false,
-          // })
-        }}
-        position={[0, -1, 0]}
-      ></Box>
 
       {/*  */}
 
