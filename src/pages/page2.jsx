@@ -1,22 +1,29 @@
-import { Box } from '@react-three/drei'
+import { Box, Environment, Sphere } from '@react-three/drei'
 
 const Page = (props) => {
   return (
     <>
-      <Box
-        args={[3, 3, 3]}
+      <Sphere
+        position-x={1}
         onClick={() => {
           props.router.push('/')
         }}
-      ></Box>
+      >
+        <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
+      </Sphere>
+
+      <Environment preset='city'></Environment>
+
       {/*  */}
     </>
   )
 }
+
 Page.useCanvasLayout = true
 async function getStaticProps() {
   return {
     props: {
+      sceneName: 'page2',
       title: 'Effect Node Forge',
     },
   }

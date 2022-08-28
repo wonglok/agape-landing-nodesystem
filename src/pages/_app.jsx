@@ -1,13 +1,14 @@
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import Header from '@/config'
 import '@/styles/index.css'
 import CanvasLayout from '@/components/layout/CanvasLayout'
 import { useSystemStore } from '@/helpers/useSystemStore'
 
-function App({ Component, pageProps = { title: 'index' } }) {
+function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
   const router = useRouter()
   const setRouter = useSystemStore((s) => s.setRouter)
+
   useEffect(() => {
     setRouter({ router })
   }, [router, setRouter])
@@ -19,7 +20,7 @@ function App({ Component, pageProps = { title: 'index' } }) {
       {router && (
         <>
           {Component.useCanvasLayout ? (
-            <CanvasLayout>
+            <CanvasLayout router={router} {...pageProps}>
               <Component router={router} {...pageProps}></Component>
             </CanvasLayout>
           ) : (
