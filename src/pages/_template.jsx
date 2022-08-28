@@ -1,7 +1,7 @@
 const Page = (props) => {
   return <>{/*  */}</>
 }
-Page.useCanvasLayout = true
+Page.layout = 'PromotePage'
 
 export default Page
 

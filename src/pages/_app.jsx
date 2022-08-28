@@ -1,9 +1,11 @@
-import { useRouter } from 'next/router'
-import { useEffect, useRef } from 'react'
-import Header from '@/config'
 import '@/styles/index.css'
-import CanvasLayout from '@/components/layout/CanvasLayout'
+
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import Header from '@/config'
+import { Multiverse } from '@/components/layout/Multiverse'
 import { useSystemStore } from '@/helpers/useSystemStore'
+import { PromotePage } from '@/components/layout/PromotePage'
 
 function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
   const router = useRouter()
@@ -19,11 +21,18 @@ function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
 
       {router && (
         <>
-          {Component.useCanvasLayout ? (
-            <CanvasLayout router={router} {...pageProps}>
+          {Component.layout === 'Multiverse' && (
+            <Multiverse router={router} {...pageProps}>
               <Component router={router} {...pageProps}></Component>
-            </CanvasLayout>
-          ) : (
+            </Multiverse>
+          )}
+          {Component.layout === 'PromotePage' && (
+            <PromotePage router={router} {...pageProps}>
+              <Component router={router} {...pageProps}></Component>
+            </PromotePage>
+          )}
+
+          {typeof Component.layout === 'undefined' && (
             <Component router={router} {...pageProps}></Component>
           )}
 

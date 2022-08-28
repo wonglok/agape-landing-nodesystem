@@ -1,7 +1,6 @@
-import { Scene } from 'three'
 import create from 'zustand'
-import { AllScenes } from './AllScenes'
-import { getSlug } from './getSlug'
+import Router from 'next/router'
+import { LoadingContent } from './LoadingContent'
 
 const useSystemStore = create((set, get) => {
   return {
@@ -11,6 +10,21 @@ const useSystemStore = create((set, get) => {
     },
     overlayReactContent: <></>,
     setOverlayReactContent: (v) => set({ overlayReactContent: v }),
+
+    changePage: (page) => {
+      Router.prefetch(`/page2`).then(() => {
+        Router.router.push('/page2')
+      })
+
+      let { setOverlayReactContent } = get()
+      setOverlayReactContent(
+        <LoadingContent
+          onHide={() => {
+            setOverlayReactContent(null)
+          }}
+        ></LoadingContent>
+      )
+    },
   }
 })
 

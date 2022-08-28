@@ -1,12 +1,14 @@
+import { useSystemStore } from '@/helpers/useSystemStore'
 import { Box, Environment, Sphere } from '@react-three/drei'
 
 const Page = (props) => {
+  let router = useSystemStore((s) => s.router)
   return (
     <>
       <Sphere
         position-x={1}
         onClick={() => {
-          props.router.push('/')
+          props.router.push('/page1')
         }}
       >
         <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
@@ -18,8 +20,8 @@ const Page = (props) => {
     </>
   )
 }
+Page.layout = 'Multiverse'
 
-Page.useCanvasLayout = true
 async function getStaticProps() {
   return {
     props: {
@@ -31,3 +33,5 @@ async function getStaticProps() {
 
 export { getStaticProps }
 export default Page
+
+//
