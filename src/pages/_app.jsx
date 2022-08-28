@@ -16,22 +16,26 @@ function App({ Component, pageProps = { title: 'index' } }) {
     <>
       <Header title={pageProps.title} />
 
-      {Component.useCanvasLayout ? (
-        <CanvasLayout>
-          <Component {...pageProps}></Component>
-        </CanvasLayout>
-      ) : (
-        <Component {...pageProps}></Component>
-      )}
+      {router && (
+        <>
+          {Component.useCanvasLayout ? (
+            <CanvasLayout>
+              <Component router={router} {...pageProps}></Component>
+            </CanvasLayout>
+          ) : (
+            <Component router={router} {...pageProps}></Component>
+          )}
 
-      <span
-        style={{
-          display: 'block',
-          position: 'absolute',
-          zIndex: 10,
-        }}
-        id='myroot'
-      ></span>
+          <span
+            style={{
+              display: 'block',
+              position: 'absolute',
+              zIndex: 10,
+            }}
+            id='myroot'
+          ></span>
+        </>
+      )}
     </>
   )
 }

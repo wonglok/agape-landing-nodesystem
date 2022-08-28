@@ -3,6 +3,7 @@ import { Preload } from '@react-three/drei' //OrbitControls,
 // import useStore from '@/helpers/store'
 // import { useEffect, useRef } from 'react'
 import { sRGBEncoding } from 'three'
+import { Suspense } from 'react'
 
 // const LControl = () => {
 //   const dom = useStore((state) => state.dom)
@@ -37,8 +38,10 @@ const CanvasLayout = ({ children }) => {
         st.gl.outputEncoding = sRGBEncoding
       }}
     >
-      <Preload all />
-      {children}
+      <Suspense fallback={null}>
+        <Preload all />
+        {children}
+      </Suspense>
     </Canvas>
   )
 }

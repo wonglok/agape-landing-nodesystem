@@ -4,16 +4,15 @@ const Page = (props) => {
   return (
     <>
       <Box
+        args={[3, 3, 3]}
         onClick={() => {
-          props.router.push('/page2')
+          props.router.push('/')
         }}
       ></Box>
-
       {/*  */}
     </>
   )
 }
-
 Page.useCanvasLayout = true
 async function getStaticProps() {
   return {
