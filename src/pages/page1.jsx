@@ -53,7 +53,3 @@ export { getStaticProps }
 export default Page
 
 //
-
-//
-
-//
