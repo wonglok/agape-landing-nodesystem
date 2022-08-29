@@ -4,10 +4,14 @@ import { Suspense, useEffect } from 'react'
 import { Floor } from '@/helpers/Floor'
 import { Companion } from '@/helpers/Companion'
 import { useMultiverse } from '@/helpers/useMultiverse'
+import anime from 'animejs'
+import { screenOpacity } from '@/helpers/GLOverlayEffect'
+import { LineStuff } from '@/helpers/LineDrop/LineStuff'
+import { useThree } from '@react-three/fiber'
+import { Vector3 } from 'three'
 // import dynamic from 'next/dynamic'
 
 const Page = (props) => {
-  let setShowFloor = useMultiverse((s) => s.setShowFloor)
   return (
     <>
       <Floor url='/scene/landing/os-effect1.glb'></Floor>
@@ -16,8 +20,15 @@ const Page = (props) => {
         position={[3, 1, 1]}
         onClick={() => {
           //
-
-          Router.router.push('/page2')
+          screenOpacity.value = 1
+          anime({
+            targets: [screenOpacity],
+            value: 0,
+            update: () => {},
+            complete: () => {
+              Router.router.push('/page2')
+            },
+          })
         }}
       >
         <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>

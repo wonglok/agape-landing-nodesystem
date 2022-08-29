@@ -16,6 +16,7 @@ import {
 } from 'three'
 import anime from 'animejs'
 import { GridHelper } from 'three140'
+import { screenOpacity } from '../GLOverlayEffect.js'
 // import { resample } from "@thi.ng/geom-resample";
 
 export class LineStuff extends Object3D {
@@ -57,7 +58,6 @@ export class LineStuff extends Object3D {
     this.add(grid)
 
     let progress = { value: 0 }
-    let progress2 = { value: 0 }
     let iMat = new ShaderMaterial({
       uniforms: {
         unitSize: { value: unitSize },
@@ -76,18 +76,13 @@ export class LineStuff extends Object3D {
     iMesh.position.copy(position)
     this.add(iMesh)
 
-    let applyGLB = (v) => {
-      if (glb) {
-        glb.scene.traverse((it) => {
-          if (it.material) {
-            it.material.transparent = true
-            it.material.opacity = v
-          }
-        })
-      }
-    }
+    //
     let current = false
-    let runner = ({ done = () => {}, delay = 0 }) => {
+    let runner = ({
+      startFadeOut = async () => {},
+      done = () => {},
+      delay = 0,
+    }) => {
       progress.value = 0.0
 
       current = anime({
@@ -96,24 +91,25 @@ export class LineStuff extends Object3D {
         easing: 'easeOutSine', //"easeOutQuad",
         duration: 2000,
         delay,
-        complete: () => {
+        complete: async () => {
           progress.value = 1
 
-          anime({
-            targets: [progress],
-            value: 0,
-            easing: 'easeOutSine', //"easeOutQuad",
-            duration: 1000,
-            delay,
-            update: () => {
-              glb.scene.visible = true
-              applyGLB(1.0 - progress.value)
-              grid.position.y = 100 * (1.0 - progress.value)
-            },
-            complete: () => {
-              done()
-            },
-          })
+          done()
+
+          // anime({
+          //   targets: [progress],
+          //   value: 0,
+          //   easing: 'easeOutSine', //"easeOutQuad",
+          //   duration: 1000,
+          //   delay,
+          //   update: () => {
+          //     grid.position.y = 100 * (1.0 - progress.value)
+          //   },
+          //   complete: () => {
+          //     startFadeOut()
+          //     done()
+          //   },
+          // })
         },
       })
     }
@@ -123,7 +119,7 @@ export class LineStuff extends Object3D {
       if (current) {
         current.pause()
       }
-      progress.value = 0.0
+      // progress.value = 0.0
     }
 
     return this

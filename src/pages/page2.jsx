@@ -1,8 +1,10 @@
 import { Companion } from '@/helpers/Companion'
 import { Floor } from '@/helpers/Floor'
+import { screenOpacity } from '@/helpers/GLOverlayEffect'
 import { useMultiverse } from '@/helpers/useMultiverse'
 import { useSystemStore } from '@/helpers/useSystemStore'
 import { Box, Environment, Sphere } from '@react-three/drei'
+import anime from 'animejs'
 import Router from 'next/router'
 import { Suspense } from 'react'
 
@@ -15,7 +17,15 @@ const Page = (props) => {
       <Sphere
         position={[-3, 1, 1]}
         onClick={() => {
-          Router.router.push('/page1')
+          screenOpacity.value = 1
+          anime({
+            targets: [screenOpacity],
+            value: 0,
+            update: () => {},
+            complete: () => {
+              Router.router.push('/page1')
+            },
+          })
         }}
       >
         <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>

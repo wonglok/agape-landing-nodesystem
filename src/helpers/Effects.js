@@ -9,6 +9,7 @@ import {
 } from '@react-three/postprocessing'
 // import { useControls } from 'leva'
 import { LUTCubeLoader } from 'postprocessing'
+import { GLOverlayEffect } from './GLOverlayEffect'
 import { useMultiverse } from './useMultiverse'
 
 // let settings = {
@@ -121,13 +122,14 @@ export function Effects({}) {
     // camera.position.y += 0.0002 * Math.sin(t * 1000)
     camera.position.z += 0.0005 * Math.sin(t * 1000)
   })
+
   //setPostProcessing
   let usePostProcessing = useMultiverse((s) => s.usePostProcessing)
   return (
     <>
       {enable && usePostProcessing && (
         <>
-          <EffectComposer disableNormalPass>
+          <EffectComposer multisampling={0} disableNormalPass>
             <Noise premultiply={true} opacity={0.8} />
 
             <Bloom
@@ -146,6 +148,8 @@ export function Effects({}) {
               bokehScale={2}
               height={480}
             /> */}
+
+            <GLOverlayEffect></GLOverlayEffect>
           </EffectComposer>
         </>
       )}

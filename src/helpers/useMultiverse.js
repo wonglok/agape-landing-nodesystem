@@ -91,8 +91,6 @@ const useMultiverse = create((set, get) => {
   }
 
   return {
-    showFloor: true,
-    setShowFloor: (s) => set({ showFloor: s }),
     ///
     usePostProcessing: true,
     setPostProcessing: (s) => set({ usePostProcessing: s }),
@@ -143,6 +141,7 @@ const useMultiverse = create((set, get) => {
       camera.position.y = initPos[1] + cameraOffset[1]
       camera.position.z = initPos[2] + cameraOffset[2]
       camera.lookAt(initPos[0], initPos[1], initPos[2])
+      controls.target.set(initPos[0], 0.0, initPos[2])
       controls.update()
     },
 
