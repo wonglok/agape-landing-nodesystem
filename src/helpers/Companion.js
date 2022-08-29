@@ -107,7 +107,7 @@ export function Companion({
   let diff = new Vector3()
 
   let lookAtQ = new Object3D()
-  useFrame(() => {
+  useFrame(({ camera }) => {
     if (ref.current) {
       // ref.current.getWorldPosition(h)
       // h.copy(player.position)
@@ -143,6 +143,12 @@ export function Companion({
             repetiton: '' + Infinity,
           })
         }
+      }
+
+      if (ref.current.position.distanceTo(camera.position) <= 1) {
+        ref.current.visible = false
+      } else {
+        ref.current.visible = true
       }
     }
   })
