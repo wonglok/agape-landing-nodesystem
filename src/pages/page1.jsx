@@ -44,7 +44,11 @@ const Page = (props) => {
           speed={3}
           lookAtOffset={[-1.5, 0, -2]}
           walkOffset={[-1.5, 0, -2]}
-        ></Companion>
+        >
+          <group position={[0, 2.5, 0]}>
+            <pointLight intensity={15} color='#00ffff'></pointLight>
+          </group>
+        </Companion>
       </Suspense>
 
       <Suspense fallback={null}>
@@ -53,7 +57,11 @@ const Page = (props) => {
           speed={3}
           lookAtOffset={[1.5, 0, -2]}
           walkOffset={[1.5, 0, -2]}
-        ></Companion>
+        >
+          <group position={[0, 2.5, 0]}>
+            <pointLight intensity={15} color='#00ffff'></pointLight>
+          </group>
+        </Companion>
       </Suspense>
 
       <Suspense fallback={null}>
@@ -62,7 +70,11 @@ const Page = (props) => {
           speed={2}
           lookAtOffset={[-1.5, 0, 1]}
           walkOffset={[-1.5, 0, 1]}
-        ></Companion>
+        >
+          <group position={[0, 2.5, 0]}>
+            <pointLight intensity={15} color='#ff00ff'></pointLight>
+          </group>
+        </Companion>
       </Suspense>
 
       <Suspense fallback={null}>
@@ -71,7 +83,11 @@ const Page = (props) => {
           speed={2}
           lookAtOffset={[1.5, 0, 1]}
           walkOffset={[1.5, 0, 1]}
-        ></Companion>
+        >
+          <group position={[0, 2.5, 0]}>
+            <pointLight intensity={15} color='#ff00ff'></pointLight>
+          </group>
+        </Companion>
       </Suspense>
 
       <Environment background={true} preset='night'></Environment>

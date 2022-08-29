@@ -12,6 +12,7 @@ export function Companion({
 
   speed = 1,
 
+  children,
   runActionName = 'sprint_forward',
 }) {
   let player = useMultiverse((s) => s.player)
@@ -150,6 +151,7 @@ export function Companion({
       <group ref={ref}>
         <group position={[0, -1.45, 0]}>
           <primitive object={root}></primitive>
+          {children}
         </group>
       </group>
     </group>
