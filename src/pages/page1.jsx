@@ -35,7 +35,14 @@ const Page = (props) => {
           speed={4}
           lookAtOffset={[0, 0, -2]}
           walkOffset={[0, 0, -0.1]}
-        ></Companion>
+        >
+          <group position={[-0.3, 1.7, 0.2]}>
+            <pointLight intensity={0.5} decay={10} color='#ffff00'></pointLight>
+          </group>
+          <group position={[0.3, 1.7, 0.2]}>
+            <pointLight intensity={0.5} decay={10} color='#00ffff'></pointLight>
+          </group>
+        </Companion>
       </Suspense>
 
       <Suspense fallback={null}>
@@ -45,8 +52,11 @@ const Page = (props) => {
           lookAtOffset={[-1.5, 0, -2]}
           walkOffset={[-1.5, 0, -2]}
         >
-          <group position={[0, 2.5, 0]}>
-            <pointLight intensity={15} color='#00ffff'></pointLight>
+          <group position={[-0.3, 1.7, 0.2]}>
+            <pointLight intensity={0.5} decay={10} color='#00ffff'></pointLight>
+          </group>
+          <group position={[0.3, 1.7, 0.2]}>
+            <pointLight intensity={0.5} decay={10} color='#ff00ff'></pointLight>
           </group>
         </Companion>
       </Suspense>
@@ -58,8 +68,11 @@ const Page = (props) => {
           lookAtOffset={[1.5, 0, -2]}
           walkOffset={[1.5, 0, -2]}
         >
-          <group position={[0, 2.5, 0]}>
-            <pointLight intensity={15} color='#00ffff'></pointLight>
+          <group position={[-0.3, 1.7, 0.2]}>
+            <pointLight intensity={0.5} decay={10} color='#00ffff'></pointLight>
+          </group>
+          <group position={[0.3, 1.7, 0.2]}>
+            <pointLight intensity={0.5} decay={10} color='#ff00ff'></pointLight>
           </group>
         </Companion>
       </Suspense>
@@ -71,8 +84,11 @@ const Page = (props) => {
           lookAtOffset={[-1.5, 0, 1]}
           walkOffset={[-1.5, 0, 1]}
         >
-          <group position={[0, 2.5, 0]}>
-            <pointLight intensity={15} color='#ff00ff'></pointLight>
+          <group position={[-0.3, 1.7, 0.2]}>
+            <pointLight intensity={0.5} decay={10} color='#00ffff'></pointLight>
+          </group>
+          <group position={[0.3, 1.7, 0.2]}>
+            <pointLight intensity={0.5} decay={10} color='#ff00ff'></pointLight>
           </group>
         </Companion>
       </Suspense>
@@ -84,8 +100,11 @@ const Page = (props) => {
           lookAtOffset={[1.5, 0, 1]}
           walkOffset={[1.5, 0, 1]}
         >
-          <group position={[0, 2.5, 0]}>
-            <pointLight intensity={15} color='#ff00ff'></pointLight>
+          <group position={[-0.3, 1.7, 0.2]}>
+            <pointLight intensity={0.5} decay={10} color='#00ffff'></pointLight>
+          </group>
+          <group position={[0.3, 1.7, 0.2]}>
+            <pointLight intensity={0.5} decay={10} color='#ff00ff'></pointLight>
           </group>
         </Companion>
       </Suspense>
