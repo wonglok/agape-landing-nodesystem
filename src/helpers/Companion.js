@@ -11,6 +11,7 @@ export function Companion({
   walkOffset = [0, 0, -5],
 
   speed = 1,
+  frustumCulled = false,
 
   children,
   runActionName = 'sprint_forward',
@@ -145,10 +146,12 @@ export function Companion({
         }
       }
 
-      if (ref.current.position.distanceTo(camera.position) <= 1) {
-        ref.current.visible = false
-      } else {
-        ref.current.visible = true
+      if (frustumCulled) {
+        if (ref.current.position.distanceTo(camera.position) <= 1) {
+          ref.current.visible = false
+        } else {
+          ref.current.visible = true
+        }
       }
     }
   })

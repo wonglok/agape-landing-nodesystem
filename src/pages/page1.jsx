@@ -31,6 +31,7 @@ const Page = (props) => {
       </Box> */}
       <Suspense fallback={null}>
         <Companion
+          frustumCulled={true}
           runActionName='sprint_forward'
           speed={4}
           lookAtOffset={[0, 0, -2]}
