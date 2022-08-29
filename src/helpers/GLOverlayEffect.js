@@ -6,7 +6,7 @@ import { BlendFunction } from 'postprocessing'
 const fragmentShader = `
 uniform float opacity;
 void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
-	outputColor = vec4((opacity) * inputColor.rgb, inputColor.a);
+	outputColor = vec4((opacity) * (inputColor.rgb), inputColor.a);
 }
 
 `
@@ -26,6 +26,10 @@ export const GLOverlayEffect = forwardRef(function EffectFuncy({}, ref) {
   const effect = useMemo(() => new CustomEffect({}), [])
   return <primitive ref={ref} object={effect} />
 })
+
+//
+
+//
 
 //
 
