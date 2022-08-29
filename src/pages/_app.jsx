@@ -6,6 +6,7 @@ import Header from '@/config'
 import { Multiverse } from '@/components/layout/Multiverse'
 import { useSystemStore } from '@/helpers/useSystemStore'
 import { PromotePage } from '@/components/layout/PromotePage'
+import { Loader } from '@react-three/drei'
 
 function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
   const router = useRouter()
@@ -48,6 +49,8 @@ function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
             }}
             id='myroot'
           ></span>
+
+          <Loader />
         </>
       )}
     </>

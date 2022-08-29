@@ -17,7 +17,7 @@ export function Companion({
   runActionName = 'sprint_forward',
 }) {
   let player = useMultiverse((s) => s.player)
-  let gltf = useGLTF(`/scene/landing/swat-team-1024.glb`)
+  let gltf = useGLTF(`/scene/landing/soldier-512.glb`)
   let ref = useRef()
   let [walkTarget] = useState(() => new Object3D())
   let [lookTarget] = useState(() => new Object3D())

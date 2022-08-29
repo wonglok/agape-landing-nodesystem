@@ -91,6 +91,11 @@ const useMultiverse = create((set, get) => {
   }
 
   return {
+    showFloor: true,
+    setShowFloor: (s) => set({ showFloor: s }),
+    ///
+    usePostProcessing: true,
+    setPostProcessing: (s) => set({ usePostProcessing: s }),
     ...self,
     ...onlineProfile,
 
@@ -102,6 +107,7 @@ const useMultiverse = create((set, get) => {
         s.dispose()
       }
     },
+
     camera: false,
     setCamera: (s) => set({ camera: s }),
     activeCollider: false,
@@ -119,6 +125,8 @@ const useMultiverse = create((set, get) => {
       set({ activeCollider: collider, colliderPromises: colliderPromises })
 
       get().setPosition({})
+
+      return collider
     },
 
     setPosition: ({ initPos = [0, 5, 0], cameraOffset = [0, -3, 5] }) => {

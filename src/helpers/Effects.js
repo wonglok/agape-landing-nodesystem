@@ -9,6 +9,7 @@ import {
 } from '@react-three/postprocessing'
 // import { useControls } from 'leva'
 import { LUTCubeLoader } from 'postprocessing'
+import { useMultiverse } from './useMultiverse'
 
 // let settings = {
 //   enabled: true,
@@ -65,6 +66,18 @@ export function Effects({}) {
 
   // const { enabled, ...props } = useControls(settings, {}, {})
 
+  // useEffect(() => {
+  //   let tt = setInterval(() => {
+  //     let svg = document.querySelector('svg')
+  //     if (svg?.classList.toString().includes('leva')) {
+  //       clearInterval(tt)
+  //       if (window.innerWidth <= 500) {
+  //         svg.parentElement.click()
+  //       }
+  //     }
+  //   })
+  // }, [])
+
   let props = {
     temporalResolve: true,
     STRETCH_MISSED_RAYS: true,
@@ -97,18 +110,6 @@ export function Effects({}) {
     ior: 1.25,
   }
 
-  // useEffect(() => {
-  //   let tt = setInterval(() => {
-  //     let svg = document.querySelector('svg')
-  //     if (svg?.classList.toString().includes('leva')) {
-  //       clearInterval(tt)
-  //       if (window.innerWidth <= 500) {
-  //         svg.parentElement.click()
-  //       }
-  //     }
-  //   })
-  // }, [])
-
   useFrame(({ camera, clock }) => {
     //
     let t = clock.getElapsedTime()
@@ -120,21 +121,20 @@ export function Effects({}) {
     // camera.position.y += 0.0002 * Math.sin(t * 1000)
     camera.position.z += 0.0005 * Math.sin(t * 1000)
   })
-
+  //setPostProcessing
+  let usePostProcessing = useMultiverse((s) => s.usePostProcessing)
   return (
     <>
-      {enable && (
+      {enable && usePostProcessing && (
         <>
           <EffectComposer disableNormalPass>
-            {/*  */}
-
             <Noise premultiply={true} opacity={0.8} />
 
             <Bloom
-              luminanceThreshold={0.8}
+              luminanceThreshold={0.5}
               mipmapBlur
               luminanceSmoothing={0.2}
-              intensity={3.0}
+              intensity={1.0}
             />
 
             <SSR {...props} />
