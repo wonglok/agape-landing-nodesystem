@@ -42,8 +42,8 @@ const Page = (props) => {
         <Companion
           runActionName='sprint_forward'
           speed={3}
-          lookAtOffset={[-2, 0, -2]}
-          walkOffset={[-2, 0, -2]}
+          lookAtOffset={[-1.5, 0, -2]}
+          walkOffset={[-1.5, 0, -2]}
         ></Companion>
       </Suspense>
 
@@ -51,8 +51,8 @@ const Page = (props) => {
         <Companion
           runActionName='sprint_forward'
           speed={3}
-          lookAtOffset={[2, 0, -2]}
-          walkOffset={[2, 0, -2]}
+          lookAtOffset={[1.5, 0, -2]}
+          walkOffset={[1.5, 0, -2]}
         ></Companion>
       </Suspense>
 
