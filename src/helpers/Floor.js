@@ -1,71 +1,63 @@
 import { useGLTF } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
-import anime from 'animejs'
-import { useEffect, useRef, useState } from 'react'
-import { Vector3 } from 'three'
-
+import { Children, useEffect, useRef } from 'react'
+import {
+  BoxBufferGeometry,
+  CircleBufferGeometry,
+  GridHelper,
+  SphereBufferGeometry,
+  Vector3,
+} from 'three'
+import { LineStuff } from './LineDrop/LineStuff'
 import { useMultiverse } from './useMultiverse'
 
+let ttt = 0
 export function Floor({ url }) {
   let addNamedScene = useMultiverse((s) => s.addNamedScene)
+  let usePostProcessing = useMultiverse((s) => s.usePostProcessing)
+  let setPostProcessing = useMultiverse((s) => s.setPostProcessing)
   let scene = useThree((s) => s.scene)
   let glb = useGLTF(url)
-
   useEffect(() => {
-    addNamedScene({ name: url, scene: glb.scene })
+    let prom = addNamedScene({ name: url, scene: glb.scene })
 
-    // setPostProcessing(false)
+    setPostProcessing(false)
+    prom.then((it) => {
+      let geo = it.geometry || new SphereBufferGeometry(5, 64, 64)
+      // geo.scale(1, 0.01, 1)
 
-    // let gh = new GridHelper(100, 100, 0xff0000, 0xff00ff)
-    // scene.add(gh)
-    // ref.current = 0
+      glb.scene.visible = false
+      let line = new LineStuff({
+        baseGeometry: geo,
 
+        glb: glb,
+        position: new Vector3(0.0, 0.0, 0.0),
+      })
+      line.run({
+        done: () => {
+          line.hide()
+          line.removeFromParent()
+          setTimeout(() => {
+            setPostProcessing(true)
+          }, 100)
+        },
+      })
+
+      setPostProcessing(false)
+      scene.add(line)
+    })
     return () => {}
-  }, [glb, url, scene, addNamedScene])
+  }, [glb, url, scene, addNamedScene, setPostProcessing])
 
   return (
     <group>
-      <Animated>
+      {/*  */}
+
+      <group>
         <primitive object={glb.scene}></primitive>
-      </Animated>
+      </group>
+
+      {/*  */}
     </group>
   )
-}
-
-function Animated({ children }) {
-  let ref = useRef()
-
-  let s1 = new Vector3(1, 1, 1)
-  let s0 = new Vector3(0, 0, 0)
-  let showFloor = useMultiverse((s) => s.showFloor)
-
-  useFrame(() => {
-    if (showFloor) {
-      ref.current.scale.lerp(s1, 0.1)
-    } else {
-      ref.current.scale.lerp(s0, 0.1)
-    }
-  })
-
-  // useEffect(() => {
-  //   value.current = 0
-  //   anime({
-  //     targets: [value],
-  //     current: 1,
-  //     duration: 3000,
-  //     complete: () => {},
-  //   })
-
-  //   return () => {
-  //     value.current = 1
-  //     anime({
-  //       targets: [value],
-  //       current: 0,
-  //       duration: 3000,
-  //       complete: () => {},
-  //     })
-  //   }
-  // }, [showFloor])
-
-  return <group ref={ref}>{children}</group>
 }

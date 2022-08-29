@@ -13,22 +13,11 @@ const Page = (props) => {
       <Floor url='/scene/landing/os-effect1.glb'></Floor>
 
       <Box
-        position-y={1}
+        position={[3, 1, 1]}
         onClick={() => {
           //
 
           Router.router.push('/page2')
-          // setShowFloor(false)
-          // setTimeout(() => {
-          //   setShowFloor(true)
-          //
-          //   setTimeout(() => {
-          //     setShowFloor(true)
-          //   }, 1500)
-          // }, 1500)
-          // // setTimeout(() => {
-          //
-          // }, 3000)
         }}
       >
         <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>

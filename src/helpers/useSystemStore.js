@@ -11,20 +11,20 @@ const useSystemStore = create((set, get) => {
     overlayReactContent: <></>,
     setOverlayReactContent: (v) => set({ overlayReactContent: v }),
 
-    changePage: (page) => {
-      Router.prefetch(`/page2`).then(() => {
-        Router.router.push('/page2')
-      })
+    // changePage: (page) => {
+    //   Router.prefetch(`/page2`).then(() => {
+    //     Router.router.push('/page2')
+    //   })
 
-      let { setOverlayReactContent } = get()
-      setOverlayReactContent(
-        <LoadingContent
-          onHide={() => {
-            setOverlayReactContent(null)
-          }}
-        ></LoadingContent>
-      )
-    },
+    //   let { setOverlayReactContent } = get()
+    //   setOverlayReactContent(
+    //     <LoadingContent
+    //       onHide={() => {
+    //         setOverlayReactContent(null)
+    //       }}
+    //     ></LoadingContent>
+    //   )
+    // },
   }
 })
 

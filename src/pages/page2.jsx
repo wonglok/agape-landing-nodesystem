@@ -1,19 +1,21 @@
 import { Companion } from '@/helpers/Companion'
 import { Floor } from '@/helpers/Floor'
+import { useMultiverse } from '@/helpers/useMultiverse'
 import { useSystemStore } from '@/helpers/useSystemStore'
 import { Box, Environment, Sphere } from '@react-three/drei'
+import Router from 'next/router'
 import { Suspense } from 'react'
 
 const Page = (props) => {
-  let router = useSystemStore((s) => s.router)
+  let setShowFloor = useMultiverse((s) => s.setShowFloor)
   return (
     <>
       <Floor url='/scene/landing/os-effect1.glb'></Floor>
 
       <Sphere
-        position-y={1}
+        position={[-3, 1, 1]}
         onClick={() => {
-          props.router.push('/page1')
+          Router.router.push('/page1')
         }}
       >
         <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
