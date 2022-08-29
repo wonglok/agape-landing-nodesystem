@@ -44,9 +44,6 @@ const Multiverse = ({ router, children }) => {
       <Effects></Effects>
       <Player></Player>
 
-      <Suspense fallback={null}>
-        <Companion></Companion>
-      </Suspense>
       {/* <OverlayContentAdapter></OverlayContentAdapter> */}
     </Canvas>
   )

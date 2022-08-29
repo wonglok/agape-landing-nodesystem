@@ -10,52 +10,52 @@ import {
 // import { useControls } from 'leva'
 import { LUTCubeLoader } from 'postprocessing'
 
-// let settings = {
-//   enabled: true,
-//   temporalResolve: true,
-//   STRETCH_MISSED_RAYS: true,
-//   USE_MRT: true,
-//   USE_NORMALMAP: true,
-//   USE_ROUGHNESSMAP: true,
-//   ENABLE_JITTERING: true,
-//   ENABLE_BLUR: true,
-//   DITHERING: false,
-//   temporalResolveMix: { value: 1, min: 0, max: 1 },
-//   temporalResolveCorrectionMix: { value: 1, min: 0, max: 1 },
-//   maxSamples: { value: 0, min: 0, max: 1 },
-//   resolutionScale: { value: 1, min: 0, max: 1 },
-//   blurMix: { value: 0.2, min: 0, max: 1 },
-//   blurKernelSize: { value: 8, min: 0, max: 8 },
-//   BLUR_EXPONENT: { value: 10, min: 0, max: 20 },
-//   rayStep: { value: 0.5, min: 0, max: 1 },
-//   intensity: { value: 3.5, min: 0, max: 5 },
-//   maxRoughness: { value: 1, min: 0, max: 1 },
-//   jitter: { value: 1.4, min: 0, max: 5 },
-//   jitterSpread: { value: 0.05, min: 0, max: 1 },
-//   jitterRough: { value: 1, min: 0, max: 1 },
-//   roughnessFadeOut: { value: 1, min: 0, max: 1 },
-//   rayFadeOut: { value: 0, min: 0, max: 1 },
-//   MAX_STEPS: { value: 20, min: 0, max: 20 },
-//   NUM_BINARY_SEARCH_STEPS: { value: 6, min: 0, max: 10 },
-//   maxDepthDifference: { value: 7, min: 0, max: 10 },
-//   maxDepth: { value: 1, min: 0, max: 1 },
-//   thickness: { value: 7.6, min: 0, max: 10 },
-//   ior: { value: 1.33, min: 0, max: 2 },
-// }
-//
-//
+let settings = {
+  enabled: true,
+  temporalResolve: true,
+  STRETCH_MISSED_RAYS: true,
+  USE_MRT: true,
+  USE_NORMALMAP: true,
+  USE_ROUGHNESSMAP: true,
+  ENABLE_JITTERING: true,
+  ENABLE_BLUR: true,
+  DITHERING: false,
+  temporalResolveMix: { value: 1, min: 0, max: 1 },
+  temporalResolveCorrectionMix: { value: 1, min: 0, max: 1 },
+  maxSamples: { value: 0, min: 0, max: 1 },
+  resolutionScale: { value: 1, min: 0, max: 1 },
+  blurMix: { value: 0.2, min: 0, max: 1 },
+  blurKernelSize: { value: 8, min: 0, max: 8 },
+  BLUR_EXPONENT: { value: 10, min: 0, max: 20 },
+  rayStep: { value: 0.5, min: 0, max: 1 },
+  intensity: { value: 3.5, min: 0, max: 5 },
+  maxRoughness: { value: 1, min: 0, max: 1 },
+  jitter: { value: 1.4, min: 0, max: 5 },
+  jitterSpread: { value: 0.05, min: 0, max: 1 },
+  jitterRough: { value: 1, min: 0, max: 1 },
+  roughnessFadeOut: { value: 1, min: 0, max: 1 },
+  rayFadeOut: { value: 0, min: 0, max: 1 },
+  MAX_STEPS: { value: 20, min: 0, max: 20 },
+  NUM_BINARY_SEARCH_STEPS: { value: 6, min: 0, max: 10 },
+  maxDepthDifference: { value: 7, min: 0, max: 10 },
+  maxDepth: { value: 1, min: 0, max: 1 },
+  thickness: { value: 7.6, min: 0, max: 10 },
+  ior: { value: 1.33, min: 0, max: 2 },
+}
 
-// function useSettings(v) {
-//   v = JSON.parse(JSON.stringify(v))
+function useSettings(v) {
+  v = JSON.parse(JSON.stringify(v))
 
-//   for (let kn in v) {
-//     if (typeof v[kn] === 'object' && typeof v[kn].value !== 'undefined') {
-//       v[kn] = v[kn].value
-//     }
-//   }
+  for (let kn in v) {
+    if (typeof v[kn] === 'object' && typeof v[kn].value !== 'undefined') {
+      v[kn] = v[kn].value
+    } else {
+      v[kn] = v[kn]
+    }
+  }
 
-//   return v
-// }
+  return v
+}
 
 export function Effects({}) {
   let enable = true
@@ -72,11 +72,11 @@ export function Effects({}) {
     USE_NORMALMAP: true,
     USE_ROUGHNESSMAP: true,
     ENABLE_JITTERING: true,
-    ENABLE_BLUR: true,
-    DITHERING: true,
+    ENABLE_BLUR: false,
+    DITHERING: false,
     temporalResolveMix: 0.5,
     temporalResolveCorrectionMix: 0.5,
-    maxSamples: 0,
+    maxSamples: 3,
     resolutionScale: 1,
     blurMix: 0.5,
     blurKernelSize: 8,
@@ -84,17 +84,17 @@ export function Effects({}) {
     rayStep: 0.5,
     intensity: 3.5,
     maxRoughness: 1,
-    jitter: 0.6,
+    jitter: 0.5,
     jitterSpread: 0.5,
-    jitterRough: 1,
+    jitterRough: 0.5,
     roughnessFadeOut: 1,
-    rayFadeOut: 0,
+    rayFadeOut: 0.2,
     MAX_STEPS: 20,
     NUM_BINARY_SEARCH_STEPS: 6,
     maxDepthDifference: 7,
-    maxDepth: 1,
-    thickness: 7.6,
-    ior: 1.33,
+    maxDepth: 3,
+    thickness: 3,
+    ior: 1.25,
   }
 
   // useEffect(() => {
@@ -109,34 +109,43 @@ export function Effects({}) {
   //   })
   // }, [])
 
-  // useFrame(({ camera, clock }) => {
-  //   //
-  //   let t = clock.getElapsedTime()
-  //   camera.position.y += 0.0000001 * Math.sin(t * 1000)
-  // })
+  useFrame(({ camera, clock }) => {
+    //
+    let t = clock.getElapsedTime()
+    // camera.rotation.x += 0.0002 * Math.sin(t * 1000)
+    // camera.rotation.y += 0.0002 * Math.sin(t * 1000)
+    // camera.rotation.z += 0.0002 * Math.sin(t * 1000)
+
+    // camera.position.x += 0.0002 * Math.sin(t * 1000)
+    // camera.position.y += 0.0002 * Math.sin(t * 1000)
+    camera.position.z += 0.0003 * Math.sin(t * 1000)
+  })
 
   return (
     <>
       {enable && (
         <>
           <EffectComposer disableNormalPass>
+            {/*  */}
+
             <Noise premultiply={true} opacity={0.8} />
+
+            <Bloom
+              luminanceThreshold={0.3}
+              mipmapBlur
+              luminanceSmoothing={0.2}
+              intensity={1.0}
+            />
 
             <SSR {...props} />
 
-            <Bloom
-              luminanceThreshold={0.0}
-              mipmapBlur
-              luminanceSmoothing={0}
-              intensity={1}
-            />
             <LUT lut={texture} />
             {/* <DepthOfField
-            focusDistance={2}
-            focalLength={0.02}
-            bokehScale={2}
-            height={480}
-          /> */}
+              focusDistance={2}
+              focalLength={0.02}
+              bokehScale={2}
+              height={480}
+            /> */}
           </EffectComposer>
         </>
       )}
