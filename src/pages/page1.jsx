@@ -29,6 +29,14 @@ const Page = (props) => {
 
         <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
       </Box> */}
+      <Suspense fallback={null}>
+        <Companion
+          runActionName='sprint_forward'
+          speed={4}
+          lookAtOffset={[0, 0, -2]}
+          walkOffset={[0, 0, -0.1]}
+        ></Companion>
+      </Suspense>
 
       <Suspense fallback={null}>
         <Companion
@@ -52,8 +60,8 @@ const Page = (props) => {
         <Companion
           runActionName='run_forward'
           speed={2}
-          lookAtOffset={[-2, 0, 2]}
-          walkOffset={[-2, 0, 2]}
+          lookAtOffset={[-1.5, 0, 1]}
+          walkOffset={[-1.5, 0, 1]}
         ></Companion>
       </Suspense>
 
@@ -61,8 +69,8 @@ const Page = (props) => {
         <Companion
           runActionName='run_forward'
           speed={2}
-          lookAtOffset={[2, 0, 2]}
-          walkOffset={[2, 0, 2]}
+          lookAtOffset={[1.5, 0, 1]}
+          walkOffset={[1.5, 0, 1]}
         ></Companion>
       </Suspense>
 

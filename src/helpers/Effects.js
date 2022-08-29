@@ -118,7 +118,7 @@ export function Effects({}) {
 
     // camera.position.x += 0.0002 * Math.sin(t * 1000)
     // camera.position.y += 0.0002 * Math.sin(t * 1000)
-    camera.position.z += 0.0003 * Math.sin(t * 1000)
+    camera.position.z += 0.0005 * Math.sin(t * 1000)
   })
 
   return (
@@ -131,10 +131,10 @@ export function Effects({}) {
             <Noise premultiply={true} opacity={0.8} />
 
             <Bloom
-              luminanceThreshold={0.3}
+              luminanceThreshold={0.25}
               mipmapBlur
               luminanceSmoothing={0.2}
-              intensity={1.0}
+              intensity={3.0}
             />
 
             <SSR {...props} />
