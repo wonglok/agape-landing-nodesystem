@@ -15,8 +15,13 @@ import { useControls } from 'leva'
 //
 
 export function EffectsLanding() {
-  const { hue, saturation } = useControls({ hue: 0, saturation: 0 })
-  const { offsetX, offsetY } = useControls({ offsetX: 0.5, offsetY: 0.0 })
+  let useSettings = useControls
+  if (process.env.NODE_ENV === 'production') {
+    useSettings = (v) => v
+  }
+
+  const { hue, saturation } = useSettings({ hue: 0, saturation: 0 })
+  const { offsetX, offsetY } = useSettings({ offsetX: 0.5, offsetY: 0.0 })
 
   const diff = useScrollStore((s) => s.diff)
   // console.log('offsetX, offsetY', offsetX, offsetY)
