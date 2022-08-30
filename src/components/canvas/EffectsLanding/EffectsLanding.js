@@ -10,15 +10,15 @@ import {
   // SMAA,
   // SSAO,
 } from '@react-three/postprocessing'
-import { useControls } from 'leva'
-
-//
+// import { useControls } from 'leva'
 
 export function EffectsLanding() {
-  let useSettings = useControls
-  if (process.env.NODE_ENV === 'production') {
-    useSettings = (v) => v
-  }
+  // let useSettings = useControls
+  // if (process.env.NODE_ENV === 'production') {
+  //   useSettings = (v) => v
+  // }
+
+  let useSettings = (v) => v
 
   const { hue, saturation } = useSettings({ hue: 0, saturation: 0 })
   const { offsetX, offsetY } = useSettings({ offsetX: 0.5, offsetY: 0.0 })
