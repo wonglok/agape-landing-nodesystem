@@ -17,7 +17,7 @@ export function EffectsLanding() {
   // if (process.env.NODE_ENV === 'production') {
   //   useSettings = (v) => v
   // }
-
+  //
   let useSettings = (v) => v
 
   const { hue, saturation } = useSettings({ hue: 0, saturation: 0 })
