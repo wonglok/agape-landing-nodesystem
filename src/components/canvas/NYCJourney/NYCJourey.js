@@ -5,7 +5,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { AnimationMixer, Vector3 } from 'three140'
 
 export function NYCJourney() {
-  let glb = useGLTF(`/scene/journey/NYC_Expo_31.glb`)
+  let glb = useGLTF(`/scene/journey/NYC_Expo_30.glb`)
 
   let myTime = useRef(0)
   let camera = useThree((s) => s.camera)
