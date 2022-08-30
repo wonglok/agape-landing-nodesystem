@@ -29,8 +29,6 @@ export function EffectsLanding() {
 
   return (
     <group>
-      {/*  */}
-
       <EffectComposer
         key={'amzingly'}
         stencilBuffer={false}
