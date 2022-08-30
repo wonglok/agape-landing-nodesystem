@@ -23,18 +23,14 @@ export function EffectsLanding() {
   const { hue, saturation } = useSettings({ hue: 0, saturation: 0 })
   const { offsetX, offsetY } = useSettings({ offsetX: 0.5, offsetY: 0.0 })
 
-  const diff = useScrollStore((s) => s.diff)
+  let diff = 0.0025
+  // const diff = useScrollStore((s) => s.diff)
   // console.log('offsetX, offsetY', offsetX, offsetY)
   // console.log('hue, saturation', hue, saturation)
 
   return (
     <group>
-      <EffectComposer
-        key={'amzingly'}
-        stencilBuffer={false}
-        disableNormalPass
-        multisampling={0}
-      >
+      <EffectComposer>
         <Noise opacity={1} premultiply={true}></Noise>
         <Bloom luminanceThreshold={0.1}></Bloom>
         <ChromaticAberration
