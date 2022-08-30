@@ -27,7 +27,7 @@ export function NightHDR() {
     //   scene.environment = tex
     //   scene.background = tex
     // })
-  }, [])
+  }, [scene])
   //
   return <group></group>
 }
