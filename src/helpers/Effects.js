@@ -120,7 +120,7 @@ export function Effects({}) {
 
     // camera.position.x += 0.0002 * Math.sin(t * 1000)
     // camera.position.y += 0.0002 * Math.sin(t * 1000)
-    camera.position.z += 0.0005 * Math.sin(t * 1000)
+    camera.position.z += 0.00025 * Math.sin(t * 1)
   })
 
   //setPostProcessing
@@ -129,7 +129,19 @@ export function Effects({}) {
     <>
       {enable && usePostProcessing && (
         <>
-          <EffectComposer multisampling={0} disableNormalPass>
+          <EffectComposer
+            depthBuffer={true}
+            stencilBuffer={false}
+            // autoClear?: boolean;
+            // resolutionScale?: number;
+            // multisampling?: number;
+            // frameBufferType?: TextureDataType;
+            // renderPriority?: number;
+            // camera?: THREE.Camera;
+            // scene?: THREE.Scene;
+            multisampling={0}
+            disableNormalPass
+          >
             <Noise premultiply={true} opacity={0.8} />
 
             <Bloom
