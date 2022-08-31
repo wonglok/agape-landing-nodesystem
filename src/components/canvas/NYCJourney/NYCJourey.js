@@ -46,22 +46,28 @@ export function NYCJourney() {
   })
 
   let lastCam = false
+  let lastTime = 0
   useFrame(({ camera, size }, dt) => {
     //
 
     mixer.setTime(myTime.current)
 
-    let sorted = glb.cameras
+    let sorted = glb.cameras.slice().sort((a, b) => {
+      if (a.played > b.played) {
+        return -1
+      } else if (a.played < b.played) {
+        return 1
+      } else {
+        return 0
+      }
+    })
 
-    // .slice().sort((a, b) => {
-    //   if (a.played > b.played) {
-    //     return -1
-    //   } else if (a.played < b.played) {
-    //     return 1
-    //   } else {
-    //     return 0
-    //   }
-    // })
+    if (myTime.current - lastTime <= 0) {
+      glb.cameras.forEach((e) => {
+        //
+        e.played = 0
+      })
+    }
 
     for (let cam of sorted) {
       cam.played = cam.played || 0
