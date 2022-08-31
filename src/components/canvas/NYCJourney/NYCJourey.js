@@ -4,6 +4,40 @@ import { useEffect, useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { AnimationMixer, Vector3 } from 'three140'
 
+let max = 45.156355645706554
+let scheduleStartTime = {
+  Camera013_Orientation: 20.00234154719934,
+  Camera003_Orientation: 2.983478243416083,
+  Camera_Orientation: 4.169748749595136,
+  Camera006_Orientation: 9.723748170225846,
+  Camera001_Orientation: 16.358542590352094,
+  Camera004_Orientation: 23.157913127575213,
+  Camera009_Orientation: 24.46997318724838,
+  Camera010_Orientation: 28.19060252266285,
+  Camera012_Orientation: 32.20940756626385,
+  Camera005_Orientation: 36.707416925716934,
+  Camera008_Orientation: 41.34326200740272,
+  Camera011_Orientation: 7.8282304198105255,
+  Camera002_Orientation: 0,
+  end: max,
+}
+let order = [
+  'Camera002_Orientation',
+  'Camera003_Orientation',
+  'Camera_Orientation',
+  'Camera011_Orientation',
+  'Camera006_Orientation',
+  'Camera001_Orientation',
+  'Camera013_Orientation',
+  'Camera004_Orientation',
+  'Camera009_Orientation',
+  'Camera010_Orientation',
+  'Camera012_Orientation',
+  'Camera005_Orientation',
+  'Camera008_Orientation',
+  'end',
+]
+
 export function NYCJourney() {
   let glb = useGLTF(`/scene/journey/NYC_Expo_30.glb`)
 
@@ -32,7 +66,6 @@ export function NYCJourney() {
     })
 
     return useScrollStore.subscribe((v) => {
-      let max = 45.156355645706554
       myTime.current = v.smooth * max
       if (myTime.current <= 0) {
         myTime.current = 0
@@ -49,43 +82,12 @@ export function NYCJourney() {
   let lastTime = 0
   let names = {}
 
-  let schedule = {
-    Camera013_Orientation: 20.00234154719934,
-    Camera003_Orientation: 2.983478243416083,
-    Camera_Orientation: 4.169748749595136,
-    Camera006_Orientation: 9.723748170225846,
-    Camera001_Orientation: 16.358542590352094,
-    Camera004_Orientation: 23.157913127575213,
-    Camera009_Orientation: 24.46997318724838,
-    Camera010_Orientation: 28.19060252266285,
-    Camera012_Orientation: 32.20940756626385,
-    Camera005_Orientation: 36.707416925716934,
-    Camera008_Orientation: 41.34326200740272,
-    Camera011_Orientation: 7.8282304198105255,
-    Camera002_Orientation: 0,
-  }
-  let order = [
-    'Camera002_Orientation',
-    'Camera003_Orientation',
-    'Camera_Orientation',
-    'Camera011_Orientation',
-    'Camera006_Orientation',
-    'Camera001_Orientation',
-    'Camera013_Orientation',
-    'Camera004_Orientation',
-    'Camera009_Orientation',
-    'Camera010_Orientation',
-    'Camera012_Orientation',
-    'Camera005_Orientation',
-    'Camera008_Orientation',
-  ]
-
   let orderTime = order.map((e, i) => {
     let nextname = order[i + 1]
     return {
       name: e,
-      start: schedule[e],
-      end: schedule[nextname] || e,
+      start: scheduleStartTime[e],
+      end: scheduleStartTime[nextname] || e,
     }
   })
 
