@@ -43,11 +43,11 @@ export function EffectsLanding() {
           luminanceThreshold={0.1}
         ></Bloom>
 
-        <BrightnessContrast
+        {/* <BrightnessContrast
           brightness={0.07}
           contrast={0.2}
         ></BrightnessContrast>
-        <HueSaturation hue={hue} saturation={saturation}></HueSaturation>
+        <HueSaturation hue={hue} saturation={saturation}></HueSaturation> */}
 
         <ChromaticAberration
           offset={[diff * offsetX, diff * offsetY]}
