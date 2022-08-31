@@ -33,7 +33,7 @@ export function EffectsLanding() {
   const { hue, saturation } = useSettings({ hue: 0, saturation: 0.05 })
   const { offsetX, offsetY } = useSettings({ offsetX: 0.5, offsetY: 0.0 })
 
-  let diff = 0.00233 * 2
+  let diff = 0.00233 * 1.5
   // const diff = useScrollStore((s) => s.diff)
   // console.log('offsetX, offsetY', offsetX, offsetY)
   // console.log('hue, saturation', hue, saturation)
@@ -46,6 +46,7 @@ export function EffectsLanding() {
         multisampling={4}
       >
         <Noise opacity={1} premultiply={true}></Noise>
+        <Noise opacity={0.5} premultiply={true}></Noise>
 
         <Bloom
           intensity={2.5}
@@ -64,12 +65,12 @@ export function EffectsLanding() {
 
         {/* <Scanline></Scanline> */}
 
-        <BrightnessContrast
+        {/* <BrightnessContrast
           brightness={0.07}
           contrast={0.2}
         ></BrightnessContrast>
 
-        <HueSaturation hue={hue} saturation={saturation}></HueSaturation>
+        <HueSaturation hue={hue} saturation={saturation}></HueSaturation> */}
 
         <ChromaticAberration
           offset={[diff * offsetX, diff * offsetY]}
