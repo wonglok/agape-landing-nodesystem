@@ -49,10 +49,9 @@ function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
             }}
             id='myroot'
           ></span>
-
-          <Loader />
         </>
       )}
+      <Loader />
     </>
   )
 }
