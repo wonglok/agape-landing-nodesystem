@@ -79,8 +79,6 @@ export function NYCJourney() {
   }, [glb.cameras, useScrollStore.subscribe])
 
   let lastCam = false
-  let lastTime = 0
-  let names = {}
 
   let orderTime = order.map((e, i) => {
     let nextname = order[i + 1]
@@ -97,23 +95,6 @@ export function NYCJourney() {
     mixer.setTime(myTime.current)
 
     let sorted = glb.cameras
-
-    // .slice().sort((a, b) => {
-    //   if (a.played > b.played) {
-    //     return -1
-    //   } else if (a.played < b.played) {
-    //     return 1
-    //   } else {
-    //     return 0
-    //   }
-    // })
-
-    // if (myTime.current - lastTime <= 0) {
-    //   glb.cameras.forEach((e) => {
-    //     //
-    //     e.played = 0
-    //   })
-    // }
 
     let getRun = (cam) => {
       let info = orderTime.find((e) => e.name === cam.name)
