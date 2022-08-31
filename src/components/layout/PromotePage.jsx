@@ -12,6 +12,7 @@ import {
 } from 'three'
 import { useMemo } from 'react'
 import { useSystemStore } from '@/helpers/useSystemStore'
+import { Core } from '@/helpers/Core'
 
 const PromotePage = ({ router, children }) => {
   return (
@@ -26,6 +27,11 @@ const PromotePage = ({ router, children }) => {
       onCreated={(st) => {
         st.gl.physicallyCorrectLights = true
         st.gl.outputEncoding = sRGBEncoding
+
+        Core.now.canvas = Core.makeDisposableNode({ name: 'canvas' }).sub
+        for (let kn in st) {
+          Core.now.canvas.now[kn] = st[kn]
+        }
       }}
     >
       {children}

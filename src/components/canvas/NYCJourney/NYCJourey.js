@@ -3,6 +3,7 @@ import { useScrollStore } from '@/helpers/useScrollStore'
 import { useEffect, useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { AnimationMixer, Vector3 } from 'three140'
+import { TheVortex } from '../TheVortex/TheVortex'
 
 let max = 45.156355645706554
 let scheduleStartTime = {
@@ -151,7 +152,18 @@ export function NYCJourney() {
     }
   })
 
-  return <primitive object={glb.scene}></primitive>
+  return (
+    <group>
+      <primitive object={glb.scene}></primitive>
+      <group position={[0, 1.5, 0]}>
+        <group position={[5.523, 6.087, -14.196]}>
+          <group scale={0.075}>
+            <theVortex></theVortex>
+          </group>
+        </group>
+      </group>
+    </group>
+  )
 }
 
 /*

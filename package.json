@@ -33,6 +33,7 @@
     "babel-plugin-glsl": "^1.0.0",
     "glsl-random": "^0.0.5",
     "leva": "^0.9.30",
+    "md5": "^2.3.0",
     "next": "^12.2.3",
     "next-pwa": "^5.5.4",
     "postprocessing": "^6.28.5",
