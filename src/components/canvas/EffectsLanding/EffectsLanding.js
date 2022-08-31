@@ -30,7 +30,7 @@ export function EffectsLanding() {
   let useSettings = (v) => v
   const texture = useLoader(LUTCubeLoader, '/lut/Chemical 168.CUBE')
 
-  const { hue, saturation } = useSettings({ hue: 0, saturation: 0.05 })
+  // const { hue, saturation } = useSettings({ hue: 0, saturation: 0.05 })
   const { offsetX, offsetY } = useSettings({ offsetX: 0.5, offsetY: 0.0 })
 
   let diff = 0.00233 * 1.5
