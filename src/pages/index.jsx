@@ -118,6 +118,10 @@ function ScrollContentt() {
         style={{ height: 100 + 'vh' }}
         className='flex items-center justify-center w-screen  pointer-events-none '
       ></div>
+      <div
+        style={{ height: 100 + 'vh' }}
+        className='flex items-center justify-center w-screen  pointer-events-none '
+      ></div>
     </>
   )
 }

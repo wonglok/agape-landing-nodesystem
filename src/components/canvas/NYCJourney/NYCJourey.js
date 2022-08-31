@@ -8,7 +8,7 @@ export function NYCJourney() {
   let glb = useGLTF(`/scene/journey/NYC_Expo_30.glb`)
 
   let myTime = useRef(0)
-  let camera = useThree((s) => s.camera)
+  // let camera = useThree((s) => s.camera)
 
   let mixer = useMemo(() => {
     return new AnimationMixer(glb.scene)
