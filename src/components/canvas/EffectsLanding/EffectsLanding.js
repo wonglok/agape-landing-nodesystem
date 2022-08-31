@@ -33,7 +33,7 @@ export function EffectsLanding() {
   // const { hue, saturation } = useSettings({ hue: 0, saturation: 0.05 })
   const { offsetX, offsetY } = useSettings({ offsetX: 0.5, offsetY: 0.0 })
 
-  let diff = 0.00233 * 1.5
+  let diff = 0.00233 * 0.75
   // const diff = useScrollStore((s) => s.diff)
   // console.log('offsetX, offsetY', offsetX, offsetY)
   // console.log('hue, saturation', hue, saturation)
