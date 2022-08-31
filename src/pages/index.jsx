@@ -61,12 +61,13 @@ Page.SEO = function SEO() {
 
     let ttt = 0
 
-    console.log(ref.current)
+    // console.log(ref.current)
 
     let rAF = () => {
       ttt = requestAnimationFrame(rAF)
       now = window.performance.now() / 1000
       let diff = now - last
+      last = now
       // let a = document.createElement('div')
       //3129
       let scrollAmount = ref.current.scrollTop
@@ -83,35 +84,40 @@ Page.SEO = function SEO() {
   }, [setSmooth])
 
   return (
-    <div
-      ref={ref}
-      className='absolute top-0 left-0 z-10 w-screen h-screen overflow-y-scroll'
-    >
-      <Content></Content>
-      {/* <div>
-        <a href={'/page1'}>Page1</a>
+    <span className=''>
+      <div
+        ref={ref}
+        className='absolute top-0 left-0 z-10 w-screen h-screen overflow-y-scroll'
+      >
+        <ScrollContentt></ScrollContentt>
       </div>
-      <div>
-        <a href={'/forge'}>Forge Avatar + Motion</a>
-      </div> */}
-    </div>
+    </span>
   )
 }
 
-function Content() {
+function ScrollContentt() {
   return (
     <>
       <div
-        style={{ height: 460 * 2 + 'vmin' }}
-        className='w-screen pointer-events-none'
-      >
-        <div
-          className='absolute bg-gray-200'
-          style={{ top: '100vmin', left: '10vmin' }}
-        >
-          123
-        </div>
-      </div>
+        style={{ height: 100 + 'vh' }}
+        className='flex items-center justify-center w-screen  pointer-events-none '
+      ></div>
+      <div
+        style={{ height: 100 + 'vh' }}
+        className='flex items-center justify-center w-screen  pointer-events-none '
+      ></div>
+      <div
+        style={{ height: 100 + 'vh' }}
+        className='flex items-center justify-center w-screen  pointer-events-none '
+      ></div>
+      <div
+        style={{ height: 100 + 'vh' }}
+        className='flex items-center justify-center w-screen  pointer-events-none '
+      ></div>
+      <div
+        style={{ height: 100 + 'vh' }}
+        className='flex items-center justify-center w-screen  pointer-events-none '
+      ></div>
     </>
   )
 }

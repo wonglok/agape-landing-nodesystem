@@ -32,7 +32,14 @@ export function NYCJourney() {
     })
 
     return useScrollStore.subscribe((v) => {
-      myTime.current = v.smooth * 45.156355645706554
+      let max = 45.156355645706554
+      myTime.current = v.smooth * max
+      if (myTime.current <= 0) {
+        myTime.current = 0
+      }
+      if (myTime.current >= max) {
+        myTime.current = max
+      }
 
       // ref.current.rotation.y = v.smooth * Math.PI
     })
