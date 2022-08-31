@@ -13,11 +13,15 @@ export function Companion({
   speed = 1,
   frustumCulled = false,
 
+  //
+  url = `/scene/landing/soldier-512.glb`,
+
+  //
   children,
   runActionName = 'sprint_forward',
 }) {
   let player = useMultiverse((s) => s.player)
-  let gltf = useGLTF(`/scene/landing/soldier-512.glb`)
+  let gltf = useGLTF(url)
   let ref = useRef()
   let [walkTarget] = useState(() => new Object3D())
   let [lookTarget] = useState(() => new Object3D())

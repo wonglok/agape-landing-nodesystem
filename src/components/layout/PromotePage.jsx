@@ -22,6 +22,7 @@ const PromotePage = ({ router, children }) => {
         top: 0,
         left: 0,
       }}
+      gl={{ antialias: false, logarithmicDepthBuffer: true }}
       onCreated={(st) => {
         st.gl.physicallyCorrectLights = true
         st.gl.outputEncoding = sRGBEncoding

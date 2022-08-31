@@ -156,7 +156,7 @@ export function Effects({}) {
             <LUT lut={texture} />
             {/* <DepthOfField
               focusDistance={2}
-              focalLength={0.02}
+              focalLength={0.12}
               bokehScale={2}
               height={480}
             /> */}

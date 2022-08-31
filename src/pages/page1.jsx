@@ -39,16 +39,17 @@ const Page = (props) => {
         <Companion
           frustumCulled={true}
           runActionName='walk_forward'
+          url={`/scene/landing/alien-avatar.glb`}
           speed={4}
           lookAtOffset={[0, 0, -2]}
           walkOffset={[0, 0, -0.1]}
         >
-          <group position={[-0.3, 1.7, 0.2]}>
+          {/* <group position={[-0.3, 1.7, 0.2]}>
             <pointLight intensity={1} decay={2} color='#ffff00'></pointLight>
           </group>
           <group position={[0.3, 1.7, 0.2]}>
             <pointLight intensity={1} decay={2} color='#00ffff'></pointLight>
-          </group>
+          </group> */}
         </Companion>
       </Suspense>
 

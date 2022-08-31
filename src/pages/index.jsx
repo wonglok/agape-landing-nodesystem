@@ -19,8 +19,8 @@ import { useRef } from 'react'
 // import { UIContent } from '@/helpers/UIContent'
 
 const Page = () => {
-  let viewport = useThree((s) => s.viewport)
-  let size = useThree((s) => s.size)
+  // let viewport = useThree((s) => s.viewport)
+  // let size = useThree((s) => s.size)
 
   return (
     <>
@@ -61,6 +61,8 @@ Page.SEO = function SEO() {
 
     let ttt = 0
 
+    console.log(ref.current)
+
     let rAF = () => {
       ttt = requestAnimationFrame(rAF)
       now = window.performance.now() / 1000
@@ -68,9 +70,7 @@ Page.SEO = function SEO() {
       // let a = document.createElement('div')
       //3129
       let scrollAmount = ref.current.scrollTop
-      let page = window.innerHeight
-      let howManyPages = ref.current.children.length
-      let total = page * (howManyPages - 1)
+      let total = ref.current.scrollHeight - window.innerHeight
 
       setSmooth(scrollAmount / total, diff)
     }
@@ -102,31 +102,17 @@ Page.SEO = function SEO() {
 function Content() {
   return (
     <>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-gray-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-red-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-red-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-red-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-red-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-red-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-red-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-red-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-red-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-red-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-red-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
-      <div className='w-screen h-screen bg-red-400 bg-opacity-20'></div>
-      <div className='w-screen h-screen pointer-events-none'></div>
+      <div
+        style={{ height: 460 * 2 + 'vh' }}
+        className='w-screen pointer-events-none'
+      >
+        <div
+          className='absolute bg-gray-200'
+          style={{ top: '100vh', left: '10vw' }}
+        >
+          123
+        </div>
+      </div>
     </>
   )
 }
