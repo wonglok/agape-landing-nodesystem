@@ -80,12 +80,9 @@ export function NYCJourney() {
         return
       }
 
-      //
+      cam.getWorldPosition(cam.userData.nowPos)
 
-      let diff = cam
-        .getWorldPosition(cam.userData.nowPos)
-        .sub(cam.userData.oldPos)
-        .length()
+      let diff = cam.userData.nowPos.sub(cam.userData.oldPos).length()
 
       cam.getWorldPosition(cam.userData.oldPos)
 
