@@ -1,5 +1,5 @@
 import md5 from 'md5'
-import { useEffect, useMemo, useState } from 'react'
+// import { useEffect, useMemo, useState } from 'react'
 
 class TJCore {
   constructor({ parent = false, name = 'ThankyouJesusCore', global = {} }) {
@@ -13,26 +13,6 @@ class TJCore {
     console.log('init: ', name)
 
     // console.trace(name);
-
-    this.reactTo = (key) => {
-      let [st, setSt] = useState(0)
-      useEffect(() => {
-        let noGo = false
-        core.onChange(key, () => {
-          if (noGo) {
-            return
-          }
-          setSt((st) => {
-            return st + 1
-          })
-        })
-
-        return () => {
-          //
-          noGo = true
-        }
-      }, [])
-    }
 
     if (typeof window !== 'undefined') {
       global = window
@@ -342,24 +322,24 @@ class TJCore {
       }
     }
 
-    this.scope = (fnc, name = 'subcore') => {
-      let { sub, dispose } = useMemo(() => {
-        return self.makeDisposableNode({ name: name })
-      }, [])
+    // this.scope = (fnc, name = 'subcore') => {
+    //   let { sub, dispose } = useMemo(() => {
+    //     return self.makeDisposableNode({ name: name })
+    //   }, [])
 
-      useEffect(() => {
-        return () => {
-          dispose()
-        }
-      }, [])
+    //   useEffect(() => {
+    //     return () => {
+    //       dispose()
+    //     }
+    //   }, [])
 
-      useEffect(() => {
-        fnc(sub)
-        return () => {}
-      }, [])
+    //   useEffect(() => {
+    //     fnc(sub)
+    //     return () => {}
+    //   }, [])
 
-      return sub
-    }
+    //   return sub
+    // }
 
     this.name = (name) => (v) => {
       this.now[name] = v
