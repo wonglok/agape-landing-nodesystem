@@ -77,7 +77,6 @@ Page.SEO = function SEO() {
 
     ttt = requestAnimationFrame(rAF)
 
-    //
     return () => {
       cancelAnimationFrame(ttt)
     }
@@ -103,12 +102,12 @@ function Content() {
   return (
     <>
       <div
-        style={{ height: 460 * 2 + 'vh' }}
+        style={{ height: 460 * 2 + 'vmin' }}
         className='w-screen pointer-events-none'
       >
         <div
           className='absolute bg-gray-200'
-          style={{ top: '100vh', left: '10vw' }}
+          style={{ top: '100vmin', left: '10vmin' }}
         >
           123
         </div>
