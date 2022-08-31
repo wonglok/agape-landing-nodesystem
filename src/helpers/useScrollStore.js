@@ -7,7 +7,7 @@ export const useScrollStore = create((set, get) => {
     setSmooth: (now, dt) => {
       let smooth = get().smooth
 
-      let ll = MathUtils.damp(smooth, now, 0.00215, dt * 1000)
+      let ll = MathUtils.damp(smooth, now, 2, dt)
 
       set({ smooth: ll, diff: ll - smooth })
     },

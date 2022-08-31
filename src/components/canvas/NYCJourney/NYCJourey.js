@@ -43,7 +43,7 @@ export function NYCJourney() {
 
       // ref.current.rotation.y = v.smooth * Math.PI
     })
-  }, [glb.cameras])
+  }, [glb.cameras, useScrollStore.subscribe])
 
   let lastCam = false
   let lastTime = 0
