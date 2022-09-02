@@ -28,6 +28,7 @@ export function BallMech() {
       return
     }
 
+    anim.actions.Idle.repetitions = Infinity
     anim.actions.Idle.play()
   }, [anim.actions.Idle])
   return (
