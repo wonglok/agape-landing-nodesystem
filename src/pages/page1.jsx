@@ -1,4 +1,10 @@
-import { Box, Environment, PerspectiveCamera, Text } from '@react-three/drei'
+import {
+  Box,
+  Environment,
+  PerspectiveCamera,
+  Text,
+  Trail,
+} from '@react-three/drei'
 import Router from 'next/router'
 import { Suspense, useEffect } from 'react'
 import { Floor } from '@/helpers/Floor'
@@ -6,9 +12,9 @@ import { Companion } from '@/helpers/Companion'
 import { useMultiverse } from '@/helpers/useMultiverse'
 import anime from 'animejs'
 import { screenOpacity } from '@/helpers/GLOverlayEffect'
-import { LineStuff } from '@/helpers/LineDrop/LineStuff'
-import { useThree } from '@react-three/fiber'
-import { Vector3 } from 'three'
+// import { LineStuff } from '@/helpers/LineDrop/LineStuff'
+// import { useThree } from '@react-three/fiber'
+// import { Vector3 } from 'three'
 // import dynamic from 'next/dynamic'
 
 const Page = (props) => {

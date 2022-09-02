@@ -1,4 +1,4 @@
-import { useAnimations, useGLTF } from '@react-three/drei'
+import { Trail, useAnimations, useGLTF } from '@react-three/drei'
 import { createPortal, useFrame } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Object3D, Vector3 } from 'three'
@@ -159,8 +159,26 @@ export function Companion({
       }
     }
   })
+  root.traverse(console.log)
   return (
     <group>
+      {root && ref && (
+        <Trail
+          width={0.2} // Width of the line
+          color={'hotpink'} // Color of the line
+          length={2} // Length of the line
+          decay={0.2} // How fast the line fades away
+          local={false} // Wether to use the target's world or local positions
+          stride={0} // Min distance between previous and current point
+          interval={1} // Number of frames to wait before next calculation
+          target={ref} // Optional target. This object will produce the trail.
+          attenuation={(width) => width} // A function to define the width in each point along it.
+        >
+          {/* You can optionally define a custom meshLineMaterial to use. */}
+          {/* <meshLineMaterial color={"red"} /> */}
+        </Trail>
+      )}
+      {/* .current.getObjectByName('mixamorigRightToe_End') */}
       <group ref={ref}>
         <group position={[0, -1.45, 0]}>
           <primitive object={root}></primitive>
