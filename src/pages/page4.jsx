@@ -56,7 +56,12 @@ const Page = (props) => {
         ></Companion>
       </Suspense>
 
-      <Environment frames={1} encoding={sRGBEncoding}>
+      <Environment
+        preset='night'
+        frames={1}
+        background={true}
+        encoding={sRGBEncoding}
+      >
         <Lightformer
           intensity={20}
           rotation-x={Math.PI * -0.5}
