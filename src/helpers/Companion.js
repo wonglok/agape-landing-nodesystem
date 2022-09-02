@@ -1,10 +1,11 @@
-import { Trail, useAnimations, useGLTF } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 import { createPortal, useFrame } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Object3D, Vector3 } from 'three'
 import { AnimationMixer } from 'three'
 import { useMultiverse } from './useMultiverse'
 import { clone } from 'three140/examples/jsm/utils/SkeletonUtils'
+import { Color } from 'three140'
 
 export function Companion({
   lookAtOffset = [0, 0, 0],
@@ -127,7 +128,7 @@ export function Companion({
       if (ref.current.position.distanceTo(h) >= 0.5) {
         lookAtQ.lookAt(h.x, lookAtQ.position.y, h.z)
 
-        ref.current.quaternion.slerp(lookAtQ.quaternion, 0.05)
+        ref.current.quaternion.slerp(lookAtQ.quaternion, 0.1)
         if (act && act.name !== runActionName) {
           setAct({
             name: runActionName,
@@ -137,7 +138,7 @@ export function Companion({
         }
       } else {
         lookAtQ.lookAt(l.x, lookAtQ.position.y, l.z)
-        ref.current.quaternion.slerp(lookAtQ.quaternion, 0.05)
+        ref.current.quaternion.slerp(lookAtQ.quaternion, 0.1)
 
         // ref.current.position.y = player.position.y
         // ref.current.lookAt(h.x, player.position.y, h.z)
@@ -159,32 +160,47 @@ export function Companion({
       }
     }
   })
-  root.traverse(console.log)
+
+  //
+  //
   return (
     <group>
-      {root && ref && (
-        <Trail
-          width={0.2} // Width of the line
-          color={'hotpink'} // Color of the line
-          length={2} // Length of the line
-          decay={0.2} // How fast the line fades away
-          local={false} // Wether to use the target's world or local positions
-          stride={0} // Min distance between previous and current point
-          interval={1} // Number of frames to wait before next calculation
-          target={ref} // Optional target. This object will produce the trail.
-          attenuation={(width) => width} // A function to define the width in each point along it.
-        >
-          {/* You can optionally define a custom meshLineMaterial to use. */}
-          {/* <meshLineMaterial color={"red"} /> */}
-        </Trail>
-      )}
-      {/* .current.getObjectByName('mixamorigRightToe_End') */}
       <group ref={ref}>
         <group position={[0, -1.45, 0]}>
           <primitive object={root}></primitive>
           {children}
+
+          {createPortal(
+            <group>
+              <Gun></Gun>
+            </group>,
+            root.getObjectByName('mixamorigRightHand')
+          )}
         </group>
       </group>
+    </group>
+  )
+}
+
+function Gun() {
+  let gun = useGLTF(`/scene/landing/gun.glb`)
+  let cloned = useMemo(() => {
+    return clone(gun.scene)
+  }, [gun.scene])
+  useEffect(() => {
+    gun.scene.traverse((it) => {
+      if (it.material) {
+        it.material.color = new Color('#ffffff')
+      }
+    })
+  })
+  return (
+    <group
+      scale={25}
+      position={[2, 23, 1]}
+      rotation={[Math.PI * 1.5, 0, Math.PI * -0.5]}
+    >
+      <primitive object={cloned}></primitive>
     </group>
   )
 }
