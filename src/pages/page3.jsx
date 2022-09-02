@@ -14,6 +14,7 @@ import anime from 'animejs'
 import { screenOpacity } from '@/helpers/GLOverlayEffect'
 import { RedMech } from '@/components/mech/RedMech'
 import { Video } from '@/components/Video/Video'
+import { sRGBEncoding } from 'three'
 // import { LineStuff } from '@/helpers/LineDrop/LineStuff'
 // import { useThree } from '@react-three/fiber'
 // import { Vector3 } from 'three'
@@ -63,31 +64,31 @@ const Page = (props) => {
           scale={[2, 2, 1]}
         />
         <Lightformer
-          intensity={2}
+          intensity={5}
           rotation-x={Math.PI / 2}
           position={[0, 5, -3]}
           scale={[10, 1, 1]}
         />
         <Lightformer
-          intensity={2}
+          intensity={5}
           rotation-x={Math.PI / 2}
           position={[0, 5, 0]}
           scale={[10, 1, 1]}
         />
         <Lightformer
-          intensity={2}
+          intensity={5}
           rotation-x={Math.PI / 2}
           position={[0, 5, 3]}
           scale={[10, 1, 1]}
         />
         <Lightformer
-          intensity={2}
+          intensity={5}
           rotation-x={Math.PI / 2}
           position={[0, 5, 6]}
           scale={[10, 1, 1]}
         />
         <Lightformer
-          intensity={2}
+          intensity={5}
           rotation-x={Math.PI / 2}
           position={[0, 5, 9]}
           scale={[10, 1, 1]}

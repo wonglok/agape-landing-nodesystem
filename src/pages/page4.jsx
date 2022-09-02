@@ -64,31 +64,31 @@ const Page = (props) => {
           scale={[2, 2, 1]}
         />
         <Lightformer
-          intensity={2}
+          intensity={5}
           rotation-x={Math.PI / 2}
           position={[0, 7, -3]}
           scale={[10, 1, 1]}
         />
         <Lightformer
-          intensity={2}
+          intensity={5}
           rotation-x={Math.PI / 2}
           position={[0, 7, 0]}
           scale={[10, 1, 1]}
         />
         <Lightformer
-          intensity={2}
+          intensity={5}
           rotation-x={Math.PI / 2}
           position={[0, 7, 3]}
           scale={[10, 1, 1]}
         />
         <Lightformer
-          intensity={2}
+          intensity={5}
           rotation-x={Math.PI / 2}
           position={[0, 7, 6]}
           scale={[10, 1, 1]}
         />
         <Lightformer
-          intensity={2}
+          intensity={5}
           rotation-x={Math.PI / 2}
           position={[0, 7, 9]}
           scale={[10, 1, 1]}
