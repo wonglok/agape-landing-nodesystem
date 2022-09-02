@@ -12,8 +12,9 @@ import { Companion } from '@/helpers/Companion'
 // import { useMultiverse } from '@/helpers/useMultiverse'
 import anime from 'animejs'
 import { screenOpacity } from '@/helpers/GLOverlayEffect'
-import { RedMech } from '@/components/mech/RedMech'
+import { BallMech } from '@/components/mech/BallMech'
 import { Video } from '@/components/Video/Video'
+import { sRGBEncoding } from 'three'
 // import { LineStuff } from '@/helpers/LineDrop/LineStuff'
 // import { useThree } from '@react-three/fiber'
 // import { Vector3 } from 'three'
@@ -59,37 +60,37 @@ const Page = (props) => {
         <Lightformer
           intensity={20}
           rotation-x={Math.PI * -0.5}
-          position={[0, 5, 0]}
+          position={[0, 7, 0]}
           scale={[2, 2, 1]}
         />
         <Lightformer
           intensity={2}
           rotation-x={Math.PI / 2}
-          position={[0, 5, -3]}
+          position={[0, 7, -3]}
           scale={[10, 1, 1]}
         />
         <Lightformer
           intensity={2}
           rotation-x={Math.PI / 2}
-          position={[0, 5, 0]}
+          position={[0, 7, 0]}
           scale={[10, 1, 1]}
         />
         <Lightformer
           intensity={2}
           rotation-x={Math.PI / 2}
-          position={[0, 5, 3]}
+          position={[0, 7, 3]}
           scale={[10, 1, 1]}
         />
         <Lightformer
           intensity={2}
           rotation-x={Math.PI / 2}
-          position={[0, 5, 6]}
+          position={[0, 7, 6]}
           scale={[10, 1, 1]}
         />
         <Lightformer
           intensity={2}
           rotation-x={Math.PI / 2}
-          position={[0, 5, 9]}
+          position={[0, 7, 9]}
           scale={[10, 1, 1]}
         />
       </Environment>
@@ -107,7 +108,7 @@ const Page = (props) => {
       </group>
 
       <group position={[0, 0, -3]}>
-        <RedMech></RedMech>
+        <BallMech></BallMech>
       </group>
       {/*  */}
 
