@@ -39,7 +39,7 @@ const Page = (props) => {
         <Companion
           frustumCulled={true}
           runActionName='walk_forward'
-          url={`/scene/landing/alien-avatar.glb`}
+          url={`/scene/landing/soldier-512.glb`}
           speed={4}
           lookAtOffset={[0, 0, -2]}
           walkOffset={[0, 0, -0.1]}

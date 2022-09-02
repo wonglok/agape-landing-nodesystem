@@ -98,7 +98,7 @@ export function Effects({}) {
     rayStep: 0.5,
     intensity: 3.5,
     maxRoughness: 1,
-    jitter: 0.5,
+    jitter: 0.15,
     jitterSpread: 0.5,
     jitterRough: 0.5,
     roughnessFadeOut: 1,
@@ -108,7 +108,7 @@ export function Effects({}) {
     maxDepthDifference: 7,
     maxDepth: 3,
     thickness: 3,
-    ior: 1.25,
+    ior: 1.35,
   }
 
   useFrame(({ camera, clock }) => {

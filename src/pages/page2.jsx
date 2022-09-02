@@ -23,7 +23,7 @@ const Page = (props) => {
             value: 0,
             update: () => {},
             complete: () => {
-              Router.router.push('/page1')
+              Router.router.push('/page3')
             },
           })
         }}
