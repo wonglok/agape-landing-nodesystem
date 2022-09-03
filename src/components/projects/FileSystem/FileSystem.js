@@ -36,14 +36,14 @@ export async function verifyPermission(fileHandle, readWrite) {
   }
   // Check if permission was already granted. If so, return true.
   if ((await fileHandle.queryPermission(options)) === 'granted') {
-    return true
+    return 'granted'
   }
   // Request permission. If the user grants permission, return true.
   if ((await fileHandle.requestPermission(options)) === 'granted') {
-    return true
+    return 'granted'
   }
   // The user didn't grant permission, so return false.
-  return false
+  return 'prompt'
 }
 
 //

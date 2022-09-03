@@ -40,12 +40,11 @@ export function ProjectLoaderGuard({ children = () => {} }) {
         <div className='flex items-center justify-center w-full h-full'>
           <div
             onClick={async () => {
-              let permission = await requestPermission(currentFolder.handle)
-              console.log(permission)
+              await requestPermission(currentFolder.handle)
             }}
             className='p-5 text-white bg-gray-500 rounded-xl'
           >
-            Allow File Reader
+            Allow Reading Folder for: {currentFolder.handle.name}
           </div>
         </div>
       )}

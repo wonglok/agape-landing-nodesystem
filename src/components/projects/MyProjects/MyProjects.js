@@ -15,6 +15,7 @@ export function MyProjects() {
   let projectFolders = useGLBEditor((s) => s.projectFolders)
   let removeProjectFolderByID = useGLBEditor((s) => s.removeProjectFolderByID)
   let loadProjectFolder = useGLBEditor((s) => s.loadProjectFolder)
+  let requestPermission = useGLBEditor((s) => s.requestPermission)
   useEffect(() => {
     if (projectFolders.length === 0) {
       loadProjectFolder()
@@ -35,9 +36,8 @@ export function MyProjects() {
                 onClick={async () => {
                   let handle = e.handle
                   if (handle) {
-                    await verifyPermission(handle, false)
+                    await requestPermission(handle, true)
                   }
-
                   Router.router.push(`/project/edit/${e._id}`)
                 }}
                 className='inline-block px-4 py-1 mb-1 mr-1 bg-blue-200'

@@ -1,6 +1,7 @@
 import {
   provideProjects,
   saveProjects,
+  verifyPermission,
 } from '@/components/projects/FileSystem/FileSystem'
 
 //
@@ -20,7 +21,7 @@ let inside = (set, get) => {
     },
 
     requestPermission: async (handle) => {
-      let permission = await handle.requestPermission({ mode: 'readwrite' })
+      let permission = await verifyPermission(handle, true)
 
       set({ permission })
 
