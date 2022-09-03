@@ -4557,6 +4557,11 @@ jsprim@^1.2.2:
     array-includes "^3.1.5"
     object.assign "^4.1.2"
 
+kaitai-struct@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/kaitai-struct/-/kaitai-struct-0.10.0.tgz#f0619a056ee4420387d821175ca0a92d3761f712"
+  integrity sha512-81oxVi/OY+LrzgrONX7ciD1wtvq24nb2M9iYixRiQG+1hrDrDRqFVWuQzF1fUexh3Sg/ol6eMAz1MOVYFouzUg==
+
 ktx-parse@^0.2.1:
   version "0.2.2"
   resolved "https://registry.npmjs.org/ktx-parse/-/ktx-parse-0.2.2.tgz"
