@@ -1,7 +1,7 @@
 import { ProjectNav } from '@/components/projects/ProjectNav/ProjectNav'
 import { useRouter } from 'next/router'
 
-export default function StudioHome() {
+export default function ResourceH() {
   let router = useRouter()
   return (
     <div>
@@ -10,6 +10,22 @@ export default function StudioHome() {
         <nav className='w-full mx-auto bg-white shadow'>
           <div className='container flex items-center justify-between h-16 px-6 mx-auto lg:items-stretch'>
             <div className='flex items-center h-full'>
+              {/* <div
+                aria-label='Home'
+                role='img'
+                className='flex items-center mr-10'
+              >
+                <img
+                  src='https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_Grey_background-svg1.svg'
+                  alt='logo'
+                />
+
+                <a href='/'>
+                  <h3 className='hidden ml-3 text-base font-bold leading-tight tracking-normal text-gray-800 lg:block'>
+                    Agape
+                  </h3>
+                </a>
+              </div> */}
               <ProjectNav></ProjectNav>
             </div>
 
@@ -22,7 +38,7 @@ export default function StudioHome() {
         <div className='container flex flex-col items-start justify-between px-6 pb-6 mx-auto my-12 border-b border-gray-300 lg:flex-row lg:items-center'>
           <div>
             <h4 className='text-2xl font-bold leading-tight text-gray-800'>
-              My Project
+              My Resources
             </h4>
           </div>
           <div className='mt-6 lg:mt-0'>
