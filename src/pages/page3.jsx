@@ -44,61 +44,12 @@ const Page = (props) => {
         <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
       </Box> */}
 
-      {/*  */}
-      <Suspense fallback={null}>
-        {/* <Companion
-          frustumCulled={true}
-          runActionName='walk_forward'
-          url={`/scene/landing/swat-team-1024.glb`}
-          speed={4}
-          lookAtOffset={[0, 0, -2]}
-          walkOffset={[0, 0, -0.1]}
-        ></Companion> */}
-      </Suspense>
-
       <Environment
         preset='night'
         frames={1}
         background={true}
         encoding={sRGBEncoding}
-      >
-        {/* <Lightformer
-          intensity={20}
-          rotation-x={Math.PI * -0.5}
-          position={[0, 5, 0]}
-          scale={[2, 2, 1]}
-        />
-        <Lightformer
-          intensity={5}
-          rotation-x={Math.PI / 2}
-          position={[0, 5, -3]}
-          scale={[10, 1, 1]}
-        />
-        <Lightformer
-          intensity={5}
-          rotation-x={Math.PI / 2}
-          position={[0, 5, 0]}
-          scale={[10, 1, 1]}
-        />
-        <Lightformer
-          intensity={5}
-          rotation-x={Math.PI / 2}
-          position={[0, 5, 3]}
-          scale={[10, 1, 1]}
-        />
-        <Lightformer
-          intensity={5}
-          rotation-x={Math.PI / 2}
-          position={[0, 5, 6]}
-          scale={[10, 1, 1]}
-        />
-        <Lightformer
-          intensity={5}
-          rotation-x={Math.PI / 2}
-          position={[0, 5, 9]}
-          scale={[10, 1, 1]}
-        /> */}
-      </Environment>
+      ></Environment>
 
       {/* <group position={[0, 0.1, -10]}>
         <Video url={`/scene/mech-red/redmech-720.mp4`}></Video>

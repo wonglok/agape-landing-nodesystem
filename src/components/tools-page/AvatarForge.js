@@ -31,7 +31,6 @@ function AvatarGenerationButton() {
           <button
             onClick={() => {
               //
-              //
               exportAvatar({
                 avatar,
                 clips,
