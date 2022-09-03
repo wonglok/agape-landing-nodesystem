@@ -8,8 +8,11 @@ export function ProjectLoaderGuard({ children = () => {} }) {
   let setCurrentFolder = useGLBEditor((s) => s.setCurrentFolder)
 
   let [project, setProject] = useState('loading')
-
   let loadProjectFolder = useGLBEditor((s) => s.loadProjectFolder)
+  let requestPermission = useGLBEditor((s) => s.requestPermission)
+  let currentFolder = useGLBEditor((s) => s.currentFolder)
+  let permission = useGLBEditor((s) => s.permission)
+
   useEffect(() => {
     if (!projectID) {
       return
@@ -22,7 +25,7 @@ export function ProjectLoaderGuard({ children = () => {} }) {
         //
         if (s) {
           await setCurrentFolder(s)
-          setProject('done')
+          setProject('found')
         } else {
           setProject('notfound')
         }
@@ -33,7 +36,20 @@ export function ProjectLoaderGuard({ children = () => {} }) {
     <>
       {project === 'loading' && <div>Loading...</div>}
       {project === 'notfound' && <div>Folder Not Found...</div>}
-      {project === 'done' && children}
+      {project === 'found' && permission !== 'granted' && (
+        <div className='flex items-center justify-center w-full h-full'>
+          <div
+            onClick={async () => {
+              let permission = await requestPermission(currentFolder.handle)
+              console.log(permission)
+            }}
+            className='p-5 text-white bg-gray-500 rounded-xl'
+          >
+            Allow File Reader
+          </div>
+        </div>
+      )}
+      {project === 'found' && permission === 'granted' && children}
     </>
   )
 }

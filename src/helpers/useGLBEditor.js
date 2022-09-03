@@ -13,6 +13,19 @@ let inside = (set, get) => {
     projectFolders: [],
     currentFolder: false,
 
+    permission: 'prompt',
+    queryPermission: async (handle) => {
+      let permission = await handle.queryPermission({ mode: 'readwrite' })
+      set({ permission })
+    },
+
+    requestPermission: async (handle) => {
+      let permission = await handle.requestPermission({ mode: 'readwrite' })
+
+      set({ permission })
+
+      return permission
+    },
     setCurrentFolder: (v) => {
       set({ currentFolder: v })
     },
