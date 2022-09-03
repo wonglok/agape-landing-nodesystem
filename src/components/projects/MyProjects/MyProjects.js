@@ -4,7 +4,6 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import Router from 'next/router'
 import { useEffect } from 'react'
-import { verifyPermission } from '../FileSystem/FileSystem'
 
 export function MyProjects() {
   // let ref = useRef()
