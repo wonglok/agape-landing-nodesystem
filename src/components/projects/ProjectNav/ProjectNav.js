@@ -68,6 +68,8 @@ export function ProjectNav() {
                 </li>
               </Link>
 
+              {/*  */}
+
               {/* <li className='flex items-center h-full mx-10 text-sm t=racking-normal cursor-pointer hover:text-indigo-700 text-gry-800'>
                   <a href='#'>Products</a>
                 </li>
@@ -83,9 +85,9 @@ export function ProjectNav() {
           <div className='flex items-center visible h-full'>
             <div>
               <div className='relative w-full h-full'>
-                <Link href='/project/resource'>
+                <Link href='/'>
                   <li className={readyClass}>
-                    <span>Home</span>
+                    <span>Back to Home</span>
                   </li>
                 </Link>
               </div>

@@ -1,3 +1,4 @@
+import { MyProjects } from '@/components/projects/MyProjects/MyProjects'
 import { ProjectNav } from '@/components/projects/ProjectNav/ProjectNav'
 import { useRouter } from 'next/router'
 
@@ -26,7 +27,9 @@ export default function StudioHome() {
         {/* <!-- Page title ends --> */}
         <div className='container px-6 mx-auto'>
           <div className='w-full '>
-            <div>123</div>
+            {/*  */}
+            <MyProjects></MyProjects>
+            {/*  */}
           </div>
         </div>
       </div>
@@ -38,6 +41,10 @@ export default function StudioHome() {
     </div>
   )
 }
+
+//
+
+//
 
 //
 
