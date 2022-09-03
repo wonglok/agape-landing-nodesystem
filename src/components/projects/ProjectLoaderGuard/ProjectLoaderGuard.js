@@ -1,7 +1,6 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { verifyPermission } from '../FileSystem/FileSystem'
 
 export function ProjectLoaderGuard({ children = () => {} }) {
   let router = useRouter()
@@ -9,6 +8,7 @@ export function ProjectLoaderGuard({ children = () => {} }) {
   let setCurrentFolder = useGLBEditor((s) => s.setCurrentFolder)
 
   let [project, setProject] = useState('loading')
+
   let loadProjectFolder = useGLBEditor((s) => s.loadProjectFolder)
   useEffect(() => {
     if (!projectID) {
@@ -18,10 +18,11 @@ export function ProjectLoaderGuard({ children = () => {} }) {
       .then((e) => {
         return e.find((e) => e._id === projectID)
       })
-      .then((s) => {
+      .then(async (s) => {
         //
         if (s) {
-          setCurrentFolder(s)
+          await setCurrentFolder(s)
+          setProject('done')
         } else {
           setProject('notfound')
         }
@@ -30,7 +31,7 @@ export function ProjectLoaderGuard({ children = () => {} }) {
 
   return (
     <>
-      {project === 'notfound' && <div>Folder Not Found...</div>}
+      {project === 'loading' && <div>Loading...</div>}
       {project === 'notfound' && <div>Folder Not Found...</div>}
       {project === 'done' && children}
     </>
