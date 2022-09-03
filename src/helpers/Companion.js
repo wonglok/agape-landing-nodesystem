@@ -39,6 +39,8 @@ export function Companion({
         it.material.emissiveIntensity = 100
       }
     })
+
+    cloned.rotation.x = Math.PI * -1.5
     return cloned
   }, [gltf])
 
@@ -142,9 +144,9 @@ export function Companion({
 
         // ref.current.position.y = player.position.y
         // ref.current.lookAt(h.x, player.position.y, h.z)
-        if (act && act.name !== 'idle') {
+        if (act && act.name !== 'idle-rifle') {
           setAct({
-            name: 'idle',
+            name: 'idle-rifle',
             inPlace: true,
             repetiton: '' + Infinity,
           })

@@ -43,8 +43,8 @@ const Page = (props) => {
       <Suspense fallback={null}>
         <Companion
           frustumCulled={false}
-          runActionName='walk_forward'
-          url={`/scene/landing/swat-team-512.glb`}
+          runActionName='sprint_forward'
+          url={`/scene/landing/swat-mo-1024.glb`}
           speed={4}
           lookAtOffset={[0, 0, -2]}
           walkOffset={[0, 0, -0.01]}
@@ -55,7 +55,7 @@ const Page = (props) => {
         <Companion
           frustumCulled={false}
           runActionName='sprint_forward'
-          url={`/scene/landing/swat-team-512.glb`}
+          url={`/scene/landing/swat-mo-1024.glb`}
           speed={4}
           lookAtOffset={[0, 0, -2]}
           walkOffset={[1, 0, -0.01]}
@@ -65,7 +65,7 @@ const Page = (props) => {
         <Companion
           frustumCulled={false}
           runActionName='sprint_forward'
-          url={`/scene/landing/swat-team-512.glb`}
+          url={`/scene/landing/swat-mo-1024.glb`}
           speed={4}
           lookAtOffset={[0, 0, -2]}
           walkOffset={[-1, 0, -0.01]}

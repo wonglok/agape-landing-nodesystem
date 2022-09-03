@@ -32,20 +32,37 @@ const Page = (props) => {
       </Sphere>
 
       <Suspense fallback={null}>
-        <Companion
-          frustumCulled={true}
-          runActionName='walk_forward'
-          speed={4}
-          lookAtOffset={[0, 0, -2]}
-          walkOffset={[0, 0, -0.1]}
-        >
-          <group position={[-0.3, 1.7, 0.2]}>
-            <pointLight intensity={1} decay={2} color='#ffff00'></pointLight>
-          </group>
-          <group position={[0.3, 1.7, 0.2]}>
-            <pointLight intensity={1} decay={2} color='#00ffff'></pointLight>
-          </group>
-        </Companion>
+        <Suspense fallback={null}>
+          <Companion
+            frustumCulled={false}
+            runActionName='sprint_forward'
+            url={`/scene/landing/swat-mo-1024.glb`}
+            speed={4}
+            lookAtOffset={[0, 0, -2]}
+            walkOffset={[0, 0, -0.01]}
+          ></Companion>
+        </Suspense>
+
+        <Suspense fallback={null}>
+          <Companion
+            frustumCulled={false}
+            runActionName='sprint_forward'
+            url={`/scene/landing/swat-mo-1024.glb`}
+            speed={4}
+            lookAtOffset={[0, 0, -2]}
+            walkOffset={[1, 0, -0.01]}
+          ></Companion>
+        </Suspense>
+        <Suspense fallback={null}>
+          <Companion
+            frustumCulled={false}
+            runActionName='sprint_forward'
+            url={`/scene/landing/swat-mo-1024.glb`}
+            speed={4}
+            lookAtOffset={[0, 0, -2]}
+            walkOffset={[-1, 0, -0.01]}
+          ></Companion>
+        </Suspense>
       </Suspense>
 
       <Environment preset='park'></Environment>
