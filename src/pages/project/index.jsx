@@ -1,3 +1,4 @@
+import { AddProjectFolder } from '@/components/projects/AddProjectFolder/AddProjectFolder'
 import { MyProjects } from '@/components/projects/MyProjects/MyProjects'
 import { ProjectNav } from '@/components/projects/ProjectNav/ProjectNav'
 import { useRouter } from 'next/router'
@@ -27,7 +28,7 @@ export default function StudioHome() {
         {/* <!-- Page title ends --> */}
         <div className='container px-6 mx-auto'>
           <div className='w-full '>
-            {/*  */}
+            <AddProjectFolder></AddProjectFolder>
             <MyProjects></MyProjects>
             {/*  */}
           </div>

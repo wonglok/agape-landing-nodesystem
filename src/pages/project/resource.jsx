@@ -13,7 +13,7 @@ export default function ResourceH() {
         <div className='container flex flex-col items-start justify-between px-6 pb-6 mx-auto my-12 border-b border-gray-300 lg:flex-row lg:items-center'>
           <div>
             <h4 className='text-2xl font-bold leading-tight text-gray-800'>
-              3D Resources
+              Materials
             </h4>
           </div>
           <div className='mt-6 lg:mt-0'>
