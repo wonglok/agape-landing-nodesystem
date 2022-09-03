@@ -34,21 +34,40 @@ export function ProjectLoaderGuard({ children = () => {} }) {
 
   return (
     <>
-      {project === 'loading' && <div>Loading...</div>}
-      {project === 'notfound' && <div>Folder Not Found...</div>}
+      {project === 'loading' && (
+        <div className='flex items-center justify-center w-full h-full'>
+          Loading...
+        </div>
+      )}
+      {project === 'notfound' && (
+        <div className='flex flex-col items-center justify-center w-full h-full'>
+          <div className='mb-12 text-center'>Folder Not Found...</div>
+          <div>
+            <button
+              onClick={async () => {
+                router.push('/project')
+              }}
+              className='p-5 text-white bg-gray-500 rounded-xl'
+            >
+              Go Back Home
+            </button>
+          </div>
+        </div>
+      )}
       {project === 'found' && permission !== 'granted' && (
         <div className='flex items-center justify-center w-full h-full'>
-          <div
+          <button
             onClick={async () => {
               await requestPermission(currentFolder.handle)
             }}
             className='p-5 text-white bg-gray-500 rounded-xl'
           >
             Allow Reading Folder for: {currentFolder.handle.name}
-          </div>
+          </button>
         </div>
       )}
       {project === 'found' && permission === 'granted' && children}
     </>
   )
 }
+//
