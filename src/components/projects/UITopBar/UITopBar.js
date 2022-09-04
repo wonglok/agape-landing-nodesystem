@@ -12,9 +12,7 @@ export function UITopBar() {
         <button
           className='text-xs'
           onClick={() => {
-            //
             router.push('/project')
-            //
           }}
         >
           ← Back

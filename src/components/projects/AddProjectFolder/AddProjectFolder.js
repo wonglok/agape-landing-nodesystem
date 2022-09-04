@@ -7,7 +7,7 @@ export function AddProjectFolder() {
   let loadProjectFolder = useGLBEditor((s) => s.loadProjectFolder)
   return (
     <button
-      className='inline-block px-4 py-1 mb-1 mr-1 bg-teal-200'
+      className='inline-block px-4 py-2 mb-1 mr-1 text-xs bg-teal-200 rounded-full'
       onClick={async () => {
         let handle = await getDirHandle()
 
@@ -19,11 +19,6 @@ export function AddProjectFolder() {
           await addProjectFolderHandle(handle)
           loadProjectFolder()
         }
-        //
-        // //
-        // for await (let item of handle.values()) {
-        //   console.log(item)
-        // }
       }}
     >
       Add New Project Folder
