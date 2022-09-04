@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react'
 import SplitPane from 'react-split-pane'
+import { ENAssetDrawer } from '../ENAssetDrawer/ENAssetDrawer'
+import { ENCanvas } from '../ENCanvas/ENCanvas'
+import { ENGraph } from '../ENGraph/ENGraph'
+import { ENLayers } from '../ENLayers/ENLayers'
+import { ENParams } from '../ENParams/ENParams'
 
 export function UIMain() {
   let [ready, setReady] = useState(false)
@@ -24,9 +29,10 @@ function UIMainContent() {
         <div className='w-full h-full'>
           <LeftRight
             //
-            NS={'ns1'}
+            NS={'canvas-control'}
             left={
               <UpDown
+                NS={'asset-layercanvas'}
                 getDefaultSize={() => {
                   return window.innerHeight - 240
                 }}
@@ -34,24 +40,24 @@ function UIMainContent() {
                   <div>
                     <LeftRight
                       getDefaultSize={() => 280}
-                      NS={'ns2'}
-                      left={<div>Layers</div>}
-                      right={<div>Canvas</div>}
+                      NS={'layers-canvas'}
+                      left={<ENLayers></ENLayers>}
+                      right={<ENCanvas></ENCanvas>}
                     ></LeftRight>
                   </div>
                 }
-                down={<div>Asset Drawer</div>}
+                down={<ENAssetDrawer></ENAssetDrawer>}
               ></UpDown>
             }
             right={
               <div>
                 <UpDown
-                  NS={'ud-2'}
+                  NS={'param-graph'}
                   getDefaultSize={() => {
                     return 300
                   }}
-                  up={<>Parameters</>}
-                  down={<>Graph Logic</>}
+                  up={<ENParams></ENParams>}
+                  down={<ENGraph></ENGraph>}
                 ></UpDown>
               </div>
             }
@@ -70,9 +76,11 @@ function LeftRight({
 }) {
   let [onoff, setOnOff] = useState(true)
   useEffect(() => {
-    let reset = () => {
+    let reset = ({ detail: isReset }) => {
       //
-      localStorage.setItem(NS, getDefaultSize())
+      if (isReset) {
+        localStorage.setItem(NS, getDefaultSize())
+      }
       setOnOff(Math.random())
     }
     // window.addEventListener('resize', hh)
@@ -85,7 +93,7 @@ function LeftRight({
   }, [])
   return (
     <>
-      {onoff && (
+      {
         <SplitPane
           split='vertical'
           size={parseInt(localStorage.getItem(NS), 10) || getDefaultSize()}
@@ -97,7 +105,7 @@ function LeftRight({
           <div>{left}</div>
           <div>{right}</div>
         </SplitPane>
-      )}
+      }
     </>
   )
 }
@@ -110,9 +118,11 @@ function UpDown({
 }) {
   let [onoff, setOnOff] = useState(true)
   useEffect(() => {
-    let reset = () => {
+    let reset = ({ detail: isReset }) => {
       //
-      localStorage.setItem(NS, getDefaultSize())
+      if (isReset) {
+        localStorage.setItem(NS, getDefaultSize())
+      }
       setOnOff(Math.random())
     }
     // window.addEventListener('resize', hh)
@@ -125,7 +135,7 @@ function UpDown({
   }, [])
   return (
     <>
-      {onoff && (
+      {
         <SplitPane
           split='horizontal'
           size={parseInt(localStorage.getItem(NS), 10) || getDefaultSize()}
@@ -137,7 +147,7 @@ function UpDown({
           <div>{up}</div>
           <div>{down}</div>
         </SplitPane>
-      )}
+      }
     </>
   )
 }

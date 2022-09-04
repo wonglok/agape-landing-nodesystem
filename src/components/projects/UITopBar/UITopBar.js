@@ -1,14 +1,24 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 export function UITopBar() {
   let currentFolder = useGLBEditor((s) => s.currentFolder)
+  let router = useRouter()
 
   return (
     <div className='flex items-center justify-between h-6 p-1 px-2 text-xs bg-gray-200'>
       <div className='inline-flex items-center justify-start w-1/3'>
-        {/*  */}
-        123
+        <button
+          className='text-xs'
+          onClick={() => {
+            //
+            router.push('/project')
+            //
+          }}
+        >
+          ← Back
+        </button>
       </div>
       <div className='inline-flex items-center justify-center w-1/3'>
         {currentFolder?.handle?.name}
@@ -29,7 +39,7 @@ function ResetLayoutBtn() {
     if (autolayout === 'yes') {
       setCanReset(true)
       setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('reset-size'))
+        window.dispatchEvent(new CustomEvent('reset-size', { detail: false }))
       }, 100)
     }
     if (autolayout === 'no') {
@@ -38,7 +48,7 @@ function ResetLayoutBtn() {
     if (autolayout === null) {
       setCanReset(true)
       setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('reset-size'))
+        window.dispatchEvent(new CustomEvent('reset-size', { detail: false }))
       }, 100)
     }
   }, [])
@@ -49,17 +59,17 @@ function ResetLayoutBtn() {
       clearTimeout(tt)
       tt = setTimeout(() => {
         if (canReset) {
-          window.dispatchEvent(new CustomEvent('reset-size'))
+          window.dispatchEvent(new CustomEvent('reset-size', { detail: true }))
         }
-      }, 500)
+      }, 100)
     }
     let focus = () => {
       clearTimeout(tt)
       tt = setTimeout(() => {
         if (canReset) {
-          window.dispatchEvent(new CustomEvent('reset-size'))
+          window.dispatchEvent(new CustomEvent('reset-size', { detail: true }))
         }
-      }, 500)
+      }, 100)
     }
     window.addEventListener('resize', rr)
     window.addEventListener('focus', focus)
@@ -75,15 +85,17 @@ function ResetLayoutBtn() {
       className=' flex items-center justify-center'
       onClick={() => {
         setCanReset((s) => {
-          setTimeout(() => {
-            localStorage.setItem('autolayout', !s ? 'yes' : 'no')
-          })
+          if (!s) {
+            setTimeout(() => {
+              localStorage.setItem('autolayout', !s ? 'yes' : 'no')
+              window.dispatchEvent(
+                new CustomEvent('reset-size', { detail: true })
+              )
+            }, 100)
+          }
 
           return !s
         })
-        setTimeout(() => {
-          window.dispatchEvent(new CustomEvent('reset-size'))
-        }, 100)
       }}
     >
       <div className='mr-1'>Auto Layout</div>
