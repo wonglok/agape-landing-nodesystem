@@ -53,10 +53,20 @@ function ResetLayoutBtn() {
         }
       }, 500)
     }
+    let focus = () => {
+      clearTimeout(tt)
+      tt = setTimeout(() => {
+        if (canReset) {
+          window.dispatchEvent(new CustomEvent('reset-size'))
+        }
+      }, 500)
+    }
     window.addEventListener('resize', rr)
+    window.addEventListener('focus', focus)
 
     return () => {
       window.removeEventListener('resize', rr)
+      window.removeEventListener('focus', focus)
     }
   }, [canReset])
 
