@@ -28,14 +28,19 @@ function ResetLayoutBtn() {
     let autolayout = localStorage.getItem('autolayout')
     if (autolayout === 'yes') {
       setCanReset(true)
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('reset-size'))
+      }, 100)
     }
     if (autolayout === 'no') {
       setCanReset(false)
     }
     if (autolayout === null) {
       setCanReset(true)
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('reset-size'))
+      }, 100)
     }
-    console.log(autolayout)
   }, [])
 
   useEffect(() => {
