@@ -8,7 +8,13 @@ export function UIMain() {
     setReady(true)
   }, [])
 
-  return ready && <UIMainContent></UIMainContent>
+  return (
+    ready && (
+      <>
+        <UIMainContent></UIMainContent>
+      </>
+    )
+  )
 }
 
 function UIMainContent() {
@@ -17,30 +23,31 @@ function UIMainContent() {
       <div className='relative w-full text-xs' style={{ height: 'calc(100%)' }}>
         <div className='w-full h-full'>
           <LeftRight
+            //
             NS={'ns1'}
             left={
               <UpDown
-                getSize={() => {
+                getDefaultSize={() => {
                   return window.innerHeight - 240
                 }}
                 up={
                   <div>
                     <LeftRight
-                      getSize={() => 280}
+                      getDefaultSize={() => 280}
                       NS={'ns2'}
                       left={<div>Layers</div>}
                       right={<div>Canvas</div>}
                     ></LeftRight>
                   </div>
                 }
-                down={<div>aaaa</div>}
+                down={<div>Asset Drawer</div>}
               ></UpDown>
             }
             right={
               <div>
                 <UpDown
                   NS={'ud-2'}
-                  getSize={() => {
+                  getDefaultSize={() => {
                     return 300
                   }}
                   up={<>Parameters</>}
@@ -57,24 +64,23 @@ function UIMainContent() {
 
 function LeftRight({
   NS = 'left-right',
-  getSize = () => window.innerWidth - 500,
+  getDefaultSize = () => window.innerWidth - 500,
   left,
   right,
 }) {
   let [onoff, setOnOff] = useState(true)
   useEffect(() => {
-    let hh = () => {
-      localStorage.setItem(NS, getSize())
+    let reset = () => {
+      //
+      localStorage.setItem(NS, getDefaultSize())
       setOnOff(Math.random())
-      // setOnOff(false)
-      // setTimeout(() => {
-      //   setOnOff(true)
-      // }, 0)
     }
-    window.addEventListener('resize', hh)
+    // window.addEventListener('resize', hh)
+    window.addEventListener('reset-size', reset)
 
     return () => {
-      window.removeEventListener('resize', hh)
+      // window.removeEventListener('resize', hh)
+      window.removeEventListener('reset-size', reset)
     }
   }, [])
   return (
@@ -82,8 +88,10 @@ function LeftRight({
       {onoff && (
         <SplitPane
           split='vertical'
-          size={getSize()}
-          defaultSize={parseInt(localStorage.getItem(NS), 10) || getSize()}
+          size={parseInt(localStorage.getItem(NS), 10) || getDefaultSize()}
+          defaultSize={
+            parseInt(localStorage.getItem(NS), 10) || getDefaultSize()
+          }
           onChange={(size) => localStorage.setItem(NS, size)}
         >
           <div>{left}</div>
@@ -96,25 +104,23 @@ function LeftRight({
 
 function UpDown({
   NS = 'updown1',
-  getSize = () => window.innerHeight - 24 - 24 - 280,
+  getDefaultSize = () => window.innerHeight - 24 - 24 - 280,
   up = <>up</>,
   down = <>down</>,
 }) {
   let [onoff, setOnOff] = useState(true)
   useEffect(() => {
-    let hh = () => {
-      localStorage.setItem(NS, getSize())
+    let reset = () => {
+      //
+      localStorage.setItem(NS, getDefaultSize())
       setOnOff(Math.random())
-
-      // setOnOff(false)
-      // setTimeout(() => {
-      //   setOnOff(true)
-      // }, 0)
     }
-    window.addEventListener('resize', hh)
+    // window.addEventListener('resize', hh)
+    window.addEventListener('reset-size', reset)
 
     return () => {
-      window.removeEventListener('resize', hh)
+      // window.removeEventListener('resize', hh)
+      window.removeEventListener('reset-size', reset)
     }
   }, [])
   return (
@@ -122,8 +128,10 @@ function UpDown({
       {onoff && (
         <SplitPane
           split='horizontal'
-          size={getSize()}
-          defaultSize={parseInt(localStorage.getItem(NS), 10) || getSize()}
+          size={parseInt(localStorage.getItem(NS), 10) || getDefaultSize()}
+          defaultSize={
+            parseInt(localStorage.getItem(NS), 10) || getDefaultSize()
+          }
           onChange={(size) => localStorage.setItem(NS, size)}
         >
           <div>{up}</div>
