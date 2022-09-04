@@ -25,12 +25,17 @@ export function ProjectLoaderGuard({ children = () => {} }) {
         //
         if (s) {
           await setCurrentFolder(s)
+          try {
+            await requestPermission(s.handle)
+          } catch (e) {
+            console.log(e)
+          }
           setProject('found')
         } else {
           setProject('notfound')
         }
       })
-  }, [loadProjectFolder, projectID, setCurrentFolder])
+  }, [loadProjectFolder, projectID, requestPermission, setCurrentFolder])
 
   return (
     <>
@@ -49,7 +54,7 @@ export function ProjectLoaderGuard({ children = () => {} }) {
               }}
               className='p-5 text-white bg-gray-500 rounded-xl'
             >
-              Go Back Home
+              Back Home
             </button>
           </div>
         </div>
@@ -58,11 +63,19 @@ export function ProjectLoaderGuard({ children = () => {} }) {
         <div className='flex items-center justify-center w-full h-full'>
           <button
             onClick={async () => {
+              router.push('/project')
+            }}
+            className='p-5 mx-2 text-white bg-gray-500 rounded-xl'
+          >
+            Back Home
+          </button>
+          <button
+            onClick={async () => {
               await requestPermission(currentFolder.handle)
             }}
-            className='p-5 text-white bg-gray-500 rounded-xl'
+            className='p-5 mx-2 text-white bg-blue-500 rounded-xl'
           >
-            Allow Reading Folder for: {currentFolder.handle.name}
+            Connect Folder: {currentFolder.handle.name}
           </button>
         </div>
       )}

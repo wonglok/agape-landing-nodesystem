@@ -27,9 +27,9 @@ export function MyProjects() {
         .filter((e) => e)
         .map((e, i) => {
           return (
-            <div className='' key={e._id}>
+            <div key={e._id}>
               <div className='inline-block px-8 py-1 mb-1 mr-1 border-b border-gray-500'>
-                {e.handle.name}
+                {e.handle?.name}
               </div>
               <button
                 onClick={async () => {
@@ -52,7 +52,7 @@ export function MyProjects() {
                 }}
                 className='inline-block px-4 py-1 mb-1 mr-1 bg-red-200'
               >
-                Remove
+                Remove Shortcut
               </button>
             </div>
           )

@@ -15,8 +15,10 @@ export function AddProjectFolder() {
           await verifyPermission(handle, false)
         }
 
-        await addProjectFolderHandle(handle)
-        loadProjectFolder()
+        if (handle) {
+          await addProjectFolderHandle(handle)
+          loadProjectFolder()
+        }
         //
         // //
         // for await (let item of handle.values()) {
