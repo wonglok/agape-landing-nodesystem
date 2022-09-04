@@ -25,16 +25,17 @@ function ResetLayoutBtn() {
 
   //
   useEffect(() => {
-    let autplayout = localStorage.getItem('autolayout')
-    if (autplayout === 'yes') {
+    let autolayout = localStorage.getItem('autolayout')
+    if (autolayout === 'yes') {
       setCanReset(true)
     }
-    if (autplayout === 'no') {
+    if (autolayout === 'no') {
       setCanReset(false)
     }
-    if (autplayout === null) {
+    if (autolayout === null) {
       setCanReset(true)
     }
+    console.log(autolayout)
   }, [])
 
   useEffect(() => {
@@ -60,7 +61,8 @@ function ResetLayoutBtn() {
       onClick={() => {
         setCanReset((s) => {
           setTimeout(() => {
-            localStorage.setItem('autolayout', !s ? 'no' : 'yes')
+            localStorage.setItem('autolayout', !s ? 'yes' : 'no')
+            window.dispatchEvent(new CustomEvent('reset-size'))
           })
 
           return !s
