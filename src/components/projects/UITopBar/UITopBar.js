@@ -67,11 +67,13 @@ function ResetLayoutBtn() {
         setCanReset((s) => {
           setTimeout(() => {
             localStorage.setItem('autolayout', !s ? 'yes' : 'no')
-            window.dispatchEvent(new CustomEvent('reset-size'))
           })
 
           return !s
         })
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('reset-size'))
+        }, 100)
       }}
     >
       <div className='mr-1'>Auto Layout</div>
