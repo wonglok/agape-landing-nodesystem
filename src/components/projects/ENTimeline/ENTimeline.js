@@ -61,6 +61,7 @@ function Track() {
 
   let uiClock = useGLBEditor((s) => s.uiClock)
   let resetTime = useGLBEditor((s) => s.resetTime)
+  let updateClockTime = useGLBEditor((s) => s.updateClockTime)
   useEffect(() => {
     resetTime()
 
@@ -81,10 +82,37 @@ function Track() {
       cancelAnimationFrame(rAFID)
     }
   }, [])
+  let isDown = useRef(false)
+
+  useEffect(() => {
+    let mouseup = () => {
+      isDown.current = false
+    }
+    window.addEventListener('mouseup', mouseup)
+    return () => {
+      window.removeEventListener('mouseup', mouseup)
+    }
+  })
   return (
     <div
       style={{ width: 'calc(100% - 54px)', height: '54px', overflow: 'hidden' }}
       className='relative bg-gray-100'
+      onClick={(ev) => {
+        let px = ev.pageX - 54
+        updateClockTime(px / 10)
+      }}
+      onMouseDown={() => {
+        isDown.current = true
+      }}
+      onMouseUp={() => {
+        isDown.current = false
+      }}
+      onMouseMove={(ev) => {
+        if (isDown.current) {
+          let px = ev.pageX - 54
+          updateClockTime(px / 10)
+        }
+      }}
     >
       <div
         className='h-full bg-gray-800'

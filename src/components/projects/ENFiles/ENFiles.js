@@ -1,3 +1,20 @@
+import { useGLBEditor } from '@/helpers/useGLBEditor'
+import { ENFileNode } from './ENFileNode'
+
 export function ENFiles() {
-  return <div>Fiels</div>
+  let currentFolder = useGLBEditor((s) => s.currentFolder)
+
+  return (
+    <div>
+      <ENFileNode></ENFileNode>
+    </div>
+  )
 }
+
+//
+
+//
+
+//
+
+//

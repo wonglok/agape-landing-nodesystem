@@ -77,6 +77,15 @@ let generateInside = (set, get) => {
       }
       set({ uiClock })
     },
+    updateClockTime: (v) => {
+      /** @type {Clock} */
+      let uiClock = get().uiClock
+
+      // console.log(uiClock.running)
+      uiClock.start()
+      uiClock.elapsedTime = v
+      set({ uiClock })
+    },
   }
 }
 
