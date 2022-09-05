@@ -58,12 +58,23 @@ let generateInside = (set, get) => {
       await saveProjects(projects)
     },
 
-    uiClock: new Clock(),
+    uiClock: new Clock(false),
+    lastTime: 0,
+    resetTime: () => {
+      set({ lastTime: 0 })
+    },
     toggleRunning: () => {
+      /** @type {Clock} */
       let uiClock = get().uiClock
 
-      uiClock.running = !uiClock.running
-
+      // console.log(uiClock.running)
+      if (uiClock.running) {
+        uiClock.stop()
+        set({ lastTime: uiClock.getElapsedTime() })
+      } else {
+        uiClock.start()
+        uiClock.elapsedTime = get().lastTime
+      }
       set({ uiClock })
     },
   }
