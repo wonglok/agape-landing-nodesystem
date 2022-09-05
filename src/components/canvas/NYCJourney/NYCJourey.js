@@ -52,7 +52,6 @@ export function NYCJourney() {
   useEffect(() => {
     glb.animations.forEach((ui) => {
       mixer.clipAction(ui).play()
-      console.log(ui.duration)
     })
 
     //

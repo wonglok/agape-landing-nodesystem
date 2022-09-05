@@ -9,7 +9,7 @@ import create from 'zustand'
 //
 import { getID } from './getID'
 
-let inside = (set, get) => {
+let generateInside = (set, get) => {
   return {
     //
     projectFolders: [],
@@ -28,9 +28,11 @@ let inside = (set, get) => {
 
       return permission
     },
+
     setCurrentFolder: (v) => {
       set({ currentFolder: v })
     },
+
     loadProjectFolder: async () => {
       let projects = await provideProjects()
       set({ projectFolders: projects })
@@ -58,5 +60,5 @@ let inside = (set, get) => {
 }
 
 export const useGLBEditor = create((set, get) => {
-  return inside(set, get)
+  return generateInside(set, get)
 })

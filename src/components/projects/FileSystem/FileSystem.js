@@ -1,20 +1,20 @@
 import { get, set } from 'idb-keyval'
 
 //
-export const EN_Resources = 'en_resources'
 export const NS_Projects = 'en_projects'
-export async function provideResourceFolder() {
-  let enFolders = await get(EN_Resources)
-  if (!enFolders) {
-    await set(EN_Resources, [])
-    enFolders = await get(EN_Resources)
-  }
-  return enFolders
-}
+// export const EN_Resources = 'en_resources'
+// export async function provideResourceFolder() {
+//   let enFolders = await get(EN_Resources)
+//   if (!enFolders) {
+//     await set(EN_Resources, [])
+//     enFolders = await get(EN_Resources)
+//   }
+//   return enFolders
+// }
 
-export async function saveResourceFolder(v) {
-  await set(EN_Resources, v)
-}
+// export async function saveResourceFolder(v) {
+//   await set(EN_Resources, v)
+// }
 
 export async function provideProjects() {
   let enProjs = await get(NS_Projects)

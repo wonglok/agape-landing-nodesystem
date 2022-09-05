@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import SplitPane from 'react-split-pane'
 import { ENAssetDrawer } from '../ENAssetDrawer/ENAssetDrawer'
 import { ENCanvas } from '../ENCanvas/ENCanvas'
+import { ENFiles } from '../ENFiles/ENFiles'
 import { ENGraph } from '../ENGraph/ENGraph'
-import { ENLayers } from '../ENLayers/ENLayers'
+// import { ENLayers } from '../ENLayers/ENLayers'
 import { ENParams } from '../ENParams/ENParams'
+import { ENTimeline } from '../ENTimeline/ENTimeline'
 
 export function UIMain() {
   let [ready, setReady] = useState(false)
@@ -22,11 +24,15 @@ export function UIMain() {
   )
 }
 
+//
 function UIMainContent() {
   return (
     <>
-      <div className='relative w-full text-xs' style={{ height: 'calc(100%)' }}>
-        <div className='w-full h-full'>
+      <div
+        className='relative w-full text-xs'
+        style={{ height: 'calc(100% - 48px - 30px)' }}
+      >
+        <div className='w-full'>
           <LeftRight
             //
             NS={'canvas-control'}
@@ -37,14 +43,14 @@ function UIMainContent() {
                   return window.innerHeight - 240
                 }}
                 up={
-                  <div>
+                  <>
                     <LeftRight
                       getDefaultSize={() => 280}
                       NS={'layers-canvas'}
-                      left={<ENLayers></ENLayers>}
+                      left={<ENFiles></ENFiles>}
                       right={<ENCanvas></ENCanvas>}
                     ></LeftRight>
-                  </div>
+                  </>
                 }
                 down={<ENAssetDrawer></ENAssetDrawer>}
               ></UpDown>
@@ -64,6 +70,7 @@ function UIMainContent() {
           ></LeftRight>
         </div>
       </div>
+      <ENTimeline></ENTimeline>
     </>
   )
 }
@@ -102,8 +109,8 @@ function LeftRight({
           }
           onChange={(size) => localStorage.setItem(NS, size)}
         >
-          <div>{left}</div>
-          <div>{right}</div>
+          <>{left}</>
+          <>{right}</>
         </SplitPane>
       }
     </>
@@ -144,8 +151,8 @@ function UpDown({
           }
           onChange={(size) => localStorage.setItem(NS, size)}
         >
-          <div>{up}</div>
-          <div>{down}</div>
+          <>{up}</>
+          <>{down}</>
         </SplitPane>
       }
     </>
