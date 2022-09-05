@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 
 export function ENFileNode({ handle }) {
   let listFolderItem = useGLBEditor((s) => s.listFolderItem)
-  let currentFolder = useGLBEditor((s) => s.currentFolder)
 
   let [arr, setArr] = useState([])
   useEffect(() => {
@@ -19,12 +18,12 @@ export function ENFileNode({ handle }) {
 
     let tt = setInterval(() => {
       load()
-    }, 1000)
+    }, 1500)
     load()
     return () => {
       clearInterval(tt)
     }
-  }, [handle, currentFolder, listFolderItem])
+  }, [handle, listFolderItem])
 
   return (
     <div>
@@ -52,13 +51,9 @@ export function ENFileNode({ handle }) {
           </div>
         )
       })}
-      {/*  */}
-      {/*  */}
     </div>
   )
 }
-
-//
 
 //
 

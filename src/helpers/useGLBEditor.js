@@ -3,7 +3,11 @@ import {
   saveProjects,
   verifyPermission,
 } from '@/components/projects/FileSystem/FileSystem'
+import { Object3D } from 'three'
 import { Clock } from 'three140'
+import { GLTFExporter } from 'three140/examples/jsm/exporters/GLTFExporter'
+import { DRACOLoader } from 'three140/examples/jsm/loaders/DRACOLoader'
+import { GLTFLoader } from 'three140/examples/jsm/loaders/GLTFLoader'
 
 //
 import create from 'zustand'
@@ -60,7 +64,7 @@ let generateInside = (set, get) => {
         }
 
         arr.push({
-          _id: getID(),
+          _id: handle.name + '/' + '-' + arr.length + item.name,
           handle: item,
         })
       }
@@ -137,22 +141,73 @@ let generateInside = (set, get) => {
       await resources.getDirectoryHandle('texture-image', { create: true })
       await resources.getDirectoryHandle('materials', { create: true })
 
-      let handle = await workspace.getFileHandle('hello.en-workspace.json', {
+      let handle = await workspace.getFileHandle('hello.en-workspace.glb', {
         create: true,
       })
 
+      //
       await writeFile(
         handle,
-        JSON.stringify({
-          vendor: 'agape',
-          version: '0.0.1',
-          content: {},
-        })
+        //
+        await get().createEmptyGLBFileBuffer()
       )
-      // handle.
 
       //
       return
+    },
+    //
+    createEmptyGLBFileBuffer: async () => {
+      let o3 = new Object3D()
+      let resource = new Object3D()
+      o3.add(resource)
+      resource.userData = {
+        myData: {
+          yo: 1,
+          b: ['yo', 'fun'],
+        },
+        bufferView: new ArrayBuffer(1024),
+        gltfExtensions: {
+          EXT_EffectNode_VFX: {},
+        },
+      }
+
+      return get().exportGLB(o3, [])
+    },
+
+    loadGLB: async (url) => {
+      let loader = new GLTFLoader()
+      const dracoLoader = new DRACOLoader()
+      dracoLoader.setDecoderPath('/draco/')
+      loader.setDRACOLoader(dracoLoader)
+      // loader.register((parser) => new GLTFEffectNodeLoader(parser))
+
+      let glb = await loader.loadAsync(url)
+      console.log(glb)
+      return glb
+    },
+    exportGLB: (o3 = new Object3D(), animations = []) => {
+      return new Promise((resolve) => {
+        let exporter = new GLTFExporter()
+        // exporter.register((writer) => new GLTFEffectNodeExport(writer))
+        exporter.parse(
+          o3,
+          (res) => {
+            resolve(res)
+          },
+          (err) => {
+            console.log(err)
+          },
+          {
+            includeCustomExtensions: true,
+            animations,
+            trs: false,
+            onlyVisible: false,
+            binary: true,
+            // maxTextureSize: params.maxTextureSize,
+          }
+        )
+        //
+      })
     },
   }
 }
