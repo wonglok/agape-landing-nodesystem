@@ -158,7 +158,7 @@ export function NYCJourney() {
       <group position={[0, 1.5, 0]}>
         <group position={[5.523, 6.087, -14.196]}>
           <group scale={0.075}>
-            <theVortex key={TheVortex}></theVortex>
+            <theVortex key={TheVortex.key}></theVortex>
           </group>
         </group>
       </group>

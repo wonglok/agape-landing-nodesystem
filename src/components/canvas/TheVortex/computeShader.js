@@ -381,6 +381,10 @@ void main ()	{
 
       pos.xyz = rotateQ(normalize(mpos.xyz * sin(mpos + time)), mod(time * 0.0065, 1.0)) * pos.xyz;
       pos.xyz = rotateQ(normalize(vec3(1.0)), mod(time * 0.0065, 1.0)) * pos.xyz;
+
+      pos.xyz = rotateQ(normalize(vec3(0.0, 1.0, 0.0)), mod(time * 0.0065, 1.0)) * pos.xyz;
+
+
     } else if (mode == 8.0) {
       float scaler = 1.0 / 350.0 * 3.14159264 * 2.0;
       vec3 mpos = pos.xyz * scaler;
@@ -403,6 +407,8 @@ void main ()	{
 
       pos.xyz = rotateQ(normalize(mpos.xyz * sin(mpos + time)), mod(time * 0.0065, 1.0)) * pos.xyz;
       pos.xyz = rotateQ(normalize(vec3(1.0)), mod(time * 0.0065, 1.0)) * pos.xyz;
+
+
     } else if (mode == 9.0) {
 
       //

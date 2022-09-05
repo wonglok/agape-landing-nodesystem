@@ -31,6 +31,7 @@ import { Geometry } from 'three140/examples/jsm/deprecated/Geometry.js'
 import { MeshPhysicalMaterial } from 'three'
 import { Core } from '@/helpers/Core'
 import { generateUUID } from 'three/src/math/MathUtils'
+import { MeshStandardMaterial } from 'three140'
 
 export class LokLokWiggleSimulation {
   constructor({ node, getHeadList, howManyTracker = 10, howLongTail = 32 }) {
@@ -423,6 +424,8 @@ export class LokLokWiggleDisplay {
     let matConfig = {
       color: new Color('#58519B').offsetHSL(0, 0, 0.3),
       // color: new Color('#ffffff'),
+      emissive: new Color('#58519B').offsetHSL(0, 0, 0.3),
+      emissiveIntensity: 2.5,
 
       // emissive: new Color('#018888'),
       side: FrontSide,
@@ -443,7 +446,7 @@ export class LokLokWiggleDisplay {
       // attenuationColor: new Color('#ffffff'),
     }
 
-    let matLine1 = new MeshBasicMaterial({
+    let matLine1 = new MeshStandardMaterial({
       ...matConfig,
       // side: DoubleSide,
       // metalness: 0.1,

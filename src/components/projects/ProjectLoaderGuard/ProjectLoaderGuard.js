@@ -75,7 +75,7 @@ export function ProjectLoaderGuard({ children = () => {} }) {
             }}
             className='p-5 mx-2 text-white bg-blue-500 rounded-xl'
           >
-            Connect Folder: {currentFolder.handle.name}
+            Connect Folder: {currentFolder?.handle?.name}
           </button>
         </div>
       )}
