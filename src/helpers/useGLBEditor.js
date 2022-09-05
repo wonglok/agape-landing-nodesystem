@@ -81,8 +81,11 @@ let generateInside = (set, get) => {
       /** @type {Clock} */
       let uiClock = get().uiClock
 
+      if (v <= 0) {
+        v = 0
+      }
+
       // console.log(uiClock.running)
-      uiClock.start()
       uiClock.elapsedTime = v
       set({ uiClock })
     },

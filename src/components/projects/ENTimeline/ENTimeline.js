@@ -92,7 +92,20 @@ function Track() {
     return () => {
       window.removeEventListener('mouseup', mouseup)
     }
-  })
+  }, [])
+
+  useEffect(() => {
+    let mousemove = (ev) => {
+      if (isDown.current) {
+        let px = ev.pageX - 54
+        updateClockTime(px / 10)
+      }
+    }
+    window.addEventListener('mousemove', mousemove)
+    return () => {
+      window.removeEventListener('mousemove', mousemove)
+    }
+  }, [])
   return (
     <div
       style={{ width: 'calc(100% - 54px)', height: '54px', overflow: 'hidden' }}
@@ -104,15 +117,15 @@ function Track() {
       onMouseDown={() => {
         isDown.current = true
       }}
-      onMouseUp={() => {
-        isDown.current = false
-      }}
-      onMouseMove={(ev) => {
-        if (isDown.current) {
-          let px = ev.pageX - 54
-          updateClockTime(px / 10)
-        }
-      }}
+      // onMouseUp={() => {
+      //   isDown.current = false
+      // }}
+      // onMouseMove={(ev) => {
+      //   if (isDown.current) {
+      //     let px = ev.pageX - 54
+      //     updateClockTime(px / 10)
+      //   }
+      // }}
     >
       <div
         className='h-full bg-gray-800'
