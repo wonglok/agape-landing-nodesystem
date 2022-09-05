@@ -1,6 +1,46 @@
-export function ENFileNode() {
+import { useGLBEditor } from '@/helpers/useGLBEditor'
+import { useEffect, useState } from 'react'
+
+export function ENFileNode({ handle }) {
+  let listFolderItem = useGLBEditor((s) => s.listFolderItem)
+  let currentFolder = useGLBEditor((s) => s.currentFolder)
+
+  let [arr, setArr] = useState([])
+  useEffect(() => {
+    if (!handle) {
+      return
+    }
+    listFolderItem(handle).then((v) => {
+      setArr(v)
+    })
+  }, [handle, currentFolder, listFolderItem])
+
   return (
     <div>
+      {arr.map((e) => {
+        return e.handle.kind === 'directory' ? (
+          <div key={e._id}>
+            <div>
+              <div className='inline-block'>
+                {e.handle.kind === 'directory' ? '🗂' : '📄'}
+              </div>
+              <div className='inline-block'>{e.handle.name}</div>
+            </div>
+            <div className='ml-2'>
+              <ENFileNode handle={e.handle}></ENFileNode>
+            </div>
+          </div>
+        ) : (
+          <div key={e._id}>
+            <div>
+              <div className='inline-block'>
+                {e.handle.kind === 'directory' ? '🗂' : '📄'}
+              </div>
+              <div className='inline-block'>{e.handle.name}</div>
+            </div>
+          </div>
+        )
+      })}
       {/*  */}
       {/*  */}
     </div>

@@ -49,6 +49,24 @@ let generateInside = (set, get) => {
       set({ projectFolders: projects })
       await saveProjects(projects)
     },
+
+    listFolderItem: async (handle) => {
+      let arr = []
+
+      for await (let item of handle.values()) {
+        //
+        if (item.name === '.DS_Store') {
+          continue
+        }
+
+        arr.push({
+          _id: getID(),
+          handle: item,
+        })
+      }
+
+      return arr
+    },
     addProjectFolderHandle: async (handle) => {
       let projects = await provideProjects()
       projects.push({
@@ -88,6 +106,36 @@ let generateInside = (set, get) => {
       // console.log(uiClock.running)
       uiClock.elapsedTime = v
       set({ uiClock })
+    },
+
+    createWorkspaceFolder: async () => {
+      let currentFolder = get().currentFolder
+
+      if (!currentFolder?.handle) {
+        return
+      }
+
+      await currentFolder?.handle.getDirectoryHandle('workspace', {
+        create: true,
+      })
+
+      await currentFolder?.handle.getDirectoryHandle('export', {
+        create: true,
+      })
+      let resources = await currentFolder?.handle.getDirectoryHandle(
+        'resources',
+        {
+          create: true,
+        }
+      )
+
+      await resources.getDirectoryHandle('glb', { create: true })
+      await resources.getDirectoryHandle('hdr', { create: true })
+      await resources.getDirectoryHandle('texture-image', { create: true })
+      await resources.getDirectoryHandle('materials', { create: true })
+
+      //
+      return
     },
   }
 }

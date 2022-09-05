@@ -62,6 +62,8 @@ function Track() {
   let uiClock = useGLBEditor((s) => s.uiClock)
   let resetTime = useGLBEditor((s) => s.resetTime)
   let updateClockTime = useGLBEditor((s) => s.updateClockTime)
+
+  //
   useEffect(() => {
     resetTime()
 
