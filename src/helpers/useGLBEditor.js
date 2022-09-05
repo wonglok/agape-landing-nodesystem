@@ -3,6 +3,7 @@ import {
   saveProjects,
   verifyPermission,
 } from '@/components/projects/FileSystem/FileSystem'
+import { Clock } from 'three140'
 
 //
 import create from 'zustand'
@@ -56,9 +57,20 @@ let generateInside = (set, get) => {
       })
       await saveProjects(projects)
     },
+
+    uiClock: new Clock(),
+    toggleRunning: () => {
+      let uiClock = get().uiClock
+
+      uiClock.running = !uiClock.running
+
+      set({ uiClock })
+    },
   }
 }
 
 export const useGLBEditor = create((set, get) => {
   return generateInside(set, get)
 })
+
+//
