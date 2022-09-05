@@ -1,7 +1,7 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { useCallback, useEffect, useState } from 'react'
 
-export function ENDrawerNode({ handle, onNext = () => {} }) {
+export function ENDrawerNode({ parent, handle, onNext = () => {} }) {
   let [entries, setEntries] = useState([])
   let listFolderItem = useGLBEditor((s) => s.listFolderItem)
   let load = useCallback(() => {
@@ -46,7 +46,7 @@ export function ENDrawerNode({ handle, onNext = () => {} }) {
                 //
 
                 console.log(e)
-                onNext(<Wrapper handle={e.handle} />)
+                onNext(<Wrapper parent={parent} handle={e.handle} />)
               }
             }}
           >
@@ -57,12 +57,26 @@ export function ENDrawerNode({ handle, onNext = () => {} }) {
   )
 }
 
-function Wrapper({ handle }) {
+function Wrapper({ parent, handle }) {
   let [next, setNext] = useState(false)
+  let listFolderItem = useGLBEditor((s) => s.listFolderItem)
+
+  useEffect(() => {
+    if (!parent) {
+      setNext(false)
+      return
+    }
+    listFolderItem(parent).then((e) => {
+      if (!e.some((ee) => ee.handle.name === handle.name)) {
+        setNext(false)
+      }
+    })
+  }, [handle.name, listFolderItem, parent])
 
   return (
     <>
       <ENDrawerNode
+        parent={parent}
         onNext={(newCompo) => {
           setNext(newCompo)
         }}

@@ -9,21 +9,22 @@ export function ENAssetDrawer() {
   let [next, setNext] = useState(false)
   let [handleEntry, setHandleEntry] = useState(false)
   let load = useCallback(() => {
-    listFolderItem(currentFolder?.handle).then(async (v) => {
-      //workspace
+    setHandleEntry(currentFolder)
 
-      let resourcesEntry = v.find(
-        (e) => e.handle.kind === 'directory' && e.handle.name === 'resources'
-      )
+    //     listFolderItem(currentFolder?.handle).then(async (v) => {
+    //   //workspace
 
-      if (resourcesEntry) {
-        setHandleEntry(resourcesEntry)
-      } else {
-        createWorkspaceFolder().then(() => {
-          load()
-        })
-      }
-    })
+    //   let resourcesEntry = v.find(
+    //     (e) => e.handle.kind === 'directory' && e.handle.name === 'resources'
+    //   )
+
+    //   if (resourcesEntry) {
+    //   } else {
+    //     createWorkspaceFolder().then(() => {
+    //       load()
+    //     })
+    //   }
+    // })
   }, [currentFolder?.handle, listFolderItem])
 
   //

@@ -17,6 +17,7 @@ import { getID } from './getID'
 let generateInside = (set, get) => {
   return {
     //
+    reloadFiles: 0,
     projectFolders: [],
     currentFolder: false,
 
