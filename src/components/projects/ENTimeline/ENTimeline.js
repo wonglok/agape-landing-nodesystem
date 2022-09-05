@@ -13,7 +13,7 @@ export function ENTimeline() {
       style={{ height: '54px' }}
     >
       <div
-        style={{ width: '54px', height: '54px' }}
+        style={{ width: '54px', minWidth: '54px', height: '54px' }}
         // className='flex items-center justify-center'
       >
         {' '}
@@ -56,8 +56,10 @@ export function ENTimeline() {
 // program.glb
 
 function Track() {
+  let timerRef = useRef()
   let cursorRef = useRef()
   let timerTextRef = useRef()
+  let trackRef = useRef()
 
   let uiClock = useGLBEditor((s) => s.uiClock)
   let resetTime = useGLBEditor((s) => s.resetTime)
@@ -74,9 +76,13 @@ function Track() {
 
       let t = uiClock.getElapsedTime()
 
-      cursorRef.current.style.transform = `translateX(${t * (10).toFixed(2)}px)`
+      cursorRef.current.style.left = `${t * (10).toFixed(0)}px`
 
       timerTextRef.current.innerText = t.toFixed(2).padStart(6, 0)
+
+      if (timerRef.current) {
+        timerRef.current.style.left = trackRef.current.scrollLeft + 12 + 'px'
+      }
     }
     rAFID = requestAnimationFrame(rAF)
 
@@ -110,15 +116,16 @@ function Track() {
   }, [])
   return (
     <div
-      style={{ width: 'calc(100% - 54px)', height: '54px', overflow: 'hidden' }}
-      className='relative bg-gray-100'
+      style={{ width: 'calc(100vw)', height: '54px' }}
+      className='relative overflow-auto bg-gray-100'
       onClick={(ev) => {
-        let px = ev.pageX - 54
+        let px = trackRef.current.scrollLeft + ev.pageX - 54
         updateClockTime(px / 10)
       }}
       onMouseDown={() => {
         isDown.current = true
       }}
+      ref={trackRef}
       // onMouseUp={() => {
       //   isDown.current = false
       // }}
@@ -129,21 +136,29 @@ function Track() {
       //   }
       // }}
     >
-      <div
-        className='h-full bg-gray-800'
-        ref={cursorRef}
-        style={{
-          width: '2px',
-        }}
-      ></div>
-      <div
-        className='absolute top-0 flex items-center justify-start left-4'
-        style={{ height: '54px' }}
-      >
-        <span className='inline-block w-12 h-4' ref={timerTextRef}></span>
-        <span className='absolute' style={{ top: '20px', left: '45px' }}>
-          s
-        </span>
+      <div className='relative h-full' style={{ width: '1000000vw' }}>
+        <div
+          className='h-full bg-gray-800'
+          ref={cursorRef}
+          style={{
+            position: 'absolute',
+            top: '0px',
+            width: '2px',
+          }}
+        ></div>
+        <div
+          className='absolute top-0 flex items-center justify-start'
+          style={{ height: '54px' }}
+          ref={timerRef}
+        >
+          <span className='inline-block w-12 h-4' ref={timerTextRef}></span>
+          <span
+            className='absolute inline-block'
+            style={{ top: '20px', left: '45px' }}
+          >
+            s
+          </span>
+        </div>
       </div>
     </div>
   )
