@@ -115,9 +115,12 @@ let generateInside = (set, get) => {
         return
       }
 
-      await currentFolder?.handle.getDirectoryHandle('workspace', {
-        create: true,
-      })
+      let workspace = await currentFolder?.handle.getDirectoryHandle(
+        'workspace',
+        {
+          create: true,
+        }
+      )
 
       await currentFolder?.handle.getDirectoryHandle('export', {
         create: true,
@@ -134,6 +137,20 @@ let generateInside = (set, get) => {
       await resources.getDirectoryHandle('texture-image', { create: true })
       await resources.getDirectoryHandle('materials', { create: true })
 
+      let handle = await workspace.getFileHandle('hello.en-workspace.json', {
+        create: true,
+      })
+
+      await writeFile(
+        handle,
+        JSON.stringify({
+          vendor: 'agape',
+          version: '0.0.1',
+          content: {},
+        })
+      )
+      // handle.
+
       //
       return
     },
@@ -145,3 +162,11 @@ export const useGLBEditor = create((set, get) => {
 })
 
 //
+async function writeFile(fileHandle, contents) {
+  // Create a FileSystemWritableFileStream to write to.
+  const writable = await fileHandle.createWritable()
+  // Write the contents of the file to the stream.
+  await writable.write(contents)
+  // Close the file and write the contents to disk.
+  await writable.close()
+}

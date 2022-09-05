@@ -1,5 +1,5 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { ENFileNode } from './ENFileNode'
 
 export function ENFiles() {
@@ -8,28 +8,27 @@ export function ENFiles() {
   let createWorkspaceFolder = useGLBEditor((s) => s.createWorkspaceFolder)
   let [handle, setHandle] = useState(false)
 
+  let load = useCallback(() => {
+    listFolderItem(currentFolder?.handle).then(async (v) => {
+      //workspace
+
+      let workspaceEntry = v.find(
+        (e) => e.handle.kind === 'directory' && e.handle.name === 'workspace'
+      )
+
+      if (workspaceEntry) {
+        setHandle(workspaceEntry.handle)
+      } else {
+        createWorkspaceFolder().then(() => {
+          load()
+        })
+      }
+    })
+  }, [createWorkspaceFolder, currentFolder?.handle, listFolderItem])
+
   useEffect(() => {
     if (!currentFolder?.handle) {
       return
-    }
-    let load = () => {
-      listFolderItem(currentFolder?.handle).then(async (v) => {
-        //workspace
-
-        let workspaceEntry = v.find(
-          (e) => e.handle.kind === 'directory' && e.handle.name === 'workspace'
-        )
-
-        if (workspaceEntry) {
-          setHandle(workspaceEntry.handle)
-        } else {
-          createWorkspaceFolder().then(() => {
-            load()
-          })
-
-          //
-        }
-      })
     }
     load()
   }, [
@@ -37,6 +36,7 @@ export function ENFiles() {
     currentFolder,
     currentFolder?.handle,
     listFolderItem,
+    load,
   ])
 
   return (
@@ -46,7 +46,7 @@ export function ENFiles() {
       ) : (
         <div
           onClick={() => {
-            createWorkspaceFolder()
+            createWorkspaceFolder().then(load)
           }}
           className='w-32 p-4 m-4 text-white bg-blue-500 rounded-xl'
         >
@@ -56,6 +56,8 @@ export function ENFiles() {
     </div>
   )
 }
+
+//
 
 //
 

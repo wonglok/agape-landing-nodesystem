@@ -10,9 +10,20 @@ export function ENFileNode({ handle }) {
     if (!handle) {
       return
     }
-    listFolderItem(handle).then((v) => {
-      setArr(v)
-    })
+
+    let load = () => {
+      listFolderItem(handle).then((v) => {
+        setArr(v)
+      })
+    }
+
+    let tt = setInterval(() => {
+      load()
+    }, 1000)
+    load()
+    return () => {
+      clearInterval(tt)
+    }
   }, [handle, currentFolder, listFolderItem])
 
   return (
@@ -46,3 +57,11 @@ export function ENFileNode({ handle }) {
     </div>
   )
 }
+
+//
+
+//
+
+//
+
+//
