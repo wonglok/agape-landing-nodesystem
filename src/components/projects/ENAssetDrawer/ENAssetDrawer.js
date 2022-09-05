@@ -35,16 +35,18 @@ export function ENAssetDrawer() {
 
   //
   return (
-    <div className='flex h-full'>
-      {handleEntry && handleEntry.handle && (
-        <ENDrawerNode
-          handle={handleEntry.handle}
-          onNext={(v) => {
-            setNext(v)
-          }}
-        ></ENDrawerNode>
-      )}
-      {next}
+    <div className='relative h-full overflow-x-scroll'>
+      <div className='relative flex h-full' style={{ width: '100000vw' }}>
+        {handleEntry && handleEntry.handle && (
+          <ENDrawerNode
+            handle={handleEntry.handle}
+            onNext={(v) => {
+              setNext(v)
+            }}
+          ></ENDrawerNode>
+        )}
+        {next}
+      </div>
     </div>
   )
 }

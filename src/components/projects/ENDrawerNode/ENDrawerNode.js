@@ -35,7 +35,7 @@ export function ENDrawerNode({ parent, handle, onNext = () => {} }) {
   return (
     <div
       style={{ width: '250px', height: '100%' }}
-      className=' inline-block border border-r'
+      className='inline-block border border-r'
     >
       {entries &&
         entries.map((e) => (
@@ -43,14 +43,20 @@ export function ENDrawerNode({ parent, handle, onNext = () => {} }) {
             key={e._id}
             onClick={() => {
               //
+              setHighlight(e._id)
               if (e.handle.kind === 'directory') {
                 // console.log(e)
-                setHighlight(e._id)
+
                 onNext(<Wrapper parent={parent} handle={e.handle} />)
               }
             }}
-            className={`${highLight === e._id ? 'bg-gray-300' : ''}`}
+            className={`pl-1 pt-1 pb-1 ${
+              highLight === e._id ? 'bg-gray-300' : ''
+            }`}
           >
+            <span className='mr-1'>
+              {e.handle?.kind === 'directory' ? '🗂' : '📄'}
+            </span>
             {e.handle.name}
           </div>
         ))}
