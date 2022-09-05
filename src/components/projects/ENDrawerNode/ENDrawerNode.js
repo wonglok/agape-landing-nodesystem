@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 export function ENDrawerNode({ parent, handle, onNext = () => {} }) {
   let [entries, setEntries] = useState([])
   let listFolderItem = useGLBEditor((s) => s.listFolderItem)
+  let [highLight, setHighlight] = useState(false)
   let load = useCallback(() => {
     if (!handle) {
       return
@@ -43,12 +44,12 @@ export function ENDrawerNode({ parent, handle, onNext = () => {} }) {
             onClick={() => {
               //
               if (e.handle.kind === 'directory') {
-                //
-
-                console.log(e)
+                // console.log(e)
+                setHighlight(e._id)
                 onNext(<Wrapper parent={parent} handle={e.handle} />)
               }
             }}
+            className={`${highLight === e._id ? 'bg-gray-300' : ''}`}
           >
             {e.handle.name}
           </div>
