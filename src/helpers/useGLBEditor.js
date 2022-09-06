@@ -50,6 +50,7 @@ let generateInside = (set, get) => {
     closeFile: () => {
       //
       set({
+        activeSceneSelection: false,
         activeGLBHandle: false,
         activeGLBRawObject: false,
         activeGLBRuntimeObject: false,
