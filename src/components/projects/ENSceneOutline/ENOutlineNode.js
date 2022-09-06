@@ -10,9 +10,7 @@ export function ENOutlineNode({ level = 0, node }) {
         ''
       }
       style={{
-        background: `hsla(100,${100.0 - (level + 2) * 2.0}%,${
-          100.0 - (level + 2) * 2.0
-        }%, 0.5)`,
+        background: `hsla(0,${0}%,${100.0 - (level + 2) * 2.0}%, 0.5)`,
         // borderColor: `hsla(0.0,0%,${100.0 - (level + 2) * 2.0}%, 1.0)`,
       }}
     >
@@ -21,7 +19,7 @@ export function ENOutlineNode({ level = 0, node }) {
         className={
           'pl-1 text-xs ' +
           (activeSceneSelection?.uuid === node.uuid
-            ? 'bg-gray-500 p-2 text-white'
+            ? 'bg-white p-2 text-gray-700 border-gray-700 border'
             : 'transition-all duration-50 hover:bg-slate-300')
         }
         onClick={() => {
@@ -29,7 +27,10 @@ export function ENOutlineNode({ level = 0, node }) {
         }}
       >
         {activeSceneSelection?.uuid === node.uuid && <span>→ </span>}
-        {node.name}
+        <span>{node.name}</span>
+        {activeSceneSelection?.uuid === node.uuid && (
+          <span className='ml-1'>[{node.type}]</span>
+        )}
       </div>
 
       {node.children.map((kid) => {
