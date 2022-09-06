@@ -24,7 +24,6 @@ export function UIMain() {
   )
 }
 
-//
 function UIMainContent() {
   return (
     <>
