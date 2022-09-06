@@ -19,9 +19,9 @@ export function UIMain() {
 
   return (
     ready && (
-      <>
+      <div className='w-full h-full bg-gray-500 '>
         <UIMainContent></UIMainContent>
-      </>
+      </div>
     )
   )
 }
@@ -30,7 +30,7 @@ function UIMainContent() {
   return (
     <>
       <div
-        className='relative w-full text-xs'
+        className='relative w-full text-xs '
         style={{ height: 'calc(100% - 48px - 30px)' }}
       >
         <div className='w-full'>
@@ -62,7 +62,10 @@ function UIMainContent() {
                   </>
                 )}
                 down={(size) => (
-                  <div className='w-full' style={{ height: size + 'px' }}>
+                  <div
+                    className='w-full bg-white'
+                    style={{ height: size + 'px' }}
+                  >
                     <ENAssetDrawer size={size}></ENAssetDrawer>
                   </div>
                 )}
@@ -94,7 +97,9 @@ function UIMainContent() {
           ></LeftRight>
         </div>
       </div>
-      <ENTimeline></ENTimeline>
+      <ENProjectGuard>
+        <ENTimeline></ENTimeline>
+      </ENProjectGuard>
     </>
   )
 }

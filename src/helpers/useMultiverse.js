@@ -10,7 +10,7 @@ const useMultiverse = create((set, get) => {
   //
   let vScene = new Scene()
 
-  let geo = new BoxBufferGeometry(1000, 0.1, 1000)
+  let geo = new BoxBufferGeometry(10000, 0.1, 10000)
   let mat = new MeshBasicMaterial({ color: 0xff0000 })
   let box = new Mesh(geo, mat)
 
@@ -29,13 +29,13 @@ const useMultiverse = create((set, get) => {
   // characters
   let player = new Mesh(
     new RoundedBoxGeometry(1.0, 2.0, 1.0, 10, 0.5),
-    new MeshPhysicalMaterial({
-      color: new Color('#00ffff'),
-      transmission: 1,
-      roughness: 0,
+    new MeshStandardMaterial({
+      color: new Color('#ffffff'),
+      // transmission: 1,
+      // roughness: 0,
       metalness: 0,
-      ior: 1.2,
-      reflectivity: 0.5,
+      // ior: 1.2,
+      // reflectivity: 1,
     })
   )
   player.name = 'myavatar'

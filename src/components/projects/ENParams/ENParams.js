@@ -1,3 +1,3 @@
 export function ENParams() {
-  return <div>ENParams</div>
+  return <div className='w-full h-full bg-white'>ENParams</div>
 }

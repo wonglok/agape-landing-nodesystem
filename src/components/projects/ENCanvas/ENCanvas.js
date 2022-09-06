@@ -12,7 +12,7 @@ export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
   let editorNavigationMode = useGLBEditor((s) => s.editorNavigationMode)
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full bg-white'>
       <Canvas className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
@@ -38,7 +38,7 @@ export function ENCanvas() {
           </>
         )}
 
-        {editorNavigationMode === 'meta' && (
+        {editorNavigationMode === 'meta' && activeGLBRawObject.scene && (
           <>
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectCameraControls></ConnectCameraControls>
