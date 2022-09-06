@@ -70,7 +70,7 @@ export function ENDrawerNode({
                 // console.log(e)
 
                 onNext(
-                  <Wrapper
+                  <NextFolder
                     level={level + 1}
                     getEl={getEl}
                     parent={parent}
@@ -106,7 +106,7 @@ export function ENDrawerNode({
   )
 }
 
-function Wrapper({ level, getEl, parent, handle }) {
+function NextFolder({ level, getEl, parent, handle }) {
   let [next, setNext] = useState(false)
   let listFolderItem = useGLBEditor((s) => s.listFolderItem)
 

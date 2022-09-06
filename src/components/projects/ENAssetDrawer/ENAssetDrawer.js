@@ -28,7 +28,6 @@ export function ENAssetDrawer({ size }) {
   }, [currentFolder])
 
   //
-
   useEffect(() => {
     load()
   }, [load])
