@@ -30,7 +30,7 @@ function UIMainContent() {
   return (
     <>
       <div
-        className='relative w-full text-xs '
+        className='relative w-full text-xs bg-gray-500 border-b bordergray-500  '
         style={{ height: 'calc(100% - 48px - 30px)' }}
       >
         <div className='w-full'>
@@ -46,7 +46,7 @@ function UIMainContent() {
                 up={(sizeTD) => (
                   <>
                     <LeftRight
-                      getDefaultSize={() => 280}
+                      getDefaultSize={() => 300}
                       NS={'layers-canvas'}
                       left={() => (
                         <ENProjectGuard>
@@ -54,7 +54,16 @@ function UIMainContent() {
                         </ENProjectGuard>
                       )}
                       right={() => (
-                        <ENProjectGuard>
+                        <ENProjectGuard
+                          placeholder={
+                            <div className='flex items-center justify-center h-full'>
+                              <div className='p-2 bg-gray-100'>
+                                Please Select a GLB File Below to Begin Editing
+                                👇🏼
+                              </div>
+                            </div>
+                          }
+                        >
                           <ENCanvas></ENCanvas>
                         </ENProjectGuard>
                       )}
