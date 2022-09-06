@@ -30,7 +30,7 @@ function UIMainContent() {
   return (
     <>
       <div
-        className='relative w-full text-xs bg-gray-500 border-b bordergray-500  '
+        className='relative w-full text-xs  bordergray-500  '
         style={{ height: 'calc(100% - 48px - 30px)' }}
       >
         <div className='w-full'>
