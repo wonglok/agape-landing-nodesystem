@@ -124,10 +124,14 @@ function Track() {
         ev.stopImmediatePropagation()
       }
     }
-    window.addEventListener('wheel', wheel, { passive: false })
+    let dom = trackRef?.current
+    if (!dom) {
+      return
+    }
+    dom.addEventListener('wheel', wheel, { passive: false })
 
     return () => {
-      window.removeEventListener('wheel', wheel)
+      dom.removeEventListener('wheel', wheel)
     }
   }, [])
 
