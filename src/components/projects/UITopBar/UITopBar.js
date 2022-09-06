@@ -24,14 +24,17 @@ export function UITopBar() {
       </div>
       <div className='inline-flex items-center justify-center w-1/3'>
         {currentFolder?.handle?.name}{' '}
-        {activeGLBHandle && <span> / {activeGLBHandle?.name}</span>}
+        {activeGLBHandle && (
+          <span className='ml-1'> / {activeGLBHandle?.name}</span>
+        )}
         {activeGLBHandle && (
           <button
+            className='px-2 ml-1 text-xs text-white bg-red-600 rounded-full'
             onClick={() => {
               closeFile()
             }}
           >
-            [Close File]
+            Close
           </button>
         )}
       </div>

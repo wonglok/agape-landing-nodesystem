@@ -23,9 +23,12 @@ function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
       {router && (
         <>
           {Component.layout === 'Multiverse' && (
-            <Multiverse router={router} {...pageProps}>
-              <Component router={router} {...pageProps}></Component>
-            </Multiverse>
+            <>
+              <Multiverse router={router} {...pageProps}>
+                <Component router={router} {...pageProps}></Component>
+              </Multiverse>
+              <Loader />
+            </>
           )}
           {Component.layout === 'PromotePage' && (
             <PromotePage router={router} {...pageProps}>
@@ -51,7 +54,6 @@ function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
           ></span>
         </>
       )}
-      <Loader />
     </>
   )
 }
