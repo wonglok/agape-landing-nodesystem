@@ -25,20 +25,37 @@ export function PreviewerModelGLB({ parent, handle }) {
             <ENModelViewer url={url} />
           </div>
           <div
-            className='flex items-center justify-center h-full border-r'
+            className='flex flex-col items-center justify-center h-full border-r'
             style={{ width: '300px' }}
           >
-            <div>
-              <button
-                onClick={() => {
-                  //
-                  openFile(handle)
-                }}
-                className='inline-block p-2 text-white bg-blue-500 rounded-lg'
-              >
-                Open in Editor
-              </button>
-            </div>
+            <button
+              onClick={() => {
+                //
+                openFile(handle, 'floor')
+              }}
+              className='inline-block p-2 my-1 text-white bg-blue-500 rounded-lg'
+            >
+              Edit GLB in Flat Floor Navigation
+            </button>
+            <button
+              onClick={() => {
+                //
+                openFile(handle, 'meta')
+              }}
+              className='inline-block p-2 my-1 text-white bg-blue-500 rounded-lg'
+            >
+              Edit GLB in 3D World Navigation
+            </button>
+
+            <button
+              onClick={() => {
+                //
+                openFile(handle, 'orbit')
+              }}
+              className='inline-block p-2 my-1 text-white bg-blue-500 rounded-lg'
+            >
+              Edit GLB in Orbit Navigation
+            </button>
           </div>
         </>
       )}

@@ -1,8 +1,8 @@
 import { ConnectCameraControls } from '@/helpers/ConnectCameraControls'
 import { ConnectKeyboard } from '@/helpers/ConnectKeyboard'
 import { ConnectSimulation } from '@/helpers/ConnectSimulation'
-import { Floor } from '@/helpers/Floor'
 import { FloorEditor } from '@/helpers/FloorEditor'
+import { FloorObject } from '@/helpers/FloorObject'
 import { Player } from '@/helpers/Player'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { Environment, OrbitControls } from '@react-three/drei'
@@ -10,6 +10,7 @@ import { Canvas } from '@react-three/fiber'
 
 export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
+  let editorNavigationMode = useGLBEditor((s) => s.editorNavigationMode)
   return (
     <div className='w-full h-full'>
       <Canvas className='w-full h-full'>
@@ -21,17 +22,39 @@ export function ENCanvas() {
             object={activeGLBRawObject.scene}
           ></primitive>
         )}
-        {/* <OrbitControls></OrbitControls> */}
-        <Environment preset='studio'></Environment>
-        <ConnectKeyboard></ConnectKeyboard>
-        <ConnectCameraControls></ConnectCameraControls>
-        <ConnectSimulation></ConnectSimulation>
-        <Player></Player>
-        <FloorEditor
-          key={activeGLBRawObject.uuid}
-          name={activeGLBRawObject.uuid}
-        ></FloorEditor>
 
+        {editorNavigationMode === 'floor' && (
+          <>
+            <Environment preset='apartment'></Environment>
+            <gridHelper args={[500, 500]}></gridHelper>
+            <ConnectKeyboard></ConnectKeyboard>
+            <ConnectCameraControls></ConnectCameraControls>
+            <ConnectSimulation></ConnectSimulation>
+            <Player></Player>
+            <FloorEditor
+              key={activeGLBRawObject.uuid}
+              name={activeGLBRawObject.uuid}
+            ></FloorEditor>
+          </>
+        )}
+
+        {editorNavigationMode === 'meta' && (
+          <>
+            <ConnectKeyboard></ConnectKeyboard>
+            <ConnectCameraControls></ConnectCameraControls>
+            <ConnectSimulation></ConnectSimulation>
+            <Player></Player>
+            <FloorObject object={activeGLBRawObject.scene}></FloorObject>
+            <Environment background preset='apartment'></Environment>
+          </>
+        )}
+
+        {editorNavigationMode === 'orbit' && (
+          <>
+            <OrbitControls></OrbitControls>
+            <Environment background preset='apartment'></Environment>
+          </>
+        )}
         {/*  */}
         {/*  */}
       </Canvas>

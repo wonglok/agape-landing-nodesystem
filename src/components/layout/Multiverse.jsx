@@ -1,25 +1,17 @@
 import { Canvas, createPortal, useFrame, useThree } from '@react-three/fiber'
-import { Float, Preload, useFBO } from '@react-three/drei' //OrbitControls,
+// import { Float, Preload, useFBO } from '@react-three/drei' //OrbitControls,
 // import useStore from '@/helpers/store'
 // import { useEffect, useRef } from 'react'
-import {
-  Camera,
-  Color,
-  DoubleSide,
-  NormalBlending,
-  Scene,
-  sRGBEncoding,
-  Vector3,
-} from 'three'
-import { Suspense, useMemo } from 'react'
-import { useSystemStore } from '@/helpers/useSystemStore'
+import { Color, sRGBEncoding } from 'three'
+import { Suspense } from 'react'
+// import { useSystemStore } from '@/helpers/useSystemStore'
 import { ConnectKeyboard } from '@/helpers/ConnectKeyboard'
 import { ConnectCameraControls } from '@/helpers/ConnectCameraControls'
 import { useEffect } from 'react'
 import { ConnectSimulation } from '@/helpers/ConnectSimulation'
 import { Effects } from '@/helpers/Effects'
 import { Player } from '@/helpers/Player'
-import { Companion } from '@/helpers/Companion'
+// import { Companion } from '@/helpers/Companion'
 
 const Multiverse = ({ router, children }) => {
   return (

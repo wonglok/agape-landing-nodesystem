@@ -27,10 +27,11 @@ let generateInside = (set, get) => {
       set({ activeSceneSelection: v })
     },
     //
+    editorNavigationMode: false,
     activeGLBHandle: false,
     activeGLBRawObject: false,
     activeGLBRuntimeObject: false,
-    openFile: async (handle) => {
+    openFile: async (handle, mode = 'floor') => {
       let closeFile = get().closeFile
       closeFile()
 
@@ -41,7 +42,10 @@ let generateInside = (set, get) => {
 
       let activeGLBRawObject = await loadGLB(url)
       let activeGLBRuntimeObject = await loadGLB(url)
+
+      //
       set({
+        editorNavigationMode: mode,
         activeGLBHandle: handle,
         activeGLBRawObject,
         activeGLBRuntimeObject,
@@ -50,6 +54,7 @@ let generateInside = (set, get) => {
     closeFile: () => {
       //
       set({
+        editorNavigationMode: false,
         activeSceneSelection: false,
         activeGLBHandle: false,
         activeGLBRawObject: false,
