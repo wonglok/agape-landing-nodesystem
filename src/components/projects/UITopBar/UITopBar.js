@@ -14,6 +14,8 @@ export function UITopBar() {
         <button
           className='text-xs'
           onClick={() => {
+            closeFile()
+
             router.push('/project')
           }}
         >

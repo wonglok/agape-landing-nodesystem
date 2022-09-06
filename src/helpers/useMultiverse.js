@@ -29,17 +29,19 @@ const useMultiverse = create((set, get) => {
   // characters
   let player = new Mesh(
     new RoundedBoxGeometry(1.0, 2.0, 1.0, 10, 0.5),
-    new MeshStandardMaterial({
+    new MeshPhysicalMaterial({
       color: new Color('#ffffff'),
-      // transmission: 1,
+      transmission: 1,
       roughness: 0.5,
-      metalness: 0.5,
+      metalness: 0.4,
       transparent: true,
       opacity: 0.5,
-      // ior: 1.2,
-      // reflectivity: 1,
+      ior: 1.4,
+      reflectivity: 1,
+      clearcoat: 1,
     })
   )
+
   player.name = 'myavatar'
   player.geometry.translate(0, -0.5, 0)
   player.capsuleInfo = {

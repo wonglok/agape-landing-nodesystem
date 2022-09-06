@@ -25,7 +25,7 @@ export function ENCanvas() {
 
         {editorNavigationMode === 'floor' && (
           <>
-            <Environment preset='apartment'></Environment>
+            <Environment preset='apartment' frames={1}></Environment>
             <gridHelper args={[500, 500]}></gridHelper>
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectCameraControls></ConnectCameraControls>
@@ -44,24 +44,27 @@ export function ENCanvas() {
             <ConnectCameraControls></ConnectCameraControls>
             <ConnectSimulation></ConnectSimulation>
             <Player></Player>
-            <FloorObject object={activeGLBRawObject.scene}></FloorObject>
-            <Environment background preset='apartment'></Environment>
+            <FloorObject
+              key={activeGLBRawObject.uuid}
+              object={activeGLBRawObject.scene}
+            ></FloorObject>
+            <Environment background preset='apartment' frames={1}></Environment>
           </>
         )}
 
         {editorNavigationMode === 'orbit' && (
           <>
             <OrbitControls></OrbitControls>
-            <Environment background preset='apartment'></Environment>
+            <Environment background preset='apartment' frames={1}></Environment>
           </>
         )}
-        {/*  */}
-        {/*  */}
       </Canvas>
     </div>
   )
 }
 
+//
+//
 //
 //
 //
