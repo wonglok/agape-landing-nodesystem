@@ -22,7 +22,7 @@ export function ENDrawerNode({
       return
     }
     listFolderItem(handle).then(async (v) => {
-      //workspace
+      //
       // let resourcesEntry = v.find(
       //   (e) => e.handle.kind === 'directory' && e.handle.name === 'resources'
       // )
@@ -33,8 +33,6 @@ export function ENDrawerNode({
       //   //   load()
       //   // })
       // }
-      //
-      //
       //
       setEntries(v)
     })
