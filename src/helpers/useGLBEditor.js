@@ -4,7 +4,12 @@ import {
   verifyPermission,
 } from '@/components/projects/FileSystem/FileSystem'
 import { Object3D } from 'three'
-import { Clock } from 'three140'
+import {
+  Clock,
+  Mesh,
+  MeshStandardMaterial,
+  SphereBufferGeometry,
+} from 'three140'
 import { GLTFExporter } from 'three140/examples/jsm/exporters/GLTFExporter'
 import { DRACOLoader } from 'three140/examples/jsm/loaders/DRACOLoader'
 import { GLTFLoader } from 'three140/examples/jsm/loaders/GLTFLoader'
@@ -160,6 +165,12 @@ let generateInside = (set, get) => {
     createEmptyGLBFileBuffer: async () => {
       let o3 = new Object3D()
       let resource = new Object3D()
+      resource.add(
+        new Mesh(
+          new SphereBufferGeometry(1, 32, 32),
+          new MeshStandardMaterial({ color: 'green' })
+        )
+      )
       o3.add(resource)
       resource.userData = {
         myData: {

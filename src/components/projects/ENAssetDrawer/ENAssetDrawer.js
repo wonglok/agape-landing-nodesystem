@@ -1,10 +1,10 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { ENDrawerNode } from '../ENDrawerNode/ENDrawerNode'
 
-export function ENAssetDrawer() {
+export function ENAssetDrawer({ size }) {
   let currentFolder = useGLBEditor((s) => s.currentFolder)
-  let listFolderItem = useGLBEditor((s) => s.listFolderItem)
+  // let listFolderItem = useGLBEditor((s) => s.listFolderItem)
 
   let [next, setNext] = useState(false)
   let [handleEntry, setHandleEntry] = useState(false)
@@ -25,7 +25,7 @@ export function ENAssetDrawer() {
     //     })
     //   }
     // })
-  }, [currentFolder?.handle, listFolderItem])
+  }, [currentFolder])
 
   //
 
@@ -33,12 +33,37 @@ export function ENAssetDrawer() {
     load()
   }, [load])
 
+  let [height, setHeight] = useState(50)
+  let barRef = useRef()
+  useEffect(() => {
+    setHeight(window.innerHeight - 54 - 24 - size)
+
+    let tt = setInterval(() => {
+      if (height !== window.innerHeight - 54 - 24 - size - 0.1) {
+        setHeight(window.innerHeight - 54 - 24 - size - 0.1)
+      }
+    }, 100)
+
+    return () => {
+      clearInterval(tt)
+    }
+  }, [size])
+
   //
   return (
-    <div className='relative h-full overflow-x-scroll'>
-      <div className='relative flex h-full' style={{ width: '100000vw' }}>
+    <div
+      className='relative h-full overflow-x-scroll border-t border-gray-300'
+      ref={barRef}
+    >
+      <div
+        className='relative flex'
+        style={{ width: '100000vw', height: height + 'px' }}
+      >
         {handleEntry && handleEntry.handle && (
           <ENDrawerNode
+            //
+            level={1}
+            getEl={() => barRef.current}
             handle={handleEntry.handle}
             onNext={(v) => {
               setNext(v)

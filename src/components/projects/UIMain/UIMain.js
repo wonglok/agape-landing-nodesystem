@@ -36,37 +36,37 @@ function UIMainContent() {
           <LeftRight
             //
             NS={'canvas-control'}
-            left={
+            left={() => (
               <UpDown
                 NS={'asset-layercanvas'}
                 getDefaultSize={() => {
                   return window.innerHeight - 240
                 }}
-                up={
+                up={() => (
                   <>
                     <LeftRight
                       getDefaultSize={() => 280}
                       NS={'layers-canvas'}
-                      left={<ENFiles></ENFiles>}
-                      right={<ENCanvas></ENCanvas>}
+                      left={() => <ENFiles></ENFiles>}
+                      right={() => <ENCanvas></ENCanvas>}
                     ></LeftRight>
                   </>
-                }
-                down={<ENAssetDrawer></ENAssetDrawer>}
+                )}
+                down={(size) => <ENAssetDrawer size={size}></ENAssetDrawer>}
               ></UpDown>
-            }
-            right={
+            )}
+            right={() => (
               <div>
                 <UpDown
                   NS={'param-graph'}
                   getDefaultSize={() => {
                     return 300
                   }}
-                  up={<ENParams></ENParams>}
-                  down={<ENGraph></ENGraph>}
+                  up={() => <ENParams></ENParams>}
+                  down={() => <ENGraph></ENGraph>}
                 ></UpDown>
               </div>
-            }
+            )}
           ></LeftRight>
         </div>
       </div>
@@ -81,8 +81,10 @@ function LeftRight({
   left,
   right,
 }) {
+  let [size, setSize] = useState(1)
   let [onoff, setOnOff] = useState(true)
   useEffect(() => {
+    setSize(getDefaultSize())
     let reset = ({ detail: isReset }) => {
       //
       if (isReset) {
@@ -109,8 +111,8 @@ function LeftRight({
           }
           onChange={(size) => localStorage.setItem(NS, size)}
         >
-          <>{left}</>
-          <>{right}</>
+          <>{left(size)}</>
+          <>{right(size)}</>
         </SplitPane>
       }
     </>
@@ -123,8 +125,11 @@ function UpDown({
   up = <>up</>,
   down = <>down</>,
 }) {
+  let [size, setSize] = useState(1)
   let [onoff, setOnOff] = useState(true)
+
   useEffect(() => {
+    setSize(getDefaultSize())
     let reset = ({ detail: isReset }) => {
       //
       if (isReset) {
@@ -149,10 +154,13 @@ function UpDown({
           defaultSize={
             parseInt(localStorage.getItem(NS), 10) || getDefaultSize()
           }
-          onChange={(size) => localStorage.setItem(NS, size)}
+          onChange={(size) => {
+            localStorage.setItem(NS, size)
+            setSize(size)
+          }}
         >
-          <>{up}</>
-          <>{down}</>
+          <>{up(size)}</>
+          <>{down(size)}</>
         </SplitPane>
       }
     </>

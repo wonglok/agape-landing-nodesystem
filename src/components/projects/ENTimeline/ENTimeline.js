@@ -9,7 +9,7 @@ export function ENTimeline() {
   let toggleRunning = useGLBEditor((s) => s.toggleRunning)
   return (
     <div
-      className='flex items-center justify-center w-full text-xs bg-gray-300'
+      className='flex items-center justify-center w-full text-xs bg-gray-300 border-t border-gray-400'
       style={{ height: '54px' }}
     >
       <div

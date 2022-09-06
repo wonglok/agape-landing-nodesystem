@@ -1,7 +1,18 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { useCallback, useEffect, useState } from 'react'
+import { Sphere } from '@react-three/drei'
+import { Canvas, useLoader } from '@react-three/fiber'
+import { Suspense, useCallback, useEffect, useState } from 'react'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
+import { ENModelViewer } from '../ENModelViewer/ENModelViewer'
+import { PreviewHDR } from './PreviewHDR'
 
-export function ENDrawerNode({ parent, handle, onNext = () => {} }) {
+export function ENDrawerNode({
+  level = 1,
+  getEl,
+  parent,
+  handle,
+  onNext = () => {},
+}) {
   let [entries, setEntries] = useState([])
   let listFolderItem = useGLBEditor((s) => s.listFolderItem)
   let [highLight, setHighlight] = useState(false)
@@ -34,8 +45,8 @@ export function ENDrawerNode({ parent, handle, onNext = () => {} }) {
 
   return (
     <div
-      style={{ width: '250px', height: '100%' }}
-      className='inline-block border border-r'
+      style={{ width: '300px', height: '100%' }}
+      className='inline-block overflow-y-auto border border-r'
     >
       {entries &&
         entries.map((e) => (
@@ -43,14 +54,42 @@ export function ENDrawerNode({ parent, handle, onNext = () => {} }) {
             key={e._id}
             onClick={() => {
               //
+
+              let scrollLeft = (level + 1) * 300 - getEl().clientWidth
+              if (scrollLeft > 0) {
+                getEl().scrollLeft = scrollLeft
+              } else {
+                getEl().scrollLeft = 0
+              }
+
               setHighlight(e._id)
               if (e.handle.kind === 'directory') {
                 // console.log(e)
 
-                onNext(<Wrapper parent={parent} handle={e.handle} />)
+                onNext(
+                  <Wrapper
+                    level={level + 1}
+                    getEl={getEl}
+                    parent={parent}
+                    handle={e.handle}
+                  />
+                )
+              } else if (e.handle.kind === 'file') {
+                if (e.handle.name.indexOf('.hdr') !== -1) {
+                  onNext(
+                    <PreviewHDR parent={parent} handle={e.handle}></PreviewHDR>
+                  )
+                } else if (e.handle.name.indexOf('.glb') !== -1) {
+                  onNext(
+                    <PreviewerModelGLB
+                      parent={parent}
+                      handle={e.handle}
+                    ></PreviewerModelGLB>
+                  )
+                }
               }
             }}
-            className={`pl-1 pt-1 pb-1 ${
+            className={`pl-1 pt-1 pb-1 whitespace-nowrap ${
               highLight === e._id ? 'bg-gray-300' : ''
             }`}
           >
@@ -64,7 +103,31 @@ export function ENDrawerNode({ parent, handle, onNext = () => {} }) {
   )
 }
 
-function Wrapper({ parent, handle }) {
+function PreviewerModelGLB({ parent, handle }) {
+  let [url, setURL] = useState()
+
+  useEffect(() => {
+    //
+    setURL(false)
+    setTimeout(() => {
+      handle.getFile().then((f) => {
+        setURL(URL.createObjectURL(f))
+      })
+    })
+  }, [handle])
+
+  return (
+    <>
+      {url && (
+        <div className='h-full border-r' style={{ width: '250px' }}>
+          <ENModelViewer url={url} />
+        </div>
+      )}
+    </>
+  )
+}
+
+function Wrapper({ level, getEl, parent, handle }) {
   let [next, setNext] = useState(false)
   let listFolderItem = useGLBEditor((s) => s.listFolderItem)
 
@@ -83,6 +146,8 @@ function Wrapper({ parent, handle }) {
   return (
     <>
       <ENDrawerNode
+        level={level}
+        getEl={getEl}
         parent={parent}
         onNext={(newCompo) => {
           setNext(newCompo)
