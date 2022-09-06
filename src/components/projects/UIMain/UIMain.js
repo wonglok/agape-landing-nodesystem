@@ -40,7 +40,7 @@ function UIMainContent() {
               <UpDown
                 NS={'asset-layercanvas'}
                 getDefaultSize={() => {
-                  return window.innerHeight - 240
+                  return window.innerHeight - 280
                 }}
                 up={() => (
                   <>

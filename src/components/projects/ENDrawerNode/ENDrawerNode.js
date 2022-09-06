@@ -4,6 +4,7 @@ import { Canvas, useLoader } from '@react-three/fiber'
 import { Suspense, useCallback, useEffect, useState } from 'react'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 import { ENModelViewer } from '../ENModelViewer/ENModelViewer'
+import { PreviewerModelGLB } from './PreviewerModelGLB'
 import { PreviewHDR } from './PreviewHDR'
 
 export function ENDrawerNode({
@@ -100,30 +101,6 @@ export function ENDrawerNode({
           </div>
         ))}
     </div>
-  )
-}
-
-function PreviewerModelGLB({ parent, handle }) {
-  let [url, setURL] = useState()
-
-  useEffect(() => {
-    //
-    setURL(false)
-    setTimeout(() => {
-      handle.getFile().then((f) => {
-        setURL(URL.createObjectURL(f))
-      })
-    })
-  }, [handle])
-
-  return (
-    <>
-      {url && (
-        <div className='h-full border-r' style={{ width: '250px' }}>
-          <ENModelViewer url={url} />
-        </div>
-      )}
-    </>
   )
 }
 

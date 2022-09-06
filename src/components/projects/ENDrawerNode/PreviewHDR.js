@@ -28,7 +28,7 @@ export function PreviewHDR({ handle }) {
         st.gl.physicallyCorrectLights = true
         st.gl.outputEncoding = sRGBEncoding
       }}
-      style={{ width: '250px' }}
+      style={{ width: '300px' }}
       key={'yopreview'}
     >
       {url && (
@@ -36,6 +36,8 @@ export function PreviewHDR({ handle }) {
           <Content url={url}></Content>
         </Suspense>
       )}
+
+      {/*  */}
       <OrbitControls
         rotateSpeed={-1}
         maxDistance={5}

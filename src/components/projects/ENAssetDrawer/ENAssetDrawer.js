@@ -52,6 +52,7 @@ export function ENAssetDrawer({ size }) {
   }, [height, size])
 
   //
+  //
   return (
     <div
       className='relative h-full overflow-x-scroll border-t border-gray-300'
