@@ -65,7 +65,7 @@ function ResetLayoutBtn() {
       clearTimeout(tt)
       tt = setTimeout(() => {
         if (canReset) {
-          window.dispatchEvent(new CustomEvent('reset-size', { detail: true }))
+          window.dispatchEvent(new CustomEvent('reset-size', { detail: false }))
         }
       }, 100)
     }

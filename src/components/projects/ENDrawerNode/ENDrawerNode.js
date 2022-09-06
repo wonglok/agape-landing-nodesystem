@@ -55,7 +55,6 @@ export function ENDrawerNode({
             key={e._id}
             onClick={() => {
               //
-
               let scrollLeft = (level + 1) * 300 - getEl().clientWidth
               if (scrollLeft > 0) {
                 getEl().scrollLeft = scrollLeft

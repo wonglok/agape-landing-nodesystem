@@ -129,15 +129,23 @@ function UpDown({
   let [onoff, setOnOff] = useState(true)
 
   useEffect(() => {
-    setSize(getDefaultSize())
-    setTimeout(() => {
-      setSize(getDefaultSize())
+    let ttt = setInterval(() => {
+      setSize(parseInt(localStorage.getItem(NS), 10) || getDefaultSize())
     }, 100)
+    return () => {
+      clearInterval(ttt)
+    }
+  }, [NS, getDefaultSize])
+
+  //
+  useEffect(() => {
     let reset = ({ detail: isReset }) => {
       //
       if (isReset) {
         localStorage.setItem(NS, getDefaultSize())
       }
+
+      //
       setOnOff(Math.random())
     }
     // window.addEventListener('resize', hh)
