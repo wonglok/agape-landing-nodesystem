@@ -90,6 +90,7 @@ function Track() {
       cancelAnimationFrame(rAFID)
     }
   }, [])
+
   let isDown = useRef(false)
 
   useEffect(() => {
