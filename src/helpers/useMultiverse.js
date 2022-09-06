@@ -32,10 +32,10 @@ const useMultiverse = create((set, get) => {
     new MeshStandardMaterial({
       color: new Color('#ffffff'),
       // transmission: 1,
-      // roughness: 0,
-      metalness: 0,
+      roughness: 0.5,
+      metalness: 0.5,
       transparent: true,
-      opacity: 0.765,
+      opacity: 0.5,
       // ior: 1.2,
       // reflectivity: 1,
     })
@@ -254,6 +254,12 @@ const useMultiverse = create((set, get) => {
       }
       if (!self.camera) {
         return
+      }
+
+      if (self.player.position.distanceTo(self.camera.position) <= 2.5) {
+        self.player.visible = false
+      } else {
+        self.player.visible = true
       }
 
       self.playerVelocity.y += self.playerIsOnGround ? 0 : delta * self.gravity
