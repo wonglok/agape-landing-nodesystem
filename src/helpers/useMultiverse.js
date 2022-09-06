@@ -34,6 +34,8 @@ const useMultiverse = create((set, get) => {
       // transmission: 1,
       // roughness: 0,
       metalness: 0,
+      transparent: true,
+      opacity: 0.765,
       // ior: 1.2,
       // reflectivity: 1,
     })
