@@ -183,6 +183,9 @@ const useMultiverse = create((set, get) => {
           case 'ArrowLeft':
             break
           case 'Space':
+            if (get().playerIsOnGround) {
+              get().playerVelocity.set(0, 13, 0)
+            }
             break
         }
       }
