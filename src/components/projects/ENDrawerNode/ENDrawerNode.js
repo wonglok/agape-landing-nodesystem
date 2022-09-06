@@ -38,8 +38,6 @@ export function ENDrawerNode({
     })
   }, [handle, listFolderItem])
 
-  //
-
   useEffect(() => {
     load()
   }, [load])
@@ -64,8 +62,6 @@ export function ENDrawerNode({
 
               setHighlight(e._id)
               if (e.handle.kind === 'directory') {
-                // console.log(e)
-
                 onNext(
                   <NextFolder
                     level={level + 1}

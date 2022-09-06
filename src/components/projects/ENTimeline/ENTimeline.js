@@ -105,7 +105,7 @@ function Track() {
   useEffect(() => {
     let mousemove = (ev) => {
       if (isDown.current) {
-        let px = ev.pageX - 54
+        let px = trackRef.current.scrollLeft + ev.pageX - 54
         updateClockTime(px / 10)
       }
     }
@@ -114,6 +114,23 @@ function Track() {
       window.removeEventListener('mousemove', mousemove)
     }
   }, [])
+
+  useEffect(() => {
+    //
+    let wheel = (ev) => {
+      if (trackRef?.current?.scrollLeft === 0 && ev.deltaX < 0) {
+        ev.preventDefault()
+        ev.stopPropagation()
+        ev.stopImmediatePropagation()
+      }
+    }
+    window.addEventListener('wheel', wheel, { passive: false })
+
+    return () => {
+      window.removeEventListener('wheel', wheel)
+    }
+  }, [])
+
   return (
     <div
       style={{ width: 'calc(100vw)', height: '54px' }}

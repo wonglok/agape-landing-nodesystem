@@ -62,7 +62,7 @@ export function ENAssetDrawer({ size }) {
     window.addEventListener('wheel', wheel, { passive: false })
 
     return () => {
-      window.removeEventListener('wheel', wheel, { passive: false })
+      window.removeEventListener('wheel', wheel)
     }
   }, [])
 
