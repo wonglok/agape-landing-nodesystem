@@ -22,12 +22,19 @@ import { getID } from './getID'
 let generateInside = (set, get) => {
   return {
     //
+    activeSceneSelection: false,
+    setSelection: (v) => {
+      set({ activeSceneSelection: v })
+    },
+    //
     activeGLBHandle: false,
     activeGLBRawObject: false,
     activeGLBRuntimeObject: false,
     openFile: async (handle) => {
       let closeFile = get().closeFile
       closeFile()
+
+      //
       let file = await handle.getFile()
       let url = URL.createObjectURL(file)
       let loadGLB = get().loadGLB

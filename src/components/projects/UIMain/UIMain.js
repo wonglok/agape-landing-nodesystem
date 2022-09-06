@@ -43,14 +43,14 @@ function UIMainContent() {
                 getDefaultSize={() => {
                   return window.innerHeight - 300
                 }}
-                up={() => (
+                up={(sizeTD) => (
                   <>
                     <LeftRight
                       getDefaultSize={() => 280}
                       NS={'layers-canvas'}
                       left={() => (
                         <ENProjectGuard>
-                          <ENSceneOutline></ENSceneOutline>
+                          <ENSceneOutline height={sizeTD}></ENSceneOutline>
                         </ENProjectGuard>
                       )}
                       right={() => (
