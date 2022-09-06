@@ -33,7 +33,7 @@ export function ENAssetDrawer({ size }) {
     load()
   }, [load])
 
-  let [height, setHeight] = useState(50)
+  let [height, setHeight] = useState(100)
   let barRef = useRef()
   useEffect(() => {
     setHeight(window.innerHeight - 54 - 24 - size)
@@ -47,7 +47,9 @@ export function ENAssetDrawer({ size }) {
     return () => {
       clearInterval(tt)
     }
-  }, [size])
+
+    //
+  }, [height, size])
 
   //
   return (

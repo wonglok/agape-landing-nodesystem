@@ -130,6 +130,9 @@ function UpDown({
 
   useEffect(() => {
     setSize(getDefaultSize())
+    setTimeout(() => {
+      setSize(getDefaultSize())
+    }, 100)
     let reset = ({ detail: isReset }) => {
       //
       if (isReset) {
