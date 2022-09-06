@@ -61,7 +61,11 @@ function UIMainContent() {
                     ></LeftRight>
                   </>
                 )}
-                down={(size) => <ENAssetDrawer size={size}></ENAssetDrawer>}
+                down={(size) => (
+                  <div className='w-full' style={{ height: size + 'px' }}>
+                    <ENAssetDrawer size={size}></ENAssetDrawer>
+                  </div>
+                )}
               ></UpDown>
             )}
             //

@@ -25,6 +25,29 @@ let generateInside = (set, get) => {
     activeGLBHandle: false,
     activeGLBRawObject: false,
     activeGLBRuntimeObject: false,
+    openFile: async (handle) => {
+      let closeFile = get().closeFile
+      closeFile()
+      let file = await handle.getFile()
+      let url = URL.createObjectURL(file)
+      let loadGLB = get().loadGLB
+
+      let activeGLBRawObject = await loadGLB(url)
+      let activeGLBRuntimeObject = await loadGLB(url)
+      set({
+        activeGLBHandle: handle,
+        activeGLBRawObject,
+        activeGLBRuntimeObject,
+      })
+    },
+    closeFile: () => {
+      //
+      set({
+        activeGLBHandle: false,
+        activeGLBRawObject: false,
+        activeGLBRuntimeObject: false,
+      })
+    },
 
     //
     reloadFiles: 0,

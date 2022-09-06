@@ -10,21 +10,6 @@ export function ENAssetDrawer({ size }) {
   let [handleEntry, setHandleEntry] = useState(false)
   let load = useCallback(() => {
     setHandleEntry(currentFolder)
-
-    //     listFolderItem(currentFolder?.handle).then(async (v) => {
-    //   //workspace
-
-    //   let resourcesEntry = v.find(
-    //     (e) => e.handle.kind === 'directory' && e.handle.name === 'resources'
-    //   )
-
-    //   if (resourcesEntry) {
-    //   } else {
-    //     createWorkspaceFolder().then(() => {
-    //       load()
-    //     })
-    //   }
-    // })
   }, [currentFolder])
 
   //
@@ -74,10 +59,6 @@ export function ENAssetDrawer({ size }) {
     <div
       className='relative h-full overflow-x-scroll border-t border-gray-300'
       ref={barRef}
-      // onScrollCapture={(e) => {
-      //   e.stopPropagation()
-      //   e.preventDefault()
-      // }}
     >
       <div
         className='relative flex'
@@ -99,3 +80,23 @@ export function ENAssetDrawer({ size }) {
     </div>
   )
 }
+
+// onScrollCapture={(e) => {
+//   e.stopPropagation()
+//   e.preventDefault()
+// }}
+
+//     listFolderItem(currentFolder?.handle).then(async (v) => {
+//   //workspace
+
+//   let resourcesEntry = v.find(
+//     (e) => e.handle.kind === 'directory' && e.handle.name === 'resources'
+//   )
+
+//   if (resourcesEntry) {
+//   } else {
+//     createWorkspaceFolder().then(() => {
+//       load()
+//     })
+//   }
+// })

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 
 export function UITopBar() {
   let currentFolder = useGLBEditor((s) => s.currentFolder)
+  let activeGLBHandle = useGLBEditor((s) => s.activeGLBHandle)
+  let closeFile = useGLBEditor((s) => s.closeFile)
   let router = useRouter()
 
   return (
@@ -19,7 +21,17 @@ export function UITopBar() {
         </button>
       </div>
       <div className='inline-flex items-center justify-center w-1/3'>
-        {currentFolder?.handle?.name}
+        {currentFolder?.handle?.name}{' '}
+        {activeGLBHandle && <span> / {activeGLBHandle?.name}</span>}
+        {activeGLBHandle && (
+          <button
+            onClick={() => {
+              closeFile()
+            }}
+          >
+            [Close File]
+          </button>
+        )}
       </div>
       <div className='inline-flex items-center justify-end w-1/3'>
         <ResetLayoutBtn></ResetLayoutBtn>
