@@ -51,12 +51,32 @@ export function ENAssetDrawer({ size }) {
     //
   }, [height, size])
 
+  useEffect(() => {
+    //
+    let wheel = (ev) => {
+      if (barRef?.current?.scrollLeft === 0 && ev.deltaX < 0) {
+        ev.preventDefault()
+        ev.stopPropagation()
+        ev.stopImmediatePropagation()
+      }
+    }
+    window.addEventListener('wheel', wheel, { passive: false })
+
+    return () => {
+      window.removeEventListener('wheel', wheel, { passive: false })
+    }
+  }, [])
+
   //
   //
   return (
     <div
       className='relative h-full overflow-x-scroll border-t border-gray-300'
       ref={barRef}
+      // onScrollCapture={(e) => {
+      //   e.stopPropagation()
+      //   e.preventDefault()
+      // }}
     >
       <div
         className='relative flex'
