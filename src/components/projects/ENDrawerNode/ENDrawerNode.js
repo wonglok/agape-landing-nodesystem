@@ -1,9 +1,9 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { Sphere } from '@react-three/drei'
-import { Canvas, useLoader } from '@react-three/fiber'
+// import { Sphere } from '@react-three/drei'
+// import { Canvas, useLoader } from '@react-three/fiber'
 import { Suspense, useCallback, useEffect, useState } from 'react'
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
-import { ENModelViewer } from '../ENModelViewer/ENModelViewer'
+// import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
+// import { ENModelViewer } from '../ENModelViewer/ENModelViewer'
 import { PreviewerModelGLB } from './PreviewerModelGLB'
 import { PreviewHDR } from './PreviewHDR'
 

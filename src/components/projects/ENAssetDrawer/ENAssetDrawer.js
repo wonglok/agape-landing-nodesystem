@@ -46,8 +46,6 @@ export function ENAssetDrawer({ size }) {
     return () => {
       clearInterval(tt)
     }
-
-    //
   }, [height, size])
 
   useEffect(() => {

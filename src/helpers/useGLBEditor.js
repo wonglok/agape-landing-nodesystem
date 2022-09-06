@@ -22,6 +22,11 @@ import { getID } from './getID'
 let generateInside = (set, get) => {
   return {
     //
+    activeGLBHandle: false,
+    activeGLBRawObject: false,
+    activeGLBRuntimeObject: false,
+
+    //
     reloadFiles: 0,
     projectFolders: [],
     currentFolder: false,

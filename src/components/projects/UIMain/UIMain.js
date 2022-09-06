@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import SplitPane from 'react-split-pane'
 import { ENAssetDrawer } from '../ENAssetDrawer/ENAssetDrawer'
 import { ENCanvas } from '../ENCanvas/ENCanvas'
-import { ENFiles } from '../ENFiles/ENFiles'
+// import { ENFiles } from '../ENFiles/ENFiles'
 import { ENGraph } from '../ENGraph/ENGraph'
 // import { ENLayers } from '../ENLayers/ENLayers'
 import { ENParams } from '../ENParams/ENParams'
+import { ENProjectGuard } from '../ENProjectGuard/ENProjectGuard'
+import { ENSceneOutline } from '../ENSceneOutline/ENSceneOutline'
 import { ENTimeline } from '../ENTimeline/ENTimeline'
 
 export function UIMain() {
@@ -46,14 +48,25 @@ function UIMainContent() {
                     <LeftRight
                       getDefaultSize={() => 280}
                       NS={'layers-canvas'}
-                      left={() => <ENFiles></ENFiles>}
-                      right={() => <ENCanvas></ENCanvas>}
+                      left={() => (
+                        <ENProjectGuard>
+                          <ENSceneOutline></ENSceneOutline>
+                        </ENProjectGuard>
+                      )}
+                      right={() => (
+                        <ENProjectGuard>
+                          <ENCanvas></ENCanvas>
+                        </ENProjectGuard>
+                      )}
                     ></LeftRight>
                   </>
                 )}
                 down={(size) => <ENAssetDrawer size={size}></ENAssetDrawer>}
               ></UpDown>
             )}
+            //
+            //
+            //
             right={() => (
               <div>
                 <UpDown
@@ -61,8 +74,16 @@ function UIMainContent() {
                   getDefaultSize={() => {
                     return 300
                   }}
-                  up={() => <ENParams></ENParams>}
-                  down={() => <ENGraph></ENGraph>}
+                  up={() => (
+                    <ENProjectGuard>
+                      <ENParams></ENParams>
+                    </ENProjectGuard>
+                  )}
+                  down={() => (
+                    <ENProjectGuard>
+                      <ENGraph></ENGraph>
+                    </ENProjectGuard>
+                  )}
                 ></UpDown>
               </div>
             )}
