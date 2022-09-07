@@ -17,6 +17,10 @@ import { GLTFLoader } from 'three140/examples/jsm/loaders/GLTFLoader'
 import { clone } from 'three140/examples/jsm/utils/SkeletonUtils'
 
 //
+import { WebIO } from '@gltf-transform/core'
+import { DracoMeshCompression } from '@gltf-transform/extensions'
+
+//
 import create from 'zustand'
 //
 import { getID } from './getID'
@@ -37,13 +41,14 @@ let generateInside = (set, get) => {
     activeGLBHandle: false,
     activeGLBRawObject: false,
     activeGLBRuntimeObject: false,
+    activeGLBSplash: 'pick',
     openFile: async (handle, mode = 'floor') => {
       let self = get()
       let closeFile = self.closeFile
       let saveFile = self.saveFile
+      set({ activeGLBSplash: 'loading' })
 
       if (self.activeGLBHandle) {
-        set({ activeGLBEditing: false })
         await saveFile({
           handle: self.activeGLBHandle,
           runTimeGLB: self.activeGLBRuntimeObject,
@@ -51,7 +56,7 @@ let generateInside = (set, get) => {
         })
       }
 
-      let ans = await closeFile()
+      let ans = await closeFile({ activeGLBSplash: 'loading' })
       if (ans !== 'ok') {
         return
       }
@@ -68,7 +73,7 @@ let generateInside = (set, get) => {
 
       //
       set({
-        activeGLBEditing: true,
+        activeGLBSplash: 'ready',
         editorNavigationMode: mode,
         activeGLBHandle: handle,
         activeGLBRawObject,
@@ -76,23 +81,27 @@ let generateInside = (set, get) => {
       })
     },
 
-    closeFile: async () => {
+    closeFile: async (
+      { activeGLBSplash = 'loading' } = { activeGLBSplash: 'loading' }
+    ) => {
       // if (await get().needsSaveFnc()) {
       //   set({ needsSaveMsg: 'please save your file beofre exit!' })
-
       //   return 'bad'
       // }
       // set({ needsSaveMsg: '' })
 
-      //
-      set({
-        activeGLBEditing: false,
+      let update = {
+        activeGLBSplash: 'pick',
         editorNavigationMode: false,
         activeSceneSelection: false,
         activeGLBHandle: false,
         activeGLBRawObject: false,
         activeGLBRuntimeObject: false,
-      })
+      }
+      if (activeGLBSplash) {
+        update['activeGLBSplash'] = activeGLBSplash
+      }
+      set(update)
 
       return 'ok'
     },
@@ -324,11 +333,42 @@ let generateInside = (set, get) => {
       })
 
       let animations = origGLB.animations
-      let buffer = await get().exportGLB(clonedForExport.children, animations)
+      let rawGltf = await get().exportGLB(clonedForExport.children, animations)
+
+      let dracoMod = await remoteImport('/draco/draco_encoder_raw.js')
+
+      const io = new WebIO({
+        mode: 'cors',
+        cache: 'no-cache',
+      })
+
+      // let draco3d = loadDraco()
+
+      let mod = dracoMod.DracoEncoderModule()
+      io.registerExtensions([DracoMeshCompression])
+      io.registerDependencies({
+        // 'draco3d.decoder': await draco3d.createDecoderModule(), // Optional.
+        'draco3d.encoder': mod, // Optional.
+      })
+
+      let glbDocument = await io.readBinary(new Uint8Array(rawGltf))
+
+      glbDocument
+        .createExtension(DracoMeshCompression)
+        .setRequired(true)
+        .setEncoderOptions({
+          method: DracoMeshCompression.EncoderMethod.SEQUENTIAL,
+          encodeSpeed: 5,
+          decodeSpeed: 5,
+        })
+
+      // io.setVertexLayout(VertexLayout.SEPARATE)
+
+      let newBin = await io.writeBinary(glbDocument)
 
       await writeFile(
         handle,
-        buffer
+        newBin
         //
         // await get().createEmptyGLBFileBuffer()
       )

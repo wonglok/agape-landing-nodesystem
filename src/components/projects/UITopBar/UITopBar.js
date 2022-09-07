@@ -19,7 +19,7 @@ export function UITopBar() {
         <button
           className='text-xs'
           onClick={() => {
-            closeFile().then((ans) => {
+            closeFile({}).then((ans) => {
               if (ans === 'ok') {
                 router.push('/project')
               }
@@ -38,7 +38,7 @@ export function UITopBar() {
           <button
             className='px-2 ml-2 text-xs text-white bg-purple-600 rounded-full'
             onClick={async () => {
-              let ans = await closeFile()
+              let ans = await closeFile({ skipResetScreen: false })
               if (ans === 'ok') {
                 //
                 await saveFile({
