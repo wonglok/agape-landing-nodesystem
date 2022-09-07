@@ -6,6 +6,8 @@ export function UITopBar() {
   let currentFolder = useGLBEditor((s) => s.currentFolder)
   let activeGLBHandle = useGLBEditor((s) => s.activeGLBHandle)
   let closeFile = useGLBEditor((s) => s.closeFile)
+  let saveFile = useGLBEditor((s) => s.saveFile)
+  let needsSaveFileWords = useGLBEditor((s) => s.needsSaveFileWords)
   let router = useRouter()
 
   return (
@@ -14,29 +16,49 @@ export function UITopBar() {
         <button
           className='text-xs'
           onClick={() => {
-            closeFile()
-
-            router.push('/project')
+            closeFile().then((ans) => {
+              if (ans === 'ok') {
+                router.push('/project')
+              }
+            })
           }}
         >
           ← Back
         </button>
       </div>
       <div className='inline-flex items-center justify-center w-1/3'>
-        {currentFolder?.handle?.name}{' '}
+        {currentFolder?.handle?.name}
         {activeGLBHandle && (
           <span className='ml-1'> / {activeGLBHandle?.name}</span>
         )}
         {activeGLBHandle && (
           <button
-            className='px-2 ml-1 text-xs text-white bg-red-600 rounded-full'
-            onClick={() => {
-              closeFile()
+            className='px-2 ml-2 text-xs text-white bg-purple-600 rounded-full'
+            onClick={async () => {
+              let ans = await closeFile()
+              if (ans === 'ok') {
+                //
+                // saveFile({ scene: ,  })
+              }
             }}
           >
-            Close
+            {needsSaveFileWords ? (
+              <span>{needsSaveFileWords}</span>
+            ) : (
+              <span>Save & Close</span>
+            )}
           </button>
         )}
+        {/* {activeGLBHandle && (
+          <button
+            className='px-2 ml-2 text-xs text-white bg-blue-600 rounded-full'
+            onClick={() => {
+              saveFile()
+            }}
+          >
+            <span>Save</span>
+          </button>
+        )} */}
       </div>
       <div className='inline-flex items-center justify-end w-1/3'>
         <ResetLayoutBtn></ResetLayoutBtn>

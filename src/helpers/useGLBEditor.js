@@ -26,14 +26,21 @@ let generateInside = (set, get) => {
     setSelection: (v) => {
       set({ activeSceneSelection: v })
     },
-    //
+    // //
+    // needsSaveFnc: () => {
+    //   //
+    // },
+    needsSaveMsg: '',
     editorNavigationMode: false,
     activeGLBHandle: false,
     activeGLBRawObject: false,
     activeGLBRuntimeObject: false,
     openFile: async (handle, mode = 'floor') => {
       let closeFile = get().closeFile
-      closeFile()
+      let ans = await closeFile()
+      if (ans !== 'ok') {
+        return
+      }
 
       //
       let file = await handle.getFile()
@@ -51,7 +58,15 @@ let generateInside = (set, get) => {
         activeGLBRuntimeObject,
       })
     },
-    closeFile: () => {
+
+    closeFile: async () => {
+      // if (await get().needsSaveFnc()) {
+      //   set({ needsSaveMsg: 'please save your file beofre exit!' })
+
+      //   return 'bad'
+      // }
+      // set({ needsSaveMsg: '' })
+
       //
       set({
         editorNavigationMode: false,
@@ -60,6 +75,8 @@ let generateInside = (set, get) => {
         activeGLBRawObject: false,
         activeGLBRuntimeObject: false,
       })
+
+      return 'ok'
     },
 
     //
@@ -166,29 +183,13 @@ let generateInside = (set, get) => {
         return
       }
 
-      let workspace = await currentFolder?.handle.getDirectoryHandle(
-        'workspace',
+      let generative = await currentFolder?.handle.getDirectoryHandle(
+        'generative',
         {
           create: true,
         }
       )
-
-      await currentFolder?.handle.getDirectoryHandle('export', {
-        create: true,
-      })
-      let resources = await currentFolder?.handle.getDirectoryHandle(
-        'resources',
-        {
-          create: true,
-        }
-      )
-
-      await resources.getDirectoryHandle('glb', { create: true })
-      await resources.getDirectoryHandle('hdr', { create: true })
-      await resources.getDirectoryHandle('texture-image', { create: true })
-      await resources.getDirectoryHandle('materials', { create: true })
-
-      let handle = await workspace.getFileHandle('hello.en-workspace.glb', {
+      let handle = await generative.getFileHandle('hello.en.glb', {
         create: true,
       })
 
@@ -198,6 +199,22 @@ let generateInside = (set, get) => {
         //
         await get().createEmptyGLBFileBuffer()
       )
+
+      await currentFolder?.handle.getDirectoryHandle('export', {
+        create: true,
+      })
+
+      let resources = await currentFolder?.handle.getDirectoryHandle(
+        'resources',
+        {
+          create: true,
+        }
+      )
+
+      await resources.getDirectoryHandle('glb', { create: true })
+      await resources.getDirectoryHandle('hdr', { create: true })
+      await resources.getDirectoryHandle('textures', { create: true })
+      await resources.getDirectoryHandle('materials', { create: true })
 
       //
       return
@@ -261,6 +278,33 @@ let generateInside = (set, get) => {
         )
         //
       })
+    },
+    saveFile: async ({ handle, runTimeScene, origScene }) => {
+      let cloned = clone(runTimeScene)
+
+      cloned.traverse((pp) => {
+        if (pp.userData.effectNode) {
+          origScene.traverse((oo) => {
+            if (oo.userData.posMD5 === pp.userData.posMD5) {
+              oo.userData.effectNode = JSON.parse(
+                JSON.stringify(pp.userData.effectNode)
+              )
+            }
+          })
+        }
+      })
+
+      let buffer = await get().exportGLB(scene, [])
+      // get().exportGLB(o3, [])
+      // await writeFile(
+      //   handle,
+      //   buffer
+      //   //
+      //   // await get().createEmptyGLBFileBuffer()
+      // )
+
+      console.log('todo save file for glb')
+      return
     },
   }
 }

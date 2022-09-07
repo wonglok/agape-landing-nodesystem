@@ -35,6 +35,33 @@ export function ProjectLoaderGuard({ children = () => {} }) {
           setProject('notfound')
         }
       })
+
+    // let intv = setInterval(async () => {
+    //   try {
+    //     loadProjectFolder()
+    //       .then((e) => {
+    //         return e.find((e) => e._id === projectID)
+    //       })
+    //       .then(
+    //         async (s) => {
+    //           await setCurrentFolder(s)
+
+    //           try {
+    //             await requestPermission(s.handle)
+    //           } catch (e) {
+    //             console.log(e)
+    //           }
+    //         },
+    //         () => {}
+    //       )
+    //   } catch (e) {
+    //     clearInterval(intv)
+    //     console.log(e)
+    //   }
+    // }, 1500)
+    // return () => {
+    //   clearInterval(intv)
+    // }
   }, [loadProjectFolder, projectID, requestPermission, setCurrentFolder])
 
   return (
