@@ -19,7 +19,7 @@ export function UIMain() {
 
   return (
     ready && (
-      <div className='w-full h-full bg-gray-500 '>
+      <div className='w-full h-full bg-white '>
         <UIMainContent></UIMainContent>
       </div>
     )
@@ -56,8 +56,8 @@ function UIMainContent() {
                       right={() => (
                         <ENProjectGuard
                           placeholder={
-                            <div className='flex items-center justify-center h-full'>
-                              <div className='p-2 bg-gray-100'>
+                            <div className='flex items-center justify-center h-full highlight-pulse '>
+                              <div className='p-2 px-4 bg-gray-100 rounded-full'>
                                 Please Select a GLB File Below to Begin Editing
                                 👇🏼
                               </div>
@@ -106,7 +106,7 @@ function UIMainContent() {
           ></LeftRight>
         </div>
       </div>
-      <ENProjectGuard>
+      <ENProjectGuard placeholder={<div className='w-full h-full'></div>}>
         <ENTimeline></ENTimeline>
       </ENProjectGuard>
     </>
