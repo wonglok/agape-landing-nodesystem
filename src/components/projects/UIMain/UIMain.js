@@ -56,7 +56,7 @@ function UIMainContent() {
                       right={() => (
                         <ENProjectGuard
                           placeholder={
-                            <div className='flex items-center justify-center h-full highlight-pulse '>
+                            <div className='flex items-center justify-center w-full h-full bg-green-700'>
                               <div className='p-2 px-4 bg-gray-100 rounded-full'>
                                 Please Select a GLB File Below to Begin Editing
                                 👇🏼
@@ -106,7 +106,11 @@ function UIMainContent() {
           ></LeftRight>
         </div>
       </div>
-      <ENProjectGuard placeholder={<div className='w-full h-full'></div>}>
+      <ENProjectGuard
+        placeholder={
+          <div className='w-full h-full border-t border-gray-300'></div>
+        }
+      >
         <ENTimeline></ENTimeline>
       </ENProjectGuard>
     </>
