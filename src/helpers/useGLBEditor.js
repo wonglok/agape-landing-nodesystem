@@ -3,7 +3,7 @@ import {
   saveProjects,
   verifyPermission,
 } from '@/components/projects/FileSystem/FileSystem'
-import { getPosMD5 } from '@/effectnode/store/getPosMD5'
+import { assignSignaturesToGLB } from '@/effectnode/store/assignSignaturesToGLB'
 import { Object3D } from 'three'
 import {
   Clock,
@@ -81,10 +81,9 @@ let generateInside = (set, get) => {
 
       let activeGLBRawObject = await loadGLB(url)
       let activeGLBRuntimeObject = await loadGLB(url)
-      getPosMD5(activeGLBRawObject)
-      getPosMD5(activeGLBRuntimeObject)
+      assignSignaturesToGLB(activeGLBRawObject)
+      assignSignaturesToGLB(activeGLBRuntimeObject)
 
-      //
       //
       set({
         overlayENGraph: '',

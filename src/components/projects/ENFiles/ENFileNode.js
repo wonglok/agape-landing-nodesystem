@@ -46,6 +46,7 @@ export function ENFileNode({ handle }) {
               <div className='inline-block'>
                 {e.handle.kind === 'directory' ? '🗂' : '📄'}
               </div>
+
               <div className='inline-block'>{e.handle.name}</div>
             </div>
           </div>
@@ -54,6 +55,8 @@ export function ENFileNode({ handle }) {
     </div>
   )
 }
+
+//
 
 //
 

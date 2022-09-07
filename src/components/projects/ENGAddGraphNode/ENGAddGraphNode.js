@@ -1,5 +1,7 @@
 //
 
+import codes from '@/effectnode/store/codes'
+
 export function ENGAddGraphNode() {
   return (
     <>
@@ -8,11 +10,10 @@ export function ENGAddGraphNode() {
           Add Modules
         </div>
         <div className='p-2'>
-          <div>1211</div>
-          <div>1211</div>
-          <div>1211</div>
+          {codes.map((e) => {
+            return <div key={e.key}>{e.title}</div>
+          })}
         </div>
-        {/*  */}
         {/*  */}
       </div>
     </>

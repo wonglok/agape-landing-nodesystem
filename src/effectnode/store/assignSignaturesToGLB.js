@@ -14,11 +14,10 @@ const getSignature = (it) => {
     k += 1
   })
 
-  // console.log(str)
   return str
 }
 
-export const getPosMD5 = (glb) => {
+export const assignSignaturesToGLB = (glb) => {
   glb.scene.traverse((it) => {
     if (it) {
       it.userData.sigMD5 = md5(getSignature(it))

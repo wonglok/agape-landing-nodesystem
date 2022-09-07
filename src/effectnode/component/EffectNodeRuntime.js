@@ -1,10 +1,13 @@
+import { useEffect } from 'react'
+import { assignSignaturesToGLB } from '../store/assignSignaturesToGLB'
+
 export function EffectNodeRuntime({ glbRoot, glbRaw }) {
   glbRoot.scene.updateMatrixWorld(true)
 
   useEffect(() => {
-    getPosMD5(glbRoot)
+    assignSignaturesToGLB(glbRoot)
     if (glbRaw) {
-      getPosMD5(glbRaw)
+      assignSignaturesToGLB(glbRaw)
     }
   }, [glbRoot, glbRaw])
 

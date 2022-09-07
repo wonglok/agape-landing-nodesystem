@@ -1,3 +1,4 @@
+import { EffectNodeRuntime } from '@/effectnode/component/EffectNodeRuntime'
 import { ConnectCameraControls } from '@/helpers/ConnectCameraControls'
 import { ConnectKeyboard } from '@/helpers/ConnectKeyboard'
 import { ConnectSimulation } from '@/helpers/ConnectSimulation'
@@ -10,17 +11,25 @@ import { Canvas } from '@react-three/fiber'
 
 export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
+  let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
   let editorNavigationMode = useGLBEditor((s) => s.editorNavigationMode)
   return (
     <div className='w-full h-full bg-white'>
       <Canvas className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
-        {activeGLBRawObject.scene && (
-          <primitive
-            key={activeGLBRawObject.scene.uuid}
-            object={activeGLBRawObject.scene}
-          ></primitive>
+        {activeGLBRawObject?.scene && (
+          <>
+            <primitive
+              key={activeGLBRuntimeObject.scene.uuid}
+              object={activeGLBRuntimeObject.scene}
+            ></primitive>
+
+            <EffectNodeRuntime
+              glbRoot={activeGLBRuntimeObject}
+              glbRaw={activeGLBRawObject}
+            ></EffectNodeRuntime>
+          </>
         )}
 
         {editorNavigationMode === 'floor' && (

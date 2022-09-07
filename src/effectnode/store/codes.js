@@ -23,3 +23,4 @@ function importAll(r) {
 const codes = importAll(r)
 
 export default codes
+export { codes }
