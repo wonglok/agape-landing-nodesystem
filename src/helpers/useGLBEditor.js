@@ -82,7 +82,7 @@ let generateInside = (set, get) => {
     },
 
     closeFile: async (
-      { activeGLBSplash = 'loading' } = { activeGLBSplash: 'loading' }
+      { activeGLBSplash = 'pick' } = { activeGLBSplash: 'pick' }
     ) => {
       // if (await get().needsSaveFnc()) {
       //   set({ needsSaveMsg: 'please save your file beofre exit!' })
