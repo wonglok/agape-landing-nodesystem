@@ -38,7 +38,19 @@ let generateInside = (set, get) => {
     activeGLBRawObject: false,
     activeGLBRuntimeObject: false,
     openFile: async (handle, mode = 'floor') => {
-      let closeFile = get().closeFile
+      set({ editorNavigationMode: false })
+      let self = get()
+      let closeFile = self.closeFile
+      let saveFile = self.saveFile
+
+      if (self.activeGLBHandle) {
+        await saveFile({
+          handle: self.activeGLBHandle,
+          runTimeGLB: self.activeGLBRuntimeObject,
+          origGLB: self.activeGLBRawObject,
+        })
+      }
+
       let ans = await closeFile()
       if (ans !== 'ok') {
         return
@@ -47,7 +59,7 @@ let generateInside = (set, get) => {
       //
       let file = await handle.getFile()
       let url = URL.createObjectURL(file)
-      let loadGLB = get().loadGLB
+      let loadGLB = self.loadGLB
 
       let activeGLBRawObject = await loadGLB(url)
       let activeGLBRuntimeObject = await loadGLB(url)
