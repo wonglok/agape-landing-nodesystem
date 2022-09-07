@@ -28,6 +28,16 @@ import { getID } from './getID'
 let generateInside = (set, get) => {
   return {
     //
+    overlayENGraph: '',
+    setOverlayENGraph: (v) => {
+      set({ overlayENGraph: v })
+    },
+    //
+    controls: false,
+    setControl: (c) => {
+      set({ controls: c })
+    },
+    //
     activeSceneSelection: false,
     setSelection: (v) => {
       set({ activeSceneSelection: v })
@@ -46,7 +56,7 @@ let generateInside = (set, get) => {
       let self = get()
       let closeFile = self.closeFile
       let saveFile = self.saveFile
-      set({ activeGLBSplash: 'loading' })
+      set({ activeGLBSplash: 'loading', overlayENGraph: '' })
 
       if (self.activeGLBHandle) {
         await saveFile({
@@ -56,7 +66,10 @@ let generateInside = (set, get) => {
         })
       }
 
-      let ans = await closeFile({ activeGLBSplash: 'loading' })
+      let ans = await closeFile({
+        activeGLBSplash: 'loading',
+        overlayENGraph: '',
+      })
       if (ans !== 'ok') {
         return
       }
@@ -72,7 +85,9 @@ let generateInside = (set, get) => {
       getPosMD5(activeGLBRuntimeObject)
 
       //
+      //
       set({
+        overlayENGraph: '',
         activeGLBSplash: 'ready',
         editorNavigationMode: mode,
         activeGLBHandle: handle,
