@@ -5,7 +5,7 @@ import { BoxBufferGeometry, Mesh } from 'three'
 import { Scene } from 'three140'
 import { useMultiverse } from './useMultiverse'
 
-export function FloorEditor({ name = 'floor-editor' }) {
+export function FloorFlat({ name = 'floor-editor' }) {
   let addNamedScene = useMultiverse((s) => s.addNamedScene)
   let setPostProcessing = useMultiverse((s) => s.setPostProcessing)
   let setPosition = useMultiverse((s) => s.setPosition)
@@ -18,7 +18,7 @@ export function FloorEditor({ name = 'floor-editor' }) {
     prom.then((it) => {
       // geo.scale(1, 0.01, 1)
       //
-      setPosition({ initPos: [0, 5, 3], cameraOffset: [0, -3, 3] })
+      setPosition({ initPos: [0, 5, 5], cameraOffset: [0, -3, 3] })
     })
     return () => {}
   }, [addNamedScene, setPosition, setPostProcessing, name])

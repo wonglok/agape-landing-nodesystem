@@ -1,7 +1,7 @@
 import { ConnectCameraControls } from '@/helpers/ConnectCameraControls'
 import { ConnectKeyboard } from '@/helpers/ConnectKeyboard'
 import { ConnectSimulation } from '@/helpers/ConnectSimulation'
-import { FloorEditor } from '@/helpers/FloorEditor'
+import { FloorFlat } from '@/helpers/FloorFlat'
 import { FloorObject } from '@/helpers/FloorObject'
 import { Player } from '@/helpers/Player'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
@@ -31,10 +31,10 @@ export function ENCanvas() {
             <ConnectCameraControls></ConnectCameraControls>
             <ConnectSimulation></ConnectSimulation>
             <Player></Player>
-            <FloorEditor
+            <FloorFlat
               key={activeGLBRawObject.uuid}
               name={activeGLBRawObject.uuid}
-            ></FloorEditor>
+            ></FloorFlat>
           </>
         )}
 

@@ -244,14 +244,22 @@ let generateInside = (set, get) => {
       return get().exportGLB(o3, [])
     },
 
+    glbCache: new Map(),
     loadGLB: async (url) => {
+      let glbCache = get().glbCache
+      if (glbCache.has(url)) {
+        return await glbCache.get(url)
+      }
       let loader = new GLTFLoader()
       const dracoLoader = new DRACOLoader()
+      dracoLoader.setWorkerLimit(32)
       dracoLoader.setDecoderPath('/draco/')
       loader.setDRACOLoader(dracoLoader)
       // loader.register((parser) => new GLTFEffectNodeLoader(parser))
-
-      let glb = await loader.loadAsync(url)
+      let prom = loader.loadAsync(url)
+      glbCache.set(url, prom)
+      let glb = await prom
+      dracoLoader.dispose()
       console.log(glb)
       return glb
     },
