@@ -3,7 +3,7 @@ import { sceneToCollider } from './sceneToCollider'
 import { BoxBufferGeometry, Color, MeshPhysicalMaterial, Scene } from 'three'
 import { Mesh, MeshBasicMaterial } from 'three'
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry'
-import { Line3, MeshStandardMaterial, Vector3 } from 'three'
+import { Line3, Vector3 } from 'three'
 import { Box3, Matrix4, Quaternion } from 'three'
 
 const useMultiverse = create((set, get) => {
@@ -26,7 +26,6 @@ const useMultiverse = create((set, get) => {
   //   })
   // })
 
-  // characters
   let player = new Mesh(
     new RoundedBoxGeometry(1.0, 2.0, 1.0, 10, 0.5),
     new MeshPhysicalMaterial({

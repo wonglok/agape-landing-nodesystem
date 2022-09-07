@@ -50,7 +50,7 @@ export function FloorObject({ object }) {
     return () => {
       cleans.forEach((t) => t())
     }
-  }, [addNamedScene, setPostProcessing, object, setPosition])
+  }, [addNamedScene, setPostProcessing, object, setPosition, scene])
 
   return (
     <group>

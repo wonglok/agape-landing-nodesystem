@@ -3,6 +3,7 @@ import {
   saveProjects,
   verifyPermission,
 } from '@/components/projects/FileSystem/FileSystem'
+import { getPosMD5 } from '@/effectnode/store/getPosMD5'
 import { Object3D } from 'three'
 import {
   Clock,
@@ -13,6 +14,7 @@ import {
 import { GLTFExporter } from 'three140/examples/jsm/exporters/GLTFExporter'
 import { DRACOLoader } from 'three140/examples/jsm/loaders/DRACOLoader'
 import { GLTFLoader } from 'three140/examples/jsm/loaders/GLTFLoader'
+import { clone } from 'three140/examples/jsm/utils/SkeletonUtils'
 
 //
 import create from 'zustand'
@@ -49,6 +51,8 @@ let generateInside = (set, get) => {
 
       let activeGLBRawObject = await loadGLB(url)
       let activeGLBRuntimeObject = await loadGLB(url)
+      getPosMD5(activeGLBRawObject)
+      getPosMD5(activeGLBRuntimeObject)
 
       //
       set({
@@ -287,31 +291,34 @@ let generateInside = (set, get) => {
         //
       })
     },
-    saveFile: async ({ handle, runTimeScene, origScene }) => {
-      let cloned = clone(runTimeScene)
+    saveFile: async ({ handle, runTimeGLB, origGLB }) => {
+      // console.log('todo save file for glb')
 
-      cloned.traverse((pp) => {
-        if (pp.userData.effectNode) {
-          origScene.traverse((oo) => {
-            if (oo.userData.posMD5 === pp.userData.posMD5) {
+      let clonedRuntime = clone(runTimeGLB.scene)
+      let clonedForExport = clone(origGLB.scene)
+
+      clonedRuntime.traverse((runtime) => {
+        if (runtime.userData.effectNode) {
+          clonedForExport.traverse((oo) => {
+            if (oo.userData.posMD5 === runtime.userData.posMD5) {
               oo.userData.effectNode = JSON.parse(
-                JSON.stringify(pp.userData.effectNode)
+                JSON.stringify(runtime.userData.effectNode)
               )
             }
           })
         }
       })
 
-      let buffer = await get().exportGLB(scene, [])
-      // get().exportGLB(o3, [])
-      // await writeFile(
-      //   handle,
-      //   buffer
-      //   //
-      //   // await get().createEmptyGLBFileBuffer()
-      // )
+      let animations = origGLB.animations
+      let buffer = await get().exportGLB(clonedForExport.children, animations)
 
-      console.log('todo save file for glb')
+      await writeFile(
+        handle,
+        buffer
+        //
+        // await get().createEmptyGLBFileBuffer()
+      )
+      console.log('done')
       return
     },
   }
@@ -322,11 +329,9 @@ export const useGLBEditor = create((set, get) => {
 })
 
 //
+
 async function writeFile(fileHandle, contents) {
-  // Create a FileSystemWritableFileStream to write to.
   const writable = await fileHandle.createWritable()
-  // Write the contents of the file to the stream.
   await writable.write(contents)
-  // Close the file and write the contents to disk.
   await writable.close()
 }

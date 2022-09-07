@@ -8,7 +8,9 @@ export function ENSceneOutline({ height }) {
       className='w-full px-1 py-12 pt-4 overflow-auto text-xs bg-white'
       style={{ height: height + 'px' }}
     >
-      <ENOutlineNode node={activeGLBRuntimeObject.scene}></ENOutlineNode>
+      {activeGLBRuntimeObject?.scene?.children.map((kid) => {
+        return <ENOutlineNode key={kid.uuid} node={kid}></ENOutlineNode>
+      })}
     </div>
   )
 }

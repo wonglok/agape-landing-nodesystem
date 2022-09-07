@@ -10,6 +10,9 @@ export function UITopBar() {
   let needsSaveFileWords = useGLBEditor((s) => s.needsSaveFileWords)
   let router = useRouter()
 
+  let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
+  let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
+
   return (
     <div className='flex items-center justify-between h-6 p-1 px-2 text-xs bg-gray-200'>
       <div className='inline-flex items-center justify-start w-1/3'>
@@ -38,7 +41,11 @@ export function UITopBar() {
               let ans = await closeFile()
               if (ans === 'ok') {
                 //
-                // saveFile({ scene: ,  })
+                await saveFile({
+                  handle: activeGLBHandle,
+                  runTimeGLB: activeGLBRuntimeObject,
+                  origGLB: activeGLBRawObject,
+                })
               }
             }}
           >
