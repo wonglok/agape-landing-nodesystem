@@ -21,7 +21,7 @@ const getSignature = (it) => {
 export const getPosMD5 = (glb) => {
   glb.scene.traverse((it) => {
     if (it) {
-      it.userData.posMD5 = md5(getSignature(it))
+      it.userData.sigMD5 = md5(getSignature(it))
     }
   })
 }

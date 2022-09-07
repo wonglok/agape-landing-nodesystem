@@ -309,12 +309,12 @@ let generateInside = (set, get) => {
       let clonedRuntime = clone(runTimeGLB.scene)
       let clonedForExport = clone(origGLB.scene)
 
-      clonedRuntime.traverse((runtime) => {
-        if (runtime.userData.effectNode) {
-          clonedForExport.traverse((oo) => {
-            if (oo.userData.posMD5 === runtime.userData.posMD5) {
-              oo.userData.effectNode = JSON.parse(
-                JSON.stringify(runtime.userData.effectNode)
+      clonedRuntime.traverse((runtimeIt) => {
+        if (runtimeIt.userData.effectNode) {
+          clonedForExport.traverse((exportIt) => {
+            if (exportIt.userData.sigMD5 === runtimeIt.userData.sigMD5) {
+              exportIt.userData.effectNode = JSON.parse(
+                JSON.stringify(runtimeIt.userData.effectNode)
               )
             }
           })
