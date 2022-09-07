@@ -38,12 +38,12 @@ let generateInside = (set, get) => {
     activeGLBRawObject: false,
     activeGLBRuntimeObject: false,
     openFile: async (handle, mode = 'floor') => {
-      set({ editorNavigationMode: false })
       let self = get()
       let closeFile = self.closeFile
       let saveFile = self.saveFile
 
       if (self.activeGLBHandle) {
+        set({ activeGLBEditing: false })
         await saveFile({
           handle: self.activeGLBHandle,
           runTimeGLB: self.activeGLBRuntimeObject,
@@ -68,6 +68,7 @@ let generateInside = (set, get) => {
 
       //
       set({
+        activeGLBEditing: true,
         editorNavigationMode: mode,
         activeGLBHandle: handle,
         activeGLBRawObject,
@@ -85,6 +86,7 @@ let generateInside = (set, get) => {
 
       //
       set({
+        activeGLBEditing: false,
         editorNavigationMode: false,
         activeSceneSelection: false,
         activeGLBHandle: false,
