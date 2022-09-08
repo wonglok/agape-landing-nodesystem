@@ -1,13 +1,13 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { TabUnifroms } from './TabUniforms'
 
 export function ENPNodeDetail() {
-  let setOverlay = useGLBEditor((s) => s.setOverlay)
-  let overlay = useGLBEditor((s) => s.overlay)
+  // let setOverlay = useGLBEditor((s) => s.setOverlay)
+  // let overlay = useGLBEditor((s) => s.overlay)
   let getActiveNode = useGLBEditor((s) => s.getActiveNode)
   let getEffectNode = useGLBEditor((s) => s.getEffectNode)
-  let reloadGraphID = useGLBEditor((s) => s.reloadGraphID)
+  let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let removeLink = useGLBEditor((s) => s.removeLink)
   let removeNode = useGLBEditor((s) => s.removeNode)
   let setActiveNodeID = useGLBEditor((s) => s.setActiveNodeID)
@@ -15,61 +15,63 @@ export function ENPNodeDetail() {
   let node = getActiveNode()
 
   let [tab, setTab] = useState('conns')
-  useEffect(() => {
-    let hh = (ev) => {
-      if (ev.key === 'Escape') {
-        if (overlay === 'nodeDetail') {
-          setOverlay('')
-        }
-      }
-    }
-    window.addEventListener('keydown', hh)
-    return () => {
-      window.removeEventListener('keydown', hh)
-    }
+  // useEffect(() => {
+  //   let hh = (ev) => {
+  //     if (ev.key === 'Escape') {
+  //       if (overlay === 'nodeDetail') {
+  //         setOverlay('')
+  //       }
+  //     }
+  //   }
+  //   window.addEventListener('keydown', hh)
+  //   return () => {
+  //     window.removeEventListener('keydown', hh)
+  //   }
 
-    //
-  }, [overlay])
+  //   //
+  // }, [overlay])
 
   return (
     <>
-      {overlay === 'nodeDetail' && node && (
+      {node && (
         <>
-          <span id={reloadGraphID}></span>
-          <div
-            style={{
-              position: 'absolute',
-              top: `calc(0% )`,
-              left: `calc(0% )`,
-              width: `100%`,
-              height: `100%`,
-            }}
-            className='shadow-xl backdrop-blur-lg'
-            onClick={() => {
-              setOverlay(false)
-            }}
-          >
-            {/*  */}
-            {/*  */}
-            {/*  */}
+          <span id={activeSceneSelection.uuid}></span>
+          <div className='flex items-center w-full h-8 pl-2 bg-yellow-300 border-b border-yellow-200'>
+            {node.displayTitle}
+          </div>
+          <div className=' absolute top-0 right-0 p-1'>
+            <button
+              onClick={() => {
+                setOverlayENGraph('')
+              }}
+            >
+              <svg
+                width={24}
+                height={24}
+                clipRule='evenodd'
+                fillRule='evenodd'
+                strokeLinejoin='round'
+                strokeMiterlimit='2'
+                viewBox='0 0 24 24'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  fill='red'
+                  d='m12.002 2.005c5.518 0 9.998 4.48 9.998 9.997 0 5.518-4.48 9.998-9.998 9.998-5.517 0-9.997-4.48-9.997-9.998 0-5.517 4.48-9.997 9.997-9.997zm0 8.933-2.721-2.722c-.146-.146-.339-.219-.531-.219-.404 0-.75.324-.75.749 0 .193.073.384.219.531l2.722 2.722-2.728 2.728c-.147.147-.22.34-.22.531 0 .427.35.75.751.75.192 0 .384-.073.53-.219l2.728-2.728 2.729 2.728c.146.146.338.219.53.219.401 0 .75-.323.75-.75 0-.191-.073-.384-.22-.531l-2.727-2.728 2.717-2.717c.146-.147.219-.338.219-.531 0-.425-.346-.75-.75-.75-.192 0-.385.073-.531.22z'
+                  fillRule='nonzero'
+                />
+              </svg>
+            </button>
           </div>
 
           <div
             style={{
-              position: 'fixed',
-              top: `calc(50% - 85% / 2)`,
-              left: `calc(100% - 85% / 2 + 50px)`,
-              width: `calc(85% / 2 - 100px)`,
-              height: `85%`,
               overflow: 'scroll',
-              zIndex: 111111111,
             }}
             //
             className='bg-white border border-yellow-300 shadow-xl bg-opacity-80 rounded-xl'
           >
-            <div className='py-2 text-2xl text-center bg-yellow-400'>
-              {node.displayTitle}
-            </div>
+            <div className='py-2 text-2xl text-center bg-yellow-400'></div>
 
             <div className='w-full bg-gray-200'>
               <div
@@ -129,7 +131,7 @@ export function ENPNodeDetail() {
                               removeLink(conn)
                             })
                           setActiveNodeID('')
-                          setOverlay('')
+                          // setOverlay('')
                           //
                         }}
                       >
@@ -201,40 +203,6 @@ export function ENPNodeDetail() {
             )}
           </div>
 
-          {/*  */}
-          {/*  */}
-          {/*  */}
-          <div
-            style={{
-              position: 'absolute',
-              top: `calc(50% - 85% / 2 - 50px / 2)`,
-              right: `calc(50% - 85% / 2 - 50px / 2)`,
-              width: `50px`,
-              height: `50px`,
-              borderRadius: '100%',
-              zIndex: 111111111,
-            }}
-            className='text-white bg-red-500 shadow-xl cursor-pointer rounded-xl'
-            onClick={() => {
-              setOverlay(false)
-            }}
-          >
-            <svg
-              clipRule='evenodd'
-              fillRule='evenodd'
-              strokeLinejoin='round'
-              strokeMiterlimit='2'
-              viewBox='0 0 24 24'
-              xmlns='http://www.w3.org/2000/svg'
-              className=' scale-75'
-            >
-              <path
-                fill='white'
-                d='m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z'
-              />
-            </svg>
-          </div>
-          {/*  */}
           {/*  */}
           {/*  */}
         </>

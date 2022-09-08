@@ -71,7 +71,7 @@ let generateInside = (set, get) => {
         return null
       }
       let nodes = effectNode?.nodes || []
-      return nodes?.find((e) => e._id === activeNodeID) || null
+      return nodes?.find((e) => e._id === self.activeNodeID) || null
       //
     },
     addByPlacing: () => {
