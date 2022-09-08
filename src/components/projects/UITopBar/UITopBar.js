@@ -38,14 +38,16 @@ export function UITopBar() {
           <button
             className='px-2 ml-2 text-xs text-white bg-purple-600 rounded-full'
             onClick={async () => {
-              let ans = await closeFile({ activeGLBSplash: 'pick' })
+              //
+              showSplash({ activeGLBSplash: 'loading' })
+              await saveFile({
+                handle: activeGLBHandle,
+                runTimeGLB: activeGLBRuntimeObject,
+                origGLB: activeGLBRawObject,
+              })
+              let ans = await closeFile()
               if (ans === 'ok') {
-                //
-                await saveFile({
-                  handle: activeGLBHandle,
-                  runTimeGLB: activeGLBRuntimeObject,
-                  origGLB: activeGLBRawObject,
-                })
+                showSplash({ activeGLBSplash: 'pick' })
               }
             }}
           >

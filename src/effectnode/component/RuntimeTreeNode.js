@@ -1,3 +1,4 @@
+import { getID } from '@/helpers/getID'
 import { EffectNodeObject } from './EffectNodeObject'
 
 export function RuntimeTreeNode({
@@ -5,12 +6,13 @@ export function RuntimeTreeNode({
   glbObject,
   disabledNodes,
   isEditingMode,
+  instID = getID(),
 }) {
   return (
     <group>
       {node.userData?.effectNode && (
         <EffectNodeObject
-          key={node.uuid + 'enrun'}
+          key={node.uuid + instID + 'enrun'}
           glbObject={glbObject}
           item={node}
           disabledNodes={disabledNodes}
@@ -21,8 +23,13 @@ export function RuntimeTreeNode({
 
       {node.children.map((gKid) => {
         return (
-          <group key={gKid.uuid + 'loop'}>
-            <RuntimeTreeNode node={gKid}></RuntimeTreeNode>
+          <group key={gKid.uuid + instID + 'loop'}>
+            <RuntimeTreeNode
+              glbObject={glbObject}
+              disabledNodes={disabledNodes}
+              isEditingMode={isEditingMode}
+              node={gKid}
+            ></RuntimeTreeNode>
           </group>
         )
       })}

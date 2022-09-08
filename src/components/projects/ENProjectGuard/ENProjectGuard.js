@@ -10,12 +10,18 @@ export function ENProjectGuard({
   let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
   return (
     <>
-      {activeGLBSplash === 'loading' && <>{loading}</>}
-      {activeGLBSplash === 'ready' &&
-      activeGLBRawObject &&
-      activeGLBRuntimeObject
-        ? children
-        : placeholder}
+      {activeGLBSplash === 'pick' && (
+        <>
+          <div className='relative w-full h-full'>{placeholder}</div>
+        </>
+      )}
+      {activeGLBSplash === 'loading' && (
+        <>
+          <div className='relative w-full h-full'>{loading}</div>
+        </>
+      )}
+
+      {activeGLBRawObject && activeGLBRuntimeObject ? children : null}
     </>
   )
 }

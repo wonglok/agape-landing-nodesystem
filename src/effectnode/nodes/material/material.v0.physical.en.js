@@ -336,23 +336,23 @@ export function effect({ node, mini, data, setComponent }) {
           newMat[uni.name] = getSide(val)
         } else if (uni.name === 'map') {
           newMat[uni.name] = loadTexture(val)
-          newMat[uni.name].flipY = data.value['mapFlipY']
+          newMat[uni.name].flipY = data.value['mapFlipY'] || false
           newMat[uni.name].needsUpdate = true
         } else if (uni.name.includes('Map')) {
           newMat[uni.name] = loadTexture(val)
-          newMat[uni.name].flipY = data.value[uni.name + 'MapFlipY']
+          newMat[uni.name].flipY = data.value[uni.name + 'MapFlipY'] || false
           newMat[uni.name].needsUpdate = true
         } else if (uni.name === 'emissiveMap') {
           newMat[uni.name] = loadTexture(val)
-          newMat[uni.name].flipY = data.value['emissiveMapFlipY']
+          newMat[uni.name].flipY = data.value['emissiveMapFlipY'] || false
           newMat[uni.name].needsUpdate = true
         } else if (uni.name === 'normalMap') {
           newMat[uni.name] = loadTexture(val)
-          newMat[uni.name].flipY = data.value['normalMapFlipY']
+          newMat[uni.name].flipY = data.value['normalMapFlipY'] || false
           newMat[uni.name].needsUpdate = true
         } else if (uni.type === 'texture') {
           newMat[uni.name] = loadTexture(val)
-          newMat[uni.name].flipY = data.value[uni.name + 'FlipY']
+          newMat[uni.name].flipY = data.value[uni.name + 'FlipY'] || false
           newMat[uni.name].needsUpdate = true
         } else if (uni.type === 'float') {
           newMat[uni.name] = val
@@ -362,9 +362,6 @@ export function effect({ node, mini, data, setComponent }) {
           newMat[uni.name] = new Color(val)
         }
 
-        //
-        //
-        //
         /*
         else if (uni.type === 'texture') {
           // needs fix

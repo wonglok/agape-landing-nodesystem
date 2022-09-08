@@ -54,25 +54,27 @@ function UIMainContent() {
                         </ENProjectGuard>
                       )}
                       right={() => (
-                        <ENProjectGuard
-                          loading={
-                            <div className='flex items-center justify-center w-full h-full bg-gray-300'>
-                              <div className='p-2 px-4 bg-gray-100 rounded-full'>
-                                Loading...
+                        <div className='relative w-full h-full'>
+                          <ENProjectGuard
+                            loading={
+                              <div className='flex items-center justify-center w-full h-full bg-gray-300'>
+                                <div className='p-2 px-4 bg-gray-100 rounded-full'>
+                                  Loading...
+                                </div>
                               </div>
-                            </div>
-                          }
-                          placeholder={
-                            <div className='flex items-center justify-center w-full h-full bg-gray-300 from-slate-500 to-slate-300 bg-gradient-to-b'>
-                              <div className='p-2 px-4 bg-gray-100 rounded-full'>
-                                Please Select a GLB File Below to Begin Editing
-                                👇🏼
+                            }
+                            placeholder={
+                              <div className='flex items-center justify-center w-full h-full bg-gray-300 from-slate-500 to-slate-300 bg-gradient-to-b'>
+                                <div className='p-2 px-4 bg-gray-100 rounded-full'>
+                                  Please Select a GLB File Below to Begin
+                                  Editing 👇🏼
+                                </div>
                               </div>
-                            </div>
-                          }
-                        >
-                          <ENCanvas></ENCanvas>
-                        </ENProjectGuard>
+                            }
+                          >
+                            <ENCanvas></ENCanvas>
+                          </ENProjectGuard>
+                        </div>
                       )}
                     ></LeftRight>
                   </>

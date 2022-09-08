@@ -58,8 +58,8 @@ let generateInside = (set, get) => {
       let self = get()
       let closeFile = self.closeFile
       let saveFile = self.saveFile
-      set({ activeGLBSplash: 'loading', overlayENGraph: '' })
-
+      // set({ activeGLBSplash: 'loading', overlayENGraph: '' })
+      self.showSplash({ activeGLBSplash: 'loading' })
       if (self.activeGLBHandle) {
         await saveFile({
           handle: self.activeGLBHandle,
@@ -68,10 +68,7 @@ let generateInside = (set, get) => {
         })
       }
 
-      let ans = await closeFile({
-        activeGLBSplash: 'loading',
-        overlayENGraph: '',
-      })
+      let ans = await closeFile({})
       if (ans !== 'ok') {
         return
       }
@@ -89,17 +86,17 @@ let generateInside = (set, get) => {
       //
       set({
         overlayENGraph: '',
-        activeGLBSplash: 'ready',
+        activeGLBSplash: '',
         editorNavigationMode: mode,
         activeGLBHandle: handle,
         activeGLBRawObject,
         activeGLBRuntimeObject,
       })
     },
-
-    closeFile: async (
-      { activeGLBSplash = 'pick' } = { activeGLBSplash: 'pick' }
-    ) => {
+    showSplash: ({ activeGLBSplash }) => {
+      set({ activeGLBSplash })
+    },
+    closeFile: async () => {
       // if (await get().needsSaveFnc()) {
       //   set({ needsSaveMsg: 'please save your file beofre exit!' })
       //   return 'bad'
@@ -107,16 +104,11 @@ let generateInside = (set, get) => {
       // set({ needsSaveMsg: '' })
 
       let update = {
-        activeGLBSplash: 'pick',
         editorNavigationMode: false,
         activeSceneSelection: false,
         activeGLBHandle: false,
         activeGLBRawObject: false,
         activeGLBRuntimeObject: false,
-      }
-
-      if (activeGLBSplash) {
-        update['activeGLBSplash'] = activeGLBSplash
       }
 
       set(update)
@@ -305,11 +297,11 @@ let generateInside = (set, get) => {
       glbCache.set(url, prom)
       let glb = await prom
       dracoLoader.dispose()
-      console.log(glb)
       return glb
     },
+    //
     exportGLB: (o3 = new Object3D(), animations = []) => {
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         let exporter = new GLTFExporter()
         // exporter.register((writer) => new GLTFEffectNodeExport(writer))
         exporter.parse(
@@ -319,14 +311,14 @@ let generateInside = (set, get) => {
           },
           (err) => {
             console.log(err)
+            reject()
           },
           {
-            includeCustomExtensions: true,
+            // includeCustomExtensions: true,
             animations,
             trs: false,
             onlyVisible: false,
             binary: true,
-            // maxTextureSize: params.maxTextureSize,
           }
         )
         //
@@ -360,8 +352,6 @@ let generateInside = (set, get) => {
         cache: 'no-cache',
       })
 
-      // let draco3d = loadDraco()
-
       let mod = dracoMod.DracoEncoderModule()
       io.registerExtensions([DracoMeshCompression])
       io.registerDependencies({
@@ -376,8 +366,8 @@ let generateInside = (set, get) => {
         .setRequired(true)
         .setEncoderOptions({
           method: DracoMeshCompression.EncoderMethod.SEQUENTIAL,
-          encodeSpeed: 1,
-          decodeSpeed: 1,
+          encodeSpeed: 5,
+          decodeSpeed: 5,
         })
 
       // io.setVertexLayout(VertexLayout.SEPARATE)
