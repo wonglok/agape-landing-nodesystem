@@ -40,6 +40,8 @@ let generateInside = (set, get) => {
     //
     activeSceneSelection: false,
     setSelection: (v) => {
+      if (v?.userData) {
+      }
       set({ activeSceneSelection: v })
     },
     // //
@@ -112,9 +114,11 @@ let generateInside = (set, get) => {
         activeGLBRawObject: false,
         activeGLBRuntimeObject: false,
       }
+
       if (activeGLBSplash) {
         update['activeGLBSplash'] = activeGLBSplash
       }
+
       set(update)
 
       return 'ok'
@@ -372,8 +376,8 @@ let generateInside = (set, get) => {
         .setRequired(true)
         .setEncoderOptions({
           method: DracoMeshCompression.EncoderMethod.SEQUENTIAL,
-          encodeSpeed: 5,
-          decodeSpeed: 5,
+          encodeSpeed: 1,
+          decodeSpeed: 1,
         })
 
       // io.setVertexLayout(VertexLayout.SEPARATE)

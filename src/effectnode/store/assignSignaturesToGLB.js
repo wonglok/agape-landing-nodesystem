@@ -17,10 +17,27 @@ const getSignature = (it) => {
   return str
 }
 
+//
+
 export const assignSignaturesToGLB = (glb) => {
   glb.scene.traverse((it) => {
     if (it) {
+      it.userData.effectNode = it.userData.effectNode || {}
+
+      //
+      it.userData.effectNode.attachment =
+        it.userData.effectNode.attachment || []
+      //
+      it.userData.effectNode.nodes = it.userData.effectNode.nodes || []
+      //
+      it.userData.effectNode.connections =
+        it.userData.effectNode.connections || []
+
       it.userData.sigMD5 = md5(getSignature(it))
     }
   })
 }
+
+//
+
+//

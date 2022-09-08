@@ -80,7 +80,7 @@ function MotionZone() {
                   <br></br>
                   <ul>
                     {clips.map((e) => (
-                      <li key={e.uuid}>{e.name}</li>
+                      <li key={e.uuid + 'motionzone'}>{e.name}</li>
                     ))}
                   </ul>
                 </div>

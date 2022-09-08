@@ -1,3 +1,4 @@
+import path from 'path'
 let r = require.context('../nodes/', true, /\.en\.js$/, 'lazy')
 
 function importAll(r) {
@@ -15,7 +16,7 @@ function importAll(r) {
     }
   })
 
-  // console.log(arr)
+  console.log(arr)
 
   return arr
 }

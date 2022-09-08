@@ -35,7 +35,7 @@ export function ENOutlineNode({ level = 0, node }) {
         return (
           <ENOutlineNode
             level={level + 1}
-            key={kid.uuid}
+            key={kid.uuid + 'outline'}
             node={kid}
           ></ENOutlineNode>
         )

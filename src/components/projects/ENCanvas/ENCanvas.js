@@ -20,13 +20,17 @@ export function ENCanvas() {
 
         {activeGLBRawObject?.scene && (
           <>
+            {/*  */}
+            {/*  */}
             <primitive
-              key={activeGLBRuntimeObject.scene.uuid}
+              key={activeGLBRuntimeObject.scene.uuid + 'display'}
               object={activeGLBRuntimeObject.scene}
             ></primitive>
-
+            {/*  */}
+            {/*  */}
             <EffectNodeRuntime
-              glbRoot={activeGLBRuntimeObject}
+              key={activeGLBRuntimeObject.scene.uuid + 'runtime'}
+              glbObject={activeGLBRuntimeObject}
               glbRaw={activeGLBRawObject}
             ></EffectNodeRuntime>
           </>
@@ -41,7 +45,7 @@ export function ENCanvas() {
             <ConnectSimulation></ConnectSimulation>
             <Player></Player>
             <FloorFlat
-              key={activeGLBRawObject.uuid}
+              key={activeGLBRawObject.uuid + 'floorflat'}
               name={activeGLBRawObject.uuid}
             ></FloorFlat>
           </>
@@ -54,7 +58,7 @@ export function ENCanvas() {
             <ConnectSimulation></ConnectSimulation>
             <Player></Player>
             <FloorObject
-              key={activeGLBRawObject.uuid}
+              key={activeGLBRawObject.uuid + 'floorobj'}
               object={activeGLBRawObject.scene}
             ></FloorObject>
             <Environment background preset='apartment' frames={1}></Environment>

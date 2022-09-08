@@ -9,7 +9,9 @@ export function ENSceneOutline({ height }) {
       style={{ height: height + 'px' }}
     >
       {activeGLBRuntimeObject?.scene?.children.map((kid) => {
-        return <ENOutlineNode key={kid.uuid} node={kid}></ENOutlineNode>
+        return (
+          <ENOutlineNode key={kid.uuid + 'outline'} node={kid}></ENOutlineNode>
+        )
       })}
     </div>
   )
