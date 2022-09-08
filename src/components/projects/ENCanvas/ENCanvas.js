@@ -108,7 +108,7 @@ export function ENCanvas() {
 
         {editorNavigationMode === 'meta' && activeGLBRawObject.scene && (
           <>
-            <Environment background preset='apartment' frames={1}></Environment>
+            <Environment preset='apartment' frames={1}></Environment>
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectCameraControls></ConnectCameraControls>
             <ConnectSimulation></ConnectSimulation>
@@ -122,7 +122,7 @@ export function ENCanvas() {
 
         {editorNavigationMode === 'orbit' && (
           <>
-            <Environment background preset='apartment' frames={1}></Environment>
+            <Environment preset='apartment' frames={1}></Environment>
             <OrbitControls
               ref={(ref) => {
                 setOrbit(ref)
