@@ -9,7 +9,6 @@ export function ENGraphFloor() {
   let controls = useGLBEditor((s) => s.controls)
   let addByPlacing = useGLBEditor((s) => s.addByPlacing)
 
-  //
   return (
     <group>
       {/*  */}
@@ -30,6 +29,7 @@ export function ENGraphFloor() {
           curosrPoint.position.copy(ev.point)
           curosrPoint.position.y = 1
         }}
+        //
         args={[500, 0.1, 500]}
         //
 
