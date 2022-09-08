@@ -34,10 +34,11 @@ let generateInside = (set, get) => {
   curosrPoint.userData.diff = new Vector3()
 
   return {
+    reloadGraphID: 0,
     getEffectNode: () => {
       return get().activeSceneSelection?.userData?.effectNode
     },
-    paramsTab: '',
+    paramsTab: 'uniforms',
     setParamsTab: (v) => {
       set({ paramsTab: v })
     },
@@ -45,6 +46,16 @@ let generateInside = (set, get) => {
     addLink: ({ effectNode, link }) => {
       effectNode.connections.push(v)
     },
+    removeNode: (node) => {
+      let effectNode = getEffectNode()
+      effectNode.nodes.splice(
+        effectNode.nodes.findIndex((s) => s._id === node._id),
+        1
+      )
+      set({ reloadGraphID: Math.random() })
+      //
+    },
+
     ///
     isDown: false,
     setDown: (isDown) => {

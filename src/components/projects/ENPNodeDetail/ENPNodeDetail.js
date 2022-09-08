@@ -6,20 +6,24 @@ export function ENPNodeDetail() {
   // let setOverlay = useGLBEditor((s) => s.setOverlay)
   // let overlay = useGLBEditor((s) => s.overlay)
   let getActiveNode = useGLBEditor((s) => s.getActiveNode)
-  let getEffectNode = useGLBEditor((s) => s.getEffectNode)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
+  let effectNode = useGLBEditor(
+    (s) => s.activeSceneSelection?.userData?.effectNode
+  )
   let removeLink = useGLBEditor((s) => s.removeLink)
   let removeNode = useGLBEditor((s) => s.removeNode)
   let setActiveNodeID = useGLBEditor((s) => s.setActiveNodeID)
-  let effectNode = getEffectNode()
   let node = getActiveNode()
 
   let paramsTab = useGLBEditor((s) => s.paramsTab)
   let setParamsTab = useGLBEditor((s) => s.setParamsTab)
+
+  let nodeDrag = useGLBEditor((s) => s.nodeDrag)
   return (
     <>
       {node && (
         <>
+          <span id={nodeDrag?.nodeID}></span>
           <span id={activeSceneSelection.uuid}></span>
 
           {/*

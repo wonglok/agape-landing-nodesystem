@@ -10,8 +10,8 @@ export function RuntimeTreeNode({
 }) {
   return (
     <group>
-      {node.userData?.effectNode &&
-        node.userData?.effectNode.nodes.length > 0 && (
+      {node?.userData?.effectNode &&
+        node?.userData?.effectNode.nodes.length > 0 && (
           <EffectNodeObject
             key={node.uuid + instID + 'enrun'}
             glbObject={glbObject}
