@@ -14,16 +14,14 @@ export function ENPNodeDetail() {
   let effectNode = getEffectNode()
   let node = getActiveNode()
 
-  let [tab, setTab] = useState('conns')
-
+  let paramsTab = useGLBEditor((s) => s.paramsTab)
+  let setParamsTab = useGLBEditor((s) => s.setParamsTab)
   return (
     <>
       {node && (
         <>
           <span id={activeSceneSelection.uuid}></span>
-          <div className='flex items-center w-full h-8 pl-2 bg-yellow-300 border-b border-yellow-200'>
-            {node.displayTitle}
-          </div>
+
           {/*
           <div className=' absolute top-0 right-0 p-1'>
             <button
@@ -52,45 +50,46 @@ export function ENPNodeDetail() {
 
           <div
             style={{
+              height: '100%',
               overflow: 'scroll',
             }}
             //
-            className='bg-white border border-yellow-300 shadow-xl bg-opacity-80 rounded-xl'
           >
-            <div className='py-2 text-2xl text-center bg-yellow-400'></div>
-
+            <div className=''>
+              <div className='flex items-center w-full h-8 pl-2 bg-yellow-300 '>
+                Node: {node.displayTitle}
+              </div>
+            </div>
             <div className='w-full bg-gray-200'>
               <div
                 onClick={() => {
                   //
-                  setTab('conns')
+                  setParamsTab('uniforms')
                 }}
-                className='inline-block p-3 my-1 mr-1 text-white bg-orange-500 rounded-lg cursor-pointer hover:bg-orange-600'
+                className='inline-block px-2 py-1 my-1 ml-1 mr-1 text-white bg-orange-500 rounded-lg cursor-pointer'
               >
-                Connections
+                Parameters
               </div>
-
               <div
                 onClick={() => {
                   //
-                  setTab('uniforms')
+                  setParamsTab('conns')
                 }}
-                className='inline-block p-3 my-1 mr-1 text-white bg-orange-500 rounded-lg cursor-pointer hover:bg-orange-600'
+                className='inline-block px-2 py-1 my-1 mr-1 text-white bg-orange-500 rounded-lg cursor-pointer'
               >
-                Uniforms
+                Node & Connection Settings
               </div>
             </div>
 
-            {tab === 'uniforms' && (
+            {paramsTab === 'uniforms' && (
               <>
                 <TabUnifroms node={node}></TabUnifroms>
               </>
             )}
 
-            {tab === 'conns' && (
+            {paramsTab === 'conns' && (
               <>
                 <div>
-                  <div className='p-2'>Node Title: {node.displayTitle}</div>
                   <div className='p-2'>
                     <div key={node._id}>
                       {/*  */}

@@ -51,8 +51,9 @@ export function NodeSingle({ effectNode, node }) {
           if (inc.current <= 5) {
             // console.log('open')
             //
+            setParamsTab('uniforms')
             setActiveNodeID(node._id)
-            setParamsTab('nodeDetail')
+
             //
             //
           }

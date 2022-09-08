@@ -37,7 +37,7 @@ let generateInside = (set, get) => {
     getEffectNode: () => {
       return get().activeSceneSelection?.userData?.effectNode
     },
-    paramsTab: 'nodeDetail',
+    paramsTab: '',
     setParamsTab: (v) => {
       set({ paramsTab: v })
     },

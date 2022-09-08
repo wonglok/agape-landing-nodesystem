@@ -141,7 +141,7 @@ export function TabUnifroms({ node }) {
       {/*  */}
       {/*  */}
       {/*  */}
-      <div className='flex flex-wrap'>
+      <div className=''>
         {node[DataKey].map((mm) => {
           mm._id = mm._id || getID()
           return (
