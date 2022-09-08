@@ -70,7 +70,13 @@ export function AdaptTC({ node, onScreenPass = () => {} }) {
     }
   })
 
-  onScreenPass(<GLOverlay fbo={fbo}></GLOverlay>)
+  useEffect(() => {
+    onScreenPass(<GLOverlay fbo={fbo}></GLOverlay>)
+
+    return () => {
+      onScreenPass(null)
+    }
+  }, [fbo])
 
   return (
     <>

@@ -31,7 +31,7 @@ export function ENCanvas() {
         <AdaptTC
           onScreenPass={(v) => {
             //
-            setScreenPass(v)
+            // setScreenPass(v)
           }}
           node={activeGLBRuntimeObject.scene}
         ></AdaptTC>
