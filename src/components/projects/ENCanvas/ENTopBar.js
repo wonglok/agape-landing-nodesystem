@@ -25,7 +25,7 @@ export function ENTopBarr() {
       >
         Flat Floor Mode
       </div>
-      <div
+      {/* <div
         className={`inline-block p-1 my-1 ml-1 mr-1 text-xs  ${
           editorNavigationMode === 'avatar' ? 'bg-green-300' : 'bg-white'
         }`}
@@ -34,7 +34,7 @@ export function ENTopBarr() {
         }}
       >
         Avatar Mode
-      </div>
+      </div> */}
       <div
         className={`inline-block p-1 my-1 ml-1 mr-1 text-xs  ${
           editorNavigationMode === 'orbit' ? 'bg-green-300' : 'bg-white'

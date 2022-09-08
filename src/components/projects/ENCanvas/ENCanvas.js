@@ -73,14 +73,14 @@ export function ENCanvas() {
           </>
         )}
 
-        {editorNavigationMode === 'avatar' && (
+        {/* {editorNavigationMode === 'avatar' && (
           <>
             <Environment preset='apartment' frames={1}></Environment>
             <gridHelper args={[500, 500]}></gridHelper>
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectCameraControls></ConnectCameraControls>
             <ConnectSimulation></ConnectSimulation>
-            {/* <Player></Player> */}
+            <Player></Player>
             <UseObjectAsPlayer
               glbObject={activeGLBRuntimeObject}
             ></UseObjectAsPlayer>
@@ -89,7 +89,7 @@ export function ENCanvas() {
               name={activeGLBRawObject.uuid}
             ></FloorFlat>
           </>
-        )}
+        )} */}
 
         {editorNavigationMode === 'floor' && (
           <>
