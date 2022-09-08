@@ -25,6 +25,7 @@ import { DracoMeshCompression } from '@gltf-transform/extensions'
 import create from 'zustand'
 //
 import { getID } from './getID'
+import codes from '@/effectnode/store/codes'
 
 let generateInside = (set, get) => {
   let curosrPoint = new Object3D()
@@ -33,6 +34,81 @@ let generateInside = (set, get) => {
   curosrPoint.userData.diff = new Vector3()
 
   return {
+    addByPlacing: () => {
+      //
+      let self = get()
+      let codeToAdd = self.codeToAdd
+      let codeID = codeToAdd
+      let activeSceneSelection = self.activeSceneSelection
+
+      if (!activeSceneSelection) {
+        return
+      }
+
+      let effectNode = activeSceneSelection?.userData?.effectNode
+      let code = codes.find((s) => s.title === codeID)
+
+      code.loader().then(async (mod) => {
+        let nodeID = getID()
+        let _id = nodeID
+
+        let customData = (await mod.nodeData({ defaultData: {}, nodeID })) || {}
+        effectNode.nodes.push({
+          _id,
+          nodeID,
+          codeID,
+          displayTitle: code.title,
+          position: curosrPoint.position.toArray(),
+
+          //
+          inputs: [
+            //
+            { _id: getID(), type: 'input', nodeID },
+            { _id: getID(), type: 'input', nodeID },
+            { _id: getID(), type: 'input', nodeID },
+          ],
+
+          //
+          outputs: [
+            //
+            { _id: getID(), type: 'output', nodeID },
+            { _id: getID(), type: 'output', nodeID },
+            { _id: getID(), type: 'output', nodeID },
+          ],
+
+          //
+          uniforms: [
+            {
+              _id: getID(),
+              nodeID,
+              name: 'position',
+              type: 'vec3',
+              value: { x: 0, y: 0, z: 0 },
+            },
+            {
+              _id: getID(),
+              nodeID,
+              name: 'rotation',
+              type: 'vec3',
+              value: { x: 0, y: 0, z: 0 },
+            },
+            {
+              _id: getID(),
+              nodeID,
+              name: 'scale',
+              type: 'vec3',
+              value: { x: 1, y: 1, z: 1 },
+            },
+          ],
+
+          ...customData,
+        })
+      })
+
+      set({
+        cursorMode: 'ready',
+      })
+    },
     cursorMode: 'ready',
     setCurosrMode: (v) => {
       set({ cursorMode: v })

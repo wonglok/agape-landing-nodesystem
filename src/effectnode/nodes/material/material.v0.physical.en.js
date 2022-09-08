@@ -306,7 +306,6 @@ export function effect({ node, mini, data, setComponent }) {
   //   return (
   //   )
   // }
-  //
 
   let send = () => {
     if (!mini.now.itself.material) {

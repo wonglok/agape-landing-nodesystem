@@ -8,6 +8,7 @@ import { ENGHDR } from '../ENGHDR/ENGHDR'
 import { IconComputer } from '../ENGOriginButton/IconComputer'
 import { ENGAddGraphNode } from '../ENGAddGraphNode/ENGAddGraphNode'
 import { ENGraphFloor } from '../ENGraphFloor/ENGraphFloor'
+import { AddItemCurosr } from '../ENGAddItemCurosr/ENGAddItemCurosr'
 
 export function ENGraph() {
   return (
@@ -101,6 +102,8 @@ function Content() {
           ></MapControls>
 
           <ENGHDR></ENGHDR>
+
+          <AddItemCurosr></AddItemCurosr>
 
           <ENGraphFloor></ENGraphFloor>
         </>

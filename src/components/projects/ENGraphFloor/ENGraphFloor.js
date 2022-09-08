@@ -7,6 +7,9 @@ export function ENGraphFloor() {
   let curosrPoint = useGLBEditor((s) => s.curosrPoint)
   let setNodeDrag = useGLBEditor((s) => s.setNodeDrag)
   let controls = useGLBEditor((s) => s.controls)
+  let addByPlacing = useGLBEditor((s) => s.addByPlacing)
+
+  //
   return (
     <group>
       {/*  */}
@@ -15,7 +18,7 @@ export function ENGraphFloor() {
       <Box
         onPointerDown={(ev) => {
           if (cursorMode === 'add') {
-            // addByPlacing()
+            addByPlacing()
           }
 
           curosrPoint.userData.added.set(0, 0, 0)

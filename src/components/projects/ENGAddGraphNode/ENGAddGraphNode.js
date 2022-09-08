@@ -8,11 +8,15 @@ export function ENGAddGraphNode() {
   let [str, setStr] = useState('')
 
   let selectCodeToAdd = useGLBEditor((s) => s.selectCodeToAdd)
+  let setCurosrMode = useGLBEditor((s) => s.setCurosrMode)
   let setOverlayENGraph = useGLBEditor((s) => s.setOverlayENGraph)
   let addCode = ({ title }) => {
     selectCodeToAdd({ title })
-    setOverlayENGraph(false)
+    setOverlayENGraph('')
+    setCurosrMode('add')
   }
+
+  //
 
   return (
     <>
