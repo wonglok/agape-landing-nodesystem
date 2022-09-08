@@ -10,6 +10,7 @@ import { ENGAddGraphNode } from '../ENGAddGraphNode/ENGAddGraphNode'
 import { ENGraphFloor } from '../ENGraphFloor/ENGraphFloor'
 import { AddItemCurosr } from '../ENGAddItemCurosr/ENGAddItemCurosr'
 import { ENGNodes } from '../ENGNodes/ENGNodes'
+import { ConnectedWires } from '../ENGConnectedWires/ConnectedWires'
 
 export function ENGraph() {
   return (
@@ -109,6 +110,8 @@ function Content() {
           <ENGraphFloor></ENGraphFloor>
 
           <ENGNodes></ENGNodes>
+
+          <ConnectedWires></ConnectedWires>
 
           {/* <group position={[0, 1.5, 0]}>
             <ConnectedWires></ConnectedWires>

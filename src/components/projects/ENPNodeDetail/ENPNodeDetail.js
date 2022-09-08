@@ -120,11 +120,9 @@ export function ENPNodeDetail() {
                               removeLink(conn)
                             })
                           setActiveNodeID('')
-                          // setOverlay('')
-                          //
                         }}
                       >
-                        Remove this node and it's connections.
+                        {`Remove this node and it's connections.`}
                       </button>
                     </div>
                   </div>
