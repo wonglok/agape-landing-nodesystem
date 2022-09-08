@@ -93,6 +93,11 @@ let generateInside = (set, get) => {
         activeGLBRuntimeObject,
       })
     },
+    switchMode: (mode) => {
+      set({
+        editorNavigationMode: mode,
+      })
+    },
     showSplash: ({ activeGLBSplash }) => {
       set({ activeGLBSplash })
     },

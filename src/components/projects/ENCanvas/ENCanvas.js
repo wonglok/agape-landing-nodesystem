@@ -9,13 +9,14 @@ import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { Environment, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { UseObjectAsPlayer } from '../UseObjectAsPlayer/UseObjectAsPlayer'
+import { ENTopBarr } from './ENTopBar'
 
 export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
   let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
   let editorNavigationMode = useGLBEditor((s) => s.editorNavigationMode)
   return (
-    <div className='w-full h-full bg-white'>
+    <div className='relative w-full h-full'>
       <Canvas className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
@@ -91,6 +92,8 @@ export function ENCanvas() {
           </>
         )}
       </Canvas>
+
+      <ENTopBarr></ENTopBarr>
     </div>
   )
 }

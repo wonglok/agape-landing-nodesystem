@@ -31,20 +31,20 @@ export function PreviewerModelGLB({ parent, handle }) {
             <button
               onClick={() => {
                 //
-                openFile(handle, 'floor')
+                openFile(handle, 'orbit')
               }}
               className='inline-block p-2 my-1 text-white bg-blue-500 rounded-lg'
             >
-              Edit GLB in Flat Floor Navigation
+              Open in Editor
             </button>
-            <button
+            {/* <button
               onClick={() => {
                 //
                 openFile(handle, 'meta')
               }}
               className='inline-block p-2 my-1 text-white bg-blue-500 rounded-lg'
             >
-              Edit GLB in 3D World Navigation
+              Open in 3D World Editor Mode
             </button>
 
             <button
@@ -54,7 +54,7 @@ export function PreviewerModelGLB({ parent, handle }) {
               }}
               className='inline-block p-2 my-1 text-white bg-blue-500 rounded-lg'
             >
-              Edit GLB in Avatar Navigation
+              Open Avatar in Editor
             </button>
 
             <button
@@ -65,7 +65,7 @@ export function PreviewerModelGLB({ parent, handle }) {
               className='inline-block p-2 my-1 text-white bg-blue-500 rounded-lg'
             >
               Edit GLB in Orbit Navigation
-            </button>
+            </button> */}
           </div>
         </>
       )}
