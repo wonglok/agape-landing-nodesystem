@@ -5,6 +5,7 @@ import { TabUnifroms } from './TabUniforms'
 export function ENPNodeDetail() {
   // let setOverlay = useGLBEditor((s) => s.setOverlay)
   // let overlay = useGLBEditor((s) => s.overlay)
+  let activeNodeID = useGLBEditor((s) => s.activeNodeID)
   let getActiveNode = useGLBEditor((s) => s.getActiveNode)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let effectNode = useGLBEditor(
@@ -107,6 +108,7 @@ export function ENPNodeDetail() {
                           if (!window.confirm('remove?')) {
                             return
                           }
+                          //
                           //
                           removeNode(node)
                           // effectNode.connections

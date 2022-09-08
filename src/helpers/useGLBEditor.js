@@ -87,9 +87,6 @@ let generateInside = (set, get) => {
     getActiveNode: () => {
       let self = get()
       let effectNode = self.activeSceneSelection?.userData?.effectNode
-      if (!effectNode) {
-        return null
-      }
       let nodes = effectNode?.nodes || []
       return nodes?.find((e) => e._id === self.activeNodeID) || null
       //
