@@ -30,8 +30,7 @@ export function ENCanvas() {
         <EffectComposer>{screenPass}</EffectComposer>
         <AdaptTC
           onScreenPass={(v) => {
-            //
-            // setScreenPass(v)
+            setScreenPass(v)
           }}
           node={activeGLBRuntimeObject.scene}
         ></AdaptTC>
