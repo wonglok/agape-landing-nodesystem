@@ -10,10 +10,12 @@ export function ENGAddGraphNode() {
   let selectCodeToAdd = useGLBEditor((s) => s.selectCodeToAdd)
   let setCurosrMode = useGLBEditor((s) => s.setCurosrMode)
   let setOverlayENGraph = useGLBEditor((s) => s.setOverlayENGraph)
+  let refreshSystem = useGLBEditor((s) => s.refreshSystem)
   let addCode = ({ title }) => {
     selectCodeToAdd({ title })
     setOverlayENGraph('')
     setCurosrMode('add')
+    refreshSystem()
   }
 
   //
@@ -29,12 +31,10 @@ export function ENGAddGraphNode() {
           rows={1}
           autoFocus={true}
           defaultValue={str}
-          onKeyDownCapture={(ev) => {
+          onKeyDown={(ev) => {
             ev.stopPropagation()
-          }}
-          onInput={(ev) => {
+            setStr(ev.target.value || '')
             if (ev.key === 'Enter') {
-              ev.preventDefault()
               //
               let firstCode = codes.filter((it) => {
                 return (it.title || '').indexOf(str) !== -1
@@ -42,8 +42,7 @@ export function ENGAddGraphNode() {
               if (firstCode) {
                 addCode({ title: firstCode.title })
               }
-            } else {
-              setStr(ev.target.value || '')
+              ev.preventDefault()
             }
           }}
           className='w-full p-2 -mb-2 bg-white border-b border-yellow-500 cursor-pointer hover:bg-yellow-100'
