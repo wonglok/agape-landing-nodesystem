@@ -30,6 +30,7 @@ export function UITopBar() {
           ← Back
         </button>
       </div>
+      {/*  */}
       <div className='inline-flex items-center justify-center w-1/3'>
         {currentFolder?.handle?.name}
         {activeGLBHandle && (
