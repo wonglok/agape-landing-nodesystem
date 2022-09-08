@@ -50,6 +50,16 @@ export function PreviewerModelGLB({ parent, handle }) {
             <button
               onClick={() => {
                 //
+                openFile(handle, 'avatar')
+              }}
+              className='inline-block p-2 my-1 text-white bg-blue-500 rounded-lg'
+            >
+              Edit GLB in Avatar Navigation
+            </button>
+
+            <button
+              onClick={() => {
+                //
                 openFile(handle, 'orbit')
               }}
               className='inline-block p-2 my-1 text-white bg-blue-500 rounded-lg'

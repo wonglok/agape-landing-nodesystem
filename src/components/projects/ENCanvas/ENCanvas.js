@@ -8,6 +8,7 @@ import { Player } from '@/helpers/Player'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { Environment, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
+import { UseObjectAsPlayer } from '../UseObjectAsPlayer/UseObjectAsPlayer'
 
 export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
@@ -33,6 +34,24 @@ export function ENCanvas() {
               glbObject={activeGLBRuntimeObject}
               glbRaw={activeGLBRawObject}
             ></EffectNodeRuntime>
+          </>
+        )}
+
+        {editorNavigationMode === 'avatar' && (
+          <>
+            <Environment preset='apartment' frames={1}></Environment>
+            <gridHelper args={[500, 500]}></gridHelper>
+            <ConnectKeyboard></ConnectKeyboard>
+            <ConnectCameraControls></ConnectCameraControls>
+            <ConnectSimulation></ConnectSimulation>
+            {/* <Player></Player> */}
+            <UseObjectAsPlayer
+              glbObject={activeGLBRuntimeObject}
+            ></UseObjectAsPlayer>
+            <FloorFlat
+              key={activeGLBRawObject.uuid + 'floorflat'}
+              name={activeGLBRawObject.uuid}
+            ></FloorFlat>
           </>
         )}
 
