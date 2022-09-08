@@ -34,6 +34,46 @@ let generateInside = (set, get) => {
   curosrPoint.userData.diff = new Vector3()
 
   return {
+    getEffectNode: () => {
+      return get().activeSceneSelection?.userData?.effectNode
+    },
+    paramsTab: 'nodeDetail',
+    setParamsTab: (v) => {
+      set({ paramsTab: v })
+    },
+    //
+    addLink: ({ effectNode, link }) => {
+      effectNode.connections.push(v)
+    },
+    ///
+    isDown: false,
+    setDown: (isDown) => {
+      set({ isDown })
+    },
+    draggingIOID: false,
+    setDraggingIOID: (v) => {
+      set({ draggingIOID: v })
+    },
+
+    ///
+    ///
+    dragStartPos: new Vector3(),
+    //,
+    //,
+    activeNodeID: '',
+    setActiveNodeID: (id) => {
+      set({ activeNodeID: id })
+    },
+    getActiveNode: () => {
+      let self = get()
+      let effectNode = self.activeSceneSelection?.userData?.effectNode
+      if (!effectNode) {
+        return null
+      }
+      let nodes = effectNode?.nodes || []
+      return nodes?.find((e) => e._id === activeNodeID) || null
+      //
+    },
     addByPlacing: () => {
       //
       let self = get()
@@ -106,6 +146,7 @@ let generateInside = (set, get) => {
       })
 
       set({
+        activeSceneSelection,
         cursorMode: 'ready',
       })
     },
@@ -114,7 +155,13 @@ let generateInside = (set, get) => {
       set({ cursorMode: v })
     },
     curosrPoint,
-    setNodeDrag: () => {},
+
+    //
+    nodeDrag: false,
+    setNodeDrag: (node) => {
+      //
+      set({ nodeDrag: node })
+    },
 
     codeToAdd: '',
     selectCodeToAdd: ({ title }) => {

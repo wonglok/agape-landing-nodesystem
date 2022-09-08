@@ -15,7 +15,7 @@ export function ENOutlineNode({ level = 0, node }) {
       {/*  */}
       <div
         className={
-          'pl-1 text-xs ' +
+          'flex justify-between pl-1 text-xs ' +
           (activeSceneSelection?.uuid === node.uuid
             ? 'bg-teal-200 p-2 text-slate-700 border-slate-700 border-l-2'
             : 'transition-all duration-50 hover:bg-teal-100 hover:p-2')
@@ -24,11 +24,18 @@ export function ENOutlineNode({ level = 0, node }) {
           setSelection(node)
         }}
       >
-        {activeSceneSelection?.uuid === node.uuid && <span>→ </span>}
-        <span>{node.name}</span>
-        {activeSceneSelection?.uuid === node.uuid && (
-          <span className='ml-1'>[{node.type}]</span>
-        )}
+        <div>
+          {activeSceneSelection?.uuid === node.uuid && <span>→ </span>}
+          <span>{node.name}</span>
+          {activeSceneSelection?.uuid === node.uuid && (
+            <span className='ml-1'>[{node.type}]</span>
+          )}
+        </div>
+        {
+          <div className='ml-1'>
+            {node.userData.effectNode.nodes.length > 0 ? '✳️' : ''}
+          </div>
+        }
       </div>
 
       {node.children.map((kid) => {

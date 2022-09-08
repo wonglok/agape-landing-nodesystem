@@ -9,6 +9,7 @@ import { IconComputer } from '../ENGOriginButton/IconComputer'
 import { ENGAddGraphNode } from '../ENGAddGraphNode/ENGAddGraphNode'
 import { ENGraphFloor } from '../ENGraphFloor/ENGraphFloor'
 import { AddItemCurosr } from '../ENGAddItemCurosr/ENGAddItemCurosr'
+import { ENGNodes } from '../ENGNodes/ENGNodes'
 
 export function ENGraph() {
   return (
@@ -106,6 +107,12 @@ function Content() {
           <AddItemCurosr></AddItemCurosr>
 
           <ENGraphFloor></ENGraphFloor>
+
+          <ENGNodes></ENGNodes>
+
+          {/* <group position={[0, 1.5, 0]}>
+            <ConnectedWires></ConnectedWires>
+          </group> */}
         </>
       )}
     </>
