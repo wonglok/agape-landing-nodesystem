@@ -19,6 +19,8 @@ export function ENPNodeDetail() {
   let setParamsTab = useGLBEditor((s) => s.setParamsTab)
 
   let nodeDrag = useGLBEditor((s) => s.nodeDrag)
+
+  let refreshSystem = useGLBEditor((s) => s.refreshSystem)
   return (
     <>
       {node && (
@@ -120,6 +122,7 @@ export function ENPNodeDetail() {
                               removeLink(conn)
                             })
                           setActiveNodeID('')
+                          refreshSystem()
                         }}
                       >
                         {`Remove this node and it's connections.`}

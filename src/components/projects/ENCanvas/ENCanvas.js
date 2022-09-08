@@ -8,11 +8,12 @@ import { Player } from '@/helpers/Player'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { Environment, OrbitControls, Select } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { EffectComposer } from '@react-three/postprocessing'
+import { Bloom, EffectComposer, SSR } from '@react-three/postprocessing'
 import { useState } from 'react'
-import { UseObjectAsPlayer } from '../UseObjectAsPlayer/UseObjectAsPlayer'
-import { AdaptTC } from './AdaptTC'
+// import { UseObjectAsPlayer } from '../UseObjectAsPlayer/UseObjectAsPlayer'
+import { AdaptTC } from './transform/AdaptTC'
 import { ENTopBarr } from './ENTopBar'
+import { PostProcCallers } from '@/effectnode/component/PostProcCallers'
 
 export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
@@ -26,14 +27,22 @@ export function ENCanvas() {
     <div className='relative w-full h-full'>
       <Canvas className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
+        {/*  */}
 
-        <EffectComposer>{screenPass}</EffectComposer>
+        <EffectComposer>
+          {screenPass}
+          <PostProcCallers></PostProcCallers>
+          {/*  */}
+          {/* <Bloom luminanceThreshold={0.1}></Bloom> */}
+          {/* <SSR></SSR> */}
+        </EffectComposer>
         <AdaptTC
           onScreenPass={(v) => {
             setScreenPass(v)
           }}
           node={activeGLBRuntimeObject.scene}
         ></AdaptTC>
+
         {activeSceneSelection && (
           <boxHelper
             key={activeSceneSelection.uuid}
@@ -73,27 +82,9 @@ export function ENCanvas() {
           </>
         )}
 
-        {/* {editorNavigationMode === 'avatar' && (
-          <>
-            <Environment preset='apartment' frames={1}></Environment>
-            <gridHelper args={[500, 500]}></gridHelper>
-            <ConnectKeyboard></ConnectKeyboard>
-            <ConnectCameraControls></ConnectCameraControls>
-            <ConnectSimulation></ConnectSimulation>
-            <Player></Player>
-            <UseObjectAsPlayer
-              glbObject={activeGLBRuntimeObject}
-            ></UseObjectAsPlayer>
-            <FloorFlat
-              key={activeGLBRawObject.uuid + 'floorflat'}
-              name={activeGLBRawObject.uuid}
-            ></FloorFlat>
-          </>
-        )} */}
-
         {editorNavigationMode === 'floor' && (
           <>
-            <Environment preset='apartment' frames={1}></Environment>
+            <Environment background preset='apartment' frames={1}></Environment>
             <gridHelper args={[500, 500]}></gridHelper>
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectCameraControls></ConnectCameraControls>
@@ -108,7 +99,7 @@ export function ENCanvas() {
 
         {editorNavigationMode === 'meta' && activeGLBRawObject.scene && (
           <>
-            <Environment preset='apartment' frames={1}></Environment>
+            <Environment background preset='apartment' frames={1}></Environment>
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectCameraControls></ConnectCameraControls>
             <ConnectSimulation></ConnectSimulation>
@@ -122,7 +113,7 @@ export function ENCanvas() {
 
         {editorNavigationMode === 'orbit' && (
           <>
-            <Environment preset='apartment' frames={1}></Environment>
+            <Environment background preset='apartment' frames={1}></Environment>
             <OrbitControls
               ref={(ref) => {
                 setOrbit(ref)
@@ -130,6 +121,24 @@ export function ENCanvas() {
             ></OrbitControls>
           </>
         )}
+
+        {/* {editorNavigationMode === 'avatar' && (
+          <>
+            <Environment background preset='apartment' frames={1}></Environment>
+            <gridHelper args={[500, 500]}></gridHelper>
+            <ConnectKeyboard></ConnectKeyboard>
+            <ConnectCameraControls></ConnectCameraControls>
+            <ConnectSimulation></ConnectSimulation>
+            <Player></Player>
+            <UseObjectAsPlayer
+              glbObject={activeGLBRuntimeObject}
+            ></UseObjectAsPlayer>
+            <FloorFlat
+              key={activeGLBRawObject.uuid + 'floorflat'}
+              name={activeGLBRawObject.uuid}
+            ></FloorFlat>
+          </>
+        )} */}
       </Canvas>
       <ENTopBarr></ENTopBarr>
     </div>

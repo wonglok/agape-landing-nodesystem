@@ -22,24 +22,19 @@ export function ENDrawerNode({
       return
     }
     listFolderItem(handle).then(async (v) => {
-      //
-      // let resourcesEntry = v.find(
-      //   (e) => e.handle.kind === 'directory' && e.handle.name === 'resources'
-      // )
-      // if (resourcesEntry) {
-      //   setHandle(resourcesEntry)
-      // } else {
-      //   // createWorkspaceFolder().then(() => {
-      //   //   load()
-      //   // })
-      // }
-      //
       setEntries(v)
     })
   }, [handle, listFolderItem])
 
   useEffect(() => {
     load()
+
+    let tt = setInterval(() => {
+      load()
+    }, 1000)
+    return () => {
+      clearInterval(tt)
+    }
   }, [load])
 
   return (

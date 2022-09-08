@@ -131,7 +131,7 @@ export function effect({ node, mini, data, setComponent }) {
       })
       send(data.value.glb)
     }, [])
-    //
+
     //
     return (
       <>

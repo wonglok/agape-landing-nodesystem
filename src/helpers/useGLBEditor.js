@@ -35,6 +35,9 @@ let generateInside = (set, get) => {
 
   return {
     reloadGraphID: 0,
+    refreshSystem: () => {
+      set({ reloadGraphID: Math.random() })
+    },
     orbit: false,
     setOrbit: (s) => {
       set({ orbit: s })
@@ -53,7 +56,7 @@ let generateInside = (set, get) => {
       effectNode.connections.push(v)
     },
     removeNode: (node) => {
-      let effectNode = getEffectNode()
+      let effectNode = get().getEffectNode()
       effectNode.nodes.splice(
         effectNode.nodes.findIndex((s) => s._id === node._id),
         1
@@ -163,6 +166,7 @@ let generateInside = (set, get) => {
       })
 
       set({
+        reloadGraphID: Math.random(),
         activeSceneSelection,
         cursorMode: 'ready',
       })

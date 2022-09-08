@@ -60,6 +60,24 @@ export function UITopBar() {
             )}
           </button>
         )}
+
+        {activeGLBHandle && (
+          <button
+            className='px-2 ml-2 text-xs text-white bg-green-600 rounded-full'
+            onClick={async () => {
+              //
+              await saveFile({
+                handle: activeGLBHandle,
+                runTimeGLB: activeGLBRuntimeObject,
+                origGLB: activeGLBRawObject,
+              })
+            }}
+          >
+            <span>Save </span>
+          </button>
+        )}
+
+        {/*  */}
         {/* {activeGLBHandle && (
           <button
             className='px-2 ml-2 text-xs text-white bg-blue-600 rounded-full'

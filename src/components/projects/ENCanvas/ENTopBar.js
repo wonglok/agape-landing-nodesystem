@@ -13,7 +13,7 @@ export function ENTopBarr() {
           switchMode('meta')
         }}
       >
-        Collider Floor Mode
+        Collider Mode
       </div>
       <div
         className={`inline-block p-1 my-1 ml-1 mr-1 text-xs  ${
@@ -25,6 +25,7 @@ export function ENTopBarr() {
       >
         Flat Floor Mode
       </div>
+      {/*  */}
       {/* <div
         className={`inline-block p-1 my-1 ml-1 mr-1 text-xs  ${
           editorNavigationMode === 'avatar' ? 'bg-green-300' : 'bg-white'

@@ -36,6 +36,7 @@ export function FloorObject({ object }) {
         (err) => {
           toast('error')
           switchMode('floor')
+          //
           // let o3 = new Object3D()
           // o3.add(new Mesh(new BoxBufferGeometry(1000000, 0.1, 1000000)))
 
