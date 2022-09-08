@@ -1,6 +1,5 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { Text } from '@react-three/drei'
-import { IconComputer } from './IconComputer'
 
 export function ENGOriginButton() {
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)

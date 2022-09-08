@@ -11,6 +11,7 @@ export function ENGraphFloor() {
     <group>
       {/*  */}
       <gridHelper args={[500, 100, 0xbababa, 0xbababa]}></gridHelper>
+      {/*  */}
       <Box
         onPointerDown={(ev) => {
           if (cursorMode === 'add') {

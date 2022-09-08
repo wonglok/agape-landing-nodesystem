@@ -36,6 +36,11 @@ let generateInside = (set, get) => {
     cursorMode: 'ready',
     curosrPoint,
     setNodeDrag: () => {},
+
+    codeToAdd: '',
+    selectCodeToAdd: ({ title }) => {
+      set({ codeToAdd: title })
+    },
     //
     overlayENGraph: '',
     setOverlayENGraph: (v) => {

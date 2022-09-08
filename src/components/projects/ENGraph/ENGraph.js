@@ -41,7 +41,7 @@ function OverlayHtml() {
           <ENGAddGraphNode></ENGAddGraphNode>
         </div>
       )}
-      {overlayENGraph === 'add-mods' && (
+      {overlayENGraph && (
         <div className=' absolute top-0 right-0 p-1'>
           <button
             onClick={() => {
