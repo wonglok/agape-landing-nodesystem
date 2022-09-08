@@ -1,5 +1,5 @@
 // import { useGLTF } from '@react-three/drei'
-import { useThree } from '@react-three/fiber'
+// import { useThree } from '@react-three/fiber'
 import { useEffect } from 'react'
 import { BoxBufferGeometry, Mesh } from 'three'
 import { Scene } from 'three140'

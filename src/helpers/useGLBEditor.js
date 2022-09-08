@@ -34,6 +34,9 @@ let generateInside = (set, get) => {
 
   return {
     cursorMode: 'ready',
+    setCurosrMode: (v) => {
+      set({ cursorMode: v })
+    },
     curosrPoint,
     setNodeDrag: () => {},
 

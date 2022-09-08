@@ -6,9 +6,8 @@ import { FloorFlat } from '@/helpers/FloorFlat'
 import { FloorObject } from '@/helpers/FloorObject'
 import { Player } from '@/helpers/Player'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { Environment, OrbitControls } from '@react-three/drei'
+import { Environment, OrbitControls, Select } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { ToastContainer } from 'react-toastify'
 import { UseObjectAsPlayer } from '../UseObjectAsPlayer/UseObjectAsPlayer'
 import { ENTopBarr } from './ENTopBar'
 
@@ -16,26 +15,49 @@ export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
   let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
   let editorNavigationMode = useGLBEditor((s) => s.editorNavigationMode)
+  let setSelection = useGLBEditor((s) => s.setSelection)
+  let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   return (
     <div className='relative w-full h-full'>
       <Canvas className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
+        {activeSceneSelection && (
+          <boxHelper
+            key={activeSceneSelection.uuid}
+            args={[activeSceneSelection, 0xff0000]}
+          ></boxHelper>
+        )}
+
         {activeGLBRawObject?.scene && (
           <>
-            {/*  */}
-            {/*  */}
-            <primitive
-              key={activeGLBRuntimeObject.scene.uuid + 'display'}
-              object={activeGLBRuntimeObject.scene}
-            ></primitive>
-            {/*  */}
-            {/*  */}
+            <Select
+              onChange={(v) => {
+                //
+                let first = v[0]
+
+                if (first) {
+                  setSelection(first)
+                }
+                console.log(v)
+              }}
+              //
+              //
+            >
+              <primitive
+                key={activeGLBRuntimeObject.scene.uuid + 'display'}
+                object={activeGLBRuntimeObject.scene}
+              ></primitive>
+              {/*  */}
+              {/*  */}
+            </Select>
             <EffectNodeRuntime
               key={activeGLBRuntimeObject.scene.uuid + 'runtime'}
               glbObject={activeGLBRuntimeObject}
               glbRaw={activeGLBRawObject}
             ></EffectNodeRuntime>
+            {/*  */}
+            {/*  */}
           </>
         )}
 

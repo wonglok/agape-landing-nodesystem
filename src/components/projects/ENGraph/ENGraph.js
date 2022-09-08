@@ -41,6 +41,7 @@ function OverlayHtml() {
           <ENGAddGraphNode></ENGAddGraphNode>
         </div>
       )}
+
       {overlayENGraph && (
         <div className=' absolute top-0 right-0 p-1'>
           <button
