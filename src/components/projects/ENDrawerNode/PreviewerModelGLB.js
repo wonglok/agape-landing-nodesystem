@@ -31,7 +31,7 @@ export function PreviewerModelGLB({ parent, handle }) {
             <button
               onClick={() => {
                 //
-                openFile(handle, 'orbit')
+                openFile(handle, 'meta')
               }}
               className='inline-block p-2 my-1 text-white bg-blue-500 rounded-lg'
             >

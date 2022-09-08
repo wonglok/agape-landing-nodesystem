@@ -1,12 +1,13 @@
-import { sRGBEncoding } from 'three'
+import { AdditiveBlending, sRGBEncoding } from 'three'
 import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
 import { ENGOriginButton } from '../ENGOriginButton/ENGOriginButton'
-import { MapControls } from '@react-three/drei'
+import { Box, MapControls } from '@react-three/drei'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { ENGHDR } from '../ENGHDR/ENGHDR'
 import { IconComputer } from '../ENGOriginButton/IconComputer'
 import { ENGAddGraphNode } from '../ENGAddGraphNode/ENGAddGraphNode'
+import { ENGraphFloor } from '../ENGraphFloor/ENGraphFloor'
 
 export function ENGraph() {
   return (
@@ -16,6 +17,8 @@ export function ENGraph() {
         onCreated={(st) => {
           st.gl.physicallyCorrectLights = true
           st.gl.outputEncoding = sRGBEncoding
+          st.camera.position.y = 30
+          st.camera.position.z = 30
         }}
       >
         <Suspense fallback={null}>
@@ -69,7 +72,7 @@ function OverlayHtml() {
 }
 
 function Content() {
-  let setControl = useGLBEditor((s) => s.setControl)
+  let setControls = useGLBEditor((s) => s.setControls)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let setOverlayENGraph = useGLBEditor((s) => s.setOverlayENGraph)
   return (
@@ -87,10 +90,8 @@ function Content() {
           ></IconComputer>
 
           <MapControls
-            ref={(control) => {
-              //
-              setControl(control)
-              //
+            ref={(controls) => {
+              setControls(controls)
             }}
             object-position={[0, 30, 30]}
             enableDamping={true}
@@ -100,7 +101,7 @@ function Content() {
 
           <ENGHDR></ENGHDR>
 
-          <gridHelper args={[200, 200, 0x888888, 0xbababa]}></gridHelper>
+          <ENGraphFloor></ENGraphFloor>
         </>
       )}
     </>

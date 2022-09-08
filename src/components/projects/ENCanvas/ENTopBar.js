@@ -13,7 +13,7 @@ export function ENTopBarr() {
           switchMode('meta')
         }}
       >
-        Envrioonment Mode
+        Collider Floor Mode
       </div>
       <div
         className={`inline-block p-1 my-1 ml-1 mr-1 text-xs  ${
@@ -23,7 +23,7 @@ export function ENTopBarr() {
           switchMode('floor')
         }}
       >
-        Floor Mode
+        Flat Floor Mode
       </div>
       <div
         className={`inline-block p-1 my-1 ml-1 mr-1 text-xs  ${

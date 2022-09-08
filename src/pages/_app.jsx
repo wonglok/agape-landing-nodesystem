@@ -7,6 +7,7 @@ import { Multiverse } from '@/components/layout/Multiverse'
 import { useSystemStore } from '@/helpers/useSystemStore'
 import { PromotePage } from '@/components/layout/PromotePage'
 import { Loader } from '@react-three/drei'
+import { ToastContainer } from 'react-toastify'
 
 function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
   const router = useRouter()
@@ -52,6 +53,19 @@ function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
             }}
             id='myroot'
           ></span>
+
+          <ToastContainer
+            position='top-right'
+            zIndex={1000}
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </>
       )}
     </>

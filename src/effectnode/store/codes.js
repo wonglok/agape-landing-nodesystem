@@ -16,7 +16,7 @@ function importAll(r) {
     }
   })
 
-  console.log(arr)
+  // console.log(arr)
 
   return arr
 }

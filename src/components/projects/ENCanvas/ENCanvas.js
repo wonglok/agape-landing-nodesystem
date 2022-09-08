@@ -8,6 +8,7 @@ import { Player } from '@/helpers/Player'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { Environment, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
+import { ToastContainer } from 'react-toastify'
 import { UseObjectAsPlayer } from '../UseObjectAsPlayer/UseObjectAsPlayer'
 import { ENTopBarr } from './ENTopBar'
 
@@ -73,6 +74,7 @@ export function ENCanvas() {
 
         {editorNavigationMode === 'meta' && activeGLBRawObject.scene && (
           <>
+            <Environment background preset='apartment' frames={1}></Environment>
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectCameraControls></ConnectCameraControls>
             <ConnectSimulation></ConnectSimulation>
@@ -81,18 +83,16 @@ export function ENCanvas() {
               key={activeGLBRawObject.uuid + 'floorobj'}
               object={activeGLBRawObject.scene}
             ></FloorObject>
-            <Environment background preset='apartment' frames={1}></Environment>
           </>
         )}
 
         {editorNavigationMode === 'orbit' && (
           <>
-            <OrbitControls></OrbitControls>
             <Environment background preset='apartment' frames={1}></Environment>
+            <OrbitControls></OrbitControls>
           </>
         )}
       </Canvas>
-
       <ENTopBarr></ENTopBarr>
     </div>
   )

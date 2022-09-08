@@ -10,6 +10,7 @@ import {
   Mesh,
   MeshStandardMaterial,
   SphereBufferGeometry,
+  Vector3,
 } from 'three140'
 import { GLTFExporter } from 'three140/examples/jsm/exporters/GLTFExporter'
 import { DRACOLoader } from 'three140/examples/jsm/loaders/DRACOLoader'
@@ -26,7 +27,15 @@ import create from 'zustand'
 import { getID } from './getID'
 
 let generateInside = (set, get) => {
+  let curosrPoint = new Object3D()
+  curosrPoint.userData.down = new Vector3()
+  curosrPoint.userData.added = new Vector3()
+  curosrPoint.userData.diff = new Vector3()
+
   return {
+    cursorMode: 'ready',
+    curosrPoint,
+    setNodeDrag: () => {},
     //
     overlayENGraph: '',
     setOverlayENGraph: (v) => {
@@ -34,7 +43,7 @@ let generateInside = (set, get) => {
     },
     //
     controls: false,
-    setControl: (c) => {
+    setControls: (c) => {
       set({ controls: c })
     },
     //
