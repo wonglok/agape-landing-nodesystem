@@ -15,21 +15,6 @@ export function ENPNodeDetail() {
   let node = getActiveNode()
 
   let [tab, setTab] = useState('conns')
-  // useEffect(() => {
-  //   let hh = (ev) => {
-  //     if (ev.key === 'Escape') {
-  //       if (overlay === 'nodeDetail') {
-  //         setOverlay('')
-  //       }
-  //     }
-  //   }
-  //   window.addEventListener('keydown', hh)
-  //   return () => {
-  //     window.removeEventListener('keydown', hh)
-  //   }
-
-  //   //
-  // }, [overlay])
 
   return (
     <>
@@ -39,10 +24,11 @@ export function ENPNodeDetail() {
           <div className='flex items-center w-full h-8 pl-2 bg-yellow-300 border-b border-yellow-200'>
             {node.displayTitle}
           </div>
+          {/*
           <div className=' absolute top-0 right-0 p-1'>
             <button
               onClick={() => {
-                setOverlayENGraph('')
+                setActiveNodeID('')
               }}
             >
               <svg
@@ -62,7 +48,7 @@ export function ENPNodeDetail() {
                 />
               </svg>
             </button>
-          </div>
+          </div> */}
 
           <div
             style={{
