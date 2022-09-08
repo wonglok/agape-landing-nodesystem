@@ -35,6 +35,12 @@ let generateInside = (set, get) => {
 
   return {
     reloadGraphID: 0,
+    orbit: false,
+    setOrbit: (s) => {
+      set({ orbit: s })
+    },
+
+    //
     getEffectNode: () => {
       return get().activeSceneSelection?.userData?.effectNode
     },

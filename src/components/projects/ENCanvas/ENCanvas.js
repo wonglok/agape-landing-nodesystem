@@ -8,7 +8,10 @@ import { Player } from '@/helpers/Player'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { Environment, OrbitControls, Select } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
+import { EffectComposer } from '@react-three/postprocessing'
+import { useState } from 'react'
 import { UseObjectAsPlayer } from '../UseObjectAsPlayer/UseObjectAsPlayer'
+import { AdaptTC } from './AdaptTC'
 import { ENTopBarr } from './ENTopBar'
 
 export function ENCanvas() {
@@ -17,11 +20,21 @@ export function ENCanvas() {
   let editorNavigationMode = useGLBEditor((s) => s.editorNavigationMode)
   let setSelection = useGLBEditor((s) => s.setSelection)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
+  let setOrbit = useGLBEditor((s) => s.setOrbit)
+  let [screenPass, setScreenPass] = useState(null)
   return (
     <div className='relative w-full h-full'>
       <Canvas className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
+        <EffectComposer>{screenPass}</EffectComposer>
+        <AdaptTC
+          onScreenPass={(v) => {
+            //
+            setScreenPass(v)
+          }}
+          node={activeGLBRuntimeObject.scene}
+        ></AdaptTC>
         {activeSceneSelection && (
           <boxHelper
             key={activeSceneSelection.uuid}
@@ -111,7 +124,11 @@ export function ENCanvas() {
         {editorNavigationMode === 'orbit' && (
           <>
             <Environment background preset='apartment' frames={1}></Environment>
-            <OrbitControls></OrbitControls>
+            <OrbitControls
+              ref={(ref) => {
+                setOrbit(ref)
+              }}
+            ></OrbitControls>
           </>
         )}
       </Canvas>
