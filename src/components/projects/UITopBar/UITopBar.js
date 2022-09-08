@@ -12,6 +12,7 @@ export function UITopBar() {
 
   let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
+  let showSplash = useGLBEditor((s) => s.showSplash)
 
   return (
     <div className='flex items-center justify-between h-6 p-1 px-2 text-xs bg-gray-200'>
@@ -109,20 +110,20 @@ function ResetLayoutBtn() {
         }
       }, 100)
     }
-    let focus = () => {
-      clearTimeout(tt)
-      tt = setTimeout(() => {
-        if (canReset) {
-          window.dispatchEvent(new CustomEvent('reset-size', { detail: false }))
-        }
-      }, 100)
-    }
+    // let focus = () => {
+    //   clearTimeout(tt)
+    //   tt = setTimeout(() => {
+    //     if (canReset) {
+    //       window.dispatchEvent(new CustomEvent('reset-size', { detail: false }))
+    //     }
+    //   }, 100)
+    // }
     window.addEventListener('resize', rr)
-    window.addEventListener('focus', focus)
+    // window.addEventListener('focus', focus)
 
     return () => {
       window.removeEventListener('resize', rr)
-      window.removeEventListener('focus', focus)
+      // window.removeEventListener('focus', focus)
     }
   }, [canReset])
 

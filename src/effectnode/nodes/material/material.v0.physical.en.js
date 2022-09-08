@@ -296,21 +296,18 @@ export function effect({ node, mini, data, setComponent }) {
   let defs = getDefinitions({ nodeID: data.raw.nodeID })
 
   // let inputReceivers = {}
-
   // let makeElemnet = () => {
-
   //   let kidz = []
-
   //   for (let socketInputName in inputReceivers) {
   //     if (inputReceivers[socketInputName]) {
   //       kidz.push(inputReceivers[socketInputName])
   //     }
   //   }
-
   //   return (
   //   )
   // }
   //
+
   let send = () => {
     if (!mini.now.itself.material) {
       mini.now.itself.material = new MeshPhysicalMaterial()

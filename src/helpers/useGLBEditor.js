@@ -267,16 +267,6 @@ let generateInside = (set, get) => {
         )
       )
       o3.add(resource)
-      resource.userData = {
-        myData: {
-          yo: 1,
-          b: ['yo', 'fun'],
-        },
-        bufferView: new ArrayBuffer(1024),
-        gltfExtensions: {
-          EXT_EffectNode_VFX: {},
-        },
-      }
 
       return get().exportGLB(o3, [])
     },
