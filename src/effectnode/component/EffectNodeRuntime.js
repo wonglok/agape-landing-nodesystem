@@ -37,12 +37,11 @@ export function EffectNodeRuntime({
             </group>
           )
         })}
-
-      {/*  */}
-      {/*  */}
     </group>
   )
 }
+
+//
 
 //
 
