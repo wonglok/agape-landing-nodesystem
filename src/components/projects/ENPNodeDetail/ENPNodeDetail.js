@@ -1,5 +1,4 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { useState } from 'react'
 import { TabUnifroms } from './TabUniforms'
 
 export function ENPNodeDetail() {
