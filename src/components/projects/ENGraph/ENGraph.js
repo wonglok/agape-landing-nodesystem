@@ -84,44 +84,45 @@ function Content() {
   let reloadGraphID = useGLBEditor((s) => s.reloadGraphID)
   return (
     <>
-      <group name={nodeDrag?.uuid + reloadGraphID + 'nodedrag'}></group>
-      {activeSceneSelection && (
-        <>
-          <ENGOriginButton></ENGOriginButton>
+      <group name={nodeDrag?.uuid + reloadGraphID + 'nodedrag'}>
+        {activeSceneSelection && (
+          <>
+            <ENGOriginButton></ENGOriginButton>
 
-          <IconComputer
-            onClick={() => {
-              //
-              //
-              setOverlayENGraph('add-mods')
-            }}
-          ></IconComputer>
+            <IconComputer
+              onClick={() => {
+                //
+                //
+                setOverlayENGraph('add-mods')
+              }}
+            ></IconComputer>
 
-          <MapControls
-            ref={(controls) => {
-              setControls(controls)
-            }}
-            object-position={[0, 30, 30]}
-            enableDamping={true}
-            enableRotate={false}
-            enablePan={true}
-          ></MapControls>
+            <MapControls
+              ref={(controls) => {
+                setControls(controls)
+              }}
+              object-position={[0, 30, 30]}
+              enableDamping={true}
+              enableRotate={false}
+              enablePan={true}
+            ></MapControls>
 
-          <ENGHDR></ENGHDR>
+            <ENGHDR></ENGHDR>
 
-          <AddItemCurosr></AddItemCurosr>
+            <AddItemCurosr></AddItemCurosr>
 
-          <ENGraphFloor></ENGraphFloor>
+            <ENGraphFloor></ENGraphFloor>
 
-          <ENGNodes></ENGNodes>
+            <ENGNodes></ENGNodes>
 
-          <ConnectedWires></ConnectedWires>
+            <ConnectedWires></ConnectedWires>
 
-          {/* <group position={[0, 1.5, 0]}>
+            {/* <group position={[0, 1.5, 0]}>
             <ConnectedWires></ConnectedWires>
           </group> */}
-        </>
-      )}
+          </>
+        )}
+      </group>
     </>
   )
 }
