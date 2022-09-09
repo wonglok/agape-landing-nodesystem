@@ -7,7 +7,7 @@ import { FloorObject } from '@/helpers/FloorObject'
 import { Player } from '@/helpers/Player'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { Environment, OrbitControls, Select } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useThree } from '@react-three/fiber'
 import { Bloom, EffectComposer, SSR } from '@react-three/postprocessing'
 import { useEffect, useState } from 'react'
 // import { UseObjectAsPlayer } from '../UseObjectAsPlayer/UseObjectAsPlayer'
@@ -22,15 +22,8 @@ export function ENCanvas() {
   let setSelection = useGLBEditor((s) => s.setSelection)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let setOrbit = useGLBEditor((s) => s.setOrbit)
-  let orbit = useGLBEditor((s) => s.orbit)
   let [screenPass, setScreenPass] = useState(null)
 
-  useEffect(() => {
-    if (activeSceneSelection && orbit) {
-      activeSceneSelection.getWorldPosition(orbit.target)
-      orbit.update()
-    }
-  }, [orbit, activeSceneSelection])
   return (
     <div className='relative w-full h-full'>
       <Canvas className='w-full h-full'>
@@ -121,10 +114,12 @@ export function ENCanvas() {
                 setOrbit(ref)
               }}
             ></OrbitControls>
+            <CamTrack activeSceneSelection={activeSceneSelection}></CamTrack>
           </>
         )}
 
         {/*
+
         {editorNavigationMode === 'avatar' && (
           <>
             <Environment background preset='apartment' frames={1}></Environment>
@@ -142,11 +137,31 @@ export function ENCanvas() {
             ></FloorFlat>
           </>
         )}
+
         */}
       </Canvas>
       <ENTopBarr></ENTopBarr>
     </div>
   )
+}
+
+function CamTrack({ activeSceneSelection }) {
+  let orbit = useGLBEditor((s) => s.orbit)
+  let camera = useThree((s) => s.camera)
+  useEffect(() => {
+    if (activeSceneSelection && orbit) {
+      activeSceneSelection.getWorldPosition(orbit.target)
+      if (orbit.target.length() === 0) {
+        orbit.target.y = 1.5
+      }
+      camera.position.x = orbit.target.x
+      camera.position.y = orbit.target.y
+      camera.position.z = orbit.target.z + 1
+      orbit.update()
+    }
+  }, [orbit, activeSceneSelection, camera.position])
+
+  return null
 }
 
 //
