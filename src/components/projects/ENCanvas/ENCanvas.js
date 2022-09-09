@@ -125,7 +125,9 @@ export function ENCanvas() {
           </>
         )}
 
-        {/* {editorNavigationMode === 'avatar' && (
+        {/*
+
+        {editorNavigationMode === 'avatar' && (
           <>
             <Environment background preset='apartment' frames={1}></Environment>
             <gridHelper args={[500, 500]}></gridHelper>
@@ -141,7 +143,9 @@ export function ENCanvas() {
               name={activeGLBRawObject.uuid}
             ></FloorFlat>
           </>
-        )} */}
+        )}
+
+        */}
       </Canvas>
       <ENTopBarr></ENTopBarr>
     </div>
