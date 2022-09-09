@@ -30,13 +30,17 @@ export function ImplementationOfBtn({ onClick }) {
         Click to Add Node Module
       </Text>
 
-      <Box args={[5, 0.2, 1]}>
+      <Box args={[5, 0.2, 1]} position={[0, 0.2, 0]}>
         <meshStandardMaterial color={'blue'} metalness={1} roughness={0} />
       </Box>
 
-      <Box args={[1, 0.2, 5]}>
+      <Box args={[1, 0.2, 5]} position={[0, 0.2, 0]}>
         <meshStandardMaterial color={'blue'} metalness={1} roughness={0} />
       </Box>
+      <Box args={[6, 0.2, 6]} position={[0, 0.0, 0]}>
+        <meshStandardMaterial color={'white'} metalness={1} roughness={0.1} />
+      </Box>
+
       {/* <primitive object={glb.scene}></primitive> */}
     </group>
   )
