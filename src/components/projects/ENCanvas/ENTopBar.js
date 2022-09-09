@@ -51,10 +51,10 @@ export function ENTopBarr() {
 
       <div className='absolute top-0 right-0 z-10'>
         <div className='inline-block p-1 m-1 bg-white cursor-pointer select-none'>
-          Background
+          Your HDR
         </div>
         <div className='inline-block p-1 m-1 bg-white cursor-pointer select-none'>
-          Environment
+          Default HDR
         </div>
       </div>
     </>
