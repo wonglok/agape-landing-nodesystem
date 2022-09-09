@@ -1,3 +1,4 @@
+import { useEffectNode } from '@/effectnode/store/useEffectNode'
 import { getID } from '@/helpers/getID'
 // import { createPortal } from '@react-three/fiber'
 // import { useEffect, useState } from 'react'
@@ -36,7 +37,6 @@ export async function nodeData({ defaultData, nodeID }) {
 
     //
     uniforms: [
-      //
       // {
       //   _id: getID(),
       //   nodeID,
@@ -44,7 +44,6 @@ export async function nodeData({ defaultData, nodeID }) {
       //   type: 'float',
       //   value: 1,
       // },
-      //
       // {
       //   _id: getID(),
       //   nodeID,
@@ -70,10 +69,44 @@ export async function nodeData({ defaultData, nodeID }) {
   }
 }
 
+function InputSockets({ inputNames, node }) {
+  let setPassArray = useEffectNode((s) => s.setPassArray)
+
+  useEffect(() => {
+    let tree = {}
+    let sync = () => {
+      console.log(tree)
+      setPassArray(Object.values(tree).filter((e) => e))
+    }
+    inputNames.forEch((name) => {
+      node[name].stream((signal) => {
+        if (signal.value) {
+          tree[name] = signal.value
+        } else {
+          tree[name] = false
+        }
+        sync()
+      })
+      //
+      node[name].ready.then((value) => {
+        tree[name] = value
+        sync()
+      })
+    })
+
+    return () => {
+      setPassArray([])
+    }
+  }, [inputNames, node, setPassArray])
+
+  //
+  //
+  return <></>
+}
+
 export function effect({ node, mini, data, setComponent }) {
   //
-
-  let inputs = [
+  let inputNames = [
     'in0',
     'in1',
     'in2',
@@ -86,22 +119,14 @@ export function effect({ node, mini, data, setComponent }) {
     'in9',
   ]
 
-  let tree = {}
-  inputs.forEach((inp) => {
-    node[inp].ready.then((value) => {
-      tree[inp] = value
-      onSync()
-    })
-    node[inp].stream((signal) => {
-      tree[inp] = signal.value
-      onSync()
-    })
-  })
-
-  let onSync = () => {
-    let array = Object.values(tree).filter((e) => e)
-    setPassArray(array)
-  }
+  setComponent(
+    <InputSockets
+      key={getID()}
+      node={node}
+      data={data}
+      inputNames={inputNames}
+    ></InputSockets>
+  )
   //
   //
 }

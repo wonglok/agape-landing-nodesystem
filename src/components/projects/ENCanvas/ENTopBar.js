@@ -50,12 +50,22 @@ export function ENTopBarr() {
       </div>
 
       <div className='absolute top-0 right-0 z-10'>
-        <div className='inline-block p-1 m-1 bg-white cursor-pointer select-none'>
+        <button
+          onClick={() => {
+            //
+          }}
+          className='inline-block p-1 m-1 bg-white cursor-pointer select-none'
+        >
           Your HDR
-        </div>
-        <div className='inline-block p-1 m-1 bg-white cursor-pointer select-none'>
+        </button>
+        <button
+          onClick={() => {
+            //
+          }}
+          className='inline-block p-1 m-1 bg-white cursor-pointer select-none'
+        >
           Default HDR
-        </div>
+        </button>
       </div>
     </>
   )

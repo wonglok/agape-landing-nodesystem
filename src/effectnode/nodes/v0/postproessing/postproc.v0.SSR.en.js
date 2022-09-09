@@ -63,23 +63,12 @@ export async function nodeData({ defaultData, nodeID }) {
 
 export function effect({ node, mini, data, setComponent }) {
   //
-
+  //
   let output = {
     _id: getID(),
-    type: 'Bloom',
+    type: 'SSR',
     props: {
-      mipmapBlur: true,
-      // radius: number,
-      // levels: number,
-      // blendFunction: BlendFunction,
-      luminanceThreshold: 0.2,
-      // luminanceSmoothing: number,
-      // intensity: number,
-      // width: number,
-      // height: number,
-      // kernelSize: KernelSize,
-      // blendFunction: BlendFunction,
-      opacity: 1,
+      //
     },
   }
 

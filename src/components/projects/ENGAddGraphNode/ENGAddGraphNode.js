@@ -1,11 +1,13 @@
 //
 
-import codes from '@/effectnode/store/codes'
+import { useEffectNode } from '@/effectnode/store/useEffectNode'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { useState } from 'react'
 
 export function ENGAddGraphNode() {
   let [str, setStr] = useState('')
+
+  let codes = useEffectNode((s) => s.codes)
 
   let selectCodeToAdd = useGLBEditor((s) => s.selectCodeToAdd)
   let setCurosrMode = useGLBEditor((s) => s.setCurosrMode)
@@ -31,6 +33,8 @@ export function ENGAddGraphNode() {
           defaultValue={str}
           onKeyDown={(ev) => {
             //
+            //
+
             ev.stopPropagation()
             setStr(ev.target.value || '')
             if (ev.key === 'Enter') {

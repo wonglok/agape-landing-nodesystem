@@ -25,7 +25,7 @@ import { DracoMeshCompression } from '@gltf-transform/extensions'
 import create from 'zustand'
 //
 import { getID } from './getID'
-import codes from '@/effectnode/store/codes'
+import { useEffectNode } from '@/effectnode/store/useEffectNode'
 
 let generateInside = (set, get) => {
   let curosrPoint = new Object3D()
@@ -33,10 +33,14 @@ let generateInside = (set, get) => {
   curosrPoint.userData.added = new Vector3()
   curosrPoint.userData.diff = new Vector3()
 
+  console.log('generateInside')
   return {
     reloadGraphID: 0,
     refreshSystem: () => {
       set({ reloadGraphID: Math.random() })
+      setTimeout(() => {
+        set({ reloadGraphID: Math.random() })
+      })
     },
     orbit: false,
     setOrbit: (s) => {
@@ -53,7 +57,7 @@ let generateInside = (set, get) => {
     },
     //
     addLink: ({ effectNode, link }) => {
-      effectNode.connections.push(v)
+      effectNode.connections.push(link)
     },
     removeNode: (node) => {
       let effectNode = get().getEffectNode()
@@ -61,8 +65,18 @@ let generateInside = (set, get) => {
         effectNode.nodes.findIndex((s) => s._id === node._id),
         1
       )
-      set({ reloadGraphID: Math.random() })
+      get().refreshSystem()
       //
+    },
+    removeLink: (link) => {
+      let effectNode = get().getEffectNode()
+
+      effectNode.connections.splice(
+        effectNode.connections.findIndex((s) => s._id === link._id),
+        1
+      )
+
+      get().refreshSystem()
     },
 
     ///
@@ -102,6 +116,7 @@ let generateInside = (set, get) => {
         return
       }
 
+      let codes = useEffectNode.getState().codes //
       let effectNode = activeSceneSelection?.userData?.effectNode
       let code = codes.find((s) => s.title === codeID)
 

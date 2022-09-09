@@ -21,7 +21,4 @@ function importAll(r) {
   return arr
 }
 
-const codes = importAll(r)
-
-export default codes
-export { codes }
+export const Codes = importAll(r)

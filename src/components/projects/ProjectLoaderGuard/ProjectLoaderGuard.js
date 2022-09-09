@@ -44,6 +44,7 @@ export function ProjectLoaderGuard({ children = () => {} }) {
     //       })
     //       .then(
     //         async (s) => {
+    //
     //           await setCurrentFolder(s)
 
     //           try {

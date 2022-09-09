@@ -11,6 +11,7 @@ import { ENGraphFloor } from '../ENGraphFloor/ENGraphFloor'
 import { AddItemCurosr } from '../ENGAddItemCurosr/ENGAddItemCurosr'
 import { ENGNodes } from '../ENGNodes/ENGNodes'
 import { ConnectedWires } from '../ENGConnectedWires/ConnectedWires'
+import { ENGDraggingWire } from '../ENGDraggingWire/ENGDraggingWire'
 
 export function ENGraph() {
   return (
@@ -76,6 +77,8 @@ function OverlayHtml() {
   )
 }
 
+//
+
 function Content() {
   let setControls = useGLBEditor((s) => s.setControls)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
@@ -87,6 +90,7 @@ function Content() {
       <group name={nodeDrag?.uuid + reloadGraphID + 'nodedrag'}>
         {activeSceneSelection && (
           <>
+            <ENGDraggingWire></ENGDraggingWire>
             <ENGOriginButton></ENGOriginButton>
 
             <IconComputer

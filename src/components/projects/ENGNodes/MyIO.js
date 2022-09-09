@@ -15,7 +15,7 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
 
   let addLink = useGLBEditor((s) => s.addLink)
 
-  let reloadGraph = useGLBEditor((s) => s.reloadGraph)
+  let refreshSystem = useGLBEditor((s) => s.refreshSystem)
   //
   let v3 = new Vector3()
   let v3b = new Vector3()
@@ -109,7 +109,7 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
         effectNode: effectNode,
         link: result,
       })
-      reloadGraph()
+      refreshSystem()
     }
 
     setDown(false)

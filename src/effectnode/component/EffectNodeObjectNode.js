@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import codes from '../store/codes'
+import { useEffectNode } from '../store/useEffectNode'
 // import { useENEditor } from '@/vfx-studio/store/use-en-editor'
 
 export function EffectNodeObjectNode({
@@ -14,7 +14,7 @@ export function EffectNodeObjectNode({
   isEditingMode,
   disabledNodes = [],
 }) {
-  // let codes = useENEditor((s) => s.codes)
+  let codes = useEffectNode((s) => s.codes)
 
   let [component, setComponent] = useState(null)
   useEffect(() => {
@@ -51,6 +51,8 @@ export function EffectNodeObjectNode({
           .loader()
           .then(async (logic) => {
             enRuntime.set(node._id, node)
+
+            //
 
             //
             //

@@ -21,13 +21,14 @@ export function ENPNodeDetail() {
   let nodeDrag = useGLBEditor((s) => s.nodeDrag)
 
   let refreshSystem = useGLBEditor((s) => s.refreshSystem)
+  let reloadGraphID = useGLBEditor((s) => s.reloadGraphID)
   return (
     <>
       {node && (
         <>
           <span id={nodeDrag?.nodeID}></span>
           <span id={activeSceneSelection.uuid}></span>
-
+          <span id={reloadGraphID + 'reloadGraphID-ennodedetails'}></span>
           {/*
           <div className=' absolute top-0 right-0 p-1'>
             <button

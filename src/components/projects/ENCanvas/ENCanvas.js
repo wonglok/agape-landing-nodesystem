@@ -30,12 +30,7 @@ export function ENCanvas() {
       <Canvas className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
-        <EffectComposer>
-          {screenPass}
-          <PostProcCallers></PostProcCallers>
-          {/* <Bloom luminanceThreshold={0.1}></Bloom> */}
-          {/* <SSR></SSR> */}
-        </EffectComposer>
+        <PostProcCallers screenPass={screenPass}></PostProcCallers>
         {/*  */}
         <AdaptTC
           onScreenPass={(v) => {
