@@ -14,10 +14,6 @@ export function ENIconLaptop() {
 }
 
 function ENIconLaptopIntenral() {
-  let glb = useGLTF(``)
-  return (
-    <group>
-      <primitive object={glb.scene}></primitive>
-    </group>
-  )
+  // let glb = useGLTF(``)
+  return <group>{/* <primitive object={glb.scene}></primitive> */}</group>
 }

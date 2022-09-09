@@ -21,6 +21,7 @@ export function ENModelViewer({ url }) {
   //
   return ok ? (
     <model-viewer
+      key={url}
       src={url}
       class='w-full h-full'
       ios-src=''

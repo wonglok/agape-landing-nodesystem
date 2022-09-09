@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import { AdaptTC } from './transform/AdaptTC'
 import { ENTopBarr } from './ENTopBar'
 import { PostProcCallers } from '@/effectnode/component/PostProcCallers'
+import { EnvOutlet } from './EnvOutlet'
 
 export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
@@ -79,7 +80,6 @@ export function ENCanvas() {
 
         {editorNavigationMode === 'floor' && (
           <>
-            <Environment background preset='apartment' frames={1}></Environment>
             <gridHelper args={[500, 500]}></gridHelper>
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectCameraControls></ConnectCameraControls>
@@ -94,7 +94,6 @@ export function ENCanvas() {
 
         {editorNavigationMode === 'meta' && activeGLBRawObject.scene && (
           <>
-            <Environment background preset='apartment' frames={1}></Environment>
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectCameraControls></ConnectCameraControls>
             <ConnectSimulation></ConnectSimulation>
@@ -108,18 +107,16 @@ export function ENCanvas() {
 
         {editorNavigationMode === 'orbit' && (
           <>
-            <Environment background preset='apartment' frames={1}></Environment>
             <OrbitControls
               ref={(ref) => {
                 setOrbit(ref)
               }}
             ></OrbitControls>
-            <CamTrack activeSceneSelection={activeSceneSelection}></CamTrack>
+            {/* <CamTrack activeSceneSelection={activeSceneSelection}></CamTrack> */}
           </>
         )}
 
         {/*
-
         {editorNavigationMode === 'avatar' && (
           <>
             <Environment background preset='apartment' frames={1}></Environment>
@@ -139,30 +136,31 @@ export function ENCanvas() {
         )}
 
         */}
+
+        <EnvOutlet></EnvOutlet>
       </Canvas>
       <ENTopBarr></ENTopBarr>
     </div>
   )
 }
 
-function CamTrack({ activeSceneSelection }) {
-  let orbit = useGLBEditor((s) => s.orbit)
-  let camera = useThree((s) => s.camera)
-  useEffect(() => {
-    if (activeSceneSelection && orbit) {
-      activeSceneSelection.getWorldPosition(orbit.target)
-      if (orbit.target.length() === 0) {
-        orbit.target.y = 1.5
-      }
-      camera.position.x = orbit.target.x
-      camera.position.y = orbit.target.y
-      camera.position.z = orbit.target.z + 1
-      orbit.update()
-    }
-  }, [orbit, activeSceneSelection, camera.position])
-
-  return null
-}
+// function CamTrack({ activeSceneSelection }) {
+//   let orbit = useGLBEditor((s) => s.orbit)
+//   let camera = useThree((s) => s.camera)
+//   useEffect(() => {
+//     if (activeSceneSelection && orbit) {
+//       activeSceneSelection.getWorldPosition(orbit.target)
+//       if (orbit.target.length() === 0) {
+//         orbit.target.y = 1.5
+//       }
+//       camera.position.x = orbit.target.x
+//       camera.position.y = orbit.target.y
+//       camera.position.z = orbit.target.z + 1
+//       orbit.update()
+//     }
+//   }, [orbit, activeSceneSelection, camera.position])
+//   return null
+// }
 
 //
 //
