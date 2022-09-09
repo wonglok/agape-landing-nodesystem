@@ -18,8 +18,6 @@ export function ENGAddGraphNode() {
     refreshSystem()
   }
 
-  //
-
   return (
     <>
       <div className='w-full h-full backdrop-blur-lg'>
