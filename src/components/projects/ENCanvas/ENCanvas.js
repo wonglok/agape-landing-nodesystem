@@ -9,7 +9,7 @@ import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { Environment, OrbitControls, Select } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Bloom, EffectComposer, SSR } from '@react-three/postprocessing'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // import { UseObjectAsPlayer } from '../UseObjectAsPlayer/UseObjectAsPlayer'
 import { AdaptTC } from './transform/AdaptTC'
 import { ENTopBarr } from './ENTopBar'
@@ -22,20 +22,28 @@ export function ENCanvas() {
   let setSelection = useGLBEditor((s) => s.setSelection)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let setOrbit = useGLBEditor((s) => s.setOrbit)
+  let orbit = useGLBEditor((s) => s.orbit)
   let [screenPass, setScreenPass] = useState(null)
+
+  useEffect(() => {
+    if (activeSceneSelection && orbit) {
+      activeSceneSelection.getWorldPosition(orbit.target)
+      orbit.update()
+    }
+  }, [orbit, activeSceneSelection])
   return (
     <div className='relative w-full h-full'>
       <Canvas className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
-        {/*  */}
 
+        {/*  */}
         <EffectComposer>
           {screenPass}
           <PostProcCallers></PostProcCallers>
-          {/*  */}
           {/* <Bloom luminanceThreshold={0.1}></Bloom> */}
           {/* <SSR></SSR> */}
         </EffectComposer>
+        {/*  */}
         <AdaptTC
           onScreenPass={(v) => {
             setScreenPass(v)
@@ -54,16 +62,11 @@ export function ENCanvas() {
           <>
             <Select
               onChange={(v) => {
-                //
                 let first = v[0]
-
                 if (first) {
                   setSelection(first)
                 }
-                console.log(v)
               }}
-              //
-              //
             >
               <primitive
                 key={activeGLBRuntimeObject.scene.uuid + 'display'}

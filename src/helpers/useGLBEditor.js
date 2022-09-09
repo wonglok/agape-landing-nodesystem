@@ -167,6 +167,11 @@ let generateInside = (set, get) => {
         activeSceneSelection,
         cursorMode: 'ready',
       })
+      setTimeout(() => {
+        set({
+          reloadGraphID: Math.random(),
+        })
+      }, 100)
     },
     cursorMode: 'ready',
     setCurosrMode: (v) => {

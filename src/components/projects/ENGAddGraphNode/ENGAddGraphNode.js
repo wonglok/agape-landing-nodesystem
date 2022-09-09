@@ -30,6 +30,7 @@ export function ENGAddGraphNode() {
           autoFocus={true}
           defaultValue={str}
           onKeyDown={(ev) => {
+            //
             ev.stopPropagation()
             setStr(ev.target.value || '')
             if (ev.key === 'Enter') {
