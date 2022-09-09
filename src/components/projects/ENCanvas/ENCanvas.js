@@ -36,7 +36,6 @@ export function ENCanvas() {
       <Canvas className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
-        {/*  */}
         <EffectComposer>
           {screenPass}
           <PostProcCallers></PostProcCallers>
@@ -126,7 +125,6 @@ export function ENCanvas() {
         )}
 
         {/*
-
         {editorNavigationMode === 'avatar' && (
           <>
             <Environment background preset='apartment' frames={1}></Environment>
@@ -144,7 +142,6 @@ export function ENCanvas() {
             ></FloorFlat>
           </>
         )}
-
         */}
       </Canvas>
       <ENTopBarr></ENTopBarr>
