@@ -32,10 +32,7 @@ export function ENCanvas() {
       <Canvas className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
-        <PostProcCallers
-          key={activeGLBRuntimeObject?.uuid}
-          screenPass={screenPass}
-        ></PostProcCallers>
+        <PostProcCallers screenPass={screenPass}></PostProcCallers>
 
         {/*  */}
         <AdaptTC

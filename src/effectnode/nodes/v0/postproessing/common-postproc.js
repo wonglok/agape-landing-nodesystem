@@ -26,23 +26,23 @@ export function doSharedPostProc({
   }
 
   for (let kn in defaultValues) {
-    if (!data.raw.uniforms.some((u) => u.name === kn)) {
+    if (!node.data.uniforms.some((u) => u.name === kn)) {
       let val = {
         id: getID(),
-        nodeID: data.raw.nodeID,
+        nodeID: node.data.nodeID,
         name: kn,
         type: getType(defaultValues[kn]),
         protected: true,
         value: defaultValues[kn],
       }
-      data.raw.uniforms.push(val)
+      node.data.uniforms.push(val)
     }
   }
 
   let _id = getID()
   let send = () => {
     let props = {}
-    data.raw.uniforms.forEach((uni) => {
+    node.data.uniforms.forEach((uni) => {
       props[uni.name] = data.value[uni.name]
     })
 
@@ -59,7 +59,7 @@ export function doSharedPostProc({
     })
   }
 
-  data.raw.uniforms.forEach((uni) => {
+  node.data.uniforms.forEach((uni) => {
     data.uniforms[uni.name](() => {
       send()
     })

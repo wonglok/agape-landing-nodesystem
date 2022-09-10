@@ -10,24 +10,24 @@ export function PostProcCallers({ screenPass }) {
   // let setPassArray = useEffectNode((s) => s.setPassArray)
   // let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
 
-  useEffect(() => {
-    return () => {
-      setPassArray([])
-    }
-  }, [setPassArray])
+  // useEffect(() => {
+  //   return () => {
+  //     setPassArray([])
+  //   }
+  // }, [setPassArray])
 
   return (
     <EffectComposer>
       {screenPass}
 
-      {passArray.map((info) => {
+      {passArray.map((info, idx) => {
         let Compo =
           PROC[info.type] ||
           function Empty() {
             return null
           }
 
-        return <Compo key={info._id} {...info.props}></Compo>
+        return <Compo key={'postproc' + idx} {...info.props}></Compo>
       })}
     </EffectComposer>
   )
