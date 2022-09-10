@@ -38,7 +38,6 @@ export function ENCanvas() {
         ></PostProcCallers>
 
         {/*  */}
-        {/*  */}
         <AdaptTC
           onScreenPass={(v) => {
             setScreenPass(v)

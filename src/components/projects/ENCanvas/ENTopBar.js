@@ -50,15 +50,19 @@ export function ENTopBarr() {
         </button>
       </div>
 
+      {/*  */}
+      {/*  */}
+      {/*  */}
+
       <div className='absolute top-0 right-0 z-10'>
-        <button
+        {/* <button
           onClick={() => {
             //
           }}
           className='inline-block p-1 m-1 bg-white cursor-pointer select-none'
         >
           HDR
-        </button>
+        </button> */}
       </div>
     </>
   )

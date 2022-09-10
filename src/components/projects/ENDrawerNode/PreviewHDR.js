@@ -7,6 +7,7 @@ import {
   EquirectangularReflectionMapping,
   sRGBEncoding,
 } from 'three'
+import { useEffectNode } from '@/effectnode/store/useEffectNode'
 
 export function PreviewHDR({ handle }) {
   let [url, setURL] = useState()
@@ -21,29 +22,50 @@ export function PreviewHDR({ handle }) {
     })
   }, [handle])
 
+  let setHDRHandle = useEffectNode((s) => s.setHDRHandle)
+  let setHDRLink = useEffectNode((s) => s.setHDRLink)
   return (
-    <Canvas
-      onCreated={(st) => {
-        //
-        st.gl.physicallyCorrectLights = true
-        st.gl.outputEncoding = sRGBEncoding
-      }}
-      style={{ width: '300px' }}
-      key={'yopreview'}
-    >
-      {url && (
-        <Suspense fallback={<Text>Loading...</Text>}>
-          <Content url={url}></Content>
-        </Suspense>
-      )}
+    <>
+      <Canvas
+        onCreated={(st) => {
+          //
+          st.gl.physicallyCorrectLights = true
+          st.gl.outputEncoding = sRGBEncoding
+        }}
+        style={{ width: '300px' }}
+        key={'yopreview'}
+      >
+        {url && (
+          <Suspense fallback={<Text>Loading...</Text>}>
+            <Content url={url}></Content>
+          </Suspense>
+        )}
 
-      {/*  */}
-      <OrbitControls
-        rotateSpeed={-1}
-        maxDistance={5}
-        minDistance={1}
-      ></OrbitControls>
-    </Canvas>
+        {/*  */}
+        <OrbitControls
+          rotateSpeed={-1}
+          maxDistance={5}
+          minDistance={1}
+        ></OrbitControls>
+      </Canvas>
+      <div
+        className='flex items-center justify-center h-full'
+        style={{ width: '300px' }}
+      >
+        <button
+          onClick={async () => {
+            //handle
+            let url = URL.createObjectURL(await handle.getFile())
+            setHDRLink(url)
+            setHDRHandle(handle)
+          }}
+          className='p-3 px-5 bg-blue-200 rounded-2xl'
+        >
+          Use This HDR
+        </button>
+        {/*  */}
+      </div>
+    </>
   )
 }
 

@@ -7,6 +7,7 @@ import { ENTJCore, EventEmitter } from '../ENTJCore/ENTJCore'
 import { EffectNodeObjectLink } from './EffectNodeObjectLink'
 import { EffectNodeObjectNode } from './EffectNodeObjectNode'
 import { getID } from '@/helpers/getID'
+import { useGLBEditor } from '@/helpers/useGLBEditor'
 
 export function EffectNodeObject({
   glbObject,
@@ -19,8 +20,8 @@ export function EffectNodeObject({
   let [enRuntime, setEnRuntime] = useState()
 
   //
-  let reloadGraphID = 1
-  // let reloadGraphID = useENEditor((s) => s.reloadGraphID)
+  // let reloadGraphID = 1
+  let reloadGraphID = useGLBEditor((s) => s.reloadGraphID)
   // useENEditor((s) => s.overlay)
   // useAccessor((s) => s.selectedMeshes)
 
@@ -102,7 +103,7 @@ export function EffectNodeObject({
               effectNode.connections.map((conn) => {
                 return (
                   <EffectNodeObjectLink
-                    key={conn._id}
+                    key={conn._id + reloadGraphID}
                     link={conn}
                     allLinks={effectNode.connections}
                     on={on}
@@ -118,7 +119,7 @@ export function EffectNodeObject({
                 return (
                   <EffectNodeObjectNode
                     key={
-                      node._id + ''
+                      node._id + reloadGraphID
                       // reloadGraphID +
                       // enRuntime.name +
                       // effectNode.connections.map((e) => e._id)
