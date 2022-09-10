@@ -63,11 +63,11 @@ export function ENCanvas() {
                 }
               }}
             >
+              {/*  */}
               <primitive
                 key={activeGLBRuntimeObject.scene.uuid + 'display'}
                 object={activeGLBRuntimeObject.scene}
               ></primitive>
-              {/*  */}
               {/*  */}
             </Select>
             <EffectNodeRuntime
