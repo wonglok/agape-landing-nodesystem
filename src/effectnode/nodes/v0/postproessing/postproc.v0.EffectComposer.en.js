@@ -93,8 +93,6 @@ export function effect({ node, mini, data, setComponent }) {
   }
 
   inputNames.forEach((name) => {
-    //
-
     node[name].stream((signal) => {
       if (signal) {
         tree[name] = signal

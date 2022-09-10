@@ -32,7 +32,6 @@ export function doSharedPostProc({
         value: defaultValues[kn],
       }
       data.raw.uniforms.push(val)
-      node.raw.uniforms.push(val)
     }
   }
 

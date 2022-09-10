@@ -64,15 +64,18 @@ export function UITopBar() {
         {activeGLBHandle && (
           <button
             className='px-2 ml-2 text-xs text-white bg-green-600 rounded-full'
-            onClick={async () => {
+            onClick={async (ev) => {
               //
-              showSplash({ activeGLBSplash: 'loading' })
+              ev.target.innerText = 'Saving...'
               await saveFile({
                 handle: activeGLBHandle,
                 runTimeGLB: activeGLBRuntimeObject,
                 origGLB: activeGLBRawObject,
               })
-              showSplash({ activeGLBSplash: '' })
+              ev.target.innerText = 'Saved'
+              setTimeout(() => {
+                ev.target.innerText = 'Save'
+              }, 1000)
             }}
           >
             <span>Save </span>
