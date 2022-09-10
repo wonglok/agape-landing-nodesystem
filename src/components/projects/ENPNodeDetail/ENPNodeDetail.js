@@ -17,6 +17,10 @@ export function ENPNodeDetail() {
 
   //
   let effectNode = activeSceneSelection?.userData?.effectNode
+  if (!effectNode) {
+    return <></>
+  }
+
   let nodes = effectNode.nodes || []
   let node = nodes.find((e) => e._id === activeNodeID)
   //
