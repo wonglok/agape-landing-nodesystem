@@ -108,6 +108,7 @@ function UIMainContent() {
             //
             //
             right={(size) => {
+              //
               setRightPanelWidth(window.innerWidth - size)
 
               return (
@@ -156,6 +157,14 @@ function LeftRight({
   useEffect(() => {
     window.dispatchEvent(new Event('reset-size', { detail: true }))
   }, [size])
+  useEffect(() => {
+    let ttt = setInterval(() => {
+      setSize(parseInt(localStorage.getItem(NS), 10) || getDefaultSize())
+    }, 100)
+    return () => {
+      clearInterval(ttt)
+    }
+  }, [NS, getDefaultSize])
   useEffect(() => {
     setSize(getDefaultSize())
     let reset = ({ detail: isReset }) => {

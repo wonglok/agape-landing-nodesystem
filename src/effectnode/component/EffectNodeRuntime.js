@@ -9,7 +9,7 @@ export function EffectNodeRuntime({
   disabledNodes = [],
   isEditingMode = false,
 }) {
-  let [instID] = useState(getID())
+  let [instID] = useState(() => getID())
   glbObject.scene.updateMatrixWorld(true)
 
   assignSignaturesToGLB(glbObject)

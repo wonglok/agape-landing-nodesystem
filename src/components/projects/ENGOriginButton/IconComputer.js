@@ -33,7 +33,7 @@ export function ImplementationOfBtn({ onClick }) {
         anchorY='middle'
         outlineWidth={0.1}
         outlineColor='#ffffff'
-        rotation-x={Math.PI * -0.25}
+        rotation-x={Math.PI * -0.35}
         position={[0, 3.5, 0]}
       >
         Click to Add Node Module

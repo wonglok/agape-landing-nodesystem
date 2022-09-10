@@ -43,7 +43,7 @@ export function TextCnavas({ text = 'Lorem ipsum dolor sit amet' }) {
           scale={1.0}
           position-y={4}
           position-z={-4}
-          rotation-x={Math.PI * -0.25}
+          rotation-x={Math.PI * -0.35}
         >
           <planeBufferGeometry
             args={[1.5 / tex.hRatio, 1.5]}

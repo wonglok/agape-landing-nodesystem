@@ -71,7 +71,6 @@ export function ENCanvas() {
               {/*  */}
             </Select>
             <EffectNodeRuntime
-              key={activeGLBRuntimeObject.scene.uuid + 'runtime'}
               glbObject={activeGLBRuntimeObject}
               glbRaw={activeGLBRawObject}
             ></EffectNodeRuntime>

@@ -102,7 +102,7 @@ export function EffectNodeObject({
               effectNode.connections.map((conn) => {
                 return (
                   <EffectNodeObjectLink
-                    key={conn._id + enRuntime.name}
+                    key={conn._id}
                     link={conn}
                     allLinks={effectNode.connections}
                     on={on}
@@ -118,10 +118,10 @@ export function EffectNodeObject({
                 return (
                   <EffectNodeObjectNode
                     key={
-                      node._id +
-                      reloadGraphID +
-                      enRuntime.name +
-                      effectNode.connections.map((e) => e._id)
+                      node._id + ''
+                      // reloadGraphID +
+                      // enRuntime.name +
+                      // effectNode.connections.map((e) => e._id)
                     }
                     disabledNodes={disabledNodes}
                     node={node}
