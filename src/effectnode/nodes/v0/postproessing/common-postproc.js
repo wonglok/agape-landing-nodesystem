@@ -1,3 +1,5 @@
+import { getID } from '@/helpers/getID'
+
 export function doSharedPostProc({
   node,
   mini,

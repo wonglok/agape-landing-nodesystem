@@ -26,7 +26,10 @@ export function UIMain() {
   )
 }
 
+let tt = 0
+let vv = 0
 function UIMainContent() {
+  let [rightPanelWidth, setRightPanelWidth] = useState(300)
   return (
     <>
       <div
@@ -37,7 +40,7 @@ function UIMainContent() {
           <LeftRight
             //
             NS={'canvas-control'}
-            left={() => (
+            left={(upperMostSize) => (
               <UpDown
                 NS={'asset-layercanvas'}
                 getDefaultSize={() => {
@@ -53,8 +56,16 @@ function UIMainContent() {
                           <ENSceneOutline height={sizeTD}></ENSceneOutline>
                         </ENProjectGuard>
                       )}
-                      right={() => (
-                        <div className='relative w-full h-full'>
+                      right={(size) => (
+                        <div
+                          className='relative h-full'
+                          style={{
+                            width:
+                              window.innerWidth -
+                              (rightPanelWidth + size) +
+                              'px',
+                          }}
+                        >
                           <ENProjectGuard
                             loading={
                               <div className='flex items-center justify-center w-full h-full bg-gray-300'>
@@ -72,7 +83,7 @@ function UIMainContent() {
                               </div>
                             }
                           >
-                            <ENCanvas></ENCanvas>
+                            <ENCanvas key='encanvas'></ENCanvas>
                           </ENProjectGuard>
                         </div>
                       )}
@@ -92,26 +103,30 @@ function UIMainContent() {
             //
             //
             //
-            right={() => (
-              <div>
-                <UpDown
-                  NS={'param-graph'}
-                  getDefaultSize={() => {
-                    return 300
-                  }}
-                  up={() => (
-                    <ENProjectGuard>
-                      <ENParams></ENParams>
-                    </ENProjectGuard>
-                  )}
-                  down={() => (
-                    <ENProjectGuard>
-                      <ENGraph></ENGraph>
-                    </ENProjectGuard>
-                  )}
-                ></UpDown>
-              </div>
-            )}
+            right={(size) => {
+              setRightPanelWidth(window.innerWidth - size)
+
+              return (
+                <div>
+                  <UpDown
+                    NS={'param-graph'}
+                    getDefaultSize={() => {
+                      return 300
+                    }}
+                    up={() => (
+                      <ENProjectGuard>
+                        <ENParams></ENParams>
+                      </ENProjectGuard>
+                    )}
+                    down={() => (
+                      <ENProjectGuard>
+                        <ENGraph></ENGraph>
+                      </ENProjectGuard>
+                    )}
+                  ></UpDown>
+                </div>
+              )
+            }}
           ></LeftRight>
         </div>
       </div>
@@ -134,6 +149,9 @@ function LeftRight({
 }) {
   let [size, setSize] = useState(1)
   let [onoff, setOnOff] = useState(true)
+  useEffect(() => {
+    window.dispatchEvent(new Event('reset-size', { detail: true }))
+  }, [size])
   useEffect(() => {
     setSize(getDefaultSize())
     let reset = ({ detail: isReset }) => {
@@ -160,7 +178,14 @@ function LeftRight({
           defaultSize={
             parseInt(localStorage.getItem(NS), 10) || getDefaultSize()
           }
-          onChange={(size) => localStorage.setItem(NS, size)}
+          onChange={(size) => {
+            clearTimeout(tt)
+            tt = setTimeout(() => {
+              setSize(size)
+            }, 100)
+
+            localStorage.setItem(NS, size)
+          }}
         >
           <>{left(size)}</>
           <>{right(size)}</>
@@ -178,7 +203,9 @@ function UpDown({
 }) {
   let [size, setSize] = useState(1)
   let [onoff, setOnOff] = useState(true)
-
+  useEffect(() => {
+    window.dispatchEvent(new Event('reset-size', { detail: true }))
+  }, [size])
   useEffect(() => {
     let ttt = setInterval(() => {
       setSize(parseInt(localStorage.getItem(NS), 10) || getDefaultSize())
@@ -218,7 +245,11 @@ function UpDown({
           }
           onChange={(size) => {
             localStorage.setItem(NS, size)
-            setSize(size)
+
+            clearTimeout(vv)
+            vv = setTimeout(() => {
+              setSize(size)
+            }, 100)
           }}
         >
           <>{up(size)}</>

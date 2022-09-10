@@ -37,13 +37,17 @@ export async function effect({ node, mini, data, setComponent }) {
 
   return await doSharedPostProc({
     componentName,
+    defaultValues,
     node,
     mini,
     data,
     setComponent,
-    defaultValues,
   })
 }
+
+//
+
+//
 
 //
 
