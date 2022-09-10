@@ -5,15 +5,10 @@ export function ENPNodeDetail() {
   // let setOverlay = useGLBEditor((s) => s.setOverlay)
   // let overlay = useGLBEditor((s) => s.overlay)
   let activeNodeID = useGLBEditor((s) => s.activeNodeID)
-  let getActiveNode = useGLBEditor((s) => s.getActiveNode)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
-  let effectNode = useGLBEditor(
-    (s) => s.activeSceneSelection?.userData?.effectNode
-  )
   let removeLink = useGLBEditor((s) => s.removeLink)
   let removeNode = useGLBEditor((s) => s.removeNode)
   let setActiveNodeID = useGLBEditor((s) => s.setActiveNodeID)
-  let node = getActiveNode()
 
   let paramsTab = useGLBEditor((s) => s.paramsTab)
   let setParamsTab = useGLBEditor((s) => s.setParamsTab)
@@ -22,6 +17,10 @@ export function ENPNodeDetail() {
 
   let refreshSystem = useGLBEditor((s) => s.refreshSystem)
   let reloadGraphID = useGLBEditor((s) => s.reloadGraphID)
+  let effectNode = activeSceneSelection?.userData?.effectNode
+  let nodes = effectNode.nodes || []
+  let node = nodes.find((e) => e._id === activeNodeID)
+  //
   return (
     <>
       {node && (

@@ -8,9 +8,7 @@ export function doSharedPostProc({
   componentName,
 }) {
   let getType = (v) => {
-    if (typeof v === 'string') {
-      return 'text'
-    } else if (typeof v === 'boolean') {
+    if (typeof v === 'boolean') {
       return 'bool'
     } else if (typeof v === 'number') {
       return 'float'
@@ -20,31 +18,33 @@ export function doSharedPostProc({
       return 'vec3'
     } else if (typeof v === 'object' && typeof v.w !== 'undefined') {
       return 'vec4'
-    } else {
+    } else if (typeof v === 'string') {
       return 'text'
+    } else {
+      return 'float'
     }
   }
 
   //
 
   for (let kn in defaultValues) {
-    if (!node.data.uniforms.some((u) => u.name === kn)) {
+    if (!data.raw.uniforms.some((u) => u.name === kn)) {
       let val = {
         id: getID(),
-        nodeID: node.data.nodeID,
+        nodeID: data.raw.nodeID,
         name: kn,
         type: getType(defaultValues[kn]),
         protected: true,
         value: defaultValues[kn],
       }
-      node.data.uniforms.push(val)
+      data.raw.uniforms.push(val)
     }
   }
 
   let send = () => {
     let _id = getID()
     let props = {}
-    node.data.uniforms.forEach((uni) => {
+    data.raw.uniforms.forEach((uni) => {
       props[uni.name] = data.value[uni.name]
     })
 
@@ -55,7 +55,7 @@ export function doSharedPostProc({
     })
   }
 
-  node.data.uniforms.forEach((uni) => {
+  data.raw.uniforms.forEach((uni) => {
     data.uniforms[uni.name](() => {
       send()
     })

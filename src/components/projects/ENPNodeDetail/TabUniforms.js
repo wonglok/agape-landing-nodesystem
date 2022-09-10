@@ -145,7 +145,7 @@ export function TabUnifroms({ node }) {
         {node[DataKey].map((mm) => {
           mm._id = mm._id || getID()
 
-          console.log(mm)
+          console.log(mm?.type)
 
           return (
             <div
