@@ -33,10 +33,8 @@ export async function effect({ node, mini, data, setComponent }) {
     // height: Resolution.AUTO_SIZE,
   }
 
-  let componentName = 'Bloom'
-
   return await doSharedPostProc({
-    componentName,
+    componentName: 'Bloom',
     defaultValues,
     node,
     mini,

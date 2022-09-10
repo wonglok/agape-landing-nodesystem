@@ -145,6 +145,8 @@ function ResetLayoutBtn() {
     window.addEventListener('resize', rr)
     // window.addEventListener('focus', focus)
 
+    window.dispatchEvent(new CustomEvent('reset-size', { detail: true }))
+
     return () => {
       window.removeEventListener('resize', rr)
       // window.removeEventListener('focus', focus)

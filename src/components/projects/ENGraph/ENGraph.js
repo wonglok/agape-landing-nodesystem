@@ -105,7 +105,8 @@ function Content() {
               ref={(controls) => {
                 setControls(controls)
               }}
-              object-position={[0, 12.5, 12.5]}
+              target={[0, 0, 0]}
+              object-position={[0, 25, 10]}
               enableDamping={true}
               enableRotate={false}
               enablePan={true}

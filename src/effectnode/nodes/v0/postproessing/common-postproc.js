@@ -18,6 +18,8 @@ export function doSharedPostProc({
       return 'vec3'
     } else if (typeof v === 'object' && v.length === 4) {
       return 'vec4'
+    } else {
+      return 'string'
     }
   }
 
@@ -35,8 +37,8 @@ export function doSharedPostProc({
     }
   }
 
-  let _id = getID()
   let send = () => {
+    let _id = getID()
     let props = {}
     data.raw.uniforms.forEach((uni) => {
       props[uni.name] = data.value[uni.name]

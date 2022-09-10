@@ -102,6 +102,11 @@ export function effect({ node, mini, data, setComponent }) {
       sync()
     })
   })
+
+  mini.onClean(() => {
+    tree = {}
+    sync()
+  })
   //
   //
   //

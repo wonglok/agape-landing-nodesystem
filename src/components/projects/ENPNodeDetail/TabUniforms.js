@@ -9,7 +9,7 @@ export function TabUnifroms({ node }) {
   let refName = useRef()
   let refType = useRef()
   let DataKey = 'uniforms'
-  let [, reload] = useState(0)
+  let [_reload, reload] = useState(0)
   let [inv0, reload0] = useState(0)
 
   useEffect(() => {
@@ -146,7 +146,7 @@ export function TabUnifroms({ node }) {
           mm._id = mm._id || getID()
           return (
             <div
-              key={mm._id + mm.nodeID + node._id + reload}
+              key={mm._id + mm.nodeID + node._id + _reload}
               className='mb-3 mr-3'
             >
               <div className='inline-block'>

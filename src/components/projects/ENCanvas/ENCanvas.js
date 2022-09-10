@@ -33,7 +33,7 @@ export function ENCanvas() {
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
         <PostProcCallers
-          key={activeGLBRawObject?.uuid}
+          key={activeGLBRuntimeObject?.uuid}
           screenPass={screenPass}
         ></PostProcCallers>
 
@@ -53,7 +53,7 @@ export function ENCanvas() {
           ></boxHelper>
         )}
 
-        {activeGLBRawObject?.scene && (
+        {activeGLBRuntimeObject?.scene && (
           <>
             <Select
               onChange={(v) => {
@@ -88,21 +88,21 @@ export function ENCanvas() {
             <ConnectSimulation></ConnectSimulation>
             <Player></Player>
             <FloorFlat
-              key={activeGLBRawObject.uuid + 'floorflat'}
-              name={activeGLBRawObject.uuid}
+              key={activeGLBRuntimeObject.uuid + 'floorflat'}
+              name={activeGLBRuntimeObject.uuid}
             ></FloorFlat>
           </>
         )}
 
-        {editorNavigationMode === 'meta' && activeGLBRawObject.scene && (
+        {editorNavigationMode === 'meta' && activeGLBRuntimeObject.scene && (
           <>
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectCameraControls></ConnectCameraControls>
             <ConnectSimulation></ConnectSimulation>
             <Player></Player>
             <FloorObject
-              key={activeGLBRawObject.uuid + 'floorobj'}
-              object={activeGLBRawObject.scene}
+              key={activeGLBRuntimeObject.uuid + 'floorobj'}
+              object={activeGLBRuntimeObject.scene}
             ></FloorObject>
           </>
         )}
@@ -117,27 +117,6 @@ export function ENCanvas() {
             {/* <CamTrack activeSceneSelection={activeSceneSelection}></CamTrack> */}
           </>
         )}
-
-        {/*
-        {editorNavigationMode === 'avatar' && (
-          <>
-            <Environment background preset='apartment' frames={1}></Environment>
-            <gridHelper args={[500, 500]}></gridHelper>
-            <ConnectKeyboard></ConnectKeyboard>
-            <ConnectCameraControls></ConnectCameraControls>
-            <ConnectSimulation></ConnectSimulation>
-            <Player></Player>
-            <UseObjectAsPlayer
-              glbObject={activeGLBRuntimeObject}
-            ></UseObjectAsPlayer>
-            <FloorFlat
-              key={activeGLBRawObject.uuid + 'floorflat'}
-              name={activeGLBRawObject.uuid}
-            ></FloorFlat>
-          </>
-        )}
-
-        */}
 
         <EnvOutlet></EnvOutlet>
       </Canvas>

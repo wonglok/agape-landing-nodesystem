@@ -15,6 +15,10 @@ export function UIMain() {
 
   useEffect(() => {
     setReady(true)
+
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('reset-size', { detail: true }))
+    }, 1000)
   }, [])
 
   return (

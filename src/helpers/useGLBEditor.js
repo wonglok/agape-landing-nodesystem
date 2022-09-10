@@ -51,6 +51,15 @@ let generateInside = (set, get) => {
     getEffectNode: () => {
       return get().activeSceneSelection?.userData?.effectNode
     },
+    getActiveNode: () => {
+      let self = get()
+      let effectNode = self.getEffectNode()
+
+      let nodes = effectNode?.nodes || []
+      return nodes?.find((e) => e._id === self.activeNodeID) || null
+      //
+    },
+
     paramsTab: 'uniforms',
     setParamsTab: (v) => {
       set({ paramsTab: v })
@@ -98,13 +107,7 @@ let generateInside = (set, get) => {
     setActiveNodeID: (id) => {
       set({ activeNodeID: id })
     },
-    getActiveNode: () => {
-      let self = get()
-      let effectNode = self.activeSceneSelection?.userData?.effectNode
-      let nodes = effectNode?.nodes || []
-      return nodes?.find((e) => e._id === self.activeNodeID) || null
-      //
-    },
+
     addByPlacing: () => {
       //
       let self = get()
