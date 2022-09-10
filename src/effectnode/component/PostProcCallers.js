@@ -1,4 +1,5 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
+import { useFrame, useThree } from '@react-three/fiber'
 import * as PROC from '@react-three/postprocessing'
 import { EffectComposer } from '@react-three/postprocessing'
 import { useEffect } from 'react'
@@ -17,20 +18,32 @@ export function PostProcCallers({ screenPass }) {
   // }, [setPassArray])
 
   return (
-    <EffectComposer>
-      {screenPass}
+    <>
+      <CameraFling></CameraFling>
+      <EffectComposer>
+        {screenPass}
 
-      {passArray.map((info, idx) => {
-        let Compo =
-          PROC[info.type] ||
-          function Empty() {
-            return null
-          }
+        {passArray.map((info, idx) => {
+          let Compo =
+            PROC[info.type] ||
+            function Empty() {
+              return null
+            }
 
-        return <Compo key={'postproc' + idx} {...info.props}></Compo>
-      })}
-    </EffectComposer>
+          return <Compo key={'postproc' + idx} {...info.props}></Compo>
+        })}
+      </EffectComposer>
+    </>
   )
 }
 
 //
+
+function CameraFling() {
+  let camera = useThree((s) => s.camera)
+
+  useFrame(() => {
+    camera.position.z += (Math.random() - 0.5) * 0.005
+    camera.rotation.z += (Math.random() - 0.5) * 0.00005
+  })
+}
