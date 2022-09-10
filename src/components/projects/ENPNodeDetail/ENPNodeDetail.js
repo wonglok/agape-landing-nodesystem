@@ -9,14 +9,13 @@ export function ENPNodeDetail() {
   let removeLink = useGLBEditor((s) => s.removeLink)
   let removeNode = useGLBEditor((s) => s.removeNode)
   let setActiveNodeID = useGLBEditor((s) => s.setActiveNodeID)
-
   let paramsTab = useGLBEditor((s) => s.paramsTab)
   let setParamsTab = useGLBEditor((s) => s.setParamsTab)
-
   let nodeDrag = useGLBEditor((s) => s.nodeDrag)
-
   let refreshSystem = useGLBEditor((s) => s.refreshSystem)
   let reloadGraphID = useGLBEditor((s) => s.reloadGraphID)
+
+  //
   let effectNode = activeSceneSelection?.userData?.effectNode
   let nodes = effectNode.nodes || []
   let node = nodes.find((e) => e._id === activeNodeID)
