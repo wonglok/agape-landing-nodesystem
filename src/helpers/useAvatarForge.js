@@ -29,11 +29,15 @@ export const useAvatarForge = create((set, get) => {
         forceIndice: false,
         includeCustomExtensions: true,
       }
-      avatar.scene.name = 'avatar'
+      // avatar.scene.name = 'avatar'
 
-      avatar.scene.rotation.x = Math.PI * -0.5
+      // avatar.scene.rotation.x = Math.PI * -0.5
+
       //
-      let rawGLBBuffer = await exporter.parseAsync([avatar.scene], options)
+      let rawGLBBuffer = await exporter.parseAsync(
+        avatar.scene.children,
+        options
+      )
 
       let dracoMod = await remoteImport('/draco/draco_encoder_raw.js')
 
@@ -116,8 +120,31 @@ export const useAvatarForge = create((set, get) => {
       loader.setDRACOLoader(dracoLoader)
 
       let avatar = await loader.loadAsync(URL.createObjectURL(file))
+
+      console.log(avatar)
       avatar.name = file.name
       set({ avatar: avatar })
+    },
+
+    setAvatarObjectByOneFBXFile: async (file) => {
+      get().exportAvatar({
+        avatar: avatar,
+        clips: [],
+        done: async ({ url }) => {
+          // set({ avatarObject: v })
+          let loader = new FBXLoader()
+          // const dracoLoader = new DRACOLoader()
+          // dracoLoader.setDecoderPath('/draco/')
+          // loader.setDRACOLoader(dracoLoader)
+
+          let avatarGLB = await loader
+            .loadAsync(url)
+            .catch((e) => console.log(e))
+
+          //
+          set({ avatar: avatarGLB })
+        },
+      })
     },
     setClipsByFiles: (files) => {
       Promise.all(

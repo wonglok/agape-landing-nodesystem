@@ -144,6 +144,9 @@ export function TabUnifroms({ node }) {
       <div className=''>
         {node[DataKey].map((mm) => {
           mm._id = mm._id || getID()
+
+          console.log(mm)
+
           return (
             <div
               key={mm._id + mm.nodeID + node._id + _reload}
@@ -277,7 +280,6 @@ export function TabUnifroms({ node }) {
                   ></ButtonInput>
                 )}
               </div>
-
               {/*  */}
               {/*  */}
               {/*  */}

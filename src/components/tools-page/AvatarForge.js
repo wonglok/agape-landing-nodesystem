@@ -63,7 +63,8 @@ function MotionZone() {
             arr[Number(kn)] = acceptedFiles[kn]
           }
 
-          setClipsByFiles(arr.filter((e) => e.name.includes('.fbx')))
+          // .name.includes('.fbx')
+          setClipsByFiles(arr.filter((e) => e))
         }}
       >
         {({ getRootProps, getInputProps }) => (
@@ -94,6 +95,9 @@ function MotionZone() {
 }
 
 function AvatarZone() {
+  let setAvatarObjectByOneFBXFile = useAvatarForge(
+    (s) => s.setAvatarObjectByOneFBXFile
+  )
   let setAvatarObjectByOneFile = useAvatarForge(
     (s) => s.setAvatarObjectByOneFile
   )
@@ -110,7 +114,11 @@ function AvatarZone() {
           arr.filter((e) => e.name.includes('.glb'))
 
           if (arr[0]) {
-            setAvatarObjectByOneFile(arr[0])
+            if (arr[0].name.includes('.fbx')) {
+              setAvatarObjectByOneFBXFile(arr[0])
+            } else {
+              setAvatarObjectByOneFile(arr[0])
+            }
           }
         }}
       >
