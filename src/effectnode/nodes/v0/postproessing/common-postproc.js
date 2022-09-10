@@ -25,8 +25,6 @@ export function doSharedPostProc({
     }
   }
 
-  //
-
   for (let kn in defaultValues) {
     if (!data.raw.uniforms.some((u) => u.name === kn)) {
       let val = {
@@ -47,6 +45,12 @@ export function doSharedPostProc({
     data.raw.uniforms.forEach((uni) => {
       props[uni.name] = data.value[uni.name]
     })
+
+    for (let kn in props) {
+      if (!props[kn]) {
+        delete props[kn]
+      }
+    }
 
     node.out0.pulse({
       _id: _id,
