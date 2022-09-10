@@ -41,8 +41,8 @@ export function doSharedPostProc({
     }
   }
 
+  let _id = getID()
   let send = () => {
-    let _id = getID()
     let props = {}
     data.raw.uniforms.forEach((uni) => {
       props[uni.name] = data.value[uni.name]
