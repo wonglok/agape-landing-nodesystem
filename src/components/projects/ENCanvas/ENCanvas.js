@@ -15,6 +15,7 @@ import { AdaptTC } from './transform/AdaptTC'
 import { ENTopBarr } from './ENTopBar'
 import { PostProcCallers } from '@/effectnode/component/PostProcCallers'
 import { EnvOutlet } from './EnvOutlet'
+import { useEffectNode } from '@/effectnode/store/useEffectNode'
 
 export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
@@ -25,12 +26,18 @@ export function ENCanvas() {
   let setOrbit = useGLBEditor((s) => s.setOrbit)
   let [screenPass, setScreenPass] = useState(null)
 
+  //
   return (
     <div className='relative w-full h-full'>
       <Canvas className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
-        <PostProcCallers screenPass={screenPass}></PostProcCallers>
+        <PostProcCallers
+          key={activeGLBRawObject?.uuid}
+          screenPass={screenPass}
+        ></PostProcCallers>
+
+        {/*  */}
         {/*  */}
         <AdaptTC
           onScreenPass={(v) => {

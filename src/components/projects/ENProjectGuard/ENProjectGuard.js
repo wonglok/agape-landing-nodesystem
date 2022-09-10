@@ -21,7 +21,9 @@ export function ENProjectGuard({
         </>
       )}
 
-      {activeGLBRawObject && activeGLBRuntimeObject ? children : null}
+      {activeGLBRawObject && activeGLBRuntimeObject && activeGLBSplash === ''
+        ? children
+        : null}
     </>
   )
 }

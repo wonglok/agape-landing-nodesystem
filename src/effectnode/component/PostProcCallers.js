@@ -6,8 +6,15 @@ import { useEffectNode } from '../store/useEffectNode'
 
 export function PostProcCallers({ screenPass }) {
   let passArray = useEffectNode((s) => s.passArray)
+  let setPassArray = useEffectNode((s) => s.setPassArray)
   // let setPassArray = useEffectNode((s) => s.setPassArray)
   // let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
+
+  useEffect(() => {
+    return () => {
+      setPassArray([])
+    }
+  }, [setPassArray])
 
   return (
     <EffectComposer>

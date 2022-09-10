@@ -181,10 +181,9 @@ function LeftRight({
           onChange={(size) => {
             clearTimeout(tt)
             tt = setTimeout(() => {
+              localStorage.setItem(NS, size)
               setSize(size)
             }, 100)
-
-            localStorage.setItem(NS, size)
           }}
         >
           <>{left(size)}</>
@@ -244,10 +243,9 @@ function UpDown({
             parseInt(localStorage.getItem(NS), 10) || getDefaultSize()
           }
           onChange={(size) => {
-            localStorage.setItem(NS, size)
-
             clearTimeout(vv)
             vv = setTimeout(() => {
+              localStorage.setItem(NS, size)
               setSize(size)
             }, 100)
           }}

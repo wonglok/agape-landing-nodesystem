@@ -23,14 +23,16 @@ export function doSharedPostProc({
 
   for (let kn in defaultValues) {
     if (!data.raw.uniforms.some((u) => u.name === kn)) {
-      data.raw.uniforms.push({
+      let val = {
         id: getID(),
         nodeID: data.raw.nodeID,
         name: kn,
         type: getType(typeof defaultValues[kn]),
         protected: true,
         value: defaultValues[kn],
-      })
+      }
+      data.raw.uniforms.push(val)
+      node.raw.uniforms.push(val)
     }
   }
 
