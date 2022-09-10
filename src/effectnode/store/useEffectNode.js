@@ -1,13 +1,11 @@
 import create from 'zustand'
+import { Codes } from './codes'
 
 export const useEffectNode = create((set, get) => {
   //
 
-  import('./codes').then(({ Codes }) => {
-    set({ codes: Codes })
-  })
   return {
-    codes: [],
+    codes: Codes,
     setCodes: (v) => {
       set({ codes: v })
     },
@@ -18,11 +16,3 @@ export const useEffectNode = create((set, get) => {
     //
   }
 })
-
-//
-
-//
-
-//
-
-//

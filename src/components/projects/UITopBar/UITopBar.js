@@ -66,11 +66,13 @@ export function UITopBar() {
             className='px-2 ml-2 text-xs text-white bg-green-600 rounded-full'
             onClick={async () => {
               //
+              showSplash({ activeGLBSplash: 'loading' })
               await saveFile({
                 handle: activeGLBHandle,
                 runTimeGLB: activeGLBRuntimeObject,
                 origGLB: activeGLBRawObject,
               })
+              showSplash({ activeGLBSplash: '' })
             }}
           >
             <span>Save </span>

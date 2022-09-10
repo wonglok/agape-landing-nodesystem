@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Codes } from '../store/codes'
 import { useEffectNode } from '../store/useEffectNode'
 // import { useENEditor } from '@/vfx-studio/store/use-en-editor'
 
@@ -14,8 +15,6 @@ export function EffectNodeObjectNode({
   isEditingMode,
   disabledNodes = [],
 }) {
-  let codes = useEffectNode((s) => s.codes)
-
   let [component, setComponent] = useState(null)
   useEffect(() => {
     let cleans = []
@@ -24,25 +23,24 @@ export function EffectNodeObjectNode({
     enRuntime.now.isEditingMode = isEditingMode
 
     let run = async () => {
-      let featureModule = codes
-        .filter((e) => {
-          let res = true
+      let featureModule = Codes.filter((e) => {
+        let res = true
 
-          disabledNodes.forEach((name) => {
-            if (res) {
-              if (e.title.indexOf(name) !== -1) {
-                res = false
-              }
+        disabledNodes.forEach((name) => {
+          if (res) {
+            if (e.title.indexOf(name) !== -1) {
+              res = false
             }
-          })
-
-          // if (!res) {
-          //   console.log('disabled node found:', e.title)
-          // }
-          //
-          return res
+          }
         })
-        .find((e) => e.title === node.codeID)
+
+        //
+        // if (!res) {
+        //   console.log('disabled node found:', e.title)
+        // }
+        //
+        return res
+      }).find((e) => e.title === node.codeID)
 
       //
       if (featureModule) {
@@ -269,6 +267,7 @@ export function EffectNodeObjectNode({
     }
 
     //
+
     run().then(() => {
       enRuntime.now['ok' + node._id] = true
     })
@@ -277,6 +276,11 @@ export function EffectNodeObjectNode({
       cleans.forEach((c) => c())
     }
   }, [])
+
+  //
+  //
+
+  //
   return (
     <>
       {/*  */}
@@ -285,3 +289,5 @@ export function EffectNodeObjectNode({
     </>
   )
 }
+
+//

@@ -159,6 +159,8 @@ function AllReady({ nodes, enRuntime }) {
           .filter((e) => !e).length === 0
       )
     }
+
+    //
     let tt = setInterval(() => {
       let allOk = check()
 

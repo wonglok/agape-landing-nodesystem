@@ -8,6 +8,7 @@ export function RuntimeTreeNode({
   isEditingMode,
   instID = getID(),
 }) {
+  //
   return (
     <group>
       {node?.userData?.effectNode &&
@@ -37,3 +38,5 @@ export function RuntimeTreeNode({
     </group>
   )
 }
+
+//

@@ -69,41 +69,6 @@ export async function nodeData({ defaultData, nodeID }) {
   }
 }
 
-function InputSockets({ inputNames, node }) {
-  let setPassArray = useEffectNode((s) => s.setPassArray)
-
-  useEffect(() => {
-    let tree = {}
-    let sync = () => {
-      console.log(tree)
-      setPassArray(Object.values(tree).filter((e) => e))
-    }
-    inputNames.forEch((name) => {
-      node[name].stream((signal) => {
-        if (signal.value) {
-          tree[name] = signal.value
-        } else {
-          tree[name] = false
-        }
-        sync()
-      })
-      //
-      node[name].ready.then((value) => {
-        tree[name] = value
-        sync()
-      })
-    })
-
-    return () => {
-      setPassArray([])
-    }
-  }, [inputNames, node, setPassArray])
-
-  //
-  //
-  return <></>
-}
-
 export function effect({ node, mini, data, setComponent }) {
   //
   let inputNames = [
@@ -119,14 +84,27 @@ export function effect({ node, mini, data, setComponent }) {
     'in9',
   ]
 
-  setComponent(
-    <InputSockets
-      key={getID()}
-      node={node}
-      data={data}
-      inputNames={inputNames}
-    ></InputSockets>
-  )
+  let setPassArray = useEffectNode.getState().setPassArray
+  let tree = {}
+
+  let sync = () => {
+    let data = Object.values(tree).filter((e) => e)
+    setPassArray(data)
+  }
+
+  inputNames.forEach((name) => {
+    //
+
+    node[name].stream((signal) => {
+      if (signal) {
+        tree[name] = signal
+      } else {
+        tree[name] = false
+      }
+      sync()
+    })
+  })
+  //
   //
   //
 }
