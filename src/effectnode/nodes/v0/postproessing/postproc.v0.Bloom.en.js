@@ -1,4 +1,5 @@
 import { getID } from '@/helpers/getID'
+import { doSharedPostProc } from './common-postproc'
 export async function nodeData({ defaultData, nodeID }) {
   return {
     ...defaultData,
@@ -19,7 +20,7 @@ export async function nodeData({ defaultData, nodeID }) {
 }
 
 export async function effect({ node, mini, data, setComponent }) {
-  let PresetValues = {
+  let defaultValues = {
     luminanceThreshold: 0.1,
     luminanceSmoothing: 0.025,
     mipmapBlur: true,
@@ -32,40 +33,22 @@ export async function effect({ node, mini, data, setComponent }) {
     // height: Resolution.AUTO_SIZE,
   }
 
-  for (let kn in PresetValues) {
-    // PresetValues[kn] =
+  let componentName = 'Bloom'
 
-    if (!data.raw.uniforms.some((u) => u.name === kn)) {
-      data.raw.uniforms.push({
-        id: getID(),
-        nodeID: data.raw.nodeID,
-        name: kn,
-        type: typeof PresetValues[kn] === 'boolean' ? 'bool' : 'float',
-        protected: true,
-        value: PresetValues[kn],
-      })
-    }
-  }
-
-  let _id = getID()
-  let send = () => {
-    let props = {}
-    data.raw.uniforms.forEach((uni) => {
-      props[uni.name] = data.value[uni.name]
-    })
-
-    node.out0.pulse({
-      _id: _id,
-      type: 'Bloom',
-      props,
-    })
-  }
-
-  data.raw.uniforms.forEach((uni) => {
-    data.uniforms[uni.name](() => {
-      send()
-    })
+  return await doSharedPostProc({
+    componentName,
+    node,
+    mini,
+    data,
+    setComponent,
+    defaultValues,
   })
-
-  send()
 }
+
+//
+
+//
+
+//
+
+//
