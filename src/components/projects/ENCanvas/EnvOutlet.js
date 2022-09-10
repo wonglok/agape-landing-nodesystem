@@ -1,12 +1,19 @@
 import { useEffectNode } from '@/effectnode/store/useEffectNode'
 import { Environment } from '@react-three/drei'
 import { useLoader, useThree } from '@react-three/fiber'
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 import { EquirectangularReflectionMapping } from 'three140'
 import { RGBELoader } from 'three140/examples/jsm/loaders/RGBELoader'
 
 export function EnvOutlet() {
   let hdrLink = useEffectNode((s) => s.hdrLink)
+  let initHDR = useEffectNode((s) => s.initHDR)
+
+  useEffect(() => {
+    initHDR()
+  }, [])
+
+  //
   return (
     <group>
       {!hdrLink && (
@@ -21,12 +28,12 @@ export function EnvOutlet() {
 }
 
 function LoaderHDR({ url }) {
+  let scene = useThree((s) => s.scene)
+
   let textre = useLoader(RGBELoader, url)
   textre.mapping = EquirectangularReflectionMapping
-  let scene = useThree((s) => s.scene)
   scene.environment = textre
 
-  // scene.background = textre
   return null
 }
 
