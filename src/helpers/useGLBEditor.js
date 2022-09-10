@@ -33,7 +33,7 @@ let generateInside = (set, get) => {
   curosrPoint.userData.added = new Vector3()
   curosrPoint.userData.diff = new Vector3()
 
-  console.log('generateInside')
+  // console.log('generateInside')
   return {
     reloadGraphID: 0,
     refreshSystem: () => {

@@ -44,6 +44,7 @@ export function ENTopBarr() {
           onClick={() => {
             switchMode('orbit')
           }}
+          //
         >
           Orbit Mode
         </button>
@@ -56,15 +57,7 @@ export function ENTopBarr() {
           }}
           className='inline-block p-1 m-1 bg-white cursor-pointer select-none'
         >
-          Your HDR
-        </button>
-        <button
-          onClick={() => {
-            //
-          }}
-          className='inline-block p-1 m-1 bg-white cursor-pointer select-none'
-        >
-          Default HDR
+          HDR
         </button>
       </div>
     </>
