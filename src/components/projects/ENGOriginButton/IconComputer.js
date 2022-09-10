@@ -12,7 +12,16 @@ export function IconComputer({ onClick = () => {} }) {
 export function ImplementationOfBtn({ onClick }) {
   // let glb = useGLTF(`/effectnode/mac-draco.glb`)
   return (
-    <group scale={1} onPointerDown={onClick}>
+    <group
+      scale={1}
+      onPointerEnter={() => {
+        document.body.style.cursor = 'pointer'
+      }}
+      onPointerLeave={() => {
+        document.body.style.cursor = ''
+      }}
+      onPointerDown={onClick}
+    >
       <Text
         color={'#000000'}
         fontSize={0.7}
