@@ -29,6 +29,7 @@ const Page = (props) => {
         onClick={() => {
           //
           screenOpacity.value = 1
+          //
           anime({
             targets: [screenOpacity],
             value: 0,
@@ -63,6 +64,7 @@ const Page = (props) => {
           walkOffset={[1, 0, -0.01]}
         ></Companion>
       </Suspense>
+
       <Suspense fallback={null}>
         <Companion
           frustumCulled={false}
@@ -75,8 +77,6 @@ const Page = (props) => {
       </Suspense>
 
       <Environment background={true} preset='night'></Environment>
-
-      {/*  */}
 
       {/*  */}
       {/*  */}
