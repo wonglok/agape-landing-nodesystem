@@ -5,7 +5,7 @@ import { EffectComposer } from '@react-three/postprocessing'
 import { useEffect } from 'react'
 import { useEffectNode } from '../store/useEffectNode'
 
-export function PostProcCallers({ screenPass }) {
+export function PostProcCallers({ screenPass = null }) {
   let passArray = useEffectNode((s) => s.passArray)
   let setPassArray = useEffectNode((s) => s.setPassArray)
   // let setPassArray = useEffectNode((s) => s.setPassArray)
@@ -43,8 +43,8 @@ function CameraFling() {
   let camera = useThree((s) => s.camera)
 
   useFrame(() => {
-    camera.rotation.z += (Math.random() - 0.5) * 0.00005
-    camera.position.z += (Math.random() - 0.5) * 0.00005
+    camera.rotation.z += (Math.random() - 0.5) * 0.0005
+    camera.position.z += (Math.random() - 0.5) * 0.0005
   })
 
   return null

@@ -28,9 +28,9 @@ export function ENPNodeDetail() {
     <>
       {node && (
         <>
-          <span id={nodeDrag?.nodeID}></span>
-          <span id={activeSceneSelection.uuid}></span>
-          <span id={reloadGraphID + 'reloadGraphID-ennodedetails'}></span>
+          {/* <span id={nodeDrag?.nodeID}></span> */}
+          {/* <span id={activeSceneSelection.uuid}></span> */}
+          {/* <span id={reloadGraphID + 'reloadGraphID-ennodedetails'}></span> */}
           {/*
           <div className=' absolute top-0 right-0 p-1'>
             <button

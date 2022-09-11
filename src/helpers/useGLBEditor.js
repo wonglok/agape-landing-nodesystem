@@ -38,9 +38,6 @@ let generateInside = (set, get) => {
     reloadGraphID: 0,
     refreshSystem: () => {
       set({ reloadGraphID: Math.random() })
-      setTimeout(() => {
-        set({ reloadGraphID: Math.random() })
-      }, 100)
     },
     orbit: false,
     setOrbit: (s) => {

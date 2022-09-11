@@ -7,7 +7,7 @@ export function ENGNodes() {
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let effectNode = activeSceneSelection?.userData?.effectNode
   return (
-    <group key={reloadGraphID + 'gpnodesingle'}>
+    <group key={'gpnodesingle'}>
       {effectNode && (
         <>
           {effectNode?.nodes
@@ -15,7 +15,7 @@ export function ENGNodes() {
             .map((nd) => {
               return (
                 <NodeSingle
-                  key={nd?._id + reloadGraphID}
+                  key={nd._id}
                   node={nd}
                   graph={effectNode}
                   effectNode={effectNode}

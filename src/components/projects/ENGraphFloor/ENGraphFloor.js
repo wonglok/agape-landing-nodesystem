@@ -20,7 +20,7 @@ export function ENGraphFloor() {
             addByPlacing()
           }
 
-          curosrPoint.userData.added.set(0, 0, 0)
+          // curosrPoint.userData.added.set(0, 0, 0)
         }}
         onPointerMove={(ev) => {
           curosrPoint.userData.diff.copy(ev.point).sub(curosrPoint.position)
@@ -36,7 +36,7 @@ export function ENGraphFloor() {
         onPointerUp={() => {
           setNodeDrag(null)
           controls.enabled = true
-          curosrPoint.userData.added.set(0, 0, 0)
+          // curosrPoint.userData.added.set(0, 0, 0)
         }}
       >
         <shaderMaterial

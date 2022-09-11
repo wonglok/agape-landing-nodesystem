@@ -7,7 +7,7 @@ import { TextCnavas } from './TextCanvas'
 
 export function NodeSingle({ effectNode, node }) {
   let ref = useRef()
-  let setParamsTab = useGLBEditor((s) => s.setParamsTab)
+  // let setParamsTab = useGLBEditor((s) => s.setParamsTab)
   let controls = useGLBEditor((s) => s.controls)
 
   let setNodeDrag = useGLBEditor((s) => s.setNodeDrag)
@@ -15,30 +15,40 @@ export function NodeSingle({ effectNode, node }) {
   let nodeDrag = useGLBEditor((s) => s.nodeDrag)
   let setActiveNodeID = useGLBEditor((s) => s.setActiveNodeID)
 
-  useFrame(() => {
-    // //
+  let sync = () => {
     if (nodeDrag && nodeDrag?._id === node?._id && curosrPoint) {
       node.position[0] =
         curosrPoint.userData.down.x + curosrPoint.userData.added.x
       node.position[1] = 1
       node.position[2] =
         curosrPoint.userData.down.z + curosrPoint.userData.added.z
+    } else {
     }
 
     if (ref.current && node?.position) {
       ref.current.position.fromArray(node.position)
       ref.current.position.y = 1
     }
+  }
+  useFrame(() => {
+    // //
+    sync()
   })
 
   let inc = useRef(0)
+
+  if (!node) {
+    return <></>
+  }
   return (
     <group ref={ref}>
       <RoundedBox
-        userData={{ canDrag: true }}
         onPointerDown={(ev) => {
           if (node) {
+            setActiveNodeID(node._id)
+            curosrPoint.userData.added.set(0, 0, 0)
             curosrPoint.userData.down.fromArray(node.position)
+            curosrPoint.userData.down.y = 1
             controls.enabled = false
             setNodeDrag(node)
           }
@@ -51,14 +61,14 @@ export function NodeSingle({ effectNode, node }) {
           if (inc.current <= 5) {
             // console.log('open')
             //
-            setParamsTab('uniforms')
-            setActiveNodeID(node._id)
-
-            //
+            // setParamsTab('uniforms')
             //
           }
+          sync()
           inc.current = 0
-          setNodeDrag(null)
+          setTimeout(() => {
+            setNodeDrag(null)
+          }, 100)
           controls.enabled = true
         }}
         args={[5, 0.5, 5]}

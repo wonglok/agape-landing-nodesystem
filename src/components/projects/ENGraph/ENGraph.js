@@ -83,51 +83,49 @@ function Content() {
   let setControls = useGLBEditor((s) => s.setControls)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let setOverlayENGraph = useGLBEditor((s) => s.setOverlayENGraph)
-  let nodeDrag = useGLBEditor((s) => s.nodeDrag)
-  let reloadGraphID = useGLBEditor((s) => s.reloadGraphID)
+  // let nodeDrag = useGLBEditor((s) => s.nodeDrag)
+  // let reloadGraphID = useGLBEditor((s) => s.reloadGraphID)
   return (
     <>
-      <group name={nodeDrag?.uuid + reloadGraphID + 'nodedrag'}>
-        {activeSceneSelection && (
-          <>
-            <ENGDraggingWire></ENGDraggingWire>
-            <ENGOriginButton></ENGOriginButton>
+      {activeSceneSelection && (
+        <>
+          <ENGDraggingWire></ENGDraggingWire>
+          <ENGOriginButton></ENGOriginButton>
 
-            <IconComputer
-              onClick={() => {
-                //
-                //
-                setOverlayENGraph('add-mods')
-              }}
-            ></IconComputer>
+          <IconComputer
+            onClick={() => {
+              //
+              //
+              setOverlayENGraph('add-mods')
+            }}
+          ></IconComputer>
 
-            <MapControls
-              ref={(controls) => {
-                setControls(controls)
-              }}
-              target={[0, 0, 0]}
-              object-position={[0, 25, 10]}
-              enableDamping={true}
-              enableRotate={false}
-              enablePan={true}
-            ></MapControls>
+          <MapControls
+            ref={(controls) => {
+              setControls(controls)
+            }}
+            target={[0, 0, 0]}
+            object-position={[0, 25, 10]}
+            enableDamping={true}
+            enableRotate={false}
+            enablePan={true}
+          ></MapControls>
 
-            <ENGHDR></ENGHDR>
+          <ENGHDR></ENGHDR>
 
-            <AddItemCurosr></AddItemCurosr>
+          <AddItemCurosr></AddItemCurosr>
 
-            <ENGraphFloor></ENGraphFloor>
+          <ENGraphFloor></ENGraphFloor>
 
-            <ENGNodes></ENGNodes>
+          <ENGNodes></ENGNodes>
 
-            <ConnectedWires></ConnectedWires>
+          <ConnectedWires></ConnectedWires>
 
-            {/* <group position={[0, 1.5, 0]}>
+          {/* <group position={[0, 1.5, 0]}>
             <ConnectedWires></ConnectedWires>
           </group> */}
-          </>
-        )}
-      </group>
+        </>
+      )}
     </>
   )
 }
