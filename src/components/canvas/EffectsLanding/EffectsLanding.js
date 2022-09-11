@@ -43,7 +43,7 @@ export function EffectsLanding() {
       <EffectComposer
         disableNormalPass={false}
         stencilBuffer={false}
-        multisampling={4}
+        // multisampling={4}
       >
         <Noise opacity={1} premultiply={true}></Noise>
         <Noise opacity={0.5} premultiply={true}></Noise>
