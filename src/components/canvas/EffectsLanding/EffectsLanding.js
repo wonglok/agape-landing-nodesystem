@@ -37,6 +37,37 @@ export function EffectsLanding() {
   // const diff = useScrollStore((s) => s.diff)
   // console.log('offsetX, offsetY', offsetX, offsetY)
   // console.log('hue, saturation', hue, saturation)
+  let props = {
+    temporalResolve: true,
+    STRETCH_MISSED_RAYS: false,
+    USE_MRT: false,
+    USE_NORMALMAP: true,
+    USE_ROUGHNESSMAP: true,
+    ENABLE_JITTERING: true,
+    ENABLE_BLUR: true,
+    DITHERING: true,
+    temporalResolveMix: 0.9,
+    temporalResolveCorrectionMix: 0.9,
+    maxSamples: 0,
+    resolutionScale: 1,
+    blurMix: 0.5,
+    blurKernelSize: 4,
+    BLUR_EXPONENT: 16.0,
+    rayStep: 0.5,
+    intensity: 3.5,
+    maxRoughness: 1,
+    jitter: 0.4,
+    jitterSpread: 0.05,
+    jitterRough: 1,
+    roughnessFadeOut: 1,
+    rayFadeOut: 0,
+    MAX_STEPS: 20,
+    NUM_BINARY_SEARCH_STEPS: 10,
+    maxDepthDifference: 8,
+    maxDepth: 1,
+    thickness: 8,
+    ior: 1.33,
+  }
 
   return (
     <group>
@@ -57,8 +88,6 @@ export function EffectsLanding() {
         ></Bloom>
 
         {/*  */}
-        {/*  */}
-        {/*  */}
         {/* <SMAA></SMAA> */}
 
         <Vignette></Vignette>
@@ -76,7 +105,7 @@ export function EffectsLanding() {
           offset={[diff * offsetX, diff * offsetY]}
         ></ChromaticAberration>
 
-        {/* <SSR></SSR> */}
+        {<SSR key={'ssr'} {...props}></SSR>}
 
         {/* <LUT lut={texture}></LUT> */}
 

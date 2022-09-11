@@ -39,7 +39,7 @@ export function doSharedPostProc({
     }
   }
 
-  let _id = getID()
+  let _id = node.nodeID + 'out0'
   let send = () => {
     let props = {}
     node.data.uniforms.forEach((uni) => {
