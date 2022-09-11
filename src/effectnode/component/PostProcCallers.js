@@ -21,8 +21,6 @@ export function PostProcCallers({ screenPass }) {
     <>
       <CameraFling></CameraFling>
       <EffectComposer>
-        {screenPass}
-
         {passArray.map((info, idx) => {
           let Compo =
             PROC[info.type] ||
@@ -32,6 +30,8 @@ export function PostProcCallers({ screenPass }) {
 
           return <Compo key={'postproc' + idx} {...info.props}></Compo>
         })}
+
+        {screenPass}
       </EffectComposer>
     </>
   )
