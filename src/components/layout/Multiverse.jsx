@@ -49,6 +49,8 @@ function TempScene() {
     camera.position.z = 15
     camera.lookAt(0, 0, 0)
   })
+
+  //
   return <gridHelper args={[100, 100, 0xff0000, 0x0000ff]}></gridHelper>
 }
 

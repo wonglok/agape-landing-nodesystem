@@ -38,35 +38,56 @@ export function EffectsLanding() {
   // console.log('offsetX, offsetY', offsetX, offsetY)
   // console.log('hue, saturation', hue, saturation)
   let props = {
+    /** whether you want to use Temporal Resolving to re-use reflections from the last frames; this will reduce noise tremendously but may result in "smearing" */
     temporalResolve: true,
-    STRETCH_MISSED_RAYS: false,
-    USE_MRT: false,
-    USE_NORMALMAP: true,
-    USE_ROUGHNESSMAP: true,
-    ENABLE_JITTERING: true,
-    ENABLE_BLUR: true,
-    DITHERING: true,
-    temporalResolveMix: 0.9,
-    temporalResolveCorrectionMix: 0.9,
+    /** a value between 0 and 1 to set how much the last frame's reflections should be blended in; higher values will result in less noisy reflections when moving the camera but a more smeary look */
+    temporalResolveMix: 0.5,
+    /** a value between 0 and 1 to set how much the reprojected reflection should be corrected; higher values will reduce smearing but will result in less flickering at reflection edges */
+    temporalResolveCorrectionMix: 0.8,
+    /** the maximum 1 of samples for reflections; settings it to 0 means unlimited samples; setting it to a value like 6 can help make camera movements less disruptive when calculating reflections */
     maxSamples: 0,
-    resolutionScale: 1,
+    /** whether to blur the reflections and blend these blurred reflections with the raw ones depending on the blurMix value */
+    ENABLE_BLUR: true,
+    /** how much the blurred reflections should be mixed with the raw reflections */
     blurMix: 0.5,
+    /** the sharpness of the Bilateral Filter used to blur reflections */
+    blurSharpness: 0.5,
+    /** the kernel size of the Bilateral Blur Filter; higher kernel sizes will result in blurrier reflections with more artifacts */
     blurKernelSize: 4,
-    BLUR_EXPONENT: 16.0,
-    rayStep: 0.5,
-    intensity: 3.5,
+    /** how much the reflection ray should travel in each of its iteration; higher values will give deeper reflections but with more artifacts */
+    rayStep: 5,
+    /** the intensity of the reflections */
+    intensity: 1,
+    /** the maximum roughness a texel can have to have reflections calculated for it */
     maxRoughness: 1,
-    jitter: 0.4,
-    jitterSpread: 0.05,
-    jitterRough: 1,
-    roughnessFadeOut: 1,
-    rayFadeOut: 0,
-    MAX_STEPS: 20,
-    NUM_BINARY_SEARCH_STEPS: 10,
-    maxDepthDifference: 8,
-    maxDepth: 1,
-    thickness: 8,
-    ior: 1.33,
+    /** whether jittering is enabled; jittering will randomly jitter the reflections resulting in a more noisy but overall more realistic look, enabling jittering can be expensive depending on the view angle */
+    ENABLE_JITTERING: true,
+    /** how intense jittering should be */
+    jitter: 0.1,
+    /** how much the jittered rays should be spread; higher values will give a rougher look regarding the reflections but are more expensive to compute with */
+    jitterSpread: 0.1,
+    /** how intense jittering should be in relation to a material's roughness */
+    jitterRough: 0.1,
+    /** the 1 of steps a reflection ray can maximally do to find an object it intersected (and thus reflects) */
+    MAX_STEPS: 10,
+    /** once we had our ray intersect something, we need to find the exact point in space it intersected and thus it reflects; this can be done through binary search with the given 1 of maximum steps */
+    NUM_BINARY_SEARCH_STEPS: 5,
+    /** the maximum depth difference between a ray and the particular depth at its screen position after refining with binary search; lower values will result in better performance */
+    maxDepthDifference: 0.2,
+    /** the maximum depth for which reflections will be calculated */
+    maxDepth: 5,
+    /** the maximum depth difference between a ray and the particular depth at its screen position before refining with binary search; lower values will result in better performance */
+    thickness: 1,
+    /** Index of Refraction, used for calculating fresnel; reflections tend to be more intense the steeper the angle between them and the viewer is, the ior parameter set how much the intensity varies */
+    ior: 1.5,
+    /** if there should still be reflections for rays for which a reflecting point couldn't be found; enabling this will result in stretched looking reflections which can look good or bad depending on the angle */
+    STRETCH_MISSED_RAYS: true,
+    /** WebGL2 only - whether to use multiple render targets when rendering the G-buffers (normals, depth and roughness); using them can improve performance as they will render all information to multiple buffers for each fragment in one run; this setting can't be changed during run-time */
+    USE_MRT: false,
+    /** if roughness maps should be taken account of when calculating reflections */
+    USE_ROUGHNESSMAP: true,
+    /** if normal maps should be taken account of when calculating reflections */
+    USE_NORMALMAP: true,
   }
 
   return (
@@ -74,7 +95,7 @@ export function EffectsLanding() {
       <EffectComposer
         disableNormalPass={false}
         stencilBuffer={false}
-        // multisampling={4}
+        multisampling={4}
       >
         <Noise opacity={1} premultiply={true}></Noise>
         <Noise opacity={0.5} premultiply={true}></Noise>
@@ -105,7 +126,7 @@ export function EffectsLanding() {
           offset={[diff * offsetX, diff * offsetY]}
         ></ChromaticAberration>
 
-        {<SSR key={'ssr'} {...props}></SSR>}
+        {/* {<SSR key={'ssr'} {...props}></SSR>} */}
 
         {/* <LUT lut={texture}></LUT> */}
 

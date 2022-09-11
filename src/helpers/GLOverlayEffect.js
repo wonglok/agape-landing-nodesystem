@@ -12,6 +12,7 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
 `
 
 export const screenOpacity = new Uniform(1)
+
 export class CustomEffect extends Effect {
   constructor({}) {
     super('CustomEffect', fragmentShader, {
