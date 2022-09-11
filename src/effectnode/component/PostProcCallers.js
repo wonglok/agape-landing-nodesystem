@@ -43,7 +43,9 @@ function CameraFling() {
   let camera = useThree((s) => s.camera)
 
   useFrame(() => {
-    camera.position.z += (Math.random() - 0.5) * 0.005
     camera.rotation.z += (Math.random() - 0.5) * 0.00005
+    camera.position.z += (Math.random() - 0.5) * 0.00005
   })
+
+  return null
 }
