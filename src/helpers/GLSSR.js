@@ -9,6 +9,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { defaultSSROptions } from 'screen-space-reflections'
 import { Pane } from 'tweakpane'
 import { Vector3 } from 'three140'
+import { generateUUID } from 'three/src/math/MathUtils'
 
 const fragmentShader = `
 uniform float opacity;
@@ -83,7 +84,7 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
     lastPos.copy(nowPos)
 
     effect.jitter =
-      MathUtils.lerp(effect.jitter, moveAmount * 0.0002, 0.3) + 0.0001
+      MathUtils.lerp(effect.jitter, moveAmount * 0.002, 0.3) + 0.002
     effect.fade = 0.01 + (Math.sin(t * 0.5) * 0.5 + 0.5 + 0.01) * 0.01
 
     effect.i++
@@ -91,6 +92,7 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
   return <primitive ref={ref} object={effect} />
 })
 
+GLSSR.key = generateUUID()
 //
 
 export class SSRDebugGUI {

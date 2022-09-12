@@ -171,7 +171,7 @@ export function EffectsLanding() {
       >
         {/* <Noise opacity={1} premultiply={true}></Noise>
         <Noise opacity={0.5} premultiply={true}></Noise> */}
-        <GLSSR></GLSSR>
+        <GLSSR key={GLSSR.key}></GLSSR>
 
         <Bloom
           intensity={2.5}
