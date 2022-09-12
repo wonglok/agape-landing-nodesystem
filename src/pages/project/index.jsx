@@ -7,7 +7,7 @@ export default function StudioHome() {
   let router = useRouter()
   return (
     <div>
-      <div className='absolute w-full h-full'>
+      <div className='absolute w-full h-full bg-white'>
         {/* <!-- Mobile --> */}
         <ProjectNav></ProjectNav>
 

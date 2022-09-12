@@ -167,11 +167,11 @@ export function EffectsLanding() {
       <EffectComposer
         disableNormalPass={false}
         stencilBuffer={false}
-        multisampling={4}
+        multisampling={0}
       >
-        {/* <Noise opacity={1} premultiply={true}></Noise>
-        <Noise opacity={0.5} premultiply={true}></Noise> */}
-        <GLSSR key={GLSSR.key}></GLSSR>
+        <Noise opacity={1} premultiply={true}></Noise>
+        <Noise opacity={0.5} premultiply={true}></Noise>
+        {/* <GLSSR key={GLSSR.key}></GLSSR> */}
 
         <Bloom
           intensity={2.5}
@@ -181,10 +181,14 @@ export function EffectsLanding() {
           luminanceThreshold={0.2}
         ></Bloom>
 
-        {/*  */}
-        {/* <SMAA></SMAA> */}
+        <ChromaticAberration
+          offset={[diff * offsetX, diff * offsetY]}
+        ></ChromaticAberration>
 
-        <Vignette></Vignette>
+        {/*
+        <SMAA></SMAA> */}
+
+        {/* <Vignette></Vignette> */}
 
         {/* <Scanline></Scanline> */}
 
@@ -194,10 +198,6 @@ export function EffectsLanding() {
         ></BrightnessContrast>
 
         <HueSaturation hue={hue} saturation={saturation}></HueSaturation> */}
-
-        <ChromaticAberration
-          offset={[diff * offsetX, diff * offsetY]}
-        ></ChromaticAberration>
 
         {/* {<SSR key={'ssr'} {...props}></SSR>} */}
 

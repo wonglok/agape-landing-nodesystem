@@ -39,7 +39,6 @@ const Page = () => {
 
       <NightHDR></NightHDR>
       <NYCJourney></NYCJourney>
-
       <EffectsLanding></EffectsLanding>
 
       {/*  */}
