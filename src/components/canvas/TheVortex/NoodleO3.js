@@ -177,6 +177,8 @@ export class LokLokWiggleSimulation {
 
     let lookupRightLine = () => {
       let str = `
+
+      //
       vec2 uvv = vec2(0.5, currentLine / ${this.HEIGHT.toFixed(1)});
 
       float ee = uvv.y;
@@ -308,6 +310,10 @@ export class LokLokWiggleSimulation {
         // const float height = resolution.y;
         // float xID = floor(gl_FragCoord.x);
         // float yID = floor(gl_FragCoord.y);
+        //
+        //
+        //
+
         vec2 uvCursor = vec2(gl_FragCoord.x, gl_FragCoord.y) / resolution.xy;
         vec4 positionHead = texture2D( texturePosition, uvCursor );
         vec4 lookupData = texture2D(lookup, uvCursor);
@@ -318,9 +324,9 @@ export class LokLokWiggleSimulation {
           // currentIDX
           ${lookupRightLine()}
         } else {
-          vec3 positionChain = texture2D( texturePosition,nextUV ).xyz;
+          vec3 positionChain = texture2D(texturePosition, nextUV).xyz;
 
-          // positionChain.rgb = lerp(positionHead.rgb, positionChain.rgb, 0.3);
+          // positionChain.rgb = lerp(positionHead.rgb, positionChain.rgb, 0.1);
 
           // positionChain.x += (rand(vec2(currentLine + 0.1)) * 2.0 - 1.0) * 2.0;
           // positionChain.y += (rand(vec2(currentLine + 0.2)) * 2.0 - 1.0) * 2.0;
