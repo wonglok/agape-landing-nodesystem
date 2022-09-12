@@ -17,7 +17,7 @@ let getDefinitions = ({ nodeID }) => {
       _id: getID(),
       nodeID,
       name: 'side',
-      type: 'string',
+      type: 'text',
       value: 'front',
       protected: true,
     },
@@ -29,7 +29,6 @@ let getDefinitions = ({ nodeID }) => {
       value: false,
       protected: true,
     },
-
     {
       _id: getID(),
       nodeID,
@@ -284,6 +283,8 @@ let getSide = (side) => {
   } else if (side === 'back') {
     return BackSide
   } else if (side === 'double') {
+    return DoubleSide
+  } else {
     return DoubleSide
   }
 }

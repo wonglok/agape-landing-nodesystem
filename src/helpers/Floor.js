@@ -1,3 +1,4 @@
+import { EffectNodeRuntime } from '@/effectnode/component/EffectNodeRuntime'
 import { useGLTF } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import anime from 'animejs'
@@ -18,6 +19,7 @@ export function Floor({ url }) {
   let addNamedScene = useMultiverse((s) => s.addNamedScene)
   let setPostProcessing = useMultiverse((s) => s.setPostProcessing)
   let scene = useThree((s) => s.scene)
+  let gl = useThree((s) => s.gl)
   let glb = useGLTF(url)
 
   useEffect(() => {
@@ -55,11 +57,22 @@ export function Floor({ url }) {
         },
       })
 
+      gl.shadowMap.enabled = true
       //
+      glb.scene.traverse((it) => {
+        if (it.isLight) {
+          it.castShadow = true
+        }
+        if (it.material) {
+          it.castShadow = true
+          it.receiveShadow = true
+        }
+      })
+
       //
     })
     return () => {}
-  }, [glb, url, scene, addNamedScene, setPostProcessing])
+  }, [gl, glb, url, scene, addNamedScene, setPostProcessing])
 
   return (
     <group>
@@ -67,6 +80,7 @@ export function Floor({ url }) {
 
       <group>
         <primitive object={glb.scene}></primitive>
+        <EffectNodeRuntime glbObject={glb}></EffectNodeRuntime>
       </group>
 
       {/*  */}

@@ -245,7 +245,6 @@ export function EffectNodeObjectNode({
 
             cleans.push(() => {
               window.removeEventListener('reload-node', hhhh)
-
               mini.clean()
             })
 

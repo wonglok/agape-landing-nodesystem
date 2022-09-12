@@ -23,6 +23,7 @@ const Multiverse = ({ router, children }) => {
         top: 0,
         left: 0,
       }}
+      shadows
       gl={{ antialias: false, logarithmicDepthBuffer: true }}
       onCreated={(st) => {
         st.scene.background = new Color('#ffffff')
@@ -45,7 +46,7 @@ const Multiverse = ({ router, children }) => {
 function TempScene() {
   let camera = useThree((s) => s.camera)
   useEffect(() => {
-    camera.position.x = 5
+    camera.position.x = 0
     camera.position.y = 5
     camera.position.z = 15
     camera.lookAt(0, 0, 0)

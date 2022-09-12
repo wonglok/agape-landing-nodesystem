@@ -5,7 +5,7 @@ import { Object3D, Vector3 } from 'three'
 import { AnimationMixer } from 'three'
 import { useMultiverse } from './useMultiverse'
 import { clone } from 'three140/examples/jsm/utils/SkeletonUtils'
-import { Color } from 'three140'
+import { Color, MeshPhysicalMaterial, MeshStandardMaterial } from 'three140'
 
 export function Companion({
   lookAtOffset = [0, 0, 0],
@@ -38,7 +38,7 @@ export function Companion({
       if (it.material) {
         it.material.roughnessMap = it.material.metalnessMap = it.material.map
         it.material.envMapIntensity = 1
-        it.material.emissiveIntensity = 150
+        it.material.emissiveIntensity = 200
       }
     })
 
@@ -105,6 +105,8 @@ export function Companion({
       action.reset()
       action.repetiton = Number(act.repetiton)
       action.play()
+
+      //
       return () => {
         action.reset().fadeOut(0.2).play()
       }
@@ -194,7 +196,13 @@ function Gun() {
   useEffect(() => {
     gun.scene.traverse((it) => {
       if (it.material) {
-        it.material.color = new Color('#ffffff')
+        it.material = new MeshStandardMaterial()
+        it.material.color = new Color('#0000ff')
+        it.material.ior = 1.5
+        it.material.reflectivity = 1.5
+        it.material.roughness = 0.3
+        it.material.metalness = 0.5
+        it.material.transmission = 1
       }
     })
   })

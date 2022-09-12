@@ -43,7 +43,7 @@ const Page = (props) => {
           ></Companion>
         </Suspense>
 
-        <Suspense fallback={null}>
+        {/* <Suspense fallback={null}>
           <Companion
             frustumCulled={false}
             runActionName='sprint_forward'
@@ -62,7 +62,7 @@ const Page = (props) => {
             lookAtOffset={[0, 0, -2]}
             walkOffset={[-1, 0, -0.01]}
           ></Companion>
-        </Suspense>
+        </Suspense> */}
       </Suspense>
 
       <Environment preset='park'></Environment>

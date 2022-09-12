@@ -50,7 +50,7 @@ const Page = (props) => {
         <Companion
           frustumCulled={true}
           runActionName='walk_forward'
-          url={`/scene/landing/swat-team-1024.glb`}
+          url={`/scene/landing/swat-mo-1024.glb`}
           speed={4}
           lookAtOffset={[0, 0, -2]}
           walkOffset={[0, 0, -0.1]}
@@ -58,12 +58,12 @@ const Page = (props) => {
       </Suspense>
 
       <Environment
-        preset='night'
+        preset='dawn'
         frames={1}
         background={true}
         encoding={sRGBEncoding}
       >
-        <Lightformer
+        {/* <Lightformer
           intensity={20}
           rotation-x={Math.PI * -0.5}
           position={[0, 7, 0]}
@@ -98,7 +98,7 @@ const Page = (props) => {
           rotation-x={Math.PI / 2}
           position={[0, 7, 9]}
           scale={[10, 1, 1]}
-        />
+        /> */}
       </Environment>
 
       {/* <group position={[0, 0.1, -10]}>

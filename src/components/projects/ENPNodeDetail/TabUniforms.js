@@ -148,10 +148,7 @@ export function TabUnifroms({ node }) {
           // console.log(mm?.type)
 
           return (
-            <div
-              key={mm._id + mm.nodeID + node._id + _reload}
-              className='mb-3 mr-3'
-            >
+            <div key={mm._id + mm.nodeID + node._id} className='mb-3 mr-3'>
               <div className='inline-block'>
                 {/*  */}
                 {mm.type === 'texture' && (

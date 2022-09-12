@@ -22,7 +22,7 @@ const Page = (props) => {
   //
   return (
     <>
-      <Floor url='/scene/landing/os-effect1.glb'></Floor>
+      <Floor url='/scene/workspace/os-effect1.glb'></Floor>
 
       <Box
         position={[3, 1, 1]}

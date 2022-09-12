@@ -33,7 +33,7 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
       fade: 0,
       roughnessFade: 0.9,
       thickness: 10,
-      ior: 1.22,
+      ior: 1.7,
       maxRoughness: 1,
       maxDepthDifference: 10,
       blend: 0.0,
