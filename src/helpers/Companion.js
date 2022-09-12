@@ -37,12 +37,12 @@ export function Companion({
       it.frustumCulled = false
       if (it.material) {
         it.material.roughnessMap = it.material.metalnessMap = it.material.map
-        it.material.envMapIntensity = 5
+        it.material.envMapIntensity = 1
         it.material.emissiveIntensity = 150
       }
     })
 
-    cloned.rotation.x = Math.PI * -1.5
+    cloned.rotation.x = Math.PI * 0.5
     return cloned
   }, [gltf])
 

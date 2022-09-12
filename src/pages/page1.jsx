@@ -47,13 +47,13 @@ const Page = (props) => {
           frustumCulled={false}
           runActionName='sprint_forward'
           url={`/scene/landing/swat-mo-1024.glb`}
-          speed={4}
-          lookAtOffset={[0, 0, -2]}
+          speed={6}
+          lookAtOffset={[0, 0, 0]}
           walkOffset={[0, 0, -0.01]}
         ></Companion>
       </Suspense>
 
-      <Suspense fallback={null}>
+      {/* <Suspense fallback={null}>
         <Companion
           frustumCulled={false}
           runActionName='sprint_forward'
@@ -73,7 +73,11 @@ const Page = (props) => {
           lookAtOffset={[0, 0, -2]}
           walkOffset={[-1, 0, -0.01]}
         ></Companion>
-      </Suspense>
+      </Suspense> */}
+
+      {/*  */}
+      {/*  */}
+      {/*  */}
 
       <Environment background={true} preset='night'></Environment>
 
