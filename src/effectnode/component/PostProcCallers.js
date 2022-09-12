@@ -1,3 +1,4 @@
+import { GLSSR } from '@/helpers/GLSSR'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as PROC from '@react-three/postprocessing'
@@ -28,6 +29,9 @@ export function PostProcCallers({ screenPass = null }) {
               return null
             }
 
+          if (info.type === 'GLSSR') {
+            Compo = GLSSR
+          }
           return <Compo key={'postproc' + idx} {...info.props}></Compo>
         })}
 

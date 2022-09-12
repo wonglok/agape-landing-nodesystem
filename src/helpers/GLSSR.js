@@ -11,13 +11,12 @@ import { Pane } from 'tweakpane'
 import { Vector3 } from 'three140'
 import { generateUUID } from 'three/src/math/MathUtils'
 
-const fragmentShader = `
-uniform float opacity;
-void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
-	outputColor = vec4((opacity) * (inputColor.rgb), inputColor.a);
-}
-
-`
+// const fragmentShader = `
+// uniform float opacity;
+// void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
+// 	outputColor = vec4((opacity) * (inputColor.rgb), inputColor.a);
+// }
+// `
 
 // Effect component
 export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
@@ -77,6 +76,8 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
   let nowPos = new Vector3()
   let diffPos = new Vector3()
   let lastPos = new Vector3()
+
+  // GLSSR
   useFrame((st) => {
     let t = st.clock.getElapsedTime()
     st.camera.getWorldPosition(nowPos)
@@ -84,7 +85,7 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
     lastPos.copy(nowPos)
 
     effect.jitter =
-      MathUtils.lerp(effect.jitter, moveAmount * 0.002, 0.3) + 0.002
+      MathUtils.lerp(effect.jitter, moveAmount * 0.002, 0.1) + 0.001
     effect.fade = 0.01 + (Math.sin(t * 0.5) * 0.5 + 0.5 + 0.01) * 0.01
 
     effect.i++
