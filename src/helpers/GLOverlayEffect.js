@@ -35,3 +35,41 @@ export const GLOverlayEffect = forwardRef(function EffectFuncy({}, ref) {
 //
 
 //
+
+// const SSR = /*#__PURE__*/ forwardRef(function SSR(_ref, ref) {
+//   let { ENABLE_BLUR = true, USE_MRT = true, ...props } = _ref
+//   const { invalidate } = useThree()
+//   const { scene, camera } = useContext(EffectComposerContext)
+//   const effect = useMemo(
+//     () =>
+//       new SSREffect(scene, camera, {
+//         ENABLE_BLUR,
+//         USE_MRT,
+//         ...props,
+//       }),
+//     [SSREffect, scene, camera, ENABLE_BLUR, USE_MRT]
+//   )
+//   useLayoutEffect(() => {
+//     Object.keys(props).forEach((key) => (effect[key] = props[key]))
+//     invalidate()
+//   }, [props])
+//   const api = useContext(selectionContext)
+//   useEffect(() => {
+//     if (api && api.enabled) {
+//       var _api$selected
+
+//       if ((_api$selected = api.selected) != null && _api$selected.length) {
+//         effect.selection.set(api.selected)
+//         invalidate()
+//         return () => {
+//           effect.selection.clear()
+//           invalidate()
+//         }
+//       }
+//     }
+//   }, [api])
+//   return /*#__PURE__*/ React.createElement('primitive', {
+//     ref: ref,
+//     object: effect,
+//   })
+// })

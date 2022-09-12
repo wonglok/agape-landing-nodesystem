@@ -63,7 +63,7 @@ export function Effects({}) {
   let enable = true
   // public/hdr/snowy_field_1k.hdr
   // const texture = useLoader(LUTCubeLoader, '/lut/F-6800-STD.cube')
-  const texture = useLoader(LUTCubeLoader, '/lut/F-6800-STD.cube')
+  // const texture = useLoader(LUTCubeLoader, '/lut/F-6800-STD.cube')
 
   // const { enabled, ...props } = useControls(settings, {}, {})
 
@@ -120,7 +120,7 @@ export function Effects({}) {
 
     // camera.position.x += 0.0002 * Math.sin(t * 1000)
     // camera.position.y += 0.0002 * Math.sin(t * 1000)
-    camera.position.z += 0.00025 * Math.sin(t * 1)
+    // camera.position.z += 0.00025 * Math.sin(t * 1)
   })
 
   //setPostProcessing
@@ -153,7 +153,7 @@ export function Effects({}) {
 
             <SSR {...props} />
 
-            <LUT lut={texture} />
+            {/* <LUT lut={texture} /> */}
             {/* <DepthOfField
               focusDistance={2}
               focalLength={0.12}

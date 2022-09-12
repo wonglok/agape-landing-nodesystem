@@ -19,7 +19,7 @@ export function PostProcCallers({ screenPass = null }) {
 
   return (
     <>
-      <CameraFling></CameraFling>
+      {/* <CameraFling></CameraFling> */}
       <EffectComposer>
         {passArray.map((info, idx) => {
           let Compo =
@@ -37,15 +37,15 @@ export function PostProcCallers({ screenPass = null }) {
   )
 }
 
-//
+// //
 
-function CameraFling() {
-  let camera = useThree((s) => s.camera)
+// function CameraFling() {
+//   let camera = useThree((s) => s.camera)
 
-  useFrame(() => {
-    camera.rotation.z += (Math.random() - 0.5) * 0.0005
-    camera.position.z += (Math.random() - 0.5) * 0.0005
-  })
+//   useFrame(() => {
+//     camera.rotation.z += (Math.random() - 0.5) * 0.0005
+//     camera.position.z += (Math.random() - 0.5) * 0.0005
+//   })
 
-  return null
-}
+//   return null
+// }
