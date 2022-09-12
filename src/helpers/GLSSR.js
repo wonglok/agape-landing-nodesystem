@@ -62,7 +62,7 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
     }
     ssrEffect.haltonSequence = arr
 
-    new SSRDebugGUI(ssrEffect, props)
+    // new SSRDebugGUI(ssrEffect, props)
 
     // const ssrPass = new POSTPROCESSING.EffectPass(camera, ssrEffect)
     // composer.addPass(ssrPass)
