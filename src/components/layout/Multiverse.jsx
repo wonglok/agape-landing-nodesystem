@@ -34,7 +34,7 @@ const Multiverse = ({ router, children }) => {
       <ConnectCameraControls></ConnectCameraControls>
       <ConnectSimulation></ConnectSimulation>
       <Effects></Effects>
-      <Player></Player>
+      <Player visible={false}></Player>
 
       {/* <OverlayContentAdapter></OverlayContentAdapter> */}
     </Canvas>

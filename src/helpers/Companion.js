@@ -36,7 +36,9 @@ export function Companion({
     cloned.traverse((it) => {
       it.frustumCulled = false
       if (it.material) {
-        it.material.emissiveIntensity = 100
+        it.material.roughnessMap = it.material.metalnessMap = it.material.map
+        it.material.envMapIntensity = 5
+        it.material.emissiveIntensity = 150
       }
     })
 

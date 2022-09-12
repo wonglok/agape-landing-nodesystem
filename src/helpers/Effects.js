@@ -10,6 +10,7 @@ import {
 // import { useControls } from 'leva'
 import { LUTCubeLoader } from 'postprocessing'
 import { GLOverlayEffect } from './GLOverlayEffect'
+import { GLSSR } from './GLSSR'
 import { useMultiverse } from './useMultiverse'
 
 // let settings = {
@@ -142,16 +143,17 @@ export function Effects({}) {
             multisampling={0}
             disableNormalPass
           >
-            <Noise premultiply={true} opacity={0.8} />
-
+            {/* <Noise premultiply={true} opacity={0.8} /> */}
+            {/*
             <Bloom
               luminanceThreshold={0.5}
               mipmapBlur
               luminanceSmoothing={0.2}
               intensity={1.0}
-            />
+            /> */}
 
-            <SSR {...props} />
+            <GLSSR></GLSSR>
+            {/* <SSR {...props} /> */}
 
             {/* <LUT lut={texture} /> */}
             {/* <DepthOfField

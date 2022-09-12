@@ -29,7 +29,6 @@ const Page = (props) => {
         onClick={() => {
           //
           screenOpacity.value = 1
-          //
           anime({
             targets: [screenOpacity],
             value: 0,
