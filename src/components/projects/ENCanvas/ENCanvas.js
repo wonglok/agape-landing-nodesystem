@@ -11,11 +11,11 @@ import { Canvas, useThree } from '@react-three/fiber'
 import { Bloom, EffectComposer, SSR } from '@react-three/postprocessing'
 import { useEffect, useState } from 'react'
 // import { UseObjectAsPlayer } from '../UseObjectAsPlayer/UseObjectAsPlayer'
-import { AdaptTC } from './transform/AdaptTC'
 import { ENTopBarr } from './ENTopBar'
 import { PostProcCallers } from '@/effectnode/component/PostProcCallers'
 import { EnvOutlet } from './EnvOutlet'
 import { useEffectNode } from '@/effectnode/store/useEffectNode'
+import { AdaptTC } from './Transform/AdaptTC'
 
 export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
