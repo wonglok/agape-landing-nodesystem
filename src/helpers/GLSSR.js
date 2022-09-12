@@ -81,35 +81,10 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
     st.camera.getWorldPosition(nowPos)
     let moveAmount = diffPos.copy(nowPos).sub(lastPos).length()
     lastPos.copy(nowPos)
-    // diffPos.
-
-    // if (effect.i >= 60 * 3.0) {
-    // effect.i = 0
-    // effect.fade += (effect.i % 2 == 0 ? -1 : 1) / 1000000000000
-    // }
-    // if (effect.fade <= 0.0001) {
-    //   effect.fade = 0.0001
-    // }
-    // effect.samples = 1
-    // effect.cameraMovedThisFrame = true
-    // effect.lastCameraTransform.position.copy(effect._camera.position)
-    // effect.lastCameraTransform.quaternion.copy(effect._camera.quaternion)
 
     effect.jitter =
       MathUtils.lerp(effect.jitter, moveAmount * 0.0002, 0.3) + 0.0001
     effect.fade = 0.01 + (Math.sin(t * 0.5) * 0.5 + 0.5 + 0.01) * 0.01
-    // if (moveAmount === 0) {
-    // }
-    // //
-    // let temporal = effect.temporalResolvePass
-    // temporal.samples = 1
-
-    // temporal.lastCameraTransform.position.set(1, 1, 1)
-    // temporal.lastCameraTransform.quaternion.set(1, 1, 1)
-
-    // effect.temporalResolvePass.velocityPass.cameraMovedThisFrame = true
-    // if (moveAmount == 0) {
-    // }
 
     effect.i++
   })
