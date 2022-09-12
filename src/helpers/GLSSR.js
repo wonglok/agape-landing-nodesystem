@@ -96,7 +96,7 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
     // effect.lastCameraTransform.quaternion.copy(effect._camera.quaternion)
 
     effect.jitter =
-      MathUtils.lerp(effect.jitter, moveAmount * 0.01, 0.1) + 0.001
+      MathUtils.lerp(effect.jitter, moveAmount * 0.0002, 0.3) + 0.0001
     effect.fade = 0.01 + (Math.sin(t * 0.5) * 0.5 + 0.5 + 0.01) * 0.01
     // if (moveAmount === 0) {
     // }
