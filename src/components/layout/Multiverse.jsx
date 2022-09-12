@@ -18,6 +18,7 @@ const Multiverse = ({ router, children }) => {
     <Canvas
       mode='concurrent'
       style={{
+        backgroundColor: 'white',
         position: 'absolute',
         top: 0,
         left: 0,
