@@ -5,6 +5,7 @@ import { NightHDR } from '@/components/canvas/NYCJourney/NightHDR'
 import { NYCJourney } from '@/components/canvas/NYCJourney/NYCJourey'
 // import { YoSpin } from '@/components/canvas/YoSpin/YoSpin'
 import { useScrollStore } from '@/helpers/useScrollStore'
+import { Loader } from '@react-three/drei'
 // import {
 //   Box,
 //   Environment,
@@ -93,6 +94,8 @@ Page.SEO = function SEO() {
       >
         <ScrollContentt></ScrollContentt>
       </div>
+
+      {/* <Loader></Loader> */}
     </span>
   )
 }
