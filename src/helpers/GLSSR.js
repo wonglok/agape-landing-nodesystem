@@ -33,36 +33,38 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
       fade: 0,
       roughnessFade: 1,
       thickness: 10,
-      ior: 1.45,
+      ior: 1.22,
       maxRoughness: 1,
       maxDepthDifference: 10,
       blend: 0.0,
       correction: false,
       correctionRadius: 0,
-      blur: 0,
-      blurKernel: 0,
+      blur: 1,
+      blurKernel: 2,
       blurSharpness: 0,
       jitter: 0.005,
-      jitterRoughness: 0.0,
-      steps: 10,
-      refineSteps: 4,
+      jitterRoughness: 0,
+      steps: 20,
+      refineSteps: 1,
       missedRays: true,
       useNormalMap: true,
       useRoughnessMap: true,
       resolutionScale: 1,
       velocityResolutionScale: 0.1,
     }
-
-    const ssrEffect = new SSREffect(scene, camera, props)
-
     let arr = []
 
     for (let i = 0; i <= 1024; i++) {
       arr.push([0, 0])
     }
+
+    const ssrEffect = new SSREffect(scene, camera, props)
+
     ssrEffect.haltonSequence = arr
 
-    // new SSRDebugGUI(ssrEffect, props)
+    if (process.env.NODE_ENV === 'development') {
+      new SSRDebugGUI(ssrEffect, props)
+    }
 
     // const ssrPass = new POSTPROCESSING.EffectPass(camera, ssrEffect)
     // composer.addPass(ssrPass)
@@ -84,8 +86,8 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
     let moveAmount = diffPos.copy(nowPos).sub(lastPos).length()
     lastPos.copy(nowPos)
 
-    effect.jitter =
-      MathUtils.lerp(effect.jitter, moveAmount * 0.002, 0.1) + 0.001
+    // effect.jitter =
+    //   MathUtils.lerp(effect.jitter, moveAmount * 0.002, 0.1) + 0.001
     effect.fade = 0.01 + (Math.sin(t * 0.5) * 0.5 + 0.5 + 0.01) * 0.01
 
     effect.i++
