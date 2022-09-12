@@ -1,3 +1,4 @@
+import { TheVortex } from '@/components/canvas/TheVortex/TheVortex'
 import { EffectNodeRuntime } from '@/effectnode/component/EffectNodeRuntime'
 import { useGLTF } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'

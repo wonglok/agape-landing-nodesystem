@@ -4,6 +4,7 @@ import { Float, Preload, useFBO } from '@react-three/drei' //OrbitControls,
 // import { useEffect, useRef } from 'react'
 import {
   Camera,
+  Color,
   DoubleSide,
   NormalBlending,
   Scene,
@@ -25,6 +26,7 @@ const PromotePage = ({ router, children }) => {
       }}
       gl={{ antialias: false, logarithmicDepthBuffer: true }}
       onCreated={(st) => {
+        st.scene.background = new Color('#ffffff')
         st.gl.physicallyCorrectLights = true
         st.gl.outputEncoding = sRGBEncoding
 

@@ -6,6 +6,7 @@ import { AnimationMixer } from 'three'
 import { useMultiverse } from './useMultiverse'
 import { clone } from 'three140/examples/jsm/utils/SkeletonUtils'
 import { Color, MeshPhysicalMaterial, MeshStandardMaterial } from 'three140'
+import { TheVortex } from '@/components/canvas/TheVortex/TheVortex'
 
 export function Companion({
   lookAtOffset = [0, 0, 0],
@@ -176,6 +177,9 @@ export function Companion({
           <primitive object={root}></primitive>
           {children}
 
+          <group position={[0, 1.0, 0]} scale={0.02}>
+            <theVortex key={TheVortex.key}></theVortex>
+          </group>
           {createPortal(
             <group>
               <Gun></Gun>

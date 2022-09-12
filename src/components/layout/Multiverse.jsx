@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 import { ConnectSimulation } from '@/helpers/ConnectSimulation'
 import { Effects } from '@/helpers/Effects'
 import { Player } from '@/helpers/Player'
+import { Core } from '@/helpers/Core'
 // import { Companion } from '@/helpers/Companion'
 
 const Multiverse = ({ router, children }) => {
@@ -29,6 +30,11 @@ const Multiverse = ({ router, children }) => {
         st.scene.background = new Color('#ffffff')
         st.gl.physicallyCorrectLights = true
         st.gl.outputEncoding = sRGBEncoding
+
+        Core.now.canvas = Core.makeDisposableNode({ name: 'canvas' }).sub
+        for (let kn in st) {
+          Core.now.canvas.now[kn] = st[kn]
+        }
       }}
     >
       <MapContent>{children}</MapContent>

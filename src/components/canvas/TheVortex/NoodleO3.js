@@ -319,9 +319,8 @@ export class LokLokWiggleSimulation {
           ${lookupRightLine()}
         } else {
           vec3 positionChain = texture2D( texturePosition,nextUV ).xyz;
+
           // positionChain.rgb = lerp(positionHead.rgb, positionChain.rgb, 0.3);
-
-
 
           // positionChain.x += (rand(vec2(currentLine + 0.1)) * 2.0 - 1.0) * 2.0;
           // positionChain.y += (rand(vec2(currentLine + 0.2)) * 2.0 - 1.0) * 2.0;
@@ -331,10 +330,7 @@ export class LokLokWiggleSimulation {
           // positionChain.y += (cnoise(positionHead.rgb * 0.01 + 0.2)) * 1.5;
           // positionChain.z += (cnoise(positionHead.rgb * 0.01 + 0.3)) * 1.5;
 
-          positionChain.xyz *= 1.0 + 0.0135;
-
-
-
+          positionChain.xyz *= 1.0 + 0.0135 * 1.5;
 
           gl_FragColor = vec4(positionChain, 1.0);
         }
@@ -425,7 +421,7 @@ export class LokLokWiggleDisplay {
       color: new Color('#58519B').offsetHSL(0, 0, 0.3),
       // color: new Color('#ffffff'),
       emissive: new Color('#58519B').offsetHSL(0, 0, 0.3),
-      emissiveIntensity: 2.5,
+      emissiveIntensity: 100.5,
 
       // emissive: new Color('#018888'),
       side: FrontSide,
