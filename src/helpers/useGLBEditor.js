@@ -125,7 +125,8 @@ let generateInside = (set, get) => {
         let _id = nodeID
 
         let customData = (await mod.nodeData({ defaultData: {}, nodeID })) || {}
-        effectNode.nodes.push({
+
+        let newNode = {
           _id,
           nodeID,
           codeID,
@@ -174,19 +175,27 @@ let generateInside = (set, get) => {
           ],
 
           ...customData,
-        })
-      })
+        }
+        effectNode.nodes.push(newNode)
 
-      set({
-        reloadGraphID: Math.random(),
-        activeSceneSelection,
-        cursorMode: 'ready',
-      })
-      setTimeout(() => {
         set({
           reloadGraphID: Math.random(),
+          activeSceneSelection,
+          cursorMode: 'ready',
         })
-      }, 100)
+        window.dispatchEvent(
+          new CustomEvent('reload-node', { detail: newNode })
+        )
+
+        setTimeout(() => {
+          set({
+            reloadGraphID: Math.random(),
+          })
+          window.dispatchEvent(
+            new CustomEvent('reload-node', { detail: newNode })
+          )
+        }, 100)
+      })
     },
     cursorMode: 'ready',
     setCurosrMode: (v) => {
@@ -253,11 +262,12 @@ let generateInside = (set, get) => {
 
       //
       let file = await handle.getFile()
-      let url = URL.createObjectURL(file)
+      let url1 = URL.createObjectURL(file)
+      let url2 = URL.createObjectURL(file)
       let loadGLB = self.loadGLB
 
-      let activeGLBRawObject = await loadGLB(url, true)
-      let activeGLBRuntimeObject = await loadGLB(url, true)
+      let activeGLBRawObject = await loadGLB(url1, true)
+      let activeGLBRuntimeObject = await loadGLB(url2, true)
       assignSignaturesToGLB(activeGLBRawObject)
       assignSignaturesToGLB(activeGLBRuntimeObject)
 
@@ -467,15 +477,19 @@ let generateInside = (set, get) => {
       loader.setDRACOLoader(dracoLoader)
       // loader.register((parser) => new GLTFEffectNodeLoader(parser))
       let prom = loader.loadAsync(url)
-      glbCache.set(url, prom)
+      if (!skipCache) {
+        glbCache.set(url, prom)
+      }
       let glb = await prom
       dracoLoader.dispose()
       return glb
     },
     //
+    //
     exportGLB: (o3 = new Object3D(), animations = []) => {
       return new Promise((resolve, reject) => {
         let exporter = new GLTFExporter()
+
         // exporter.register((writer) => new GLTFEffectNodeExport(writer))
         exporter.parse(
           o3,
@@ -506,7 +520,7 @@ let generateInside = (set, get) => {
       clonedRuntime.traverse((runtimeIt) => {
         if (runtimeIt.userData.effectNode) {
           clonedForExport.traverse((exportIt) => {
-            if (exportIt.userData.sigMD5 === runtimeIt.userData.sigMD5) {
+            if (exportIt.userData.posMD5 === runtimeIt.userData.posMD5) {
               exportIt.userData.effectNode = JSON.parse(
                 JSON.stringify(runtimeIt.userData.effectNode)
               )
@@ -515,45 +529,47 @@ let generateInside = (set, get) => {
         }
       })
 
+      //
+
       let animations = origGLB.animations
-      let rawGltf = await get().exportGLB(clonedForExport.children, animations)
+      let rawGltf = await get().exportGLB(clonedRuntime.children, animations)
 
-      let dracoMod = await remoteImport('/draco/draco_encoder_raw.js')
+      // let dracoMod = await remoteImport('/draco/draco_encoder_raw.js')
 
-      const io = new WebIO({
-        mode: 'cors',
-        cache: 'no-cache',
-      })
+      // const io = new WebIO({
+      //   mode: 'cors',
+      //   cache: 'no-cache',
+      // })
 
-      let mod = dracoMod.DracoEncoderModule()
-      io.registerExtensions([DracoMeshCompression])
-      io.registerDependencies({
-        // 'draco3d.decoder': await draco3d.createDecoderModule(), // Optional.
-        'draco3d.encoder': mod, // Optional.
-      })
+      // let mod = dracoMod.DracoEncoderModule()
+      // io.registerExtensions([DracoMeshCompression])
+      // io.registerDependencies({
+      //   // 'draco3d.decoder': await draco3d.createDecoderModule(), // Optional.
+      //   'draco3d.encoder': mod, // Optional.
+      // })
 
-      let glbDocument = await io.readBinary(new Uint8Array(rawGltf))
+      // let glbDocument = await io.readBinary(new Uint8Array(rawGltf))
 
-      glbDocument
-        .createExtension(DracoMeshCompression)
-        .setRequired(true)
-        .setEncoderOptions({
-          method: DracoMeshCompression.EncoderMethod.SEQUENTIAL,
-          encodeSpeed: 5,
-          decodeSpeed: 5,
-        })
+      // glbDocument
+      //   .createExtension(DracoMeshCompression)
+      //   .setRequired(true)
+      //   .setEncoderOptions({
+      //     method: DracoMeshCompression.EncoderMethod.SEQUENTIAL,
+      //     encodeSpeed: 5,
+      //     decodeSpeed: 5,
+      //   })
 
       // io.setVertexLayout(VertexLayout.SEPARATE)
 
-      let newBin = await io.writeBinary(glbDocument)
+      // let newBin = await io.writeBinary(glbDocument)
 
       await writeFile(
         handle,
-        newBin
-        //
+        new Blob([new Uint8Array(rawGltf)], {
+          type: 'application/octet-stream',
+        })
         // await get().createEmptyGLBFileBuffer()
       )
-      console.log('done')
       return
     },
   }

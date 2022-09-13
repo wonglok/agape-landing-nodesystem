@@ -62,9 +62,9 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
 
     ssrEffect.haltonSequence = arr
 
-    // if (process.env.NODE_ENV === 'development' && window.innerWidth >= 560) {
-    //   new SSRDebugGUI(ssrEffect, props)
-    // }
+    if (process.env.NODE_ENV === 'development' && window.innerWidth >= 560) {
+      new SSRDebugGUI(ssrEffect, props)
+    }
 
     // const ssrPass = new POSTPROCESSING.EffectPass(camera, ssrEffect)
     // composer.addPass(ssrPass)
@@ -86,8 +86,10 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
     let moveAmount = diffPos.copy(nowPos).sub(lastPos).length()
     lastPos.copy(nowPos)
 
-    // effect.jitter =
-    //   MathUtils.lerp(effect.jitter, moveAmount * 0.002, 0.1) + 0.001
+    effect.jitter = MathUtils.lerp(effect.jitter, moveAmount + 0.0001, 0.1)
+
+    // effect.jitter = 0.0001 + moveAmount
+
     effect.fade = 0.01 + (Math.sin(t * 0.5) * 0.5 + 0.5 + 0.01) * 0.01
 
     effect.i++

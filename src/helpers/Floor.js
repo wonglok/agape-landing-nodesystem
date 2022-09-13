@@ -59,17 +59,17 @@ export function Floor({ url }) {
         },
       })
 
-      glb.scene.traverse((it) => {
-        if (it.isLight) {
-          it.castShadow = true
-        }
-        if (it.material) {
-          it.castShadow = true
-          it.receiveShadow = true
-        }
-      })
+      // glb.scene.traverse((it) => {
+      //   if (it.isLight) {
+      //     it.castShadow = true
+      //   }
+      //   it.castShadow = true
+      //   it.receiveShadow = true
+      // })
 
-      setRender(<primitive object={glb.scene}></primitive>)
+      setTimeout(() => {
+        setRender(<primitive object={glb.scene}></primitive>)
+      })
 
       //
     })
@@ -78,14 +78,8 @@ export function Floor({ url }) {
 
   return (
     <group>
-      {/*  */}
-
-      <group>
-        {outletRneder}
-        <EffectNodeRuntime key={url} glbObject={glb}></EffectNodeRuntime>
-      </group>
-
-      {/*  */}
+      {outletRneder}
+      <EffectNodeRuntime key={url} glbObject={glb}></EffectNodeRuntime>
     </group>
   )
 }

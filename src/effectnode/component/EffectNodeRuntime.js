@@ -19,20 +19,18 @@ export function EffectNodeRuntime({
 
   return (
     <group>
-      {glbObject.scene.children
-        // .filter((e) => e.sigMD5)
-        .map((kid) => {
-          return (
-            <RuntimeTreeNode
-              key={kid.uuid + instID + 'explore'}
-              instID={instID}
-              glbObject={glbObject}
-              disabledNodes={disabledNodes}
-              node={kid}
-              isEditingMode={isEditingMode}
-            ></RuntimeTreeNode>
-          )
-        })}
+      {glbObject.scene.children.map((kid) => {
+        return (
+          <RuntimeTreeNode
+            key={kid.uuid + instID + 'explore'}
+            instID={instID}
+            glbObject={glbObject}
+            disabledNodes={disabledNodes}
+            node={kid}
+            isEditingMode={isEditingMode}
+          ></RuntimeTreeNode>
+        )
+      })}
     </group>
   )
 }

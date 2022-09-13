@@ -17,6 +17,7 @@ import { EnvOutlet } from './EnvOutlet'
 // import { useEffectNode } from '@/effectnode/store/useEffectNode'
 import { AdaptTC } from './Transform/AdaptTC'
 import { sRGBEncoding } from 'three'
+import { ConfigCanvas } from '@/helpers/ConfigCanvas'
 
 export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)

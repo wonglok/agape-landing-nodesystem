@@ -33,7 +33,7 @@ export const assignSignaturesToGLB = (glb) => {
       it.userData.effectNode.connections =
         it.userData.effectNode.connections || []
 
-      it.userData.sigMD5 = md5(getSignature(it))
+      it.userData.posMD5 = md5(getSignature(it))
     }
   })
 }

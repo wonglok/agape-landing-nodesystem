@@ -129,6 +129,15 @@ export async function nodeData({ defaultData, nodeID }) {
         needsInit: true,
         value: 2,
       },
+      {
+        _id: getID(),
+        nodeID,
+        protected: true,
+        name: 'castShadow',
+        type: 'bool',
+        needsInit: true,
+        value: 2,
+      },
     ],
 
     //
@@ -140,7 +149,7 @@ export async function nodeData({ defaultData, nodeID }) {
 
 function Parent({ node, data, mini }) {
   let ref = useRef()
-
+  let ref2 = useRef()
   useEffect(() => {
     let color = new Color(data.value.color)
     mini.onLoop(() => {
@@ -177,14 +186,25 @@ function Parent({ node, data, mini }) {
       if (object && data.value.decay) {
         object.decay = data.value.decay
       }
+      if (object && typeof data.value.castShadow !== 'undefined') {
+        object.castShadow = data.value.castShadow
+      }
+
+      /** @type {Object3D} */
+      let o2 = ref2.current
+      if (o2) {
+        mini.now.itself.getWorldPosition(o2.position)
+        mini.now.itself.getWorldQuaternion(o2.quaternion)
+        mini.now.itself.getWorldScale(o2.scale)
+      }
     })
 
     //
   })
 
   return (
-    <group>
-      {createPortal(<pointLight ref={ref}></pointLight>, mini.now.itself)}
+    <group ref={ref2}>
+      <pointLight ref={ref}></pointLight>
 
       {/* <Inbound socketName={'in0'} node={node} data={data} mini={mini}></Inbound>
       <Inbound socketName={'in1'} node={node} data={data} mini={mini}></Inbound>
