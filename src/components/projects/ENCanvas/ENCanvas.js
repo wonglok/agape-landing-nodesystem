@@ -14,8 +14,9 @@ import { useEffect, useState } from 'react'
 import { ENTopBarr } from './ENTopBar'
 import { PostProcCallers } from '@/effectnode/component/PostProcCallers'
 import { EnvOutlet } from './EnvOutlet'
-import { useEffectNode } from '@/effectnode/store/useEffectNode'
+// import { useEffectNode } from '@/effectnode/store/useEffectNode'
 import { AdaptTC } from './Transform/AdaptTC'
+import { sRGBEncoding } from 'three'
 
 export function ENCanvas() {
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
@@ -25,11 +26,22 @@ export function ENCanvas() {
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let setOrbit = useGLBEditor((s) => s.setOrbit)
   let [screenPass, setScreenPass] = useState(null)
-
+  let [_, reload] = useState(0)
+  useEffect(() => {
+    window.addEventListener('reload-node', () => {
+      reload((s) => s + 1)
+    })
+  }, [])
   //
   return (
     <div className='relative w-full h-full'>
-      <Canvas className='w-full h-full'>
+      <Canvas
+        onCreated={(st) => {
+          st.gl.outputEncoding = sRGBEncoding
+          st.gl.physicallyCorrectLights = true
+        }}
+        className='w-full h-full'
+      >
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
         <PostProcCallers screenPass={screenPass}></PostProcCallers>

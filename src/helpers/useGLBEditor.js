@@ -256,8 +256,8 @@ let generateInside = (set, get) => {
       let url = URL.createObjectURL(file)
       let loadGLB = self.loadGLB
 
-      let activeGLBRawObject = await loadGLB(url)
-      let activeGLBRuntimeObject = await loadGLB(url)
+      let activeGLBRawObject = await loadGLB(url, true)
+      let activeGLBRuntimeObject = await loadGLB(url, true)
       assignSignaturesToGLB(activeGLBRawObject)
       assignSignaturesToGLB(activeGLBRuntimeObject)
 
@@ -455,9 +455,9 @@ let generateInside = (set, get) => {
     },
 
     glbCache: new Map(),
-    loadGLB: async (url) => {
+    loadGLB: async (url, skipCache = false) => {
       let glbCache = get().glbCache
-      if (glbCache.has(url)) {
+      if (glbCache.has(url) && !skipCache) {
         return await glbCache.get(url)
       }
       let loader = new GLTFLoader()

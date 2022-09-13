@@ -33,7 +33,7 @@ export function ENOutlineNode({ level = 0, node }) {
         </div>
         {
           <div className='ml-1'>
-            {node.userData.effectNode.nodes.length > 0 ? '✳️' : ''}
+            {node.userData.effectNode?.nodes?.length > 0 ? '✳️' : ''}
           </div>
         }
       </div>

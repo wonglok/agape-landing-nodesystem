@@ -62,9 +62,9 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
 
     ssrEffect.haltonSequence = arr
 
-    if (process.env.NODE_ENV === 'development' && window.innerWidth >= 560) {
-      new SSRDebugGUI(ssrEffect, props)
-    }
+    // if (process.env.NODE_ENV === 'development' && window.innerWidth >= 560) {
+    //   new SSRDebugGUI(ssrEffect, props)
+    // }
 
     // const ssrPass = new POSTPROCESSING.EffectPass(camera, ssrEffect)
     // composer.addPass(ssrPass)

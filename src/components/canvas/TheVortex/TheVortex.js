@@ -15,10 +15,10 @@ import {
   InstancedMesh,
   InstancedBufferAttribute,
   InstancedBufferGeometry,
-  IcosahedronBufferGeometry,
   MeshPhysicalMaterial,
-  FrontSide,
   PointLight,
+  IcosahedronBufferGeometry,
+  FrontSide,
 } from 'three'
 import { CustomGPU } from './CustomGPU'
 import { vortexComputeShader } from './computeShader'
@@ -143,6 +143,8 @@ export class TheVortex extends Object3D {
           na += 3
         }
       }
+
+      //
       return newArr
     }
 
@@ -304,14 +306,6 @@ export class TheVortex extends Object3D {
       noodleO3.track({ trackers: [], lerp: 1, dt })
     })
 
-    //
-    //
-    //
-    //
-    //
-
-    //
-    //
     //
     //
     //

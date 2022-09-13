@@ -48,7 +48,7 @@ const Page = (props) => {
           frustumCulled={false}
           runActionName='sprint_forward'
           url={`/scene/landing/swat-mo-1024.glb`}
-          speed={6}
+          speed={4}
           lookAtOffset={[0, 0, 0]}
           walkOffset={[0, 0, -0.01]}
         ></Companion>
