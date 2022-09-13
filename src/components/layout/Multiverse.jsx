@@ -2,7 +2,7 @@ import { Canvas, createPortal, useFrame, useThree } from '@react-three/fiber'
 // import { Float, Preload, useFBO } from '@react-three/drei' //OrbitControls,
 // import useStore from '@/helpers/store'
 // import { useEffect, useRef } from 'react'
-import { Color, sRGBEncoding } from 'three'
+import { Color, PCFShadowMap, sRGBEncoding } from 'three'
 import { Suspense } from 'react'
 // import { useSystemStore } from '@/helpers/useSystemStore'
 import { ConnectKeyboard } from '@/helpers/ConnectKeyboard'
@@ -12,30 +12,33 @@ import { ConnectSimulation } from '@/helpers/ConnectSimulation'
 import { Effects } from '@/helpers/Effects'
 import { Player } from '@/helpers/Player'
 import { Core } from '@/helpers/Core'
+import { ConfigCanvas } from '@/helpers/ConfigCanvas'
 // import { Companion } from '@/helpers/Companion'
 
 const Multiverse = ({ router, children }) => {
   return (
     <Canvas
-      mode='concurrent'
       style={{
         backgroundColor: 'white',
         position: 'absolute',
         top: 0,
         left: 0,
       }}
-      shadows
-      gl={{ antialias: false, logarithmicDepthBuffer: true }}
-      onCreated={(st) => {
-        st.scene.background = new Color('#ffffff')
-        st.gl.physicallyCorrectLights = true
-        st.gl.outputEncoding = sRGBEncoding
+      {...ConfigCanvas}
+      // mode='concurrent'
+      // shadows
+      // gl={{ antialias: false, logarithmicDepthBuffer: true }}
+      // onCreated={(st) => {
+      //   st.scene.background = new Color('#ffffff')
+      //   st.gl.physicallyCorrectLights = true
+      //   st.gl.outputEncoding = sRGBEncoding
+      //   st.gl.shadowMap.enabled = true
 
-        Core.now.canvas = Core.makeDisposableNode({ name: 'canvas' }).sub
-        for (let kn in st) {
-          Core.now.canvas.now[kn] = st[kn]
-        }
-      }}
+      //   Core.now.canvas = Core.makeDisposableNode({ name: 'canvas' }).sub
+      //   for (let kn in st) {
+      //     Core.now.canvas.now[kn] = st[kn]
+      //   }
+      // }}
     >
       <MapContent>{children}</MapContent>
       <ConnectKeyboard></ConnectKeyboard>

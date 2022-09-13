@@ -35,13 +35,7 @@ export function ENCanvas() {
   //
   return (
     <div className='relative w-full h-full'>
-      <Canvas
-        onCreated={(st) => {
-          st.gl.outputEncoding = sRGBEncoding
-          st.gl.physicallyCorrectLights = true
-        }}
-        className='w-full h-full'
-      >
+      <Canvas {...ConfigCanvas} className='w-full h-full'>
         {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
         <PostProcCallers screenPass={screenPass}></PostProcCallers>

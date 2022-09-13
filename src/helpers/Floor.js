@@ -3,7 +3,7 @@ import { EffectNodeRuntime } from '@/effectnode/component/EffectNodeRuntime'
 import { useGLTF } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import anime from 'animejs'
-import { Children, useEffect, useRef } from 'react'
+import { Children, useEffect, useRef, useState } from 'react'
 import {
   BoxBufferGeometry,
   CircleBufferGeometry,
@@ -22,7 +22,7 @@ export function Floor({ url }) {
   let scene = useThree((s) => s.scene)
   let gl = useThree((s) => s.gl)
   let glb = useGLTF(url)
-
+  let [outletRneder, setRender] = useState(null)
   useEffect(() => {
     let prom = addNamedScene({ name: url, scene: glb.scene })
 
@@ -53,13 +53,12 @@ export function Floor({ url }) {
       anime({
         targets: [screenOpacity],
         value: 1,
+        duration: 7000,
         update: () => {
           applyGLB(screenOpacity.value)
         },
       })
 
-      gl.shadowMap.enabled = true
-      //
       glb.scene.traverse((it) => {
         if (it.isLight) {
           it.castShadow = true
@@ -69,6 +68,8 @@ export function Floor({ url }) {
           it.receiveShadow = true
         }
       })
+
+      setRender(<primitive object={glb.scene}></primitive>)
 
       //
     })
@@ -80,8 +81,8 @@ export function Floor({ url }) {
       {/*  */}
 
       <group>
-        <primitive object={glb.scene}></primitive>
-        <EffectNodeRuntime glbObject={glb}></EffectNodeRuntime>
+        {outletRneder}
+        <EffectNodeRuntime key={url} glbObject={glb}></EffectNodeRuntime>
       </group>
 
       {/*  */}

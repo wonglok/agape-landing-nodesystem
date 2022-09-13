@@ -23,18 +23,14 @@ export function EffectNodeRuntime({
         // .filter((e) => e.sigMD5)
         .map((kid) => {
           return (
-            <group key={kid.uuid + instID + 'explore'}>
-              {/*  */}
-              <RuntimeTreeNode
-                key={kid.uuid + instID + 'runtreenode'}
-                instID={instID}
-                glbObject={glbObject}
-                disabledNodes={disabledNodes}
-                node={kid}
-                isEditingMode={isEditingMode}
-              ></RuntimeTreeNode>
-              {/*  */}
-            </group>
+            <RuntimeTreeNode
+              key={kid.uuid + instID + 'explore'}
+              instID={instID}
+              glbObject={glbObject}
+              disabledNodes={disabledNodes}
+              node={kid}
+              isEditingMode={isEditingMode}
+            ></RuntimeTreeNode>
           )
         })}
     </group>
