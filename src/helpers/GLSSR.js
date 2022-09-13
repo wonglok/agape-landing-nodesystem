@@ -86,7 +86,7 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
     let moveAmount = diffPos.copy(nowPos).sub(lastPos).length()
     lastPos.copy(nowPos)
 
-    effect.jitter = MathUtils.lerp(effect.jitter, moveAmount + 0.0001, 0.1)
+    effect.jitter = MathUtils.lerp(effect.jitter, moveAmount * 0.1 + 0.01, 0.1)
 
     // effect.jitter = 0.0001 + moveAmount
 

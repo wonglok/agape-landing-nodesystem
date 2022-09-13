@@ -1,6 +1,6 @@
 import { GLSSR } from '@/helpers/GLSSR'
 import { useScrollStore } from '@/helpers/useScrollStore'
-import { useTexture } from '@react-three/drei'
+import { useDetectGPU, useTexture } from '@react-three/drei'
 import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import {
   Bloom,
@@ -162,6 +162,14 @@ export function EffectsLanding() {
   //   camera.position.z += 0.0001 * Math.sin(t * 1000000.1)
   // })
 
+  //
+
+  const GPUTier = useDetectGPU()
+
+  //
+  // console.log(GPUTier)
+  //
+
   return (
     <group>
       <EffectComposer
@@ -171,7 +179,9 @@ export function EffectsLanding() {
       >
         <Noise opacity={1} premultiply={true}></Noise>
         <Noise opacity={0.5} premultiply={true}></Noise>
-        <GLSSR key={GLSSR.key}></GLSSR>
+        {!GPUTier.isMobile && GPUTier.tier >= 3 && (
+          <GLSSR key={GLSSR.key}></GLSSR>
+        )}
 
         {/* <SSR></SSR> */}
 
