@@ -89,7 +89,7 @@ Page.SEO = function SEO() {
     <span className=''>
       <div
         ref={ref}
-        className='absolute top-0 left-0 z-10 w-screen h-screen overflow-y-scroll'
+        className='absolute top-0 left-0 z-10 w-screen h-screen overflow-y-scroll bg-black'
       >
         <ScrollContentt></ScrollContentt>
       </div>
