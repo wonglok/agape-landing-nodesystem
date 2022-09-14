@@ -43,6 +43,8 @@ export function NodeSingle({ effectNode, node }) {
   return (
     <group ref={ref}>
       <RoundedBox
+        args={[5, 0.5, 5]}
+        radius={0.5 / 3}
         onPointerDown={(ev) => {
           if (node) {
             setActiveNodeID(node._id)
@@ -71,11 +73,9 @@ export function NodeSingle({ effectNode, node }) {
           }, 100)
           controls.enabled = true
         }}
-        args={[5, 0.5, 5]}
-        radius={0.5 / 3}
       >
         <meshStandardMaterial
-          roughness={0.15}
+          roughness={1}
           metalness={1}
           color={'#00ffff'}
           transparent={true}
@@ -180,7 +180,9 @@ function TitleText({ node }) {
         // >
         //   {node?.displayTitle}
         // </Html>
-        <TextCnavas text={node?.displayTitle}></TextCnavas>
+        <group position-y={4} position-z={-4}>
+          <TextCnavas text={node?.displayTitle}></TextCnavas>
+        </group>
         // //
         // //
         // //

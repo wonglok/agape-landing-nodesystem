@@ -19,8 +19,6 @@ import { useScrollStore } from '@/helpers/useScrollStore'
 import { useEffect } from 'react'
 import { useRef } from 'react'
 
-//
-//
 const Page = () => {
   // let viewport = useThree((s) => s.viewport)
   // let size = useThree((s) => s.size)
@@ -42,7 +40,7 @@ const Page = () => {
       <EffectsLanding></EffectsLanding>
 
       {/*  */}
-
+      {/*  */}
       {/*  */}
     </>
   )
@@ -57,6 +55,8 @@ Page.SEO = function SEO() {
     if (!ref.current) {
       return
     }
+    //
+    //
     let now = window.performance.now() / 1000
     let last = now
     //

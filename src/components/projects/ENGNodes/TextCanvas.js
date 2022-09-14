@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import { DoubleSide } from 'three'
 import { CanvasTexture } from 'three140'
-export function TextCnavas({ text = 'Lorem ipsum dolor sit amet' }) {
+export function TextCnavas({
+  align = 'center',
+  text = 'Lorem ipsum dolor sit amet',
+}) {
   //
   let [tex, setTexture] = useState(false)
 
@@ -12,7 +15,7 @@ export function TextCnavas({ text = 'Lorem ipsum dolor sit amet' }) {
     c.width = text.length * 21
     c.height = 80
 
-    c.width += 25
+    c.width += 25 + 50
 
     ctx.fillStyle = '#ffffff'
     ctx.fillRect(0, 0, c.width - 0, c.height - 0)
@@ -36,13 +39,21 @@ export function TextCnavas({ text = 'Lorem ipsum dolor sit amet' }) {
     })
   }, [text])
 
+  let getX = () => {
+    if (align === 'left') {
+      return -1.5 / tex.hRatio / 2 + -1
+    } else if (align === 'right') {
+      return 1.5 / tex.hRatio / 2 + 1
+    } else {
+      return 0
+    }
+  }
   return (
     <>
       {tex && (
         <mesh
+          position={[getX(), 0, 0]}
           scale={1.0}
-          position-y={4}
-          position-z={-4}
           rotation-x={Math.PI * -0.35}
         >
           <planeBufferGeometry

@@ -1,4 +1,4 @@
-import { Box, Text, useGLTF } from '@react-three/drei'
+import { Box, RoundedBox, Text, useGLTF } from '@react-three/drei'
 import { Suspense } from 'react'
 
 export function IconComputer({ onClick = () => {} }) {
@@ -39,20 +39,22 @@ export function ImplementationOfBtn({ onClick }) {
         Click to Add Node Module
       </Text>
 
-      <Box args={[5, 0.2, 1]} position={[0, 0.2, 0]}>
+      <RoundedBox args={[5, 0.2, 1]} position={[0, 0.2, 0]} radius={0.5 / 3}>
         <meshStandardMaterial color={'blue'} metalness={1} roughness={0} />
-      </Box>
+      </RoundedBox>
 
-      <Box args={[1, 0.2, 5]} position={[0, 0.2, 0]}>
+      <RoundedBox args={[1, 0.2, 5]} position={[0, 0.2, 0]} radius={0.5 / 3}>
         <meshStandardMaterial color={'blue'} metalness={1} roughness={0} />
-      </Box>
-      <Box args={[6, 0.2, 6]} position={[0, 0.0, 0]}>
+      </RoundedBox>
+
+      <RoundedBox args={[6, 0.2, 6]} radius={0.5 / 3}>
         <meshStandardMaterial color={'white'} metalness={1} roughness={0.1} />
-      </Box>
+      </RoundedBox>
+
+      {/* <Box args={[6, 0.2, 6]} position={[0, 0.0, 0]}></Box> */}
 
       {/* <primitive object={glb.scene}></primitive> */}
     </group>
   )
 }
-
 //

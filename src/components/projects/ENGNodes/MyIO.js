@@ -1,6 +1,7 @@
 import { Vector3 } from 'three140'
 import { getID } from '@/helpers/getID'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
+import { TextCnavas } from './TextCanvas'
 
 export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
   let draggingIOID = useGLBEditor((s) => s.draggingIOID)
@@ -123,6 +124,13 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
       {/*  */}
       {/*  */}
       {/*  */}
+
+      {socket.type === 'input' && (
+        <TextCnavas align={'left'} text={idx}></TextCnavas>
+      )}
+      {socket.type === 'output' && (
+        <TextCnavas align={'right'} text={idx}></TextCnavas>
+      )}
 
       {io === 'input' && (
         <mesh
