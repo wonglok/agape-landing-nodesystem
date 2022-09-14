@@ -19,7 +19,7 @@ import {
   Scene,
   VideoTexture,
 } from 'three140'
-import create from 'zustand'
+import { useAICamera } from './useAICamera'
 
 async function initDetector() {
   return handdetection.createDetector(
@@ -50,20 +50,6 @@ async function getVideo(video) {
 
   return video
 }
-
-export const useAICamera = create((set, get) => {
-  return {
-    video: false,
-    vTex: false,
-    detector: false,
-
-    setAIVidSrc: ({ video, vTex, detector }) => {
-      set({ video, vTex, detector })
-    },
-
-    indexFingerTip: new Object3D(),
-  }
-})
 
 export function MyHands() {
   let setAIVidSrc = useAICamera((s) => s.setAIVidSrc)
@@ -163,8 +149,13 @@ function Hand() {
     }
   }, [detector, indexFingerTip.position, video])
 
+  useEffect(() => {
+    ref.current.visible = false
+  }, [])
   useFrame(() => {
     if (ref.current) {
+      ref.current.visible = true
+
       ref.current.position.lerp(indexFingerTip.position, 0.1)
     }
   })
