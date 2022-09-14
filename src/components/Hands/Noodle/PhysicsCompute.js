@@ -200,7 +200,7 @@ void main ()	{
   toBall(noiser, az, el);
   az += sin(time + uv.x * 3.14);
   el += cos(time + uv.x * 3.14);
-  pos.xyz = trackerPos + vec3(0.0, 1.0, 0.0) + rotateY(time) * fromBall(50.9 + 0.5 * sin(time), az, el);
+  pos.xyz = trackerPos + vec3(0.0, 1.0, 0.0) + rotateY(time) * fromBall(150.9 + 0.5 * sin(time), az, el);
   gl_FragColor.rgb = pos.rgb;
   gl_FragColor.w = 1.0;
 

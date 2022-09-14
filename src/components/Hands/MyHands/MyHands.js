@@ -141,10 +141,10 @@ function Hand({ scene }) {
         )
         // console.log(results[0])
         if (tip) {
-          indexFingerTip.position.x = video.videoWidth / -2 + tip2d.x
+          indexFingerTip.position.x = (video.videoWidth / -2 + tip2d.x) * 2
           indexFingerTip.position.y =
-            video.videoHeight - tip2d.y - video.videoHeight / 2
-          indexFingerTip.position.z = tip.z * 100
+            (video.videoHeight - tip2d.y - video.videoHeight / 2) * 2
+          indexFingerTip.position.z = tip.z * 0
         }
       }
     })
@@ -173,7 +173,7 @@ function Hand({ scene }) {
   useEffect(() => {
     let mini = Core.now.canvas
     let howManyTracker = 256
-    let howLongTail = 32
+    let howLongTail = 64
 
     let physics = new PhysicsCompute({
       sizeX: 1,
