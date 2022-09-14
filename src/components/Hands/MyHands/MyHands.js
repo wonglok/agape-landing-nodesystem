@@ -119,6 +119,7 @@ export function MyHands() {
 }
 
 function Hand() {
+  let vTex = useAICamera((s) => s.vTex)
   let detector = useAICamera((s) => s.detector)
   let video = useAICamera((s) => s.video)
   let indexFingerTip = useAICamera((s) => s.indexFingerTip)
@@ -152,6 +153,7 @@ function Hand() {
           indexFingerTip.position.x = video.videoWidth / -2 + tip2d.x
           indexFingerTip.position.y =
             video.videoHeight - tip2d.y - video.videoHeight / 2
+          indexFingerTip.position.z = tip.z * 100
         }
       }
     })
@@ -175,11 +177,12 @@ function Hand() {
       {/*  */}
 
       <mesh ref={ref} rotation-y={Math.PI * -1} position={[0, 0, 0]}>
-        <sphereBufferGeometry args={[10, 32, 32]}></sphereBufferGeometry>
+        <sphereBufferGeometry args={[25, 32, 32]}></sphereBufferGeometry>
         <meshBasicMaterial
           color={'#ffffff'}
           side={DoubleSide}
           roughness={0}
+          map={vTex}
         ></meshBasicMaterial>
       </mesh>
     </group>
