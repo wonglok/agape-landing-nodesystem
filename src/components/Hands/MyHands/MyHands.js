@@ -1,3 +1,4 @@
+import { Core } from '@/helpers/Core'
 import * as mpHands from '@mediapipe/hands'
 import {
   Environment,
@@ -11,7 +12,7 @@ import {
 import { createPortal, useFrame, useThree } from '@react-three/fiber'
 import * as handdetection from '@tensorflow-models/hand-pose-detection'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { DoubleSide, sRGBEncoding } from 'three'
+import { DoubleSide, FrontSide, sRGBEncoding } from 'three'
 import {
   Color,
   Object3D,
@@ -19,6 +20,10 @@ import {
   Scene,
   VideoTexture,
 } from 'three140'
+import { NoodleRenderable } from '../Noodle/NoodleRenderable'
+import { NoodleSegmentCompute } from '../Noodle/NoodleSegmentCompute'
+import { ParticleRenderable } from '../Noodle/ParticleRenderable'
+import { PhysicsCompute } from '../Noodle/PhysicsCompute'
 import { useAICamera } from './useAICamera'
 
 async function initDetector() {
@@ -104,7 +109,7 @@ export function MyHands() {
   )
 }
 
-function Hand() {
+function Hand({ scene }) {
   let vTex = useAICamera((s) => s.vTex)
   let detector = useAICamera((s) => s.detector)
   let video = useAICamera((s) => s.video)
@@ -152,13 +157,83 @@ function Hand() {
   useEffect(() => {
     ref.current.visible = false
   }, [])
-  useFrame(() => {
+  useFrame((st, dt) => {
     if (ref.current) {
-      ref.current.visible = true
+      if (ref.current.position.length() === 0.0) {
+        ref.current.visible = false
+      } else {
+        ref.current.visible = true
+      }
 
+      ref.current.rotation.y += dt
       ref.current.position.lerp(indexFingerTip.position, 0.1)
     }
   })
+
+  useEffect(() => {
+    let mini = Core.now.canvas
+    let howManyTracker = 256
+    let howLongTail = 32
+
+    let physics = new PhysicsCompute({
+      sizeX: 1,
+      sizeY: howManyTracker,
+      tracker: ref.current,
+    })
+
+    let sim = new NoodleSegmentCompute({
+      node: mini,
+      tracker: ref.current,
+      getTextureAlpha: () => {
+        return physics.getHeadList()
+      },
+      howManyTracker: howManyTracker,
+      howLongTail: howLongTail,
+    })
+
+    let renderConfig = {
+      color: new Color('#00ffff'),
+      transparent: true,
+      roughness: 0.0,
+      metalness: 0.2,
+      side: FrontSide,
+      reflectivity: 0,
+      transmission: 0,
+      ior: 1.5,
+    }
+
+    let noodle = new NoodleRenderable({
+      renderConfig,
+      node: mini,
+      sim,
+      howManyTracker: howManyTracker,
+      howLongTail: howLongTail,
+    })
+
+    let pars = new ParticleRenderable({
+      renderConfig,
+      sizeX: 1,
+      sizeY: howManyTracker,
+      core: mini,
+      getTextureAlpha: () => {
+        return physics.getHeadList()
+      },
+      getTextureBeta: () => {
+        return physics.getHeadList2()
+      },
+    })
+
+    mini.onClean(() => {
+      pars.removeFromParent()
+      noodle.o3d.removeFromParent()
+    })
+
+    noodle.o3d.scale.setScalar(1)
+    pars.scale.setScalar(1)
+    scene.add(noodle.o3d)
+    scene.add(pars)
+  }, [])
+
   return (
     <group>
       {/*  */}
@@ -183,7 +258,7 @@ function Hand() {
 function MyScreen({}) {
   let vTex = useAICamera((s) => s.vTex)
   let video = useAICamera((s) => s.video)
-  let fbo = useFBO(video.videoWidth, video.videoHeight)
+  let fbo = useFBO(video.videoWidth * 2, video.videoHeight * 2)
 
   return (
     <group>
@@ -196,7 +271,9 @@ function MyScreen({}) {
       </Plane>
 
       <MyCam texture={vTex} fbo={fbo}>
-        {vTex && <Hand></Hand>}
+        {({ scene }) => {
+          return <group>{vTex && <Hand scene={scene}></Hand>}</group>
+        }}
       </MyCam>
     </group>
   )
@@ -234,5 +311,7 @@ export function MyCam({ texture, fbo, children }) {
     gl.render(scene, cam)
     gl.setRenderTarget(null)
   })
-  return <group>{createPortal(<group>{children}</group>, scene)}</group>
+  return (
+    <group>{createPortal(<group>{children({ scene })}</group>, scene)}</group>
+  )
 }

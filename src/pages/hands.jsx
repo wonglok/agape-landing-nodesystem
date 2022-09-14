@@ -1,4 +1,5 @@
 import { MyHands } from '@/components/Hands/MyHands/MyHands'
+import { Core } from '@/helpers/Core'
 import { Canvas } from '@react-three/fiber'
 import { Color, sRGBEncoding } from 'three'
 
@@ -17,6 +18,12 @@ export default function Hands() {
         onCreated={(st) => {
           st.gl.physicallyCorrectLights = true
           st.gl.outputEncoding = sRGBEncoding
+
+          Core.now.canvas = Core.makeDisposableNode({ name: 'core' }).sub
+
+          for (let kn in st) {
+            Core.now.canvas.now[kn] = st[kn]
+          }
         }}
       >
         <Content></Content>
