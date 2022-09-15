@@ -24,7 +24,7 @@ export function Diamond() {
               color='#ff94ff'
               axis={'z'}
               url={`/scene/diamond/sq2diamond.glb`}
-              query={(glb) => {
+              geoQuery={(glb) => {
                 return glb.scene.getObjectByName('D2').geometry
               }}
             />
@@ -36,7 +36,7 @@ export function Diamond() {
               color='#ffc874'
               axis={'y'}
               url={`/scene/diamond/shard.glb`}
-              query={(glb) => {
+              geoQuery={(glb) => {
                 return glb.scene.getObjectByName('Cube').geometry
               }}
               position={[0, 0, 0]}
@@ -82,7 +82,7 @@ export function Diamond() {
 
 function Load({
   url = '/scene/diamond/sq2diamond.glb',
-  query = () => {
+  geoQuery = () => {
     return new IcosahedronBufferGeometry(1, 0)
   },
   color = '#bababa',
@@ -90,7 +90,7 @@ function Load({
   axis = 'x',
 }) {
   const sq2 = useGLTF(url)
-  let geo = query(sq2)
+  let geo = geoQuery(sq2)
   const ref = useRef()
   const config = useTweaks(title, {
     bounces: { value: 4, min: 0, max: 8, step: 1 },
