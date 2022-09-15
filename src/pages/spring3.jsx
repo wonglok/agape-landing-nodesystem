@@ -36,6 +36,7 @@ let F_spring = new Vector3()
 let F_damper = new Vector3()
 let a = new Vector3()
 let initPos = new Vector3()
+let gravity = new Vector3(0, -9.8 * 5, 0)
 
 //
 
@@ -64,6 +65,7 @@ const Page = () => {
         .add(F_damper)
         .multiplyScalar(1 / block.mass)
 
+      a.add(gravity)
       block.v.addScaledVector(a, frameRate)
       block.x.addScaledVector(block.v, frameRate)
     }
