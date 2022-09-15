@@ -9,7 +9,13 @@ import {
 } from '@react-three/drei'
 import { RefractionMaterial } from './RefractionMaterial'
 import { useTweaks } from 'use-tweaks'
-import { Bloom, EffectComposer } from '@react-three/postprocessing'
+import {
+  Bloom,
+  ChromaticAberration,
+  EffectComposer,
+  Noise,
+  SMAA,
+} from '@react-three/postprocessing'
 import { IcosahedronBufferGeometry } from 'three140'
 import { generateUUID } from 'three/src/math/MathUtils'
 
@@ -63,13 +69,17 @@ export function Diamond() {
 
           <Environment preset='apartment' background></Environment>
 
-          <EffectComposer multisampling={4}>
+          <EffectComposer disableNormalPass multisampling={4}>
             <Bloom
               luminanceThreshold={2}
               intensity={1.5}
               levels={9}
               mipmapBlur={true}
             />
+            <Noise premultiply={1} opacity={0.5}></Noise>
+            {/* <ChromaticAberration
+              offset={[0.0015, 0.0015]}
+            ></ChromaticAberration> */}
           </EffectComposer>
         </Suspense>
         <OrbitControls object-position={[0, 0, 5.5]}></OrbitControls>
@@ -94,8 +104,8 @@ function Load({
   const ref = useRef()
   const config = useTweaks(title, {
     bounces: { value: 4, min: 0, max: 8, step: 1 },
-    aberrationStrength: { value: 0.01, min: 0, max: 0.1, step: 0.01 },
-    ior: { value: 2.4, min: 0, max: 10 },
+    aberrationStrength: { value: 0.05, min: 0, max: 0.1, step: 0.01 },
+    ior: { value: 2, min: 0, max: 10 },
     fresnel: { value: 0, min: 0, max: 1 },
     color: { value: color },
     autoRotate: true,
@@ -109,7 +119,7 @@ function Load({
 
   //
   return (
-    <CubeCamera resolution={128} frames={1}>
+    <CubeCamera resolution={64} frames={1}>
       {(texture) => (
         <mesh ref={ref} geometry={geo}>
           <RefractionMaterial
