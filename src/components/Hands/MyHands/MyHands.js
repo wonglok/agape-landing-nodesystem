@@ -79,6 +79,7 @@ export function MyHands() {
                   let vid = document.createElement('video')
                   vid.autoplay = true
                   vid.srcObject = stream
+                  vid.playsInline = true
                   getVideo(vid).then(async (vid) => {
                     vid.play()
                     let tex = new VideoTexture(vid)
