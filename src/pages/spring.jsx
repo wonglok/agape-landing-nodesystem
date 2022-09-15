@@ -12,9 +12,10 @@ Mass (0.5) kg
 //https://burakkanber.com/blog/physics-in-javascript-car-suspension-part-1-spring-mass-damper/
 /* Spring stiffness, in kg / s^2 */
 let k = -10
+let spring_length = 1
 
 /* Damping constant, in kg / s */
-let b = -0.5 / 10
+let b = -0.5
 
 /* Block position and velocity. */
 let block = { x: 0, v: 0, mass: 0.1 }
@@ -38,7 +39,7 @@ const Page = () => {
     // wall.v = (wall.x - wall.lx) / frameRate
 
     if (!mouse.isDown) {
-      let F_spring = k * (block.x - wall.x)
+      let F_spring = k * (block.x - wall.x - spring_length)
       let F_damper = b * (block.v - wall.v)
 
       let a = (F_spring + F_damper) / block.mass

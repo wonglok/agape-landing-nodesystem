@@ -21,9 +21,10 @@ let b = -0.5
 let block = {
   x: new Vector3(),
   v: new Vector3(),
-  mass: 0.5,
-  start: new Vector3(0, 0, 0),
+  mass: 0.3,
 }
+
+let drag = { x: new Vector3(0, 1, 0) }
 
 let wall = { x: new Vector3(), v: new Vector3() }
 
@@ -34,6 +35,9 @@ let mouse = { x: new Vector3(), isDown: false }
 let F_spring = new Vector3()
 let F_damper = new Vector3()
 let a = new Vector3()
+let initPos = new Vector3()
+
+//
 
 const Page = () => {
   let ref = useRef()
@@ -49,7 +53,11 @@ const Page = () => {
     // wall.v = (wall.x - wall.lx) / frameRate
 
     if (!mouse.isDown) {
-      F_spring.copy(block.x).sub(wall.x).multiplyScalar(k).sub(block.start)
+      //
+      F_spring.copy(block.x)
+        .sub(wall.x)
+        .multiplyScalar(k)
+        .sub(initPos.copy(drag.x).multiplyScalar(k))
       F_damper.copy(block.v).sub(wall.v).multiplyScalar(b)
 
       a.copy(F_spring)
@@ -95,7 +103,24 @@ const Page = () => {
         </Box>
       </group>
 
-      <Box scale={0.1} position={[0, 0.7, 0]}>
+      <Box
+        scale={1}
+        position={[0, 0, 0]}
+        onPointerDown={() => {
+          mouse.isDown = true
+        }}
+        onPointerUp={() => {
+          mouse.isDown = false
+        }}
+        onPointerMove={(ev) => {
+          if (mouse.isDown) {
+            mouse.x.copy(ev.point)
+            drag.x.copy(mouse.x)
+            ev.eventObject.position.copy(mouse.x)
+          }
+        }}
+        args={[0.5, 0.5, 0.0001]}
+      >
         <meshStandardMaterial color={'#0000ff'}></meshStandardMaterial>
       </Box>
       {/*  */}
