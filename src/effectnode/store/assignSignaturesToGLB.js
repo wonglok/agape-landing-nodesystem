@@ -1,4 +1,5 @@
 import md5 from 'md5'
+import { Object3D } from 'three140'
 
 const getSignature = (it) => {
   let str = '' + it.name
@@ -20,6 +21,12 @@ const getSignature = (it) => {
 //
 
 export const assignSignaturesToGLB = (glb) => {
+  let object = glb.scene.getObjectByName('EffectNodeMetaData')
+  if (!object) {
+    let newO = new Object3D()
+    newO.name = 'EffectNodeMetaData'
+    glb.scene.add(newO)
+  }
   glb.scene.traverse((it) => {
     if (it) {
       it.userData.effectNode = it.userData.effectNode || {}
