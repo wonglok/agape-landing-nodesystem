@@ -21,7 +21,7 @@ export function Diamond() {
           <group position={[-1.75, 0, 0]} rotation={[Math.PI * -0.35, 0, 0]}>
             <Load
               title='yo'
-              color='#ff00ff'
+              color='#ff94ff'
               axis={'z'}
               url={`/scene/diamond/sq2diamond.glb`}
               query={(glb) => {
@@ -33,7 +33,7 @@ export function Diamond() {
           <group position={[1.75, 0, 0]} rotation={[Math.PI * 0.0, 0, 0]}>
             <Load
               title='yo2'
-              color='#00ffff'
+              color='#ffc874'
               axis={'y'}
               url={`/scene/diamond/shard.glb`}
               query={(glb) => {
@@ -45,14 +45,14 @@ export function Diamond() {
 
           <Sphere position={[5, 0, 0]}>
             <meshStandardMaterial
-              emissive={'#00ff00'}
+              emissive={'#ff94ff'}
               color={'green'}
             ></meshStandardMaterial>
           </Sphere>
 
           <Sphere position={[-5, 0, 0]}>
             <meshStandardMaterial
-              emissive={'#0000ff'}
+              emissive={'#ffc874'}
               color={'blue'}
             ></meshStandardMaterial>
           </Sphere>
