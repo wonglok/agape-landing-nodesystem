@@ -5,20 +5,46 @@ import {
   Environment,
   OrbitControls,
   CubeCamera,
+  Sphere,
 } from '@react-three/drei'
-import { useControls } from 'leva'
 import { RefractionMaterial } from './RefractionMaterial'
 import { useTweaks } from 'use-tweaks'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
+import { IcosahedronBufferGeometry } from 'three140'
 
 export function Diamond() {
   return (
     <>
       <Canvas>
         <Suspense fallback={null}>
-          <group rotation={[Math.PI * -0.35, 0, 0]}>
-            <YoDiamond position={[0, 0, 0]} />
+          <group position={[-1.5, 0, 0]} rotation={[Math.PI * -0.35, 0, 0]}>
+            <Load
+              axis={'z'}
+              url={`/scene/diamond/sq2diamond.glb`}
+              query={(glb) => {
+                return glb.scene.getObjectByName('D2').geometry
+              }}
+            />
           </group>
+
+          <group position={[1.5, 0, 0]} rotation={[Math.PI * 0.0, 0, 0]}>
+            <Load
+              axis={'y'}
+              url={`/scene/diamond/shard.glb`}
+              query={(glb) => {
+                return glb.scene.getObjectByName('Cube').geometry
+              }}
+              position={[0, 0, 0]}
+            />
+          </group>
+
+          <Sphere position={[5, 0, 0]}>
+            <meshStandardMaterial color={'green'}></meshStandardMaterial>
+          </Sphere>
+
+          <Sphere position={[-5, 0, 0]}>
+            <meshStandardMaterial color={'blue'}></meshStandardMaterial>
+          </Sphere>
 
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
@@ -35,7 +61,7 @@ export function Diamond() {
             />
           </EffectComposer>
         </Suspense>
-        <OrbitControls object-position={[0, 0, 3.5]}></OrbitControls>
+        <OrbitControls object-position={[0, 0, 5.5]}></OrbitControls>
       </Canvas>
     </>
   )
@@ -43,21 +69,28 @@ export function Diamond() {
 
 //
 
-function YoDiamond(props) {
+function Load({
+  url = '/scene/diamond/sq2diamond.glb',
+  query = () => {
+    return new IcosahedronBufferGeometry(1, 0)
+  },
+  axis = 'x',
+}) {
+  const sq2 = useGLTF(url)
+  let geo = query(sq2)
   const ref = useRef()
-  const { nodes } = useGLTF('/scene/diamond/sq2diamond.glb')
-  const config = useTweaks({
+  const config = useTweaks('Yo', {
     bounces: { value: 4, min: 0, max: 8, step: 1 },
     aberrationStrength: { value: 0.01, min: 0, max: 0.1, step: 0.01 },
     ior: { value: 2.4, min: 0, max: 10 },
     fresnel: { value: 0, min: 0, max: 1 },
-    color: 'white',
+    color: { value: '#bababa' },
     autoRotate: true,
     fastChroma: true,
   })
   useFrame((_, delta) => {
     if (config.autoRotate) {
-      ref.current.rotation.z += delta * 0.25
+      ref.current.rotation[axis] += delta * 0.25
     }
   })
 
@@ -65,8 +98,13 @@ function YoDiamond(props) {
   return (
     <CubeCamera resolution={128} frames={1}>
       {(texture) => (
-        <mesh ref={ref} geometry={nodes.D2.geometry} {...props}>
-          <RefractionMaterial envMap={texture} {...config} toneMapped={false} />
+        <mesh ref={ref} geometry={geo}>
+          <RefractionMaterial
+            key={texture.uuid}
+            envMap={texture}
+            {...config}
+            toneMapped={false}
+          />
         </mesh>
       )}
     </CubeCamera>
