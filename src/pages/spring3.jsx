@@ -1,7 +1,8 @@
-import { Box, Environment, PerspectiveCamera } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
+import { Box, Environment, PerspectiveCamera, Plane } from '@react-three/drei'
+import { useFrame, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
 import { Vector3 } from 'three'
+// import {  } from 'three140'
 
 /*
 Stiffness (-20 kg / s2)
@@ -12,33 +13,32 @@ Mass (0.5) kg
 */
 //https://burakkanber.com/blog/physics-in-javascript-car-suspension-part-1-spring-mass-damper/
 /* Spring stiffness, in kg / s^2 */
-let k = -20
+let sK = -20
 
 /* Damping constant, in kg / s */
-let b = -0.5
+let sB = -0.5
+
+let anchor = { pos: new Vector3(0, 0, 0) }
 
 /* Block position and velocity. */
 let block = {
-  x: new Vector3(),
-  v: new Vector3(),
+  pos: new Vector3(),
+  vel: new Vector3(),
   mass: 0.3,
 }
 
-let drag = { x: new Vector3(0, 0, 0) }
-
-let wall = { x: new Vector3(), v: new Vector3() }
+let wall = { pos: new Vector3(), vel: new Vector3(), mass: 0.3 }
 
 let frameRate = 1 / 60
 
 let mouse = { x: new Vector3(), isDown: false }
 
-let F_spring = new Vector3()
-let F_damper = new Vector3()
-let a = new Vector3()
-let initPos = new Vector3()
-let gravity = new Vector3(0, -9.8 * 5, 0)
-
 //
+let tF_Spring = new Vector3()
+let tF_Damper = new Vector3()
+let tAcceleration = new Vector3()
+let tRestorationForce = new Vector3()
+let uGravity = new Vector3(0, -9.8 * 10, 0)
 
 const Page = () => {
   let ref = useRef()
@@ -49,31 +49,35 @@ const Page = () => {
     frameRate = dt
     /* Move the wall. */
     // wall.t += frameRate
-    // wall.lx = wall.x
-    // wall.x = 30 + 70 * Math.sin(2 * Math.PI * wall.frequency * wall.t)
-    // wall.v = (wall.x - wall.lx) / frameRate
+    // wall.lx = wall.pos
+    // wall.pos = 30 + 70 * Math.sin(2 * Math.PI * wall.frequency * wall.t)
+    // wall.vel = (wall.pos - wall.lx) / frameRate
 
-    if (!mouse.isDown) {
-      //
-      F_spring.copy(block.x)
-        .sub(wall.x)
-        .multiplyScalar(k)
-        .sub(initPos.copy(drag.x).multiplyScalar(k))
-      F_damper.copy(block.v).sub(wall.v).multiplyScalar(b)
+    tRestorationForce.copy(anchor.pos).multiplyScalar(sK)
 
-      a.copy(F_spring)
-        .add(F_damper)
-        .multiplyScalar(1 / block.mass)
+    tF_Spring
+      .copy(block.pos)
+      .sub(wall.pos)
+      .multiplyScalar(sK)
+      .sub(tRestorationForce)
 
-      a.add(gravity)
-      block.v.addScaledVector(a, frameRate)
-      block.x.addScaledVector(block.v, frameRate)
-    }
+    tF_Damper.copy(block.vel).sub(wall.vel).multiplyScalar(sB)
 
+    tAcceleration
+      .copy(tF_Spring)
+      .add(tF_Damper)
+      .multiplyScalar(1 / block.mass)
+
+    tAcceleration.add(uGravity)
+
+    block.vel.addScaledVector(tAcceleration, frameRate)
+    block.pos.addScaledVector(block.vel, frameRate)
     if (ref.current) {
-      ref.current.position.copy(block.x)
+      ref.current.position.copy(block.pos)
     }
   })
+
+  let scene = useThree((s) => s.scene)
   return (
     <>
       {/* <YoSpin>
@@ -82,43 +86,36 @@ const Page = () => {
         </Box>
       </YoSpin> */}
       <group position={[0.0, 0, 0]} scale={1}>
-        <Box
-          ref={ref}
-          args={[1, 1, 0.00001]}
-          onPointerDown={() => {
-            mouse.isDown = true
-          }}
+        <Plane
+          args={[100, 100]}
           onPointerUp={() => {
             mouse.isDown = false
           }}
           onPointerMove={(ev) => {
-            if (mouse.isDown) {
-              mouse.x.copy(ev.point)
-              block.x.copy(mouse.x)
+            let mesh = scene.getObjectByName(mouse.isDown)
+
+            if (mesh) {
+              ev.point.z = 0
+              anchor.pos.copy(ev.point)
+              mesh.position.copy(ev.point)
             }
           }}
         >
+          <meshBasicMaterial transparent={true} opacity={0}></meshBasicMaterial>
+        </Plane>
+        {/*  */}
+        {/*  */}
+        <Box ref={ref} args={[1, 1, 0.00001]} onPointerDown={() => {}}>
           <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
         </Box>
       </group>
 
       <Box
         scale={1}
+        name='anchorMesh'
         position={[0, 0, 0]}
         onPointerDown={() => {
-          mouse.isDown = true
-        }}
-        onPointerUp={() => {
-          mouse.isDown = false
-        }}
-        onPointerMove={(ev) => {
-          if (mouse.isDown) {
-            ev.stopPropagation()
-            ev.point.z = 0
-            mouse.x.copy(ev.point)
-            drag.x.copy(mouse.x)
-            ev.eventObject.position.copy(mouse.x)
-          }
+          mouse.isDown = 'anchorMesh'
         }}
         args={[0.5, 0.5, 0.5]}
       >
