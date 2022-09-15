@@ -5,6 +5,7 @@ import { NightHDR } from '@/components/canvas/NYCJourney/NightHDR'
 import { NYCJourney } from '@/components/canvas/NYCJourney/NYCJourey'
 // import { YoSpin } from '@/components/canvas/YoSpin/YoSpin'
 import { useScrollStore } from '@/helpers/useScrollStore'
+//
 // import { Loader } from '@react-three/drei'
 // import {
 //   Box,
@@ -16,6 +17,7 @@ import { useScrollStore } from '@/helpers/useScrollStore'
 // } from '@react-three/drei'
 // import { useThree } from '@react-three/fiber'
 // import { UIContent } from '@/helpers/UIContent'
+//
 import { useEffect } from 'react'
 import { useRef } from 'react'
 
@@ -102,46 +104,37 @@ Page.SEO = function SEO() {
 function ScrollContentt() {
   return (
     <>
-      <div
-        style={{ height: 'calc(100vh - 100px)' }}
-        className='flex items-center justify-center w-screen e'
-      ></div>
-      <div
-        style={{ height: '100px' }}
-        className='flex items-center justify-center w-screen bg-black e bg-opacity-30'
+      <div style={{ height: '800vh' }}></div>
+      {/* <div
+        style={{ height: '100vh' }}
+        className='flex items-center justify-center w-screen bg-red-200 bg-opacity-50'
       >
-        <div className='text-2xl text-gray-200'>Welcome to AGAPE</div>
-      </div>
-      <div
-        style={{ height: '300vh' }}
-        className='flex items-center justify-center w-screen '
-      >
-        <div className='text-2xl text-gray-200'>Welcome to AGAPE</div>
-      </div>
-      <div
-        style={{ paddingTop: '200px', paddingBottom: '200px' }}
-        className='flex items-center justify-center w-screen bg-black e bg-opacity-30'
-      >
-        <div className='text-2xl text-gray-200'>Welcome to AGAPE</div>
-      </div>
-      <div
-        style={{ height: '300vh' }}
-        className='flex items-center justify-center w-screen '
-      >
-        <div className='text-2xl text-gray-200'>Welcome to AGAPE</div>
+        <div className='text-2xl text-gray-200'>Page 1</div>
       </div>
       <div
         style={{ height: '100vh' }}
-        className='flex items-center justify-center w-screen bg-black e bg-opacity-30'
+        className='flex items-center justify-center w-screen  bg-blue-200 bg-opacity-50'
       >
-        <div className='text-2xl text-gray-200'>Welcome to AGAPE</div>
+        <div className='text-2xl text-gray-200'>Page 2</div>
       </div>
       <div
-        style={{ height: '500px' }}
-        className='flex items-center justify-center w-screen bg-black e bg-opacity-30'
+        style={{ height: '100vh' }}
+        className='flex items-center justify-center w-screen bg-blue-200 bg-opacity-50'
       >
-        <div className='text-2xl text-gray-200'>Welcome to AGAPE</div>
+        <div className='text-2xl text-gray-200'>Page 3</div>
       </div>
+      <div
+        style={{ height: '100vh' }}
+        className='flex items-center justify-center w-screen bg-red-200 bg-opacity-50'
+      >
+        <div className='text-2xl text-gray-200'>Page 4</div>
+      </div>
+      <div
+        style={{ height: '100vh' }}
+        className='flex items-center justify-center w-screen bg-green-200 bg-opacity-50'
+      >
+        <div className='text-2xl text-gray-200'>Page 5</div>
+      </div> */}
     </>
   )
 }

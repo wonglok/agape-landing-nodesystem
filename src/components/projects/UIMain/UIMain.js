@@ -42,7 +42,6 @@ function UIMainContent() {
       >
         <div className='w-full'>
           <LeftRight
-            //
             NS={'canvas-control'}
             left={(upperMostSize) => (
               <UpDown
