@@ -20,13 +20,23 @@ const getSignature = (it) => {
 
 //
 
+export const GlobalsEmptyObjects = [
+  //
+  'EN_MaterialLibrary',
+  'EN_PostProcessing',
+]
+
 export const assignSignaturesToGLB = (glb) => {
-  let object = glb.scene.getObjectByName('EN_PostProcessing')
-  if (!object) {
-    let newO = new Object3D()
-    newO.name = 'EN_PostProcessing'
-    glb.scene.add(newO)
+  let polyfillName = (name) => {
+    let found = glb.scene.getObjectByName(name)
+    if (!found) {
+      let addNew = new Object3D()
+      addNew.name = name
+      glb.scene.add(addNew)
+    }
   }
+
+  GlobalsEmptyObjects.forEach(polyfillName)
   glb.scene.traverse((it) => {
     if (it) {
       it.userData.effectNode = it.userData.effectNode || {}

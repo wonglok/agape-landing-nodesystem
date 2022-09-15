@@ -40,15 +40,15 @@ export function ImplementationOfBtn({ onClick }) {
       </Text>
 
       <RoundedBox args={[5, 0.2, 1]} position={[0, 0.2, 0]} radius={0.5 / 3}>
-        <meshStandardMaterial color={'blue'} metalness={1} roughness={0} />
+        <meshStandardMaterial color={'blue'} metalness={1} roughness={0.5} />
       </RoundedBox>
 
       <RoundedBox args={[1, 0.2, 5]} position={[0, 0.2, 0]} radius={0.5 / 3}>
-        <meshStandardMaterial color={'blue'} metalness={1} roughness={0} />
+        <meshStandardMaterial color={'blue'} metalness={1} roughness={0.5} />
       </RoundedBox>
 
       <RoundedBox args={[6, 0.2, 6]} radius={0.5 / 3}>
-        <meshStandardMaterial color={'white'} metalness={1} roughness={0.1} />
+        <meshStandardMaterial color={'white'} metalness={1} roughness={0.5} />
       </RoundedBox>
 
       {/* <Box args={[6, 0.2, 6]} position={[0, 0.0, 0]}></Box> */}

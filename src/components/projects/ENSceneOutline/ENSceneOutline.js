@@ -1,3 +1,4 @@
+import { GlobalsEmptyObjects } from '@/effectnode/store/assignSignaturesToGLB'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { ENOutlineNode } from './ENOutlineNode'
 
@@ -9,8 +10,9 @@ export function ENSceneOutline({ height }) {
       style={{ height: height + 'px' }}
     >
       {activeGLBRuntimeObject?.scene?.children
+        .slice()
         .sort((a, b) => {
-          if (a.name === 'EN_PostProcessing') {
+          if (GlobalsEmptyObjects.includes(a.name)) {
             return -1
           }
           return 0
@@ -26,6 +28,8 @@ export function ENSceneOutline({ height }) {
     </div>
   )
 }
+
+//
 
 //
 

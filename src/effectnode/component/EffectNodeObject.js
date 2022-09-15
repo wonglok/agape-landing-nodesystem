@@ -16,16 +16,13 @@ export function EffectNodeObject({
   disabledNodes,
   isEditingMode,
 }) {
-  //
   let [enRuntime, setEnRuntime] = useState()
-
-  //
-  // let reloadGraphID = 1
   let reloadGraphID = useGLBEditor((s) => s.reloadGraphID)
+
+  // let reloadGraphID = 1
   // useENEditor((s) => s.overlay)
   // useAccessor((s) => s.selectedMeshes)
 
-  //
   let get = useThree((s) => s.get)
 
   //
@@ -63,6 +60,12 @@ export function EffectNodeObject({
 
     st.scene.add(mounter)
 
+    if (enRuntime) {
+      if (enRuntime.now.isEditingMode !== isEditingMode) {
+        enRuntime.now.isEditingMode = isEditingMode
+      }
+    }
+
     setEnRuntime(enRuntime)
 
     return () => {
@@ -71,15 +74,10 @@ export function EffectNodeObject({
       }
     }
     //get, glbObject, item
-  }, [glbObject, get, item])
+  }, [glbObject, get, item, isEditingMode])
 
   useFrame(() => {
     enRuntime?.work()
-    if (enRuntime) {
-      if (enRuntime.now.isEditingMode !== isEditingMode) {
-        enRuntime.now.isEditingMode = isEditingMode
-      }
-    }
   })
 
   let on = (ev, h) => {
@@ -113,6 +111,7 @@ export function EffectNodeObject({
                 )
               })}
 
+            {/*  */}
             {effectNode &&
               effectNode.nodes &&
               effectNode.nodes.map((node) => {
