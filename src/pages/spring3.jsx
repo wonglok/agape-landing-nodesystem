@@ -24,7 +24,7 @@ let block = {
   mass: 0.3,
 }
 
-let drag = { x: new Vector3(0, 1, 0) }
+let drag = { x: new Vector3(0, 0, 0) }
 
 let wall = { x: new Vector3(), v: new Vector3() }
 
@@ -82,14 +82,11 @@ const Page = () => {
       <group position={[0.0, 0, 0]} scale={1}>
         <Box
           ref={ref}
-          args={[1, 1, 0.0001]}
+          args={[1, 1, 0.00001]}
           onPointerDown={() => {
             mouse.isDown = true
           }}
           onPointerUp={() => {
-            mouse.isDown = false
-          }}
-          onPointerLeave={() => {
             mouse.isDown = false
           }}
           onPointerMove={(ev) => {
@@ -114,12 +111,14 @@ const Page = () => {
         }}
         onPointerMove={(ev) => {
           if (mouse.isDown) {
+            ev.stopPropagation()
+            ev.point.z = 0
             mouse.x.copy(ev.point)
             drag.x.copy(mouse.x)
             ev.eventObject.position.copy(mouse.x)
           }
         }}
-        args={[0.5, 0.5, 0.0001]}
+        args={[0.5, 0.5, 0.5]}
       >
         <meshStandardMaterial color={'#0000ff'}></meshStandardMaterial>
       </Box>
