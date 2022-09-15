@@ -80,7 +80,6 @@ export function EffectNodeObject({
       }
     }
   })
-  //
 
   let on = (ev, h) => {
     enRuntime.now.eventsBus.addEventListener(ev, h)

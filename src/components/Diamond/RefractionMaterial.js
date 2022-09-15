@@ -144,7 +144,7 @@ export function RefractionMaterial({
   near = 0.1,
   far = 1000,
   aberrationStrength = 0,
-  key = generateUUID(),
+  key2 = generateUUID(),
   ...props
 }) {
   const material = useRef()
@@ -168,7 +168,7 @@ export function RefractionMaterial({
 
   return (
     <diamondMaterial
-      key={JSON.stringify(!!aberrationStrength + key + DiamondMaterial.key)}
+      key={JSON.stringify(!!aberrationStrength + key2 + DiamondMaterial.key)}
       defines={defines}
       ref={material}
       resolution={[size.width, size.height]}
