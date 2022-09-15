@@ -16,7 +16,9 @@ export function Diamond() {
     <>
       <Canvas>
         <Suspense fallback={null}>
-          <YoDiamond position={[0, 0, 0]} />
+          <group rotation={[Math.PI * -0.35, 0, 0]}>
+            <YoDiamond position={[0, 0, 0]} />
+          </group>
 
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
@@ -33,7 +35,7 @@ export function Diamond() {
             />
           </EffectComposer>
         </Suspense>
-        <OrbitControls object-position={[0, 3.5, 3.5]}></OrbitControls>
+        <OrbitControls object-position={[0, 0, 3.5]}></OrbitControls>
       </Canvas>
     </>
   )
@@ -43,9 +45,9 @@ export function Diamond() {
 
 function YoDiamond(props) {
   const ref = useRef()
-  const { nodes } = useGLTF('/scene/diamond/sqdiamond.glb')
+  const { nodes } = useGLTF('/scene/diamond/sq2diamond.glb')
   const config = useTweaks({
-    bounces: { value: 3, min: 0, max: 8, step: 1 },
+    bounces: { value: 4, min: 0, max: 8, step: 1 },
     aberrationStrength: { value: 0.01, min: 0, max: 0.1, step: 0.01 },
     ior: { value: 2.4, min: 0, max: 10 },
     fresnel: { value: 0, min: 0, max: 1 },
@@ -55,13 +57,15 @@ function YoDiamond(props) {
   })
   useFrame((_, delta) => {
     if (config.autoRotate) {
-      ref.current.rotation.y += delta * 0.25
+      ref.current.rotation.z += delta * 0.25
     }
   })
+
+  //
   return (
     <CubeCamera resolution={128} frames={1}>
       {(texture) => (
-        <mesh ref={ref} geometry={nodes.Cube.geometry} {...props}>
+        <mesh ref={ref} geometry={nodes.D2.geometry} {...props}>
           <RefractionMaterial envMap={texture} {...config} toneMapped={false} />
         </mesh>
       )}
