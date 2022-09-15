@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { Pane } from 'tweakpane'
+import Pane from 'tweakpane'
 import { GLSLEditor } from './GLSLEditor'
-import * as TweakpaneImagePlugin from 'tweakpane-image-plugin'
+// import * as TweakpaneImagePlugin from 'tweakpane-image-plugin'
 import { ModelViewer } from './ModelViewer'
 import { getID } from '@/helpers/getID'
 
@@ -824,7 +824,7 @@ function TextureInput({
     const pane = new Pane({
       container: ref.current,
     })
-    pane.registerPlugin(TweakpaneImagePlugin)
+    // pane.registerPlugin(TweakpaneImagePlugin)
 
     let tt = 0
     try {
