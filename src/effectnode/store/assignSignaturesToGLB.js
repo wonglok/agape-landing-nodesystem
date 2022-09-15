@@ -21,10 +21,10 @@ const getSignature = (it) => {
 //
 
 export const assignSignaturesToGLB = (glb) => {
-  let object = glb.scene.getObjectByName('EffectNodeMetaData')
+  let object = glb.scene.getObjectByName('EN_PostProcessing')
   if (!object) {
     let newO = new Object3D()
-    newO.name = 'EffectNodeMetaData'
+    newO.name = 'EN_PostProcessing'
     glb.scene.add(newO)
   }
   glb.scene.traverse((it) => {

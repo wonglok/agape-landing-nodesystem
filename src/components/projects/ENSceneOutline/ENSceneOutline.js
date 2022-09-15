@@ -10,7 +10,7 @@ export function ENSceneOutline({ height }) {
     >
       {activeGLBRuntimeObject?.scene?.children
         .sort((a, b) => {
-          if (a.name === 'EffectNodeMetaData') {
+          if (a.name === 'EN_PostProcessing') {
             return -1
           }
           return 0
@@ -26,32 +26,6 @@ export function ENSceneOutline({ height }) {
     </div>
   )
 }
-
-//
-
-///
-
-//
-
-//
-
-//
-
-//
-
-//
-
-//
-
-//
-
-//
-
-//
-
-//
-
-//
 
 //
 

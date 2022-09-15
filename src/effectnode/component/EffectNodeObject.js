@@ -70,7 +70,8 @@ export function EffectNodeObject({
         enRuntime.clean()
       }
     }
-  }, [get, glbObject, item])
+    //get, glbObject, item
+  }, [glbObject, get, item])
 
   useFrame(() => {
     enRuntime?.work()
