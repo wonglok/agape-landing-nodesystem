@@ -70,6 +70,9 @@ void main (void) {
   float dist = length(diff) * length(diff);
   vec3 normal = normalize(diff);
 
+  if (dist <= 15.0) {
+    dist = 15.0;
+  }
 
   velData.rgb = normal / -dist;
 

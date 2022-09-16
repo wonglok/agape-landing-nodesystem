@@ -19,15 +19,11 @@ void main (void) {
   vec3 diff = posData.rgb - vec3(mouse.xy, 0.0);
   float dist = length(diff) * length(diff);
   vec3 normal = normalize(diff);
-
   posData.rgb += velData.rgb * delta * 1.0;
-  if (dist <= 0.01) {
-   posData.rgb = vec3(
-    rand(uv + 0.1) * 2.0 - 1.0,
-    rand(uv + 0.2) * 2.0 - 1.0,
-    rand(uv + 0.3) * 2.0 - 1.0
-   );
-  }
+
+  // if (dist <= 0.01) {
+  //  posData.rgb = velData.rgb * delta * 1.0;;
+  // }
 
 
 
