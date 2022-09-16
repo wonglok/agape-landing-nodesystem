@@ -8,7 +8,7 @@ void main (void) {
 
   gl_Position = vec4(pos0data.xyz, 1.0);
 
-  gl_PointSize = 1.5;
+  gl_PointSize = 3.0;
 }
 
 //

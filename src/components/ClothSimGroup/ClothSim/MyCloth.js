@@ -62,17 +62,17 @@ export class MyCloth extends Object3D {
     meta0.needsUpdate = true
 
     for (let i = 0; i < this.count; i++) {
-      pos0.image.data[i * 4 + 0] = Math.random() * 2.0 - 1.0
-      pos0.image.data[i * 4 + 1] = Math.random() * 2.0 - 1.0
-      pos0.image.data[i * 4 + 2] = Math.random() * 2.0 - 1.0
+      pos0.image.data[i * 4 + 0] = (Math.random() * 2.0 - 1.0) * 0.5
+      pos0.image.data[i * 4 + 1] = (Math.random() * 2.0 - 1.0) * 0.5
+      pos0.image.data[i * 4 + 2] = (Math.random() * 2.0 - 1.0) * 0.5
       pos0.image.data[i * 4 + 3] = 1
     }
     pos0.needsUpdate = true
 
     for (let i = 0; i < this.count; i++) {
-      vel0.image.data[i * 4 + 0] = Math.random() * 2.0 - 1.0
-      vel0.image.data[i * 4 + 1] = Math.random() * 2.0 - 1.0
-      vel0.image.data[i * 4 + 2] = Math.random() * 2.0 - 1.0
+      vel0.image.data[i * 4 + 0] = (Math.random() * 2.0 - 1.0) * 0.5
+      vel0.image.data[i * 4 + 1] = (Math.random() * 2.0 - 1.0) * 0.5
+      vel0.image.data[i * 4 + 2] = (Math.random() * 2.0 - 1.0) * 0.5
       vel0.image.data[i * 4 + 3] = 1
     }
     vel0.needsUpdate = true
@@ -142,10 +142,9 @@ export class MyCloth extends Object3D {
       fragmentShader: displayFragment,
     })
 
-    this.core.onLoop(() => {
+    this.core.onLoop((dt) => {
       //
       let et = this.clock.getElapsedTime()
-      let dt = this.clock.getDelta()
       if (dt >= 1 / 60) {
         dt = 1 / 60
       }

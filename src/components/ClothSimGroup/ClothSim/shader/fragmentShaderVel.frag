@@ -1,4 +1,5 @@
 uniform float time;
+uniform float delta;
 uniform sampler2D meta0;
 uniform vec2 mouse;
 
@@ -66,16 +67,11 @@ void main (void) {
   //
 
   vec3 diff = posData.rgb - vec3(mouse.xy, 0.0);
-  float dist = length(diff);
+  float dist = length(diff) * length(diff);
   vec3 normal = normalize(diff);
 
-  // velData.rgb += normalize(diff) / dist / dist / 256.0;
 
-  // velData.rgb = -normalize(velData.rgb) / 256.0;
-
-  velData.rgb = normal / dist / -256.;
-
-
+  velData.rgb = normal / -dist;
 
   gl_FragColor = vec4(velData.x, velData.y, velData.z, 1.0);
 }
