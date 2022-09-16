@@ -1,7 +1,14 @@
-import { Box, Environment, PerspectiveCamera, Plane } from '@react-three/drei'
+import { getID } from '@/helpers/getID'
+import {
+  Box,
+  Environment,
+  OrbitControls,
+  PerspectiveCamera,
+  Plane,
+} from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
-import { Vector3 } from 'three'
+import { Vector2, Vector3 } from 'three'
 // import {  } from 'three140'
 
 /*
@@ -13,33 +20,127 @@ Mass (0.5) kg
 */
 //https://burakkanber.com/blog/physics-in-javascript-car-suspension-part-1-spring-mass-damper/
 /* Spring stiffness, in kg / s^2 */
-let sK = -20
-
-/* Damping constant, in kg / s */
-let sB = -0.5
-
-let anchor = { pos: new Vector3(0, 0, 0) }
 
 /* Block position and velocity. */
-let block = {
-  pos: new Vector3(),
-  vel: new Vector3(),
-  mass: 0.3,
+let makeBlock = ({ xMin, yMin, xMax, yMax, uvX, uvY }) => {
+  let isXMin = false,
+    isYMin = false,
+    isXMax = false,
+    isYMax = false
+
+  let hood = {
+    connT: new Vector2(+0 + uvX, +1 + uvY),
+    connD: new Vector2(+0 + uvX, -1 + uvY),
+    connR: new Vector2(-1 + uvX, +0 + uvY),
+    connL: new Vector2(+1 + uvX, +0 + uvY),
+
+    connTL: new Vector2(-1 + uvX, +1 + uvY),
+    connTR: new Vector2(+1 + uvX, +1 + uvY),
+    connDL: new Vector2(-1 + uvX, -1 + uvY),
+    connDR: new Vector2(+1 + uvX, -1 + uvY),
+  }
+
+  if (uvX === xMin) {
+    isXMin = true
+  }
+  if (uvX === xMax) {
+    isXMax = true
+  }
+
+  if (uvY === yMin) {
+    isYMin = true
+  }
+  if (uvY === yMax) {
+    isYMax = true
+  }
+
+  return {
+    _id: getID(),
+    uvX: uvX,
+    uvY: uvY,
+
+    isXMin,
+    isYMin,
+
+    isXMax,
+    isYMax,
+
+    pos: new Vector3(uvX, uvY, 0),
+    vel: new Vector3(),
+
+    mass: 0.05,
+
+    ...hood,
+  }
 }
 
-let wall = { pos: new Vector3(), vel: new Vector3(), mass: 0.3 }
+let BoxUnit = ({ data }) => {
+  let ref = useRef()
+
+  useFrame(() => {
+    if (ref.current) {
+      ref.current.position.copy(data.pos)
+    }
+  })
+  return (
+    <Box ref={ref} args={[0.2, 0.2, 0.00001]} onPointerDown={() => {}}>
+      <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
+    </Box>
+  )
+}
+let Boxes = () => {
+  return blocks.map((b) => <BoxUnit data={b} key={b._id}></BoxUnit>)
+}
+
+// let block = makeBlock({ type: 'block' })
+
+let uK = -20
+
+/* Damping constant, in kg / s */
+let uB = -5.0
+/* Gravity */
+let uGravity = new Vector3(0, -9.8, 0)
+
+let uAnchor = new Vector3(0, 0, 0)
+let blocks = []
+let unit = 15
+for (let y = -unit; y <= 0; y++) {
+  for (let x = -unit; x <= unit; x++) {
+    blocks.push(
+      makeBlock({
+        xMin: -unit,
+        xMax: unit,
+        yMin: -unit,
+        yMax: 0,
+        uvX: x,
+        uvY: y,
+      })
+    )
+  }
+}
+
+// let pinMouse = makeBlock({
+//   xMin: -unit,
+//   xMax: unit,
+//   yMin: -unit,
+//   yMax: unit,
+//   uvX: 0,
+//   uvY: 0,
+// })
 
 let frameRate = 1 / 60
 
 let mouse = { x: new Vector3(), isDown: false }
 
-//
 let tF_Spring = new Vector3()
 let tF_Damper = new Vector3()
 let tAcceleration = new Vector3()
-let tRestorationForce = new Vector3()
-let uGravity = new Vector3(0, -9.8 * 10, 0)
 
+let tForceAny = new Vector3()
+
+let tNormal = new Vector3()
+
+let tSpread = new Vector3()
 const Page = () => {
   let ref = useRef()
   // let viewport = useThree((s) => s.viewport)
@@ -47,37 +148,132 @@ const Page = () => {
 
   useFrame((st, dt) => {
     frameRate = dt
-    /* Move the wall. */
-    // wall.t += frameRate
-    // wall.lx = wall.pos
-    // wall.pos = 30 + 70 * Math.sin(2 * Math.PI * wall.frequency * wall.t)
-    // wall.vel = (wall.pos - wall.lx) / frameRate
 
-    tRestorationForce.copy(anchor.pos).multiplyScalar(sK)
+    // pin.pos.copy(uAnchor)
 
-    tF_Spring
-      .copy(block.pos)
-      .sub(wall.pos)
-      .multiplyScalar(sK)
-      .sub(tRestorationForce)
+    // tForceAny.copy(pin.pos).multiplyScalar(uK)
 
-    tF_Damper.copy(block.vel).sub(wall.vel).multiplyScalar(sB)
+    // tF_Spring.copy(block.pos).sub(pin.pos).multiplyScalar(uK).sub(tForceAny)
 
-    tAcceleration
-      .copy(tF_Spring)
-      .add(tF_Damper)
-      .multiplyScalar(1 / block.mass)
+    // tF_Damper.copy(block.vel).sub(pin.vel).multiplyScalar(uB)
 
-    tAcceleration.add(uGravity)
+    // tAcceleration
+    //   .copy(tF_Spring)
+    //   .add(tF_Damper)
+    //   .multiplyScalar(1 / block.mass)
 
-    block.vel.addScaledVector(tAcceleration, frameRate)
-    block.pos.addScaledVector(block.vel, frameRate)
-    if (ref.current) {
-      ref.current.position.copy(block.pos)
-    }
+    // tAcceleration.add(uGravity)
+
+    // block.vel.addScaledVector(tAcceleration, frameRate)
+    // block.pos.addScaledVector(block.vel, frameRate)
+
+    // if (ref.current) {
+    //   ref.current.position.copy(block.pos)
+    // }
+
+    // here we go//
+
+    blocks.forEach((iBlock) => {
+      if (iBlock.isYMax) {
+        // let pin = pinMouse
+        tSpread.x = uAnchor.x + iBlock.uvX
+        tSpread.y = uAnchor.y
+        tSpread.z = 0.0
+        // tForceAny.copy(tSpread).multiplyScalar(uK)
+
+        iBlock.pos.lerp(tSpread, 0.5)
+
+        // tF_Spring
+        //   .copy(iBlock.pos)
+        //   .sub(pin.pos)
+        //   .multiplyScalar(uK)
+        //   .sub(tForceAny)
+        // tF_Damper.copy(iBlock.vel).sub(pin.vel).multiplyScalar(uB)
+
+        // //
+        // tAcceleration
+        //   .copy(tF_Spring)
+        //   .add(tF_Damper)
+        //   .multiplyScalar(1 / iBlock.mass)
+
+        // iBlock.vel.addScaledVector(tAcceleration, frameRate)
+        // iBlock.pos.addScaledVector(iBlock.vel, frameRate)
+      } else {
+        let updown = [
+          blocks.find(
+            (b) => iBlock.uvX === b.connT.x && iBlock.uvY === b.connT.y
+          ),
+          blocks.find(
+            (b) => iBlock.uvX === b.connD.x && iBlock.uvY === b.connD.y
+          ),
+          blocks.find(
+            (b) => iBlock.uvX === b.connL.x && iBlock.uvY === b.connL.y
+          ),
+          blocks.find(
+            (b) => iBlock.uvX === b.connR.x && iBlock.uvY === b.connR.y
+          ),
+          //
+          blocks.find(
+            (b) => iBlock.uvX === b.connTL.x && iBlock.uvY === b.connTL.y
+          ),
+          blocks.find(
+            (b) => iBlock.uvX === b.connTR.x && iBlock.uvY === b.connTR.y
+          ),
+          blocks.find(
+            (b) => iBlock.uvX === b.connDL.x && iBlock.uvY === b.connDL.y
+          ),
+          blocks.find(
+            (b) => iBlock.uvX === b.connDR.x && iBlock.uvY === b.connDR.y
+          ),
+        ]
+
+        let initLenght = updown.length
+
+        // // //
+
+        updown.forEach((pin, i) => {
+          //
+
+          if (pin) {
+            // let dist = iBlock.pos.distanceTo(pin.pos)
+            // let springLg = 0.5
+
+            // let diff = dist - springLg
+            tSpread.copy(iBlock.pos).normalize()
+            tForceAny.copy(tSpread).multiplyScalar(0)
+
+            tF_Spring
+              .copy(iBlock.pos)
+              .sub(pin.pos)
+              .multiplyScalar(uK)
+              .sub(tForceAny)
+
+            tF_Damper.copy(iBlock.vel).sub(pin.vel).multiplyScalar(uB)
+
+            //
+            tAcceleration
+              .copy(tF_Spring)
+              .add(tF_Damper)
+              .multiplyScalar(1 / iBlock.mass)
+
+            tAcceleration.addScaledVector(uGravity, -uK)
+
+            iBlock.vel.addScaledVector(tAcceleration, frameRate / initLenght)
+            iBlock.pos.addScaledVector(iBlock.vel, frameRate / initLenght)
+
+            //
+          } else {
+          }
+
+          //
+        })
+      }
+    })
   })
 
   let scene = useThree((s) => s.scene)
+  let camera = useThree((s) => s.camera)
+  camera.position.z = 100
   return (
     <>
       {/* <YoSpin>
@@ -96,7 +292,7 @@ const Page = () => {
 
             if (mesh) {
               ev.point.z = 0
-              anchor.pos.copy(ev.point)
+              uAnchor.copy(ev.point)
               mesh.position.copy(ev.point)
             }
           }}
@@ -108,18 +304,24 @@ const Page = () => {
         <Box ref={ref} args={[1, 1, 0.00001]} onPointerDown={() => {}}>
           <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
         </Box>
+
+        <Boxes></Boxes>
       </group>
 
       <Box
         scale={1}
-        name='anchorMesh'
+        name='uAnchorMesh'
         position={[0, 0, 0]}
         onPointerDown={() => {
-          mouse.isDown = 'anchorMesh'
+          mouse.isDown = 'uAnchorMesh'
         }}
-        args={[0.5, 0.5, 0.5]}
+        args={[5, 5, 5]}
       >
-        <meshStandardMaterial color={'#0000ff'}></meshStandardMaterial>
+        <meshStandardMaterial
+          transparent={true}
+          opacity={0.5}
+          color={'#0000ff'}
+        ></meshStandardMaterial>
       </Box>
       {/*  */}
       {/*  */}
@@ -127,6 +329,7 @@ const Page = () => {
 
       <Environment preset='apartment' background></Environment>
 
+      {/* <OrbitControls></OrbitControls> */}
       {/*  */}
       {/*  */}
       {/*  */}
