@@ -1,6 +1,7 @@
 import { extend } from '@react-three/fiber'
 import { generateUUID } from 'three/src/math/MathUtils'
 import {
+  BufferAttribute,
   BufferGeometry,
   Clock,
   InstancedBufferGeometry,
@@ -22,7 +23,7 @@ import displayFragment from './shader/display.frag'
 import displayVertex from './shader/display.vert'
 
 export class MyCloth extends Object3D {
-  constructor({ gl }) {
+  constructor({ gl, mouse }) {
     super()
     // In each frame...
 
@@ -43,25 +44,39 @@ export class MyCloth extends Object3D {
     this.gpu = new CustomGPU(this.sizeX, this.sizeY, this.gl)
 
     // Create initial state float textures
+    let meta0 = this.gpu.createTexture()
     let pos0 = this.gpu.createTexture()
     let vel0 = this.gpu.createTexture()
 
+    let i = 0
+    for (let y = 0; y < this.sizeY; y++) {
+      for (let x = 0; x < this.sizeX; x++) {
+        //
+        meta0.image.data[i * 4 + 0] = x / this.sizeX
+        meta0.image.data[i * 4 + 1] = y / this.sizeY
+        meta0.image.data[i * 4 + 2] = 0
+        meta0.image.data[i * 4 + 3] = 1
+        i++
+      }
+    }
+    meta0.needsUpdate = true
+
     for (let i = 0; i < this.count; i++) {
-      pos0.image.data[i * 4 + 0] = 0.0
-      pos0.image.data[i * 4 + 1] = 0.0
-      pos0.image.data[i * 4 + 2] = 0.0
+      pos0.image.data[i * 4 + 0] = Math.random() * 2.0 - 1.0
+      pos0.image.data[i * 4 + 1] = Math.random() * 2.0 - 1.0
+      pos0.image.data[i * 4 + 2] = Math.random() * 2.0 - 1.0
       pos0.image.data[i * 4 + 3] = 1
     }
+    pos0.needsUpdate = true
 
     for (let i = 0; i < this.count; i++) {
-      vel0.image.data[i * 4 + 0] = (Math.random() * 2.0 - 1.0) * 0.1
-      vel0.image.data[i * 4 + 1] = (Math.random() * 2.0 - 1.0) * 0.1
-      vel0.image.data[i * 4 + 2] = (Math.random() * 2.0 - 1.0) * 0.1
+      vel0.image.data[i * 4 + 0] = Math.random() * 2.0 - 1.0
+      vel0.image.data[i * 4 + 1] = Math.random() * 2.0 - 1.0
+      vel0.image.data[i * 4 + 2] = Math.random() * 2.0 - 1.0
       vel0.image.data[i * 4 + 3] = 1
     }
-
     vel0.needsUpdate = true
-    pos0.needsUpdate = true
+
     // and fill in here the texture data...
 
     let velVar = this.gpu.addVariable(
@@ -69,13 +84,24 @@ export class MyCloth extends Object3D {
       fragmentShaderVel,
       pos0
     )
+
     let posVar = this.gpu.addVariable(
       'texturePosition',
       fragmentShaderPos,
       vel0
     )
+    //
     velVar.material.uniforms.time = { value: 0 }
     posVar.material.uniforms.time = { value: 0 }
+
+    velVar.material.uniforms.delta = { value: 0 }
+    posVar.material.uniforms.delta = { value: 0 }
+
+    velVar.material.uniforms.meta0 = { value: meta0 }
+    posVar.material.uniforms.meta0 = { value: meta0 }
+
+    velVar.material.uniforms.mouse = { value: mouse }
+    posVar.material.uniforms.mouse = { value: mouse }
 
     //
     // Add variable dependencies
@@ -95,13 +121,20 @@ export class MyCloth extends Object3D {
     this.getTexAVel = () => this.gpu.getCurrentRenderTarget(velVar).texture
 
     //
-
-    //
-    this.buff = new PlaneBufferGeometry(1, 1, this.sizeX, this.sizeY)
+    this.buff = new BufferGeometry()
+    this.buff.setAttribute(
+      'position',
+      new BufferAttribute(new Float32Array(pos0.image.data), 4)
+    )
+    this.buff.setAttribute(
+      'meta0',
+      new BufferAttribute(new Float32Array(meta0.image.data), 4)
+    )
 
     this.mat = new ShaderMaterial({
       uniforms: {
         time: { value: 0 },
+        delta: { value: 0 },
         pos0: { value: null },
         vel0: { value: null },
       },
@@ -110,12 +143,21 @@ export class MyCloth extends Object3D {
     })
 
     this.core.onLoop(() => {
+      //
       let et = this.clock.getElapsedTime()
+      let dt = this.clock.getDelta()
+      if (dt >= 1 / 60) {
+        dt = 1 / 60
+      }
 
+      //
       velVar.material.uniforms.time.value = et
       posVar.material.uniforms.time.value = et
+      velVar.material.uniforms.delta.value = dt
+      posVar.material.uniforms.delta.value = dt
 
       this.mat.uniforms.time.value = et
+      this.mat.uniforms.delta.value = dt
       this.mat.uniforms.pos0.value = this.getTexAPos()
       this.mat.uniforms.vel0.value = this.getTexAPos()
     })
@@ -147,4 +189,6 @@ extend({ MyCloth })
 
 //
 
-///
+//
+
+//

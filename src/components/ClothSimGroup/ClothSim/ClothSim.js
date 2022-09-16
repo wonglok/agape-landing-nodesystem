@@ -5,6 +5,7 @@ import { MyCloth } from './MyCloth'
 export function ClothSim() {
   //
   let gl = useThree((s) => s.gl)
+  let mouse = useThree((s) => s.mouse)
   let [ready, setReady] = useState(false)
   useEffect(() => {
     setReady(true)
@@ -12,7 +13,7 @@ export function ClothSim() {
   return (
     <group>
       {/*  */}
-      {ready && <myCloth args={[{ gl }]} key={MyCloth.key}></myCloth>}
+      {ready && <myCloth args={[{ gl, mouse }]} key={MyCloth.key}></myCloth>}
       {/*  */}
     </group>
   )
