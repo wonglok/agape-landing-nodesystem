@@ -1,8 +1,10 @@
+import { ClothSim } from '@/components/ClothSimGroup/ClothSim/ClothSim'
 import { Environment } from '@react-three/drei'
 
 const Page = () => {
   return (
     <>
+      <ClothSim></ClothSim>
       <Environment preset='apartment' background></Environment>
     </>
   )

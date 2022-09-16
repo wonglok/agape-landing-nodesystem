@@ -16,5 +16,6 @@ export const ConfigCanvas = {
     for (let kn in st) {
       Core.now.canvas.now[kn] = st[kn]
     }
+    st.gl.setAnimationLoop(Core.work)
   },
 }
