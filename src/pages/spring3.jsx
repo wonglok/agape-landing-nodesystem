@@ -5,11 +5,9 @@ import {
   Instance,
   Instances,
   OrbitControls,
-  PerspectiveCamera,
   Plane,
 } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
-import { sin } from '@tensorflow/tfjs-core'
 import { useRef } from 'react'
 import { Vector2, Vector3 } from 'three'
 // import {  } from 'three140'
@@ -79,6 +77,7 @@ let makeBlock = ({ xMin, yMin, xMax, yMax, uvX, uvY }) => {
   }
 }
 
+//
 let BoxUnit = ({ data }) => {
   let ref = useRef()
 
@@ -92,7 +91,7 @@ let BoxUnit = ({ data }) => {
 let Boxes = () => {
   return (
     <Instances>
-      <boxBufferGeometry args={[0.2, 0.2, 0.00001]}></boxBufferGeometry>
+      <boxBufferGeometry args={[0.5, 0.5, 0.5]}></boxBufferGeometry>
       <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
       {blocks.map((b) => (
         <BoxUnit data={b} key={b._id}></BoxUnit>
@@ -101,33 +100,41 @@ let Boxes = () => {
   )
 }
 
-// let block = makeBlock({ type: 'block' })
+//
 
 let uK = -20
-
 let uB = -5.0
-
 let uGravity = new Vector3(0, -9.8, 0)
 
 // let uWind = new Vector3(-1, 0.0, 0.0)
 
 let uAnchor = new Vector3(0, 0, 0)
 let blocks = []
-let unit = 20
-for (let y = -unit; y <= 0; y++) {
-  for (let x = -unit; x <= unit; x++) {
+
+let unit = 25
+for (let y = 0; y <= unit; y++) {
+  for (let x = 0; x <= unit; x++) {
     blocks.push(
       makeBlock({
-        xMin: -unit,
+        xMin: 0,
         xMax: unit,
-        yMin: -unit,
-        yMax: 0,
+        yMin: 0,
+        yMax: unit,
         uvX: x,
         uvY: y,
       })
     )
   }
 }
+
+let mousePin = makeBlock({
+  xMin: 0,
+  xMax: unit,
+  yMin: 0,
+  yMax: unit,
+  uvX: 0,
+  uvY: 0,
+})
 
 // let pinMouse = makeBlock({
 //   xMin: -unit,
@@ -178,7 +185,6 @@ const Page = () => {
     //   .multiplyScalar(1 / block.mass)
 
     // tAcceleration.add(uGravity)
-
     // block.vel.addScaledVector(tAcceleration, frameRate)
     // block.pos.addScaledVector(block.vel, frameRate)
 
@@ -190,34 +196,16 @@ const Page = () => {
 
     blocks.forEach((iBlock) => {
       if (iBlock.isYMax) {
-        // let pin = pinMouse
-        tSpread.x = uAnchor.x + iBlock.uvX
+        tSpread.x = uAnchor.x + iBlock.uvX * 2
         tSpread.y =
           uAnchor.y +
-          iBlock.uvY +
           5.0 * Math.sin(time * 5.0 + (iBlock.uvX / unit) * 3.1415 * 1.5)
         tSpread.z =
-          5.0 * Math.sin(time * 5.0 + (iBlock.uvX / unit) * 3.1415 * 1.5)
+          5.0 * Math.cos(time * 5.0 + (iBlock.uvX / unit) * 3.1415 * 1.5)
 
-        // tForceAny.copy(tSpread).multiplyScalar(uK)
+        iBlock.pos.copy(tSpread)
 
-        iBlock.pos.lerp(tSpread, 0.05)
-
-        // tF_Spring
-        //   .copy(iBlock.pos)
-        //   .sub(pin.pos)
-        //   .multiplyScalar(uK)
-        //   .sub(tForceAny)
-        // tF_Damper.copy(iBlock.vel).sub(pin.vel).multiplyScalar(uB)
-
-        // //
-        // tAcceleration
-        //   .copy(tF_Spring)
-        //   .add(tF_Damper)
-        //   .multiplyScalar(1 / iBlock.mass)
-
-        // iBlock.vel.addScaledVector(tAcceleration, frameRate)
-        // iBlock.pos.addScaledVector(iBlock.vel, frameRate)
+        //
       } else {
         let updown = []
 
@@ -284,22 +272,20 @@ const Page = () => {
 
             tAcceleration.addScaledVector(uGravity, -uK)
 
-            let diff = tDiff.copy(iBlock.pos).sub(pin.pos).length() - 1.5
+            let maxRepel = 2
+            let diff = tDiff.copy(iBlock.pos).sub(pin.pos).length() - maxRepel
 
-            if (diff >= 1.5) {
-              diff = 1.5
+            if (diff >= maxRepel) {
+              diff = maxRepel
             }
-            if (diff <= -1.5) {
-              diff = -1.5
+            if (diff <= -maxRepel) {
+              diff = -maxRepel
             }
             // tAcceleration.addScaledVector(diff, 1 / 8)
 
             iBlock.vel.addScaledVector(tAcceleration, (frameRate / 8) * diff)
             iBlock.pos.addScaledVector(iBlock.vel, frameRate / 8)
-
-            //
           }
-          //
         })
       }
     })
@@ -317,9 +303,10 @@ const Page = () => {
       </YoSpin> */}
       <group position={[0.0, 0, 0]} scale={1}>
         <Plane
-          args={[100, 100]}
+          args={[200, 200]}
           onPointerUp={() => {
             mouse.isDown = false
+            ref.current.enabled = true
           }}
           onPointerMove={(ev) => {
             let mesh = scene.getObjectByName(mouse.isDown)
@@ -333,11 +320,6 @@ const Page = () => {
         >
           <meshBasicMaterial transparent={true} opacity={0}></meshBasicMaterial>
         </Plane>
-        {/*  */}
-        {/*  */}
-        <Box ref={ref} args={[1, 1, 0.00001]} onPointerDown={() => {}}>
-          <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
-        </Box>
 
         <Boxes></Boxes>
       </group>
@@ -347,6 +329,7 @@ const Page = () => {
         name='uAnchorMesh'
         position={[0, 0, 0]}
         onPointerDown={() => {
+          ref.current.enabled = false
           mouse.isDown = 'uAnchorMesh'
         }}
         args={[5, 5, 5]}
@@ -361,9 +344,9 @@ const Page = () => {
       {/*  */}
       {/*  */}
 
-      <Environment preset='apartment' background></Environment>
+      <Environment preset='apartment' background={true}></Environment>
 
-      {/* <OrbitControls></OrbitControls> */}
+      <OrbitControls ref={ref}></OrbitControls>
       {/*  */}
       {/*  */}
       {/*  */}
