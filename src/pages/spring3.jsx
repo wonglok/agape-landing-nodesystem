@@ -66,9 +66,9 @@ let makeBlock = ({ xMin, yMin, xMax, yMax, uvX, uvY }) => {
     isYMax,
 
     pos: new Vector3(uvX, uvY, 0),
-    vel: new Vector3(),
+    vel: new Vector3(0, 0, 0),
 
-    mass: 0.05,
+    mass: 0.067,
 
     ...hood,
   }
@@ -96,12 +96,11 @@ let Boxes = () => {
 
 let uK = -20
 
-/* Damping constant, in kg / s */
 let uB = -5.0
-/* Gravity */
+
 let uGravity = new Vector3(0, -9.8, 0)
 
-let uWind = new Vector3(-1, 0.0, 0.0)
+// let uWind = new Vector3(-1, 0.0, 0.0)
 
 let uAnchor = new Vector3(0, 0, 0)
 let blocks = []
@@ -139,8 +138,6 @@ let tF_Damper = new Vector3()
 let tAcceleration = new Vector3()
 
 let tForceAny = new Vector3()
-
-let tNormal = new Vector3()
 
 let tSpread = new Vector3()
 const Page = () => {
@@ -201,38 +198,55 @@ const Page = () => {
         // iBlock.vel.addScaledVector(tAcceleration, frameRate)
         // iBlock.pos.addScaledVector(iBlock.vel, frameRate)
       } else {
-        let updown = [
+        let updown = []
+
+        updown.push(
           blocks.find(
             (b) => iBlock.uvX === b.connT.x && iBlock.uvY === b.connT.y
-          ),
+          )
+        )
+        updown.push(
           blocks.find(
             (b) => iBlock.uvX === b.connD.x && iBlock.uvY === b.connD.y
-          ),
+          )
+        )
+
+        updown.push(
           blocks.find(
             (b) => iBlock.uvX === b.connL.x && iBlock.uvY === b.connL.y
-          ),
+          )
+        )
+        updown.push(
           blocks.find(
             (b) => iBlock.uvX === b.connR.x && iBlock.uvY === b.connR.y
-          ),
+          )
+        )
 
-          //
+        //
+        updown.push(
           blocks.find(
             (b) => iBlock.uvX === b.connTL.x && iBlock.uvY === b.connTL.y
-          ),
+          )
+        )
+        updown.push(
           blocks.find(
             (b) => iBlock.uvX === b.connTR.x && iBlock.uvY === b.connTR.y
-          ),
+          )
+        )
+        updown.push(
           blocks.find(
             (b) => iBlock.uvX === b.connDL.x && iBlock.uvY === b.connDL.y
-          ),
+          )
+        )
+        updown.push(
           blocks.find(
             (b) => iBlock.uvX === b.connDR.x && iBlock.uvY === b.connDR.y
-          ),
-        ]
+          )
+        )
 
         let initLenght = updown.length
 
-        updown.forEach((pin, i) => {
+        updown.forEach((pin) => {
           //
 
           if (pin) {
