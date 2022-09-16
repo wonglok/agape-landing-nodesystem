@@ -43,7 +43,7 @@ let makeBlock = ({ xMin, yMin, xMax, yMax, uvX, uvY }) => {
     connDR: new Vector2(+1 + uvX, -1 + uvY),
   }
 
-  let mass = 0.03
+  let mass = 0.03 + 0.01
 
   if (uvX === xMin) {
     isXMin = true
@@ -196,7 +196,9 @@ const Page = () => {
           uAnchor.y +
           iBlock.uvY +
           5.0 * Math.sin(time * 5.0 + (iBlock.uvX / unit) * 3.1415 * 1.5)
-        tSpread.z = 0
+        tSpread.z =
+          5.0 * Math.sin(time * 5.0 + (iBlock.uvX / unit) * 3.1415 * 1.5)
+
         // tForceAny.copy(tSpread).multiplyScalar(uK)
 
         iBlock.pos.lerp(tSpread, 0.05)
@@ -282,21 +284,20 @@ const Page = () => {
 
             tAcceleration.addScaledVector(uGravity, -uK)
 
-            let diff = tDiff
-              .copy(iBlock.pos)
-              .sub(pin.pos)
-              .normalize()
-              .multiplyScalar(uK)
+            let diff = tDiff.copy(iBlock.pos).sub(pin.pos).length() - 1.5
 
-            tAcceleration.addScaledVector(diff, 2 / 8)
+            if (diff >= 1.5) {
+              diff = 1.5
+            }
+            if (diff <= -1.5) {
+              diff = -1.5
+            }
+            // tAcceleration.addScaledVector(diff, 1 / 8)
 
-            iBlock.vel.addScaledVector(tAcceleration, frameRate / 8)
+            iBlock.vel.addScaledVector(tAcceleration, (frameRate / 8) * diff)
             iBlock.pos.addScaledVector(iBlock.vel, frameRate / 8)
 
             //
-          } else if (!iBlock.isYMax) {
-            // iBlock.vel.addScaledVector(uGravity, -uK / 8)
-            // iBlock.pos.addScaledVector(iBlock.vel, frameRate / 8)
           }
           //
         })
