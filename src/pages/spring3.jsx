@@ -148,6 +148,9 @@ const Page = () => {
   useFrame((st, dt) => {
     frameRate = dt
 
+    if (frameRate >= 1 / 60) {
+      frameRate = 1 / 60
+    }
     // pin.pos.copy(uAnchor)
 
     // tForceAny.copy(pin.pos).multiplyScalar(uK)
@@ -177,7 +180,7 @@ const Page = () => {
         // let pin = pinMouse
         tSpread.x = uAnchor.x + iBlock.uvX
         tSpread.y = uAnchor.y
-        tSpread.z = 0.0
+        // tSpread.z = 0.0
         // tForceAny.copy(tSpread).multiplyScalar(uK)
 
         iBlock.pos.lerp(tSpread, 0.5)
@@ -222,7 +225,6 @@ const Page = () => {
           )
         )
 
-        //
         updown.push(
           blocks.find(
             (b) => iBlock.uvX === b.connTL.x && iBlock.uvY === b.connTL.y
@@ -254,15 +256,13 @@ const Page = () => {
             // let springLg = 0.5
 
             // let diff = dist - springLg
-            tSpread.copy(iBlock.pos)
-            tForceAny.copy(tSpread).multiplyScalar(0)
+            // tSpread.copy(iBlock.pos)
+            // tForceAny.copy(tSpread).multiplyScalar(-0.1)
 
-            tF_Spring
-              .copy(iBlock.pos)
-              .sub(pin.pos)
-              .multiplyScalar(uK)
-              .sub(tForceAny)
+            tF_Spring.copy(iBlock.pos).sub(pin.pos).multiplyScalar(uK)
+            // .sub(tForceAny)
 
+            //
             tF_Damper.copy(iBlock.vel).sub(pin.vel).multiplyScalar(uB)
 
             //
