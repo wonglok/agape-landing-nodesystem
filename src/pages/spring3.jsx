@@ -101,6 +101,8 @@ let uB = -5.0
 /* Gravity */
 let uGravity = new Vector3(0, -9.8, 0)
 
+let uWind = new Vector3(-1, 0.0, 0.0)
+
 let uAnchor = new Vector3(0, 0, 0)
 let blocks = []
 let unit = 15
@@ -212,6 +214,7 @@ const Page = () => {
           blocks.find(
             (b) => iBlock.uvX === b.connR.x && iBlock.uvY === b.connR.y
           ),
+
           //
           blocks.find(
             (b) => iBlock.uvX === b.connTL.x && iBlock.uvY === b.connTL.y
@@ -229,8 +232,6 @@ const Page = () => {
 
         let initLenght = updown.length
 
-        // // //
-
         updown.forEach((pin, i) => {
           //
 
@@ -239,7 +240,7 @@ const Page = () => {
             // let springLg = 0.5
 
             // let diff = dist - springLg
-            tSpread.copy(iBlock.pos).normalize()
+            tSpread.copy(iBlock.pos)
             tForceAny.copy(tSpread).multiplyScalar(0)
 
             tF_Spring
@@ -254,9 +255,10 @@ const Page = () => {
             tAcceleration
               .copy(tF_Spring)
               .add(tF_Damper)
-              .multiplyScalar(1 / iBlock.mass)
+              .multiplyScalar(2 / iBlock.mass)
 
             tAcceleration.addScaledVector(uGravity, -uK)
+            // tAcceleration.addScaledVector(uWind, 1 / initLenght)
 
             iBlock.vel.addScaledVector(tAcceleration, frameRate / initLenght)
             iBlock.pos.addScaledVector(iBlock.vel, frameRate / initLenght)
