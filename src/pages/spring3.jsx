@@ -2,11 +2,14 @@ import { getID } from '@/helpers/getID'
 import {
   Box,
   Environment,
+  Instance,
+  Instances,
   OrbitControls,
   PerspectiveCamera,
   Plane,
 } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
+import { sin } from '@tensorflow/tfjs-core'
 import { useRef } from 'react'
 import { Vector2, Vector3 } from 'three'
 // import {  } from 'three140'
@@ -40,6 +43,8 @@ let makeBlock = ({ xMin, yMin, xMax, yMax, uvX, uvY }) => {
     connDR: new Vector2(+1 + uvX, -1 + uvY),
   }
 
+  let mass = 0.03
+
   if (uvX === xMin) {
     isXMin = true
   }
@@ -68,7 +73,7 @@ let makeBlock = ({ xMin, yMin, xMax, yMax, uvX, uvY }) => {
     pos: new Vector3(uvX, uvY, 0),
     vel: new Vector3(0, 0, 0),
 
-    mass: 0.067,
+    mass,
 
     ...hood,
   }
@@ -82,14 +87,18 @@ let BoxUnit = ({ data }) => {
       ref.current.position.copy(data.pos)
     }
   })
-  return (
-    <Box ref={ref} args={[0.2, 0.2, 0.00001]} onPointerDown={() => {}}>
-      <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
-    </Box>
-  )
+  return <Instance ref={ref} onPointerDown={() => {}}></Instance>
 }
 let Boxes = () => {
-  return blocks.map((b) => <BoxUnit data={b} key={b._id}></BoxUnit>)
+  return (
+    <Instances>
+      <boxBufferGeometry args={[0.2, 0.2, 0.00001]}></boxBufferGeometry>
+      <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
+      {blocks.map((b) => (
+        <BoxUnit data={b} key={b._id}></BoxUnit>
+      ))}
+    </Instances>
+  )
 }
 
 // let block = makeBlock({ type: 'block' })
@@ -104,7 +113,7 @@ let uGravity = new Vector3(0, -9.8, 0)
 
 let uAnchor = new Vector3(0, 0, 0)
 let blocks = []
-let unit = 15
+let unit = 20
 for (let y = -unit; y <= 0; y++) {
   for (let x = -unit; x <= unit; x++) {
     blocks.push(
@@ -137,20 +146,24 @@ let tF_Spring = new Vector3()
 let tF_Damper = new Vector3()
 let tAcceleration = new Vector3()
 
-let tForceAny = new Vector3()
+// let tForceAny = new Vector3()
+
+let tDiff = new Vector3()
 
 let tSpread = new Vector3()
 const Page = () => {
   let ref = useRef()
   // let viewport = useThree((s) => s.viewport)
   // let size = useThree((s) => s.size)
-
+  let time = 0
   useFrame((st, dt) => {
     frameRate = dt
 
     if (frameRate >= 1 / 60) {
       frameRate = 1 / 60
     }
+    time += frameRate
+
     // pin.pos.copy(uAnchor)
 
     // tForceAny.copy(pin.pos).multiplyScalar(uK)
@@ -179,11 +192,14 @@ const Page = () => {
       if (iBlock.isYMax) {
         // let pin = pinMouse
         tSpread.x = uAnchor.x + iBlock.uvX
-        tSpread.y = uAnchor.y
-        // tSpread.z = 0.0
+        tSpread.y =
+          uAnchor.y +
+          iBlock.uvY +
+          5.0 * Math.sin(time * 5.0 + (iBlock.uvX / unit) * 3.1415 * 1.5)
+        tSpread.z = 0
         // tForceAny.copy(tSpread).multiplyScalar(uK)
 
-        iBlock.pos.lerp(tSpread, 0.5)
+        iBlock.pos.lerp(tSpread, 0.05)
 
         // tF_Spring
         //   .copy(iBlock.pos)
@@ -246,11 +262,7 @@ const Page = () => {
           )
         )
 
-        let initLenght = updown.length
-
         updown.forEach((pin) => {
-          //
-
           if (pin) {
             // let dist = iBlock.pos.distanceTo(pin.pos)
             // let springLg = 0.5
@@ -260,27 +272,32 @@ const Page = () => {
             // tForceAny.copy(tSpread).multiplyScalar(-0.1)
 
             tF_Spring.copy(iBlock.pos).sub(pin.pos).multiplyScalar(uK)
-            // .sub(tForceAny)
-
-            //
             tF_Damper.copy(iBlock.vel).sub(pin.vel).multiplyScalar(uB)
 
             //
             tAcceleration
               .copy(tF_Spring)
               .add(tF_Damper)
-              .multiplyScalar(2 / iBlock.mass)
+              .multiplyScalar(1 / iBlock.mass)
 
             tAcceleration.addScaledVector(uGravity, -uK)
-            // tAcceleration.addScaledVector(uWind, 1 / initLenght)
 
-            iBlock.vel.addScaledVector(tAcceleration, frameRate / initLenght)
-            iBlock.pos.addScaledVector(iBlock.vel, frameRate / initLenght)
+            let diff = tDiff
+              .copy(iBlock.pos)
+              .sub(pin.pos)
+              .normalize()
+              .multiplyScalar(uK)
+
+            tAcceleration.addScaledVector(diff, 2 / 8)
+
+            iBlock.vel.addScaledVector(tAcceleration, frameRate / 8)
+            iBlock.pos.addScaledVector(iBlock.vel, frameRate / 8)
 
             //
-          } else {
+          } else if (!iBlock.isYMax) {
+            // iBlock.vel.addScaledVector(uGravity, -uK / 8)
+            // iBlock.pos.addScaledVector(iBlock.vel, frameRate / 8)
           }
-
           //
         })
       }
