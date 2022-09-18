@@ -6,9 +6,9 @@ void main (void) {
   //
   vec4 pos0data = texture2D(pos0, meta0.xy);
 
-  gl_Position = vec4(pos0data.xyz, 1.0);
+  gl_Position = projectionMatrix * modelViewMatrix * pos0data;
 
-  gl_PointSize = 3.0;
+  gl_PointSize = 5.0;
 }
 
 //

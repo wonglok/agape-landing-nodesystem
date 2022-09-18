@@ -1,10 +1,15 @@
 import { ClothSim } from '@/components/ClothSimGroup/ClothSim/ClothSim'
-import { Environment } from '@react-three/drei'
+import { Environment, OrbitControls } from '@react-three/drei'
 
 const Page = () => {
   return (
     <>
       <ClothSim></ClothSim>
+      <OrbitControls
+        object-position={[0, 0, 50]}
+        object-far={1000}
+        object-near={0.1}
+      ></OrbitControls>
       <Environment preset='apartment' background></Environment>
     </>
   )

@@ -38,8 +38,8 @@ export class MyCloth extends Object3D {
     }
 
     this.gl = gl
-    this.sizeX = 256
-    this.sizeY = 256
+    this.sizeX = 25
+    this.sizeY = 25
     this.count = this.sizeX * this.sizeY
     this.gpu = new CustomGPU(this.sizeX, this.sizeY, this.gl)
 
