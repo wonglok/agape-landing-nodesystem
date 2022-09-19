@@ -31,57 +31,8 @@ export function UITopBar() {
         </button>
       </div>
       {/*  */}
+
       <div className='inline-flex items-center justify-center w-1/3'>
-        {currentFolder?.handle?.name}
-        {activeGLBHandle && (
-          <span className='ml-1'> / {activeGLBHandle?.name}</span>
-        )}
-        {activeGLBHandle && (
-          <button
-            className='px-2 ml-2 text-xs text-white bg-purple-600 rounded-full'
-            onClick={async () => {
-              //
-              showSplash({ activeGLBSplash: 'loading' })
-              await saveFile({
-                handle: activeGLBHandle,
-                runTimeGLB: activeGLBRuntimeObject,
-                origGLB: activeGLBRawObject,
-              })
-              let ans = await closeFile()
-              if (ans === 'ok') {
-                showSplash({ activeGLBSplash: 'pick' })
-              }
-            }}
-          >
-            {needsSaveFileWords ? (
-              <span>{needsSaveFileWords}</span>
-            ) : (
-              <span>Save & Close</span>
-            )}
-          </button>
-        )}
-
-        {activeGLBHandle && (
-          <button
-            className='px-2 ml-2 text-xs text-white bg-green-600 rounded-full'
-            onClick={async (ev) => {
-              //
-              ev.target.innerText = 'Saving...'
-              await saveFile({
-                handle: activeGLBHandle,
-                runTimeGLB: activeGLBRuntimeObject,
-                origGLB: activeGLBRawObject,
-              })
-              ev.target.innerText = 'Saved'
-              setTimeout(() => {
-                ev.target.innerText = 'Save'
-              }, 1000)
-            }}
-          >
-            <span>Save </span>
-          </button>
-        )}
-
         {/*  */}
         {/* {activeGLBHandle && (
           <button
@@ -95,6 +46,57 @@ export function UITopBar() {
         )} */}
       </div>
       <div className='inline-flex items-center justify-end w-1/3'>
+        <div className='mr-3'>
+          {currentFolder?.handle?.name}
+          {activeGLBHandle && (
+            <span className='ml-1'> / {activeGLBHandle?.name}</span>
+          )}
+          {activeGLBHandle && (
+            <button
+              className='px-2 ml-2 text-xs text-white bg-purple-600 rounded-full'
+              onClick={async () => {
+                //
+                showSplash({ activeGLBSplash: 'loading' })
+                await saveFile({
+                  handle: activeGLBHandle,
+                  runTimeGLB: activeGLBRuntimeObject,
+                  origGLB: activeGLBRawObject,
+                })
+                let ans = await closeFile()
+                if (ans === 'ok') {
+                  showSplash({ activeGLBSplash: 'pick' })
+                }
+              }}
+            >
+              {needsSaveFileWords ? (
+                <span>{needsSaveFileWords}</span>
+              ) : (
+                <span>Save & Close</span>
+              )}
+            </button>
+          )}
+
+          {activeGLBHandle && (
+            <button
+              className='px-2 ml-2 text-xs text-white bg-green-600 rounded-full'
+              onClick={async (ev) => {
+                //
+                ev.target.innerText = 'Saving...'
+                await saveFile({
+                  handle: activeGLBHandle,
+                  runTimeGLB: activeGLBRuntimeObject,
+                  origGLB: activeGLBRawObject,
+                })
+                ev.target.innerText = 'Saved'
+                setTimeout(() => {
+                  ev.target.innerText = 'Save'
+                }, 1000)
+              }}
+            >
+              <span>Save </span>
+            </button>
+          )}
+        </div>
         <ResetLayoutBtn></ResetLayoutBtn>
       </div>
     </div>

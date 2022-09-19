@@ -66,9 +66,9 @@ function UIMainContent() {
                         <UpDown
                           NS={'param-graph'}
                           getDefaultSize={() => {
-                            return 300
+                            return (window.innerHeight - 150) / 2
                           }}
-                          up={() => (
+                          up={(size) => (
                             <div
                               className='relative w-full h-full'
                               style={{
