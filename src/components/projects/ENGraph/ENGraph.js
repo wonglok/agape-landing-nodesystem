@@ -87,17 +87,6 @@ function Content() {
     <>
       {activeSceneSelection && (
         <>
-          <ENGDraggingWire></ENGDraggingWire>
-          <ENGOriginButton></ENGOriginButton>
-
-          <IconComputer
-            onClick={() => {
-              //
-              //
-              setOverlayENGraph('add-mods')
-            }}
-          ></IconComputer>
-
           <MapControls
             ref={(controls) => {
               setControls(controls)
@@ -108,6 +97,17 @@ function Content() {
             enableRotate={false}
             enablePan={true}
           ></MapControls>
+
+          <ENGDraggingWire></ENGDraggingWire>
+          <ENGOriginButton></ENGOriginButton>
+
+          <IconComputer
+            onClick={() => {
+              //
+              //
+              setOverlayENGraph('add-mods')
+            }}
+          ></IconComputer>
 
           <ENGHDR></ENGHDR>
 
