@@ -76,7 +76,7 @@ export function AdaptTC({ node, onScreenPass = () => {} }) {
     return () => {
       onScreenPass(null)
     }
-  }, [fbo])
+  }, [])
 
   return (
     <>

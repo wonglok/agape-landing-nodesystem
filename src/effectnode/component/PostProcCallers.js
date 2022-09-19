@@ -1,14 +1,13 @@
 import { GLSSR } from '@/helpers/GLSSR'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { useFrame, useThree } from '@react-three/fiber'
 import * as PROC from '@react-three/postprocessing'
 import { EffectComposer } from '@react-three/postprocessing'
-import { useEffect } from 'react'
 import { useEffectNode } from '../store/useEffectNode'
 
-export function PostProcCallers({ screenPass = null }) {
+export function PostProcCallers({}) {
   let passArray = useEffectNode((s) => s.passArray)
   let setPassArray = useEffectNode((s) => s.setPassArray)
+  let screenPass = useEffectNode((s) => s.screenPass)
   // let setPassArray = useEffectNode((s) => s.setPassArray)
   // let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
 
@@ -32,7 +31,9 @@ export function PostProcCallers({ screenPass = null }) {
           if (info.type === 'GLSSR') {
             Compo = GLSSR
           }
-          return <Compo key={'postproc' + idx} {...info.props}></Compo>
+          return (
+            <Compo key={'postproc' + info.type + idx} {...info.props}></Compo>
+          )
         })}
 
         {screenPass}

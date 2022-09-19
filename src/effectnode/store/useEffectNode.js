@@ -11,6 +11,11 @@ export const useEffectNode = create((set, get) => {
   ///
 
   return {
+    screenPass: false,
+    setScreenPass: (v) => {
+      set({ screenPass: v })
+    },
+
     codes: Codes,
     setCodes: (v) => {
       set({ codes: v })

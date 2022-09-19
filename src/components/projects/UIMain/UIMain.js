@@ -128,7 +128,7 @@ function UIMainContent() {
               setRightPaneWidth(window.innerWidth - size)
 
               return (
-                <div>
+                <div style={{ height: '100%' }}>
                   <ENProjectGuard>
                     <ENParams></ENParams>
                   </ENProjectGuard>

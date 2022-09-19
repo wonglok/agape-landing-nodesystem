@@ -18,112 +18,122 @@ import { EnvOutlet } from './EnvOutlet'
 import { AdaptTC } from './Transform/AdaptTC'
 import { sRGBEncoding } from 'three'
 import { ConfigCanvas } from '@/helpers/ConfigCanvas'
+import { useEffectNode } from '@/effectnode/store/useEffectNode'
 
 export function ENCanvas() {
+  //
+  return (
+    <div className='relative w-full h-full'>
+      <Canvas {...ConfigCanvas} className='w-full h-full'>
+        <Content></Content>
+        <PostProcCallers></PostProcCallers>
+      </Canvas>
+      <ENTopBarr></ENTopBarr>
+    </div>
+  )
+}
+
+function Content() {
+  let setScreenPass = useEffectNode((s) => s.setScreenPass)
   let activeGLBRawObject = useGLBEditor((s) => s.activeGLBRawObject)
   let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
   let editorNavigationMode = useGLBEditor((s) => s.editorNavigationMode)
   let setSelection = useGLBEditor((s) => s.setSelection)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let setOrbit = useGLBEditor((s) => s.setOrbit)
-  let [screenPass, setScreenPass] = useState(null)
+  // let [screenPass, setScreenPass] = useState(null)
   let [_, reload] = useState(0)
   useEffect(() => {
     window.addEventListener('reload-node', () => {
       reload((s) => s + 1)
     })
   }, [])
-  //
+
   return (
-    <div className='relative w-full h-full'>
-      <Canvas {...ConfigCanvas} className='w-full h-full'>
-        {/* <color attach={'background'} args={['#cceeff']}></color> */}
+    <group>
+      {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
-        <PostProcCallers screenPass={screenPass}></PostProcCallers>
+      {/*  */}
+      <AdaptTC
+        onScreenPass={(v) => {
+          setScreenPass(v)
+        }}
+        node={activeGLBRuntimeObject.scene}
+      ></AdaptTC>
 
-        {/*  */}
-        <AdaptTC
-          onScreenPass={(v) => {
-            setScreenPass(v)
-          }}
-          node={activeGLBRuntimeObject.scene}
-        ></AdaptTC>
+      {activeSceneSelection && (
+        <boxHelper
+          key={activeSceneSelection.uuid}
+          args={[activeSceneSelection, 0xff0000]}
+        ></boxHelper>
+      )}
 
-        {activeSceneSelection && (
-          <boxHelper
-            key={activeSceneSelection.uuid}
-            args={[activeSceneSelection, 0xff0000]}
-          ></boxHelper>
-        )}
-
-        {activeGLBRuntimeObject?.scene && (
-          <>
-            <Select
-              onChange={(v) => {
-                let first = v[0]
-                if (first) {
-                  setSelection(first)
-                }
-              }}
-            >
-              {/*  */}
-              <primitive
-                key={activeGLBRuntimeObject.scene.uuid + 'display'}
-                object={activeGLBRuntimeObject.scene}
-              ></primitive>
-              {/*  */}
-            </Select>
-            <EffectNodeRuntime
-              glbObject={activeGLBRuntimeObject}
-              glbRaw={activeGLBRawObject}
-            ></EffectNodeRuntime>
+      {activeGLBRuntimeObject?.scene && (
+        <>
+          <Select
+            onChange={(v) => {
+              let first = v[0]
+              if (first) {
+                setSelection(first)
+              }
+            }}
+          >
             {/*  */}
-            {/*  */}
-          </>
-        )}
-
-        {editorNavigationMode === 'floor' && (
-          <>
-            <gridHelper args={[500, 500]}></gridHelper>
-            <ConnectKeyboard></ConnectKeyboard>
-            <ConnectCameraControls></ConnectCameraControls>
-            <ConnectSimulation></ConnectSimulation>
-            <Player></Player>
-            <FloorFlat
-              key={activeGLBRuntimeObject.uuid + 'floorflat'}
-              name={activeGLBRuntimeObject.uuid}
-            ></FloorFlat>
-          </>
-        )}
-
-        {editorNavigationMode === 'meta' && activeGLBRuntimeObject.scene && (
-          <>
-            <ConnectKeyboard></ConnectKeyboard>
-            <ConnectCameraControls></ConnectCameraControls>
-            <ConnectSimulation></ConnectSimulation>
-            <Player></Player>
-            <FloorObject
-              key={activeGLBRuntimeObject.uuid + 'floorobj'}
+            <primitive
+              key={activeGLBRuntimeObject.scene.uuid + 'display'}
               object={activeGLBRuntimeObject.scene}
-            ></FloorObject>
-          </>
-        )}
+            ></primitive>
+            {/*  */}
+          </Select>
+          <EffectNodeRuntime
+            glbObject={activeGLBRuntimeObject}
+            glbRaw={activeGLBRawObject}
+          ></EffectNodeRuntime>
+          {/*  */}
+          {/*  */}
+        </>
+      )}
 
-        {editorNavigationMode === 'orbit' && (
-          <>
-            <OrbitControls
-              ref={(ref) => {
-                setOrbit(ref)
-              }}
-            ></OrbitControls>
-            {/* <CamTrack activeSceneSelection={activeSceneSelection}></CamTrack> */}
-          </>
-        )}
+      {editorNavigationMode === 'floor' && (
+        <>
+          <gridHelper args={[500, 500]}></gridHelper>
+          <ConnectKeyboard></ConnectKeyboard>
+          <ConnectCameraControls></ConnectCameraControls>
+          <ConnectSimulation></ConnectSimulation>
+          <Player></Player>
+          <FloorFlat
+            key={activeGLBRuntimeObject.uuid + 'floorflat'}
+            name={activeGLBRuntimeObject.uuid}
+          ></FloorFlat>
+        </>
+      )}
 
-        <EnvOutlet></EnvOutlet>
-      </Canvas>
-      <ENTopBarr></ENTopBarr>
-    </div>
+      {editorNavigationMode === 'meta' && activeGLBRuntimeObject.scene && (
+        <>
+          <ConnectKeyboard></ConnectKeyboard>
+          <ConnectCameraControls></ConnectCameraControls>
+          <ConnectSimulation></ConnectSimulation>
+          <Player></Player>
+          <FloorObject
+            key={activeGLBRuntimeObject.uuid + 'floorobj'}
+            object={activeGLBRuntimeObject.scene}
+          ></FloorObject>
+        </>
+      )}
+
+      {editorNavigationMode === 'orbit' && (
+        <>
+          <OrbitControls
+            ref={(ref) => {
+              setOrbit(ref)
+            }}
+          ></OrbitControls>
+          {/* <CamTrack activeSceneSelection={activeSceneSelection}></CamTrack> */}
+        </>
+      )}
+
+      <EnvOutlet></EnvOutlet>
+    </group>
   )
 }
 
