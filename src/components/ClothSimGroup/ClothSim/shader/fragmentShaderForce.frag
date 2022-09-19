@@ -84,18 +84,70 @@ void main (void) {
   vec4 posData = texture2D(texturePosition, uv);
   vec4 metaData = texture2D(meta0, uv);
 
-  float mass = 2.0;
-  vec3 gravity = vec3(0.0, -1.0, 0.0);
+  float ks = 0.001;
+  float kd = 0.001;
+  vec3 p1 = vec3(0.0);
+  vec3 p2 = vec3(0.0);
+  float L0 = 0.001;
+  vec3 v1 = vec3(0.0);
+  vec3 v2 = vec3(0.0);
+
+  if (forceData.w == 0.0) {
+    gl_FragColor = vec4(forceData.x, forceData.y, forceData.z, 1.0);
+    return;
+  }
+
+  for (float y = -2.0; y <= 2.0; y++) {
+    for (float x = -2.0; x <= 2.0; x++) {
+      if (x == 0.0 && y == 0.0) {
+        continue;
+      }
+      //
+      if (gl_FragCoord.x + x >= resolution.x) {
+        continue;
+      }
+      if (gl_FragCoord.y + y >= resolution.y) {
+        continue;
+      }
+      if (gl_FragCoord.x + x <= 0.0) {
+        continue;
+      }
+      if (gl_FragCoord.y + y <= 0.0) {
+        continue;
+      }
+
+      //
+      float xx = x;
+      float yy = y;
+
+      p1 = posData.rgb;
+      p2 = texture2D(texturePosition, vec2(gl_FragCoord.x + xx, gl_FragCoord.y + yy) / resolution.xy).rgb;
+
+      v1 = velData.rgb;
+      v2 = texture2D(textureVelocity, vec2(gl_FragCoord.x + xx, gl_FragCoord.y + yy) / resolution.xy).rgb;
+
+      vec3 f1 = -1.0 * (ks * (abs(p1 - p2) - L0) + kd * ((v1 - v2) * (p1 - p2)) / abs(p1 - p2)) * (p1 - p2) / abs(p1 - p2);
+
+      f1.x = clamp(f1.x, (-0.005), (0.005));
+      f1.y = clamp(f1.y, (-0.005), (0.005));
+      f1.z = clamp(f1.z, (-0.005), (0.005));
+
+      // f1 *= length(p1 - p2);
+
+      forceData.xyz += f1;
+    }
+  }
+
+  //
+  if (forceData.w == 0.0) {
+    forceData.x = (uv.x * 2.0 - 1.0) * 0.0;
+    forceData.y = (uv.y * 2.0 - 1.0) * 0.0;
+    forceData.z = 0.0;
+    forceData.w = 1.0;
+  }
 
 
-  velData.xyz += (gravity + forceData.xyz / mass) * delta;
-
-  // if (metaData.z > 0.0) {
-  //   velData.xyz = vec3(0.0);
-  // }
-
-  velData.w = 1.0;
-  gl_FragColor = vec4(velData.x, velData.y, velData.z, velData.w);
+  gl_FragColor = vec4(forceData.x, forceData.y, forceData.z, forceData.w);
 }
 
 //
