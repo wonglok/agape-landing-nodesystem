@@ -84,9 +84,16 @@ void main (void) {
   vec4 posData = texture2D(texturePosition, uv);
   vec4 metaData = texture2D(meta0, uv);
 
-  float mass = 2.0;
-  vec3 gravity = vec3(0.0, -1.0, 0.0);
+  float mass = 1.0;
+  vec3 gravity = vec3(0.0, 0.0, 0.0);
 
+
+  if (posData.w == 0.0) {
+    posData.x = (uv.x * 2.0 - 1.0) * 10.0;
+    posData.y = 0.0;
+    posData.z = (uv.y * 2.0 - 1.0) * 10.0;
+    posData.w = 1.0;
+  }
 
   velData.xyz += (gravity + forceData.xyz / mass) * delta;
 

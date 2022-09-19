@@ -97,46 +97,35 @@ void main (void) {
     return;
   }
 
-  for (float y = -2.0; y <= 2.0; y++) {
-    for (float x = -2.0; x <= 2.0; x++) {
-      if (x == 0.0 && y == 0.0) {
-        continue;
-      }
-      //
-      if (gl_FragCoord.x + x >= resolution.x) {
-        continue;
-      }
-      if (gl_FragCoord.y + y >= resolution.y) {
-        continue;
-      }
-      if (gl_FragCoord.x + x <= 0.0) {
-        continue;
-      }
-      if (gl_FragCoord.y + y <= 0.0) {
-        continue;
-      }
+ //
+  float xx = 0.0;
+  float yy = 0.0;
 
-      //
-      float xx = x;
-      float yy = y;
+  p1 = posData.rgb;
+  p2 = texture2D(texturePosition, vec2(gl_FragCoord.x + xx, gl_FragCoord.y + yy) / resolution.xy).rgb;
 
-      p1 = posData.rgb;
-      p2 = texture2D(texturePosition, vec2(gl_FragCoord.x + xx, gl_FragCoord.y + yy) / resolution.xy).rgb;
+  v1 = velData.rgb;
+  v2 = texture2D(textureVelocity, vec2(gl_FragCoord.x + xx, gl_FragCoord.y + yy) / resolution.xy).rgb;
 
-      v1 = velData.rgb;
-      v2 = texture2D(textureVelocity, vec2(gl_FragCoord.x + xx, gl_FragCoord.y + yy) / resolution.xy).rgb;
+  // vec3 f1 = -1.0 * (ks * (abs(p1 - p2) - L0) + kd * ((v1 - v2) * (p1 - p2)) / abs(p1 - p2)) * (p1 - p2) / abs(p1 - p2);
 
-      vec3 f1 = -1.0 * (ks * (abs(p1 - p2) - L0) + kd * ((v1 - v2) * (p1 - p2)) / abs(p1 - p2)) * (p1 - p2) / abs(p1 - p2);
+  vec3 norm = normalize(p1 - p2);
+  float l = 1.0 / resolution.x;
+  float dist = length(p1 - p2);
+  float stiff = 1.0;
+  vec3 f1;
 
-      f1.x = clamp(f1.x, (-0.005), (0.005));
-      f1.y = clamp(f1.y, (-0.005), (0.005));
-      f1.z = clamp(f1.z, (-0.005), (0.005));
+  f1.x = (stiff * (dist - l) * (norm.x)) / dist;
+  f1.y = (stiff * (dist - l) * (norm.y)) / dist;
+  f1.z = (stiff * (dist - l) * (norm.z)) / dist;
 
-      // f1 *= length(p1 - p2);
+  f1.x = clamp(f1.x, -0.5, 0.5);
+  f1.y = clamp(f1.y, -0.5, 0.5);
+  f1.z = clamp(f1.z, -0.5, 0.5);
 
-      forceData.xyz += f1;
-    }
-  }
+  forceData.xyz += -f1;
+
+
 
   //
   if (forceData.w == 0.0) {

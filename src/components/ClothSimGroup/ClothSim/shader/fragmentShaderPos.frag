@@ -15,7 +15,6 @@ void main (void) {
   vec4 posData = texture2D(texturePosition, uv);
 
   float mass = 1.0;
-  posData.rgb = posData.rgb + velData.rgb * delta;
 
   if (posData.w == 0.0) {
     posData.x = (uv.x * 2.0 - 1.0) * 10.0;
@@ -24,6 +23,11 @@ void main (void) {
     posData.w = 1.0;
   }
 
+
+  posData.rgb = posData.rgb + velData.rgb * delta;
+
+
+  //
   // if (metaData.z > 0.0) {
   //   posData.y = 0.0;
   // }
