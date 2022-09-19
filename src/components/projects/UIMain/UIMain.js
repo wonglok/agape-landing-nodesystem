@@ -9,7 +9,7 @@ import { ENGraph } from '../ENGraph/ENGraph'
 import { ENParams } from '../ENParams/ENParams'
 import { ENProjectGuard } from '../ENProjectGuard/ENProjectGuard'
 import { ENSceneOutline } from '../ENSceneOutline/ENSceneOutline'
-import { ENTimeline } from '../ENTimeline/ENTimeline'
+// import { ENTimeline } from '../ENTimeline/ENTimeline'
 
 export function UIMain() {
   let [ready, setReady] = useState(false)
