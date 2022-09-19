@@ -21,8 +21,6 @@ export function ENGraph() {
         onCreated={(st) => {
           st.gl.physicallyCorrectLights = true
           st.gl.outputEncoding = sRGBEncoding
-          st.camera.position.y = 30
-          st.camera.position.z = 30
         }}
       >
         <Suspense fallback={null}>
@@ -105,7 +103,7 @@ function Content() {
               setControls(controls)
             }}
             target={[0, 0, 0]}
-            object-position={[0, 25, 10]}
+            object-position={[0, 25, 5]}
             enableDamping={true}
             enableRotate={false}
             enablePan={true}

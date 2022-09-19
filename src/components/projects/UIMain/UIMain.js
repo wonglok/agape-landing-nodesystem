@@ -39,8 +39,9 @@ function UIMainContent() {
   return (
     <>
       <div
+        // - 48px - 30px
         className='relative w-full text-xs  bordergray-500  '
-        style={{ height: 'calc(100% - 48px - 30px)' }}
+        style={{ height: 'calc(100% )' }}
       >
         <div className='w-full'>
           <LeftRight
@@ -49,7 +50,7 @@ function UIMainContent() {
               <UpDown
                 NS={'asset-layercanvas'}
                 getDefaultSize={() => {
-                  return window.innerHeight - 300
+                  return window.innerHeight - 150
                 }}
                 up={(sizeTD) => (
                   <>
@@ -154,13 +155,13 @@ function UIMainContent() {
           ></LeftRight>
         </div>
       </div>
-      <ENProjectGuard
+      {/* <ENProjectGuard
         placeholder={
           <div className='w-full h-full border-t border-gray-300'></div>
         }
       >
         <ENTimeline></ENTimeline>
-      </ENProjectGuard>
+      </ENProjectGuard> */}
     </>
   )
 }

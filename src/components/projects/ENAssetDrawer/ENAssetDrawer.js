@@ -20,11 +20,11 @@ export function ENAssetDrawer({ size }) {
   let [height, setHeight] = useState(100)
   let barRef = useRef()
   useEffect(() => {
-    setHeight(window.innerHeight - 54 - 24 - size)
+    setHeight(window.innerHeight - 54 * 0.0 - 24 - size)
 
     let tt = setInterval(() => {
-      if (height !== window.innerHeight - 54 - 24 - size - 0.1) {
-        setHeight(window.innerHeight - 54 - 24 - size - 0.1)
+      if (height !== window.innerHeight - 54 * 0.0 - 24 - size - 0.1) {
+        setHeight(window.innerHeight - 54 * 0.0 - 24 - size - 0.1)
       }
     }, 100)
 
