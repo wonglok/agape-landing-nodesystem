@@ -35,6 +35,10 @@ let generateInside = (set, get) => {
 
   // console.log('generateInside')
   return {
+    rightPaneWidth: 300,
+    setRightPaneWidth: (v) => {
+      set({ rightPaneWidth: v })
+    },
     reloadGraphID: 0,
     refreshSystem: () => {
       set({ reloadGraphID: Math.random() })

@@ -1,3 +1,4 @@
+import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { useEffect, useState } from 'react'
 import SplitPane from 'react-split-pane'
 import { ENAssetDrawer } from '../ENAssetDrawer/ENAssetDrawer'
@@ -33,7 +34,8 @@ export function UIMain() {
 let tt = 0
 let vv = 0
 function UIMainContent() {
-  let [rightPanelWidth, setRightPanelWidth] = useState(300)
+  let setRightPaneWidth = useGLBEditor((s) => s.setRightPaneWidth)
+  let rightPanelWidth = useGLBEditor((s) => s.rightPanelWidth)
   return (
     <>
       <div
@@ -60,35 +62,48 @@ function UIMainContent() {
                         </ENProjectGuard>
                       )}
                       right={(size) => (
-                        <div
-                          className='relative h-full'
-                          style={{
-                            width:
-                              window.innerWidth -
-                              (rightPanelWidth + size) +
-                              'px',
+                        <UpDown
+                          NS={'param-graph'}
+                          getDefaultSize={() => {
+                            return window.innerHeight / 2
                           }}
-                        >
-                          <ENProjectGuard
-                            loading={
-                              <div className='flex items-center justify-center w-full h-full bg-gray-300'>
-                                <div className='p-2 px-4 bg-gray-100 rounded-full'>
-                                  Loading...
-                                </div>
-                              </div>
-                            }
-                            placeholder={
-                              <div className='flex items-center justify-center w-full h-full bg-gray-300 from-slate-500 to-slate-300 bg-gradient-to-b'>
-                                <div className='p-2 px-4 bg-gray-100 rounded-full'>
-                                  Please Select a GLB File Below to Begin
-                                  Editing 👇🏼
-                                </div>
-                              </div>
-                            }
-                          >
-                            <ENCanvas key='encanvas'></ENCanvas>
-                          </ENProjectGuard>
-                        </div>
+                          up={() => (
+                            <div
+                              className='relative w-full h-full'
+                              style={{
+                                width:
+                                  window.innerWidth -
+                                  (rightPanelWidth + size) +
+                                  'px',
+                              }}
+                            >
+                              <ENProjectGuard
+                                loading={
+                                  <div className='flex items-center justify-center w-full h-full bg-gray-300'>
+                                    <div className='p-2 px-4 bg-gray-100 rounded-full'>
+                                      Loading...
+                                    </div>
+                                  </div>
+                                }
+                                placeholder={
+                                  <div className='flex items-center justify-center w-full h-full bg-gray-300 from-slate-500 to-slate-300 bg-gradient-to-b'>
+                                    <div className='p-2 px-4 bg-gray-100 rounded-full'>
+                                      Please Select a GLB File Below to Begin
+                                      Editing 👇🏼
+                                    </div>
+                                  </div>
+                                }
+                              >
+                                <ENCanvas key='encanvas'></ENCanvas>
+                              </ENProjectGuard>
+                            </div>
+                          )}
+                          down={() => (
+                            <ENProjectGuard>
+                              <ENGraph></ENGraph>
+                            </ENProjectGuard>
+                          )}
+                        ></UpDown>
                       )}
                     ></LeftRight>
                   </>
@@ -108,10 +123,15 @@ function UIMainContent() {
             //
             right={(size) => {
               //
-              setRightPanelWidth(window.innerWidth - size)
+              setRightPaneWidth(window.innerWidth - size)
 
               return (
                 <div>
+                  <ENProjectGuard>
+                    <ENParams></ENParams>
+                  </ENProjectGuard>
+
+                  {/*
                   <UpDown
                     NS={'param-graph'}
                     getDefaultSize={() => {
@@ -127,7 +147,7 @@ function UIMainContent() {
                         <ENGraph></ENGraph>
                       </ENProjectGuard>
                     )}
-                  ></UpDown>
+                  ></UpDown> */}
                 </div>
               )
             }}
