@@ -97,35 +97,43 @@ void main (void) {
     return;
   }
 
- //
-  float xx = 0.0;
-  float yy = 0.0;
+  for (float y = -1.0; y <= 1.0; y++) {
+    for (float x = -1.0; x <= 1.0; x++) {
+      if (x == 0.0 && y == 0.0) {
+        continue;
+      }
+      //
+      float xx = x;
+      float yy = y;
 
-  p1 = posData.rgb;
-  p2 = texture2D(texturePosition, vec2(gl_FragCoord.x + xx, gl_FragCoord.y + yy) / resolution.xy).rgb;
+      p1 = posData.rgb;
+      p2 = texture2D(texturePosition, vec2(gl_FragCoord.x + xx, gl_FragCoord.y + yy) / resolution.xy).rgb;
 
-  v1 = velData.rgb;
-  v2 = texture2D(textureVelocity, vec2(gl_FragCoord.x + xx, gl_FragCoord.y + yy) / resolution.xy).rgb;
+      v1 = velData.rgb;
+      v2 = texture2D(textureVelocity, vec2(gl_FragCoord.x + xx, gl_FragCoord.y + yy) / resolution.xy).rgb;
 
-  // vec3 f1 = -1.0 * (ks * (abs(p1 - p2) - L0) + kd * ((v1 - v2) * (p1 - p2)) / abs(p1 - p2)) * (p1 - p2) / abs(p1 - p2);
+      vec3 ff1 = forceData.rgb;
+      vec3 ff2 = texture2D(textureForce, vec2(gl_FragCoord.x + xx, gl_FragCoord.y + yy) / resolution.xy).rgb;
 
-  vec3 norm = normalize(p1 - p2);
-  float l = 1.0 / resolution.x;
-  float dist = length(p1 - p2);
-  float stiff = 1.0;
-  vec3 f1;
+      // vec3 f1 = -1.0 * (ks * (abs(p1 - p2) - L0) + kd * ((v1 - v2) * (p1 - p2)) / abs(p1 - p2)) * (p1 - p2) / abs(p1 - p2);
 
-  f1.x = (stiff * (dist - l) * (norm.x)) / dist;
-  f1.y = (stiff * (dist - l) * (norm.y)) / dist;
-  f1.z = (stiff * (dist - l) * (norm.z)) / dist;
+      vec3 norm = normalize(p1 - p2);
+      float l = 1.0;
+      float dist = length(p1 - p2);
+      float stiff = 1.0;
+      vec3 f1;
 
-  f1.x = clamp(f1.x, -0.5, 0.5);
-  f1.y = clamp(f1.y, -0.5, 0.5);
-  f1.z = clamp(f1.z, -0.5, 0.5);
+      f1.x = (stiff * (dist - l) * (norm.x)) / dist - v2.x * 0.1;
+      f1.y = (stiff * (dist - l) * (norm.y)) / dist - v2.y * 0.1;
+      f1.z = (stiff * (dist - l) * (norm.z)) / dist - v2.z * 0.1;
 
-  forceData.xyz += -f1;
+      f1.x = clamp(f1.x, -0.5, 0.5);
+      f1.y = clamp(f1.y, -0.5, 0.5);
+      f1.z = clamp(f1.z, -0.5, 0.5);
 
-
+      forceData.xyz += f1;
+    }
+  }
 
   //
   if (forceData.w == 0.0) {
