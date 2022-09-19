@@ -50,7 +50,7 @@ function UIMainContent() {
               <UpDown
                 NS={'asset-layercanvas'}
                 getDefaultSize={() => {
-                  return window.innerHeight - 150
+                  return window.innerHeight - 175
                 }}
                 up={(sizeTD) => (
                   <>
@@ -66,7 +66,7 @@ function UIMainContent() {
                         <UpDown
                           NS={'param-graph'}
                           getDefaultSize={() => {
-                            return (window.innerHeight - 150) / 2
+                            return (window.innerHeight - 175) / 2
                           }}
                           up={(size) => (
                             <div
@@ -78,6 +78,7 @@ function UIMainContent() {
                                   'px',
                               }}
                             >
+                              {/* material.agape.json */}
                               <ENProjectGuard
                                 loading={
                                   <div className='flex items-center justify-center w-full h-full bg-gray-300'>
