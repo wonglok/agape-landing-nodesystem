@@ -17,8 +17,8 @@ export function ENGOriginButton() {
           anchorY='middle'
           outlineWidth={0.1}
           outlineColor='#ffffff'
-          rotation-x={Math.PI * -0.25}
-          position={[0, 5, 0]}
+          rotation-x={Math.PI * -0.45}
+          position={[0, 0.5, -2]}
         >
           {activeSceneSelection.name}
         </Text>

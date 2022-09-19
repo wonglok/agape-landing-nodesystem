@@ -51,11 +51,7 @@ export function TextCnavas({
   return (
     <>
       {tex && (
-        <mesh
-          position={[getX(), 0, 0]}
-          scale={1.0}
-          rotation-x={Math.PI * -0.35}
-        >
+        <mesh position={[getX(), 0, 0]} scale={1.0}>
           <planeBufferGeometry
             args={[1.5 / tex.hRatio, 1.5]}
           ></planeBufferGeometry>

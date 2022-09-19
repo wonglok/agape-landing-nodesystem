@@ -180,7 +180,7 @@ function TitleText({ node }) {
         // >
         //   {node?.displayTitle}
         // </Html>
-        <group position-y={4} position-z={-4}>
+        <group rotation-x={Math.PI * -0.5} position-y={0.5} position-z={-5}>
           <TextCnavas text={node?.displayTitle}></TextCnavas>
         </group>
         // //

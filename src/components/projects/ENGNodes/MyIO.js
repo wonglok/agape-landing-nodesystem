@@ -125,12 +125,14 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
       {/*  */}
       {/*  */}
 
-      {socket.type === 'input' && (
-        <TextCnavas align={'left'} text={idx}></TextCnavas>
-      )}
-      {socket.type === 'output' && (
-        <TextCnavas align={'right'} text={idx}></TextCnavas>
-      )}
+      <group rotation-x={-0.45 * Math.PI}>
+        {socket.type === 'input' && (
+          <TextCnavas align={'left'} text={idx}></TextCnavas>
+        )}
+        {socket.type === 'output' && (
+          <TextCnavas align={'right'} text={idx}></TextCnavas>
+        )}
+      </group>
 
       {io === 'input' && (
         <mesh
