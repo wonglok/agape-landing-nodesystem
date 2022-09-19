@@ -65,7 +65,7 @@ function UIMainContent() {
                         <UpDown
                           NS={'param-graph'}
                           getDefaultSize={() => {
-                            return window.innerHeight / 2
+                            return 300
                           }}
                           up={() => (
                             <div
