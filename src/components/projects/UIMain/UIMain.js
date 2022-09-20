@@ -88,7 +88,7 @@ function UIMainContent() {
                             <div
                               className='w-full'
                               style={{
-                                height: window.innerHeight - down - 35 + 'px',
+                                height: window.innerHeight - 150 - down + 'px',
                               }}
                             >
                               <ENProjectGuard
@@ -127,7 +127,6 @@ function UIMainContent() {
                 )}
               ></UpDown>
             )}
-            //
             //
             //
             right={(size) => {

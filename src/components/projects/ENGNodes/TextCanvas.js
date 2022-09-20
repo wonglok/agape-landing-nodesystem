@@ -28,6 +28,7 @@ export function TextCnavas({
     ctx.fillText(text, c.width / 2, c.height / 2)
 
     let texture = new CanvasTexture(c)
+    texture.generateMipmaps = true
     texture.needsUpdate = true
 
     setTexture({

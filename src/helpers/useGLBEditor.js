@@ -3,7 +3,10 @@ import {
   saveProjects,
   verifyPermission,
 } from '@/components/projects/FileSystem/FileSystem'
-import { assignSignaturesToGLB } from '@/effectnode/store/assignSignaturesToGLB'
+import {
+  assignSignaturesToGLB,
+  GlobalsEmptyObjects,
+} from '@/effectnode/store/assignSignaturesToGLB'
 import { Object3D } from 'three'
 import {
   Clock,
@@ -265,6 +268,7 @@ let generateInside = (set, get) => {
       }
 
       //
+      //
       let file = await handle.getFile()
       let url1 = URL.createObjectURL(file)
       let url2 = URL.createObjectURL(file)
@@ -285,8 +289,9 @@ let generateInside = (set, get) => {
       })
 
       setTimeout(() => {
-        let objectFirst =
-          activeGLBRuntimeObject.scene.getObjectByName('EN_MaterialLibrary')
+        let objectFirst = activeGLBRuntimeObject.scene.getObjectByName(
+          GlobalsEmptyObjects[0]
+        )
 
         if (objectFirst.children) {
           set({ activeSceneSelection: objectFirst })

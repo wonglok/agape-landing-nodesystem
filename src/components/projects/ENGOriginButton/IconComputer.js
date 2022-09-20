@@ -35,12 +35,13 @@ export function ImplementationOfBtn({ onClick }) {
         outlineColor='#ffffff'
         rotation-x={Math.PI * -0.45}
         position={[0, 0.5, 0]}
+        scale={1.5}
       >
-        Click to Add Node Module
+        Add Moudle Node
       </Text>
 
-      <RoundedBox args={[6, 0.2, 6]} radius={0.5 / 3}>
-        <meshStandardMaterial color={'#ffff00'} metalness={1} roughness={0.5} />
+      <RoundedBox position={[0, 0, -1]} args={[13, 0.2, 6]} radius={0.5 / 3}>
+        <meshStandardMaterial color={'#ffffff'} metalness={0} roughness={0.5} />
       </RoundedBox>
     </group>
   )

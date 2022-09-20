@@ -21,9 +21,9 @@ const getSignature = (it) => {
 //
 
 export const GlobalsEmptyObjects = [
-  //
-  'EN_MaterialLibrary',
   'EN_PostProcessing',
+  //
+  // 'EN_MaterialLibrary',
 ]
 
 export const assignSignaturesToGLB = (glb) => {

@@ -90,11 +90,11 @@ export function OverlayHtml() {
 }
 
 //
-
 function Content() {
   let setControls = useGLBEditor((s) => s.setControls)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let setOverlayENGraph = useGLBEditor((s) => s.setOverlayENGraph)
+  //
   // let nodeDrag = useGLBEditor((s) => s.nodeDrag)
   // let reloadGraphID = useGLBEditor((s) => s.reloadGraphID)
   return (
@@ -118,8 +118,8 @@ function Content() {
           <IconComputer
             onClick={() => {
               //
-              //
               setOverlayENGraph('add-mods')
+              //
             }}
           ></IconComputer>
 
