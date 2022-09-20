@@ -36,6 +36,8 @@ let vv = 0
 function UIMainContent() {
   let setRightPaneWidth = useGLBEditor((s) => s.setRightPaneWidth)
   let rightPanelWidth = useGLBEditor((s) => s.rightPanelWidth)
+  let setDrawerSize = useGLBEditor((s) => s.setDrawerSize)
+  let drawerSize = useGLBEditor((s) => s.drawerSize)
   return (
     <>
       <div
@@ -88,7 +90,8 @@ function UIMainContent() {
                             <div
                               className='w-full'
                               style={{
-                                height: window.innerHeight - 150 - down + 'px',
+                                height:
+                                  window.innerHeight - drawerSize - down + 'px',
                               }}
                             >
                               <ENProjectGuard
@@ -117,14 +120,18 @@ function UIMainContent() {
                     ></LeftRight>
                   </>
                 )}
-                down={(size) => (
-                  <div
-                    className='w-full bg-white'
-                    style={{ height: size + 'px' }}
-                  >
-                    <ENAssetDrawer size={size}></ENAssetDrawer>
-                  </div>
-                )}
+                down={(size) => {
+                  setDrawerSize(window.innerHeight - size)
+
+                  return (
+                    <div
+                      className='w-full bg-white'
+                      style={{ height: size + 'px' }}
+                    >
+                      <ENAssetDrawer size={size}></ENAssetDrawer>
+                    </div>
+                  )
+                }}
               ></UpDown>
             )}
             //
@@ -235,11 +242,11 @@ function LeftRight({
   )
 }
 
-function UpDown({
+export function UpDown({
   NS = 'updown1',
   getDefaultSize = () => window.innerHeight - 24 - 24 - 280,
-  up = <>up</>,
-  down = <>down</>,
+  up = () => <>up</>,
+  down = () => <>down</>,
 }) {
   let [size, setSize] = useState(1)
   let [onoff, setOnOff] = useState(true)

@@ -38,6 +38,10 @@ let generateInside = (set, get) => {
 
   // console.log('generateInside')
   return {
+    drawerSize: 175,
+    setDrawerSize: (v) => {
+      set({ drawerSize: v })
+    },
     rightPaneWidth: 300,
     setRightPaneWidth: (v) => {
       set({ rightPaneWidth: v })
