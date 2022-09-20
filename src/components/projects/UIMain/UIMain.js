@@ -96,12 +96,16 @@ function UIMainContent() {
                                     style={{ height: '35' + 'px' }}
                                     className='flex items-center justify-center bg-gray-300'
                                   >
-                                    <div>Scene Outline</div>
-                                    {/*  */}
+                                    <div>Material Library</div>
                                   </div>
-                                  <ENSceneOutline
-                                    height={sizeTD - varHeight - 35}
-                                  ></ENSceneOutline>
+                                  <div
+                                    className='w-full'
+                                    style={{
+                                      height: sizeTD - varHeight - 35 + 'px',
+                                    }}
+                                  >
+                                    <div>1</div>
+                                  </div>
                                 </div>
                               )
                             }}
