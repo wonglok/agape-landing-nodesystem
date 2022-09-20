@@ -48,7 +48,7 @@ function UIMainContent() {
         <div className='w-full'>
           <LeftRight
             NS={'canvas-control'}
-            left={(upperMostSize) => (
+            left={(leftSize) => (
               <UpDown
                 NS={'asset-layercanvas'}
                 getDefaultSize={() => {
@@ -68,16 +68,41 @@ function UIMainContent() {
                             NS={'ENSceneOutline-up-down'}
                             up={(varHeight) => {
                               return (
-                                <ENSceneOutline
-                                  height={varHeight}
-                                ></ENSceneOutline>
+                                <div
+                                  className='w-full'
+                                  style={{ height: varHeight + 'px' }}
+                                >
+                                  <div
+                                    style={{ height: '35' + 'px' }}
+                                    className='flex items-center justify-center bg-gray-300'
+                                  >
+                                    <div>Scene Outline</div>
+                                    {/*  */}
+                                  </div>
+                                  <ENSceneOutline
+                                    height={varHeight - 35}
+                                  ></ENSceneOutline>
+                                </div>
                               )
                             }}
+                            //
                             down={(varHeight) => {
                               return (
-                                <ENSceneOutline
-                                  height={sizeTD - varHeight}
-                                ></ENSceneOutline>
+                                <div
+                                  className='w-full'
+                                  style={{ height: sizeTD - varHeight + 'px' }}
+                                >
+                                  <div
+                                    style={{ height: '35' + 'px' }}
+                                    className='flex items-center justify-center bg-gray-300'
+                                  >
+                                    <div>Scene Outline</div>
+                                    {/*  */}
+                                  </div>
+                                  <ENSceneOutline
+                                    height={sizeTD - varHeight - 35}
+                                  ></ENSceneOutline>
+                                </div>
                               )
                             }}
                           ></UpDown>
