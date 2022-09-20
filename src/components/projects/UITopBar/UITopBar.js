@@ -32,19 +32,6 @@ export function UITopBar() {
       </div>
       {/*  */}
 
-      <div className='inline-flex items-center justify-center w-1/2'>
-        {/*  */}
-        {/* {activeGLBHandle && (
-          <button
-            className='px-2 ml-2 text-xs text-white bg-blue-600 rounded-full'
-            onClick={() => {
-              saveFile()
-            }}
-          >
-            <span>Save</span>
-          </button>
-        )} */}
-      </div>
       <div className='inline-flex items-center justify-end w-1/2'>
         <div className='mr-3'>
           {currentFolder?.handle?.name}
