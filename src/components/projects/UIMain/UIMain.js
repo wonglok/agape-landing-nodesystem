@@ -61,7 +61,26 @@ function UIMainContent() {
                       NS={'layers-canvas'}
                       left={() => (
                         <ENProjectGuard>
-                          <ENSceneOutline height={sizeTD}></ENSceneOutline>
+                          <UpDown
+                            getDefaultSize={() => {
+                              return (window.innerHeight - 175) / 2
+                            }}
+                            NS={'ENSceneOutline-up-down'}
+                            up={(varHeight) => {
+                              return (
+                                <ENSceneOutline
+                                  height={varHeight}
+                                ></ENSceneOutline>
+                              )
+                            }}
+                            down={(varHeight) => {
+                              return (
+                                <ENSceneOutline
+                                  height={sizeTD - varHeight}
+                                ></ENSceneOutline>
+                              )
+                            }}
+                          ></UpDown>
                         </ENProjectGuard>
                       )}
                       right={(size) => (
@@ -95,6 +114,7 @@ function UIMainContent() {
                               }}
                             >
                               <ENProjectGuard
+                                //
                                 loading={
                                   <div className='flex items-center justify-center w-full h-full bg-gray-300'>
                                     <div className='p-2 px-4 bg-gray-100 rounded-full'>
@@ -102,6 +122,7 @@ function UIMainContent() {
                                     </div>
                                   </div>
                                 }
+                                //
                                 placeholder={
                                   <div className='flex items-center justify-center w-full h-full bg-gray-300 from-slate-500 to-slate-300 bg-gradient-to-b'>
                                     <div className='p-2 px-4 bg-gray-100 rounded-full'>
