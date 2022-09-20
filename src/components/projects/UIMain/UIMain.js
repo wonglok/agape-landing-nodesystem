@@ -4,7 +4,7 @@ import SplitPane from 'react-split-pane'
 import { ENAssetDrawer } from '../ENAssetDrawer/ENAssetDrawer'
 import { ENCanvas } from '../ENCanvas/ENCanvas'
 // import { ENFiles } from '../ENFiles/ENFiles'
-import { ENGraph } from '../ENGraph/ENGraph'
+import { ENGraph, OverlayHtml } from '../ENGraph/ENGraph'
 // import { ENLayers } from '../ENLayers/ENLayers'
 import { ENParams } from '../ENParams/ENParams'
 import { ENProjectGuard } from '../ENProjectGuard/ENProjectGuard'
@@ -79,6 +79,18 @@ function UIMainContent() {
                               }}
                             >
                               {/* material.agape.json */}
+                              <ENProjectGuard>
+                                <ENCanvas key='encanvas'></ENCanvas>
+                              </ENProjectGuard>
+                            </div>
+                          )}
+                          down={(down) => (
+                            <div
+                              className='w-full'
+                              style={{
+                                height: window.innerHeight - down - 35 + 'px',
+                              }}
+                            >
                               <ENProjectGuard
                                 loading={
                                   <div className='flex items-center justify-center w-full h-full bg-gray-300'>
@@ -96,14 +108,9 @@ function UIMainContent() {
                                   </div>
                                 }
                               >
-                                <ENCanvas key='encanvas'></ENCanvas>
+                                <ENGraph></ENGraph>
                               </ENProjectGuard>
                             </div>
-                          )}
-                          down={() => (
-                            <ENProjectGuard>
-                              <ENGraph></ENGraph>
-                            </ENProjectGuard>
                           )}
                         ></UpDown>
                       )}
@@ -132,6 +139,7 @@ function UIMainContent() {
                   <ENProjectGuard>
                     <ENParams></ENParams>
                   </ENProjectGuard>
+                  <OverlayHtml></OverlayHtml>
 
                   {/*
                   <UpDown

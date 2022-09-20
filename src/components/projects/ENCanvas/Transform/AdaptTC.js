@@ -162,8 +162,7 @@ export function ENTCNode({ node, fakeScene }) {
           graphData={graphData}
         ></GroupTCs>
       )}
-      {/*  */}
-      {node.children.map((it) => {
+      {node?.children?.map((it) => {
         return (
           <ENTCNode fakeScene={fakeScene} key={it.uuid} node={it}></ENTCNode>
         )

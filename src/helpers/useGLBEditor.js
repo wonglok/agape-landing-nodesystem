@@ -274,7 +274,6 @@ let generateInside = (set, get) => {
       let activeGLBRuntimeObject = await loadGLB(url2, true)
       assignSignaturesToGLB(activeGLBRawObject)
       assignSignaturesToGLB(activeGLBRuntimeObject)
-
       //
       set({
         overlayENGraph: '',
@@ -284,6 +283,15 @@ let generateInside = (set, get) => {
         activeGLBRawObject,
         activeGLBRuntimeObject,
       })
+
+      setTimeout(() => {
+        let objectFirst =
+          activeGLBRuntimeObject.scene.getObjectByName('EN_MaterialLibrary')
+
+        if (objectFirst.children) {
+          set({ activeSceneSelection: objectFirst })
+        }
+      }, 10)
     },
     switchMode: (mode) => {
       set({

@@ -12,7 +12,6 @@ export function ENGraphFloor() {
   return (
     <group>
       {/*  */}
-      <gridHelper args={[500, 100, 0xbababa, 0xbababa]}></gridHelper>
       {/*  */}
       <Box
         onPointerDown={(ev) => {

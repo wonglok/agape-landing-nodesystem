@@ -1,6 +1,6 @@
 import { AdditiveBlending, sRGBEncoding } from 'three'
 import { Canvas } from '@react-three/fiber'
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 import { ENGOriginButton } from '../ENGOriginButton/ENGOriginButton'
 import { Box, MapControls } from '@react-three/drei'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
@@ -12,6 +12,8 @@ import { AddItemCurosr } from '../ENGAddItemCurosr/ENGAddItemCurosr'
 import { ENGNodes } from '../ENGNodes/ENGNodes'
 import { ConnectedWires } from '../ENGConnectedWires/ConnectedWires'
 import { ENGDraggingWire } from '../ENGDraggingWire/ENGDraggingWire'
+import { EffectComposer, Noise } from '@react-three/postprocessing'
+import { GLSSR } from '@/helpers/GLSSR'
 
 export function ENGraph() {
   return (
@@ -23,20 +25,32 @@ export function ENGraph() {
           st.gl.outputEncoding = sRGBEncoding
         }}
       >
+        <color attach={'background'} args={['#222222']}></color>
+        <gridHelper args={[500, 250, 0x555555, 0x555555]}></gridHelper>
+
         <Suspense fallback={null}>
           <Content></Content>
         </Suspense>
       </Canvas>
 
-      <OverlayHtml></OverlayHtml>
+      {/* <OverlayHtml></OverlayHtml> */}
     </div>
   )
 }
 
-function OverlayHtml() {
+export function OverlayHtml() {
   let overlayENGraph = useGLBEditor((s) => s.overlayENGraph)
   let setOverlayENGraph = useGLBEditor((s) => s.setOverlayENGraph)
 
+  useEffect(() => {
+    let hh = () => {
+      setOverlayENGraph('')
+    }
+    window.addEventListener('keydown', hh)
+    return () => {
+      window.removeEventListener('keydown', hh)
+    }
+  }, [overlayENGraph, setOverlayENGraph])
   return (
     <>
       {overlayENGraph === 'add-mods' && (
@@ -92,7 +106,7 @@ function Content() {
               setControls(controls)
             }}
             target={[0, 0, 0]}
-            object-position={[0, 25, 5]}
+            object-position={[0, 20, 5]}
             enableDamping={true}
             enableRotate={false}
             enablePan={true}

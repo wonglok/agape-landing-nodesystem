@@ -20,6 +20,7 @@ export function ENGAddGraphNode() {
     refreshSystem()
   }
 
+  //
   return (
     <>
       <div className='w-full h-full backdrop-blur-lg'>
@@ -32,9 +33,6 @@ export function ENGAddGraphNode() {
           autoFocus={true}
           defaultValue={str}
           onKeyDown={(ev) => {
-            //
-            //
-
             ev.stopPropagation()
             setStr(ev.target.value || '')
             if (ev.key === 'Enter') {
@@ -51,7 +49,7 @@ export function ENGAddGraphNode() {
           className='w-full p-2 -mb-2 bg-white border-b border-yellow-500 cursor-pointer hover:bg-yellow-100'
         ></textarea>
 
-        <div className='p-2'>
+        <div className='p-2 pt-3'>
           {codes
             .filter((it) => {
               return (it.title || '').indexOf(str) !== -1
@@ -63,6 +61,7 @@ export function ENGAddGraphNode() {
                   onClick={() => {
                     addCode({ title: e.title })
                   }}
+                  className='mb-1 cursor-pointer'
                 >
                   {e.title}
                 </div>

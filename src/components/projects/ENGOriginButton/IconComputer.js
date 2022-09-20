@@ -40,7 +40,7 @@ export function ImplementationOfBtn({ onClick }) {
       </Text>
 
       <RoundedBox args={[6, 0.2, 6]} radius={0.5 / 3}>
-        <meshStandardMaterial color={'white'} metalness={1} roughness={0.5} />
+        <meshStandardMaterial color={'#ffff00'} metalness={1} roughness={0.5} />
       </RoundedBox>
     </group>
   )
