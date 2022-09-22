@@ -139,7 +139,6 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
           onPointerMove={onPointerMove}
-          //
           // args={[1, 1, 1]}
           // radius={1 / 5}
         >
@@ -150,9 +149,9 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
             args={[2 / 5, 2 / 5, 2, 32, 32]}
           ></cylinderBufferGeometry>
           <meshStandardMaterial
-            roughness={0.2}
-            metalness={0.5}
-            color={'lime'}
+            roughness={0.5}
+            metalness={1}
+            color={'white'}
           ></meshStandardMaterial>
         </mesh>
       )}
@@ -176,9 +175,9 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
           ></cylinderBufferGeometry>
 
           <meshStandardMaterial
-            roughness={0.2}
-            metalness={0.5}
-            color={'cyan'}
+            roughness={0.5}
+            metalness={1}
+            color={'white'}
           ></meshStandardMaterial>
         </mesh>
       )}

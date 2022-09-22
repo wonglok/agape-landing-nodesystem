@@ -87,11 +87,10 @@ export function NodeSingle({ effectNode, node }) {
           metalness={1}
           color={
             sel.some((r) => {
-              console.log(r)
               return r?.userData?.node?._id === node._id
             })
-              ? 'lime'
-              : 'darkblue'
+              ? 'cyan'
+              : 'gray'
           }
           transparent={true}
           opacity={1}
