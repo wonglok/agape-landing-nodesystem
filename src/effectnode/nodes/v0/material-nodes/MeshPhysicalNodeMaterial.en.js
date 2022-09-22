@@ -36,6 +36,14 @@ export async function nodeData({ defaultData, nodeID }) {
 export function effect({ node, mini, data, setComponent }) {
   //
   //
+
+  let applyToIt = (v) => {
+    mini.ready.itself.ready((it) => {
+      it.material = v
+    })
+  }
+
+  let material = new MeshMater()
   //
   //
   //
