@@ -222,14 +222,14 @@ function UIMainContent() {
                       tabs={[
                         {
                           name: 'mat',
-                          label: 'Basic Object Properties',
+                          label: 'Basic Properties',
                           compo: (
                             <ENBasicParams key={'matparams'}></ENBasicParams>
                           ),
                         },
                         {
                           name: 'node',
-                          label: 'Advanced Node Properties',
+                          label: 'Advanced Properties (Overrides)',
                           compo: <ENParams key={'nodeparams'}></ENParams>,
                         },
                       ]}

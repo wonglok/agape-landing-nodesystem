@@ -54,7 +54,7 @@ export function OverlayHtml() {
   return (
     <>
       {overlayENGraph === 'add-mods' && (
-        <div className=' absolute top-0 left-0 w-full h-full '>
+        <div className='absolute top-0 left-0 z-30 w-full h-full'>
           <ENGAddGraphNode></ENGAddGraphNode>
         </div>
       )}

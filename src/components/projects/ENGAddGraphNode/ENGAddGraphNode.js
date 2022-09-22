@@ -23,7 +23,7 @@ export function ENGAddGraphNode() {
   //
   return (
     <>
-      <div className='w-full h-full backdrop-blur-lg'>
+      <div className='w-full h-full bg-white backdrop-blur-lg bg-opacity-25'>
         <div className='flex items-center w-full h-8 pl-2 bg-yellow-300 border-b border-yellow-200'>
           Add Modules
         </div>
@@ -49,7 +49,7 @@ export function ENGAddGraphNode() {
           className='w-full p-2 -mb-2 bg-white border-b border-yellow-500 cursor-pointer hover:bg-yellow-100'
         ></textarea>
 
-        <div className='p-2 pt-3'>
+        <div className='p-2 pt-3 '>
           {codes
             .filter((it) => {
               return (it.title || '').indexOf(str) !== -1
