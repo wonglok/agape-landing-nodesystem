@@ -89,6 +89,7 @@ export function EffectNodeObjectNode({
 
             inputs.forEach((input, idx) => {
               let answer = false
+
               on(input._id, (v) => {
                 answer = v
               })
@@ -124,10 +125,11 @@ export function EffectNodeObjectNode({
               }
 
               portsAPIMap.set(`in${idx}`, api)
+              portsAPIMap.set(`in_${input.name}`, api)
             })
 
             outputs.forEach((output, idx) => {
-              portsAPIMap.set(`out${idx}`, {
+              let stream = {
                 pulse: (data) => {
                   let ttt = setInterval(() => {
                     if (mode === 'can-send') {
@@ -144,13 +146,22 @@ export function EffectNodeObjectNode({
                   //   })
                   // }
                 },
-              })
+              }
+              portsAPIMap.set(`out_${output.name}`, stream)
+              portsAPIMap.set(`out${idx}`, stream)
             })
 
             let nodeAPI = new Proxy(node, {
               get: (obj, key) => {
                 if (key === 'data') {
                   return node
+                }
+
+                if (key.indexOf('in_') === 0) {
+                  return portsAPIMap.get(key)
+                }
+                if (key.indexOf('out_') === 0) {
+                  return portsAPIMap.get(key)
                 }
 
                 //

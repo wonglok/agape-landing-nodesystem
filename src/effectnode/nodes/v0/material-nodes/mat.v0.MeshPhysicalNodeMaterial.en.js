@@ -12,20 +12,34 @@ export async function nodeData({ defaultData, nodeID }) {
     inputs: [
       //
       { _id: getID(), name: 'color', type: 'input', nodeID },
+      //
       { _id: getID(), name: 'map', type: 'input', nodeID },
+      //
       { _id: getID(), name: 'normalMap', type: 'input', nodeID },
+      //
+      { _id: getID(), name: 'roughness', type: 'input', nodeID },
+      { _id: getID(), name: 'roughnessMap', type: 'input', nodeID },
+      //
+      { _id: getID(), name: 'metalness', type: 'input', nodeID },
+      { _id: getID(), name: 'metalnessMap', type: 'input', nodeID },
+      //
+      { _id: getID(), name: 'transmission', type: 'input', nodeID },
+      { _id: getID(), name: 'transmissionMap', type: 'input', nodeID },
+      //
+      { _id: getID(), name: 'metalness', type: 'input', nodeID },
+      { _id: getID(), name: 'metalnessMap', type: 'input', nodeID },
+      //
       { _id: getID(), name: 'emissive', type: 'input', nodeID },
       { _id: getID(), name: 'emissiveMap', type: 'input', nodeID },
       { _id: getID(), name: 'emissiveIntensity', type: 'input', nodeID },
-      { _id: getID(), name: 'opacity', type: 'input', nodeID },
-      { _id: getID(), name: 'transparent', type: 'input', nodeID },
+      //
       { _id: getID(), name: 'side', type: 'input', nodeID },
-      { _id: getID(), name: '', type: 'input', nodeID },
-      { _id: getID(), name: '', type: 'input', nodeID },
+      //
+      { _id: getID(), name: 'transparent', type: 'input', nodeID },
+      { _id: getID(), name: 'opacity', type: 'input', nodeID },
     ],
 
     // at least 1
-    //
     outputs: [
       //
       { _id: getID(), type: 'output', nodeID },
@@ -35,36 +49,34 @@ export async function nodeData({ defaultData, nodeID }) {
     uniforms: [],
 
     //
+
+    //
     //
   }
 }
 
 export function effect({ node, mini, data, setComponent }) {
-  //
-  //
-
   let applyToIt = (v) => {
     mini.ready.itself.then((it) => {
       it.material = v
     })
   }
-  let physcialMat = new MeshPhysicalMaterial()
+  let physicalMaterialInstance = new MeshPhysicalMaterial()
+  let nodeMaterial = NodeMaterial.fromMaterial(physicalMaterialInstance)
 
-  //
+  applyToIt(nodeMaterial)
 
-  console.log(physcialMat)
-
-  let material = NodeMaterial.fromMaterial(physcialMat)
-
-  applyToIt(material)
-
-  node.in0.stream((v) => {
-    material.colorNode = v
+  node.in_color.stream((v) => {
+    nodeMaterial.colorNode = v
   })
 
-  //
+  node.in_map.stream((v) => {
+    nodeMaterial.mapNode = v
+  })
 
-  //
+  node.in_normalMap.stream((v) => {
+    nodeMaterial.normalMapNode = v
+  })
 
   //
 
