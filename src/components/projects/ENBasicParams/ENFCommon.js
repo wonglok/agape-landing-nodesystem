@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import Pane from 'tweakpane'
-export function ENFCommonMaterial({ material }) {
+export function ENFCommon({ material }) {
   let refBasic = useRef()
 
   useEffect(() => {

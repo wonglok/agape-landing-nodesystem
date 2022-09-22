@@ -1,7 +1,7 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { ENFCommonMaterial } from './ENFCommonMaterial'
+import { ENFCommon } from './ENFCommon'
 
-export function ENMaterialParams() {
+export function ENBasicParams() {
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
 
   return (
@@ -11,9 +11,7 @@ export function ENMaterialParams() {
         <div className='w-full'>
           {/*  */}
           {/*  */}
-          <ENFCommonMaterial
-            material={activeSceneSelection?.material}
-          ></ENFCommonMaterial>
+          <ENFCommon material={activeSceneSelection?.material}></ENFCommon>
           {/*  */}
           {/*  */}
           {/* <div className='w-full whitespace-pre-wrap'>

@@ -5,7 +5,7 @@ import { ENAssetDrawer } from '../ENAssetDrawer/ENAssetDrawer'
 import { ENCanvas } from '../ENCanvas/ENCanvas'
 // import { ENFiles } from '../ENFiles/ENFiles'
 import { ENGraph, OverlayHtml } from '../ENGraph/ENGraph'
-import { ENMaterialParams } from '../ENMaterialParams/ENMaterialParams'
+import { ENBasicParams } from '../ENBasicParams/ENBasicParams'
 // import { ENLayers } from '../ENLayers/ENLayers'
 import { ENParams } from '../ENParams/ENParams'
 import { ENProjectGuard } from '../ENProjectGuard/ENProjectGuard'
@@ -218,11 +218,9 @@ function UIMainContent() {
                       tabs={[
                         {
                           name: 'mat',
-                          label: 'Material Properties',
+                          label: 'Basic Object Properties',
                           compo: (
-                            <ENMaterialParams
-                              key={'matparams'}
-                            ></ENMaterialParams>
+                            <ENBasicParams key={'matparams'}></ENBasicParams>
                           ),
                         },
                         {
