@@ -1,5 +1,5 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import SplitPane from 'react-split-pane'
 import { ENAssetDrawer } from '../ENAssetDrawer/ENAssetDrawer'
 import { ENCanvas } from '../ENCanvas/ENCanvas'
@@ -192,7 +192,9 @@ function UIMainContent() {
                   </>
                 )}
                 down={(size) => {
-                  setDrawerSize(window.innerHeight - size)
+                  setTimeout(() => {
+                    setDrawerSize(window.innerHeight - size)
+                  })
 
                   return (
                     <div
@@ -209,7 +211,9 @@ function UIMainContent() {
             //
             right={(size) => {
               //
-              setRightPaneWidth(window.innerWidth - size)
+              setTimeout(() => {
+                setRightPaneWidth(window.innerWidth - size)
+              })
 
               return (
                 <div style={{ height: '100%' }}>
@@ -274,25 +278,33 @@ function LeftRight({
 }) {
   let [size, setSize] = useState(1)
   let [onoff, setOnOff] = useState(true)
+
+  let canRun = useRef(true)
+  useEffect(() => {
+    return () => {
+      canRun.current = false
+    }
+  }, [])
   useEffect(() => {
     window.dispatchEvent(new Event('reset-size', { detail: true }))
   }, [size])
   useEffect(() => {
     let ttt = setInterval(() => {
-      setSize(parseInt(localStorage.getItem(NS), 10) || getDefaultSize())
+      canRun.current &&
+        setSize(parseInt(localStorage.getItem(NS), 10) || getDefaultSize())
     }, 100)
     return () => {
       clearInterval(ttt)
     }
   }, [NS, getDefaultSize])
   useEffect(() => {
-    setSize(getDefaultSize())
+    canRun.current && setSize(getDefaultSize())
     let reset = ({ detail: isReset }) => {
       //
       if (isReset) {
         localStorage.setItem(NS, getDefaultSize())
       }
-      setOnOff(Math.random())
+      canRun.current && setOnOff(Math.random())
     }
     // window.addEventListener('resize', hh)
     window.addEventListener('reset-size', reset)
@@ -315,7 +327,7 @@ function LeftRight({
             clearTimeout(tt)
             tt = setTimeout(() => {
               localStorage.setItem(NS, size)
-              setSize(size)
+              canRun.current && setSize(size)
             }, 100)
           }}
         >
@@ -335,12 +347,21 @@ export function UpDown({
 }) {
   let [size, setSize] = useState(1)
   let [onoff, setOnOff] = useState(true)
+
+  let canRun = useRef(true)
+  useEffect(() => {
+    return () => {
+      canRun.current = false
+    }
+  }, [])
+
   useEffect(() => {
     window.dispatchEvent(new Event('reset-size', { detail: true }))
   }, [size])
   useEffect(() => {
     let ttt = setInterval(() => {
-      setSize(parseInt(localStorage.getItem(NS), 10) || getDefaultSize())
+      canRun.current &&
+        setSize(parseInt(localStorage.getItem(NS), 10) || getDefaultSize())
     }, 100)
     return () => {
       clearInterval(ttt)
@@ -356,7 +377,7 @@ export function UpDown({
       }
 
       //
-      setOnOff(Math.random())
+      canRun.current && setOnOff(Math.random())
     }
     // window.addEventListener('resize', hh)
     window.addEventListener('reset-size', reset)
@@ -379,7 +400,7 @@ export function UpDown({
             clearTimeout(vv)
             vv = setTimeout(() => {
               localStorage.setItem(NS, size)
-              setSize(size)
+              canRun.current && setSize(size)
             }, 100)
           }}
         >
