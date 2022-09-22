@@ -6,6 +6,10 @@ export function ENFCommon({ material }) {
   useEffect(() => {
     //
 
+    if (!material) {
+      return
+    }
+
     let pane = new Pane({
       container: refBasic.current,
       ttile: 'material-commons',
@@ -27,10 +31,18 @@ export function ENFCommon({ material }) {
         material.emissive = material.emissive || new Color(v)
         material.emissive.set(v)
       },
+
+      get envMapIntenisty() {
+        return material.envMapIntenisty || 1
+      },
+      set envMapIntenisty(v) {
+        material.envMapIntenisty = v
+      },
     }
     //
     pane.addInput(proxy, 'color')
     pane.addInput(proxy, 'emissive')
+    pane.addInput(proxy, 'envMapIntenisty')
 
     return () => {
       pane.dispose()
@@ -38,7 +50,12 @@ export function ENFCommon({ material }) {
   }, [material])
 
   return (
-    <div className='m-1 mt-2'>
+    <div
+      className='m-1 mt-2'
+      onKeyDown={(ev) => {
+        ev.stopPropagation()
+      }}
+    >
       <div className='mb-2'>{material?.name || 'Unknown'} </div>
       <div ref={refBasic}></div>
     </div>

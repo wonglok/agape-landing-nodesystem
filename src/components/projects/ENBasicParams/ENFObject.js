@@ -51,7 +51,12 @@ export function ENFObject({ object }) {
   }, [object])
 
   return (
-    <div className='m-1 mr-5'>
+    <div
+      onKeyDown={(ev) => {
+        ev.stopPropagation()
+      }}
+      className='m-1 mr-5'
+    >
       <div className='mb-2'>{object?.name || 'object'}</div>
       <div ref={refBasic}></div>
     </div>
