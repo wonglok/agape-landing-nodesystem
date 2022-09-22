@@ -51,12 +51,31 @@ export function ENFCommon({ material }) {
       set envMapIntenisty(v) {
         material.envMapIntenisty = v
       },
+
+      get transparent() {
+        return material.transparent || false
+      },
+      set transparent(v) {
+        material.transparent = v
+      },
+      get opacity() {
+        return material.opacity
+      },
+      set opacity(v) {
+        material.opacity = v
+      },
     }
     //
-    pane.addInput(proxy, 'roughness')
-    pane.addInput(proxy, 'metalness')
+    //
+
     pane.addInput(proxy, 'color')
     pane.addInput(proxy, 'emissive')
+
+    pane.addInput(proxy, 'transparent')
+    pane.addInput(proxy, 'opacity')
+    pane.addInput(proxy, 'roughness')
+    pane.addInput(proxy, 'metalness')
+
     pane.addInput(proxy, 'envMapIntenisty')
 
     return () => {
