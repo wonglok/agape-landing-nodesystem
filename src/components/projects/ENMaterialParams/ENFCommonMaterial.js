@@ -35,5 +35,10 @@ export function ENFCommonMaterial({ material }) {
   }, [])
 
   //
-  return <div ref={ref}></div>
+  return (
+    <div>
+      <div ref={ref}></div>
+      <div></div>
+    </div>
+  )
 }
