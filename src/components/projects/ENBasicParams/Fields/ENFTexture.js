@@ -59,6 +59,15 @@ export function ENFTexture({ material, field }) {
     fin.click()
   }
 
+  let onDownload = () => {
+    //
+    let url = ref.current.toDataURL('png', 100)
+    let a = document.createElement('a')
+    a.href = url
+    a.download = 'texture.png'
+    a.click()
+  }
+
   let onSetNull = () => {
     //
     //
@@ -95,6 +104,7 @@ export function ENFTexture({ material, field }) {
             texture={texture}
             material={material}
             field={field}
+            onDownload={onDownload}
           ></TextureOptions>
           {/*  */}
         </>
@@ -118,7 +128,14 @@ export function ENFTexture({ material, field }) {
 
 //
 
-function TextureOptions({ onChoose, onSetNull, material, field, texture }) {
+function TextureOptions({
+  onDownload,
+  onChoose,
+  onSetNull,
+  material,
+  field,
+  texture,
+}) {
   let ref = useRef()
 
   useEffect(() => {
@@ -266,6 +283,13 @@ function TextureOptions({ onChoose, onSetNull, material, field, texture }) {
       if (window.confirm('remove?')) {
         onSetNull()
       }
+    })
+
+    let btn3 = pane.addButton({ title: 'Download Texture' })
+    btn3.on('click', () => {
+      //
+      onDownload()
+      //
     })
 
     // let updateMatrix = (type) => (ev) => {

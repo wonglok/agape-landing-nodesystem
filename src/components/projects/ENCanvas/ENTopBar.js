@@ -1,11 +1,14 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils'
+import { Object3D } from 'three140'
 
 export function ENTopBarr() {
   let switchMode = useGLBEditor((s) => s.switchMode)
   let editorNavigationMode = useGLBEditor((s) => s.editorNavigationMode)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let setSelection = useGLBEditor((s) => s.setSelection)
+  let loadGLB = useGLBEditor((s) => s.loadGLB)
+  let refreshSystem = useGLBEditor((s) => s.refreshSystem)
   return (
     <>
       <div className='absolute top-0 left-0'>
@@ -58,6 +61,45 @@ export function ENTopBarr() {
       <div className='absolute top-0 right-0 z-10 p-1'>
         {activeSceneSelection && (
           <div>
+            <button
+              className='p-1 mb-1 mr-1 bg-white'
+              onClick={async () => {
+                //
+
+                let fin = document.createElement('input')
+                fin.type = 'file'
+                fin.accept = 'model/gltf-binary'
+                fin.onchange = (ev) => {
+                  let first = ev.target.files[0]
+
+                  if (first) {
+                    let url = URL.createObjectURL(first)
+
+                    loadGLB(url, true).then((glb) => {
+                      let o3 = new Object3D()
+                      o3.name = 'Imported GLB'
+                      o3.position.copy(activeSceneSelection.position)
+                      o3.position.x += 0.1
+                      o3.position.z += 0.1
+                      o3.add(glb.scene)
+
+                      activeSceneSelection.parent.add(o3)
+                      setSelection(o3)
+                      refreshSystem()
+                    })
+                  }
+                }
+                fin.click()
+
+                // loadGLB()
+                // let cloned  =
+                // cloned.position.x += 0.1
+                // cloned.position.z += 0.1
+              }}
+            >
+              Import GLB
+            </button>
+
             {activeSceneSelection.type === 'Mesh' && (
               <button
                 className='p-1 mb-1 mr-1 bg-white'
