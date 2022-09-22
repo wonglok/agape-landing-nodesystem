@@ -144,6 +144,9 @@ export function ENFCommon({ material }) {
       <div className='w-1/2 mt-3'>
         <ENFTexture material={material} field={'map'}></ENFTexture>
         <ENFTexture material={material} field={'emissiveMap'}></ENFTexture>
+        <ENFTexture material={material} field={'normalMap'}></ENFTexture>
+        <ENFTexture material={material} field={'roughnessMap'}></ENFTexture>
+        <ENFTexture material={material} field={'metalnessMap'}></ENFTexture>
       </div>
     </div>
   )
