@@ -122,6 +122,7 @@ let generateInside = (set, get) => {
     //,
     activeNodeID: '',
     setActiveNodeID: (id) => {
+      set({ propsTab: 'node' })
       set({ activeNodeID: id })
     },
 
@@ -249,6 +250,8 @@ let generateInside = (set, get) => {
     setSelection: (v) => {
       if (v?.userData) {
       }
+      set({ propsTab: 'mat' })
+
       set({ activeSceneSelection: v })
     },
     // //
