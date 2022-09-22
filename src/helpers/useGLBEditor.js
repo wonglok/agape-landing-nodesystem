@@ -250,7 +250,12 @@ let generateInside = (set, get) => {
     setSelection: (v) => {
       if (v?.userData) {
       }
-      set({ propsTab: 'mat' })
+      if (
+        v.material?.type === 'MeshPhysicalMaterail' ||
+        v.material?.type === 'MeshStandardMaterial'
+      ) {
+        set({ propsTab: 'mat' })
+      }
 
       set({ activeSceneSelection: v })
     },

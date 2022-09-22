@@ -30,6 +30,8 @@ export function ENFObject({ object }) {
     }
 
     //
+
+    //
     pane.addInput(object, 'position').on('change', () => {
       window.dispatchEvent(new CustomEvent('useTranslate', { detail: {} }))
     })
