@@ -31,7 +31,6 @@ export function ENFCommon({ material }) {
         material.emissive = material.emissive || new Color(v)
         material.emissive.set(v)
       },
-
       get roughness() {
         return material.roughness || 0.5
       },
