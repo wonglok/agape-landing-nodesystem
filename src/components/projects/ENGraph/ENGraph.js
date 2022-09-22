@@ -2,7 +2,7 @@ import { AdditiveBlending, sRGBEncoding } from 'three'
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useEffect } from 'react'
 import { ENGOriginButton } from '../ENGOriginButton/ENGOriginButton'
-import { Box, MapControls } from '@react-three/drei'
+import { Box, MapControls, Select } from '@react-three/drei'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { ENGHDR } from '../ENGHDR/ENGHDR'
 import { IconComputer } from '../ENGOriginButton/IconComputer'
@@ -129,7 +129,21 @@ function Content() {
 
           <ENGraphFloor></ENGraphFloor>
 
-          <ENGNodes></ENGNodes>
+          <Select
+            multiple
+            box={true}
+            onChange={(arr) => {
+              // console.log(arr)
+            }}
+            filter={(arr) => {
+              console.log(arr)
+
+              return arr
+              // return v?.userData?.isEffectNodeModule === true
+            }}
+          >
+            <ENGNodes></ENGNodes>
+          </Select>
 
           <ConnectedWires></ConnectedWires>
 

@@ -116,15 +116,13 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
     setDown(false)
     setDraggingIOID(false)
   }
-  let onPointerMove = () => {}
+  let onPointerMove = () => {
+    //
+  }
 
   return (
     <group>
       {/*  */}
-      {/*  */}
-      {/*  */}
-      {/*  */}
-
       <group rotation-x={-0.45 * Math.PI}>
         {socket.type === 'input' && (
           <TextCnavas align={'left'} text={socket.name || idx}></TextCnavas>
@@ -136,7 +134,7 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
 
       {io === 'input' && (
         <mesh
-          position={[0, 1, 0]}
+          position={[0, 0, 0]}
           name={socket._id}
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
@@ -149,7 +147,7 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
             args={[2 / 5, 2 / 5, 0.5, 32, 32]}
           ></cylinderBufferGeometry> */}
           <cylinderBufferGeometry
-            args={[2 / 5, 2 / 5, 1, 32, 32]}
+            args={[2 / 5, 2 / 5, 2, 32, 32]}
           ></cylinderBufferGeometry>
           <meshStandardMaterial
             roughness={0.2}
@@ -158,9 +156,10 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
           ></meshStandardMaterial>
         </mesh>
       )}
+
       {io === 'output' && (
         <mesh
-          position={[0, 1, 0]}
+          position={[0, 0, 0]}
           name={socket._id}
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
@@ -173,7 +172,7 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
             args={[2 / 5, 2 / 5, 0.5, 32, 32]}
           ></cylinderBufferGeometry> */}
           <cylinderBufferGeometry
-            args={[2 / 5, 2 / 5, 1, 32, 32]}
+            args={[2 / 5, 2 / 5, 2, 32, 32]}
           ></cylinderBufferGeometry>
 
           <meshStandardMaterial

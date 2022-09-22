@@ -156,6 +156,9 @@ export function EffectNodeObjectNode({
                 if (key === 'data') {
                   return node
                 }
+                if (key === 'raw') {
+                  return node
+                }
 
                 if (key.indexOf('in_') === 0) {
                   return portsAPIMap.get(key)

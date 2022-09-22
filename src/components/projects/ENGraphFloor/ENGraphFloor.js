@@ -1,6 +1,6 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { Box } from '@react-three/drei'
-import { AdditiveBlending } from 'three'
+import { AdditiveBlending, NormalBlending } from 'three'
 
 export function ENGraphFloor() {
   let cursorMode = useGLBEditor((s) => s.cursorMode)
@@ -14,6 +14,7 @@ export function ENGraphFloor() {
       {/*  */}
       {/*  */}
       <Box
+        position={[0, -0.05 + 0.01, 0]}
         onPointerDown={(ev) => {
           if (cursorMode === 'add') {
             addByPlacing()
@@ -29,7 +30,7 @@ export function ENGraphFloor() {
           curosrPoint.position.y = 1
         }}
         //
-        args={[500, 0.1, 500]}
+        args={[500, 0.05, 500]}
         //
 
         onPointerUp={() => {
@@ -38,21 +39,9 @@ export function ENGraphFloor() {
           // curosrPoint.userData.added.set(0, 0, 0)
         }}
       >
-        <shaderMaterial
-          fragmentShader={
-            /* glsl */ `
-              void main (void) {
-                gl_FragColor = vec4(0.0);
-                discard;
-              }
-            `
-          }
-          depthTest={false}
-          depthWrite={false}
-          transparent={true}
-          blending={AdditiveBlending}
-        ></shaderMaterial>
+        <meshStandardMaterial color='#222222'></meshStandardMaterial>
       </Box>
+
       {/*  */}
     </group>
   )

@@ -66,17 +66,23 @@ export function effect({ node, mini, data, setComponent }) {
 
   applyToIt(nodeMaterial)
 
-  node.in_color.stream((v) => {
-    nodeMaterial.colorNode = v
+  node.raw.inputs.forEach((it) => {
+    node[`in_${it.name}`].stream((v) => {
+      nodeMaterial[`${it.name}Node`] = v
+    })
   })
 
-  node.in_map.stream((v) => {
-    nodeMaterial.mapNode = v
-  })
+  // node.in_color.stream((v) => {
+  //   nodeMaterial.colorNode = v
+  // })
 
-  node.in_normalMap.stream((v) => {
-    nodeMaterial.normalMapNode = v
-  })
+  // node.in_map.stream((v) => {
+  //   nodeMaterial.mapNode = v
+  // })
+
+  // node.in_normalMap.stream((v) => {
+  //   nodeMaterial.normalMapNode = v
+  // })
 
   //
 

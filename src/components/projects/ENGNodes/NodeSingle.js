@@ -1,5 +1,5 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { RoundedBox } from '@react-three/drei'
+import { RoundedBox, useSelect } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { MyIO } from './MyIO'
@@ -37,12 +37,19 @@ export function NodeSingle({ effectNode, node }) {
 
   let inc = useRef(0)
 
+  let sel = useSelect() || []
+
   if (!node) {
     return <></>
   }
   return (
     <group ref={ref}>
       <RoundedBox
+        userData={{
+          isEffectNodeModule: true,
+          node,
+          effectNode,
+        }}
         args={[5, 0.5, 5]}
         radius={0.5 / 3}
         onPointerDown={(ev) => {
@@ -56,6 +63,7 @@ export function NodeSingle({ effectNode, node }) {
           }
           inc.current = 0
         }}
+        //
         onPointerMove={() => {
           inc.current++
         }}
@@ -77,11 +85,19 @@ export function NodeSingle({ effectNode, node }) {
         <meshStandardMaterial
           roughness={1}
           metalness={1}
-          color={'#00ffff'}
+          color={
+            sel.some((r) => {
+              console.log(r)
+              return r?.userData?.node?._id === node._id
+            })
+              ? 'lime'
+              : 'darkblue'
+          }
           transparent={true}
           opacity={1}
         ></meshStandardMaterial>
       </RoundedBox>
+
       {node && <TitleText node={node}></TitleText>}
       {node && <Inputs effectNode={effectNode} node={node}></Inputs>}
       {node && <Outputs effectNode={effectNode} node={node}></Outputs>}
