@@ -1,18 +1,16 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { ENFCommonMaterial } from './ENFCommonMaterial'
-import { ENFColor } from './Fields/ENFColor'
 
 export function ENMaterialParams() {
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
 
   return (
     <>
-      {(activeSceneSelection?.material?.type === 'MeshPhysicalMaterial' ||
-        activeSceneSelection?.material?.type === 'MeshStandardMaterial') && (
+      {activeSceneSelection?.material?.type === 'MeshPhysicalMaterial' ||
+      activeSceneSelection?.material?.type === 'MeshStandardMaterial' ? (
         <div className='w-full'>
           {/*  */}
           {/*  */}
-          <div id='ENFCommonMaterial01'></div>
           <ENFCommonMaterial
             material={activeSceneSelection?.material}
           ></ENFCommonMaterial>
@@ -23,6 +21,10 @@ export function ENMaterialParams() {
           </div> */}
           {/*  */}
           {/*  */}
+        </div>
+      ) : (
+        <div className='p-2 m-2 bg-yellow-400'>
+          Mesh Stanadard / Physical Materail Not Found in the current selection
         </div>
       )}
     </>

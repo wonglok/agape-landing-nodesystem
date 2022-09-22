@@ -206,7 +206,7 @@ function UIMainContent() {
                       tabs={[
                         {
                           name: 'mat',
-                          label: 'Material Params',
+                          label: 'Material Properties',
                           compo: (
                             <ENMaterialParams
                               key={'matparams'}
@@ -215,7 +215,7 @@ function UIMainContent() {
                         },
                         {
                           name: 'node',
-                          label: 'Node Params',
+                          label: 'Advanced Node Properties',
                           compo: <ENParams key={'nodeparams'}></ENParams>,
                         },
                       ]}

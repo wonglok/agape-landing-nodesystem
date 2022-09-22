@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react'
 import Pane from 'tweakpane'
 export function ENFCommonMaterial({ material }) {
-  let ref = useRef()
+  let refBasic = useRef()
 
   useEffect(() => {
     //
 
     let pane = new Pane({
-      container: ref.current,
+      container: refBasic.current,
       ttile: 'material-commons',
     })
     let proxy = {
@@ -26,18 +26,18 @@ export function ENFCommonMaterial({ material }) {
         material.emissive.set(v)
       },
     }
+    //
     pane.addInput(proxy, 'color')
     pane.addInput(proxy, 'emissive')
 
     return () => {
       pane.dispose()
     }
-  }, [])
+  }, [material])
 
-  //
   return (
-    <div>
-      <div ref={ref}></div>
+    <div className='m-1 mr-5'>
+      <div ref={refBasic}></div>
       <div></div>
     </div>
   )
