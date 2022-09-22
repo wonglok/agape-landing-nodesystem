@@ -35,6 +35,8 @@ export function UIMain() {
 
 let tt = 0
 let vv = 0
+
+//
 function UIMainContent() {
   let setRightPaneWidth = useGLBEditor((s) => s.setRightPaneWidth)
   let rightPanelWidth = useGLBEditor((s) => s.rightPanelWidth)
@@ -136,6 +138,7 @@ function UIMainContent() {
                               <ENProjectGuard>
                                 <ENCanvas key='encanvas'></ENCanvas>
                               </ENProjectGuard>
+                              <OverlayHtml></OverlayHtml>
                             </div>
                           )}
                           down={(down) => (
@@ -199,7 +202,6 @@ function UIMainContent() {
                   <ENProjectGuard>
                     <ENParams></ENParams>
                   </ENProjectGuard>
-                  <OverlayHtml></OverlayHtml>
 
                   {/*
                   <UpDown

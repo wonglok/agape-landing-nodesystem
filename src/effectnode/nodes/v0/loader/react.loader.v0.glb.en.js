@@ -80,6 +80,7 @@ let loadGLB = async (v) => {
   return yo
 }
 
+//
 // let getSide = (side) => {
 //   if (side === 'front') {
 //     return FrontSide

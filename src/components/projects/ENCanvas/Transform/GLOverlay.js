@@ -4,13 +4,13 @@ import { Uniform, Vector3 } from 'three'
 import { BlendFunction } from 'postprocessing'
 
 const fragmentShader = `
-
 uniform sampler2D screen;
 
 void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
-	outputColor = vec4(inputColor.rgb, inputColor.a) + texture2D(screen, uv);
-}
 
+  vec4 sColor = texture2D(screen, uv);
+	outputColor = vec4(inputColor.rgb + sColor.rgb, inputColor.a);
+}
 `
 
 export class CustomEffect extends Effect {

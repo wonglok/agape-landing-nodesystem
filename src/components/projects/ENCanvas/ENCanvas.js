@@ -6,19 +6,27 @@ import { FloorFlat } from '@/helpers/FloorFlat'
 import { FloorObject } from '@/helpers/FloorObject'
 import { Player } from '@/helpers/Player'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { Environment, OrbitControls, Select } from '@react-three/drei'
+import {
+  Box,
+  Environment,
+  OrbitControls,
+  Select,
+  TransformControls,
+} from '@react-three/drei'
 import { Canvas, useThree } from '@react-three/fiber'
-import { Bloom, EffectComposer, SSR } from '@react-three/postprocessing'
-import { useEffect, useState } from 'react'
+// import { Bloom, EffectComposer, SSR } from '@react-three/postprocessing'
+import { useEffect, useRef, useState } from 'react'
 // import { UseObjectAsPlayer } from '../UseObjectAsPlayer/UseObjectAsPlayer'
 import { ENTopBarr } from './ENTopBar'
 import { PostProcCallers } from '@/effectnode/component/PostProcCallers'
 import { EnvOutlet } from './EnvOutlet'
 // import { useEffectNode } from '@/effectnode/store/useEffectNode'
 import { AdaptTC } from './Transform/AdaptTC'
-import { sRGBEncoding } from 'three'
+// import { sRGBEncoding } from 'three'
 import { ConfigCanvas } from '@/helpers/ConfigCanvas'
 import { useEffectNode } from '@/effectnode/store/useEffectNode'
+
+//
 
 export function ENCanvas() {
   //
@@ -41,6 +49,7 @@ function Content() {
   let setSelection = useGLBEditor((s) => s.setSelection)
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let setOrbit = useGLBEditor((s) => s.setOrbit)
+
   // let [screenPass, setScreenPass] = useState(null)
   let [_, reload] = useState(0)
   useEffect(() => {

@@ -31,7 +31,10 @@ export function UITopBar() {
         </button>
       </div>
       {/*  */}
+      {/*  */}
 
+      {/*  */}
+      {/*  */}
       <div className='inline-flex items-center justify-end w-1/2'>
         <div className='mr-3'>
           {currentFolder?.handle?.name}

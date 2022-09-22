@@ -23,15 +23,17 @@ import { SceneTransformControl } from './SceneTransformControl'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { EffectComposer } from '@react-three/postprocessing'
 import { GLOverlay } from './GLOverlay'
+import { TransformControlsFix } from './TransformControlsFix'
 // import { EffectComposer, SSR } from '@react-three/postprocessing'
 // import { GLOverlay } from './GLOverlay'
 
-export function AdaptTC({ node, onScreenPass = () => {} }) {
+export function AdaptTC({ node, children, onScreenPass = () => {} }) {
   let reloadGraphID = useGLBEditor((s) => s.reloadGraphID)
 
   let fakeScene = useMemo(() => new Scene(), [])
 
-  let fbo = useFBO(512, 1024)
+  let size = useThree((s) => s.size)
+  let fbo = useFBO(size.width, size.height)
 
   let camQ = new Camera()
   camQ.position.z = 1
@@ -80,6 +82,8 @@ export function AdaptTC({ node, onScreenPass = () => {} }) {
 
   return (
     <>
+      {createPortal(children, fakeScene)}
+
       {/* {fbo && (
         <EffectComposer>
 
@@ -87,6 +91,7 @@ export function AdaptTC({ node, onScreenPass = () => {} }) {
       )} */}
 
       {/* <Screen fbo={fbo}></Screen> */}
+      <TransformControlsFix fakeScene={fakeScene}></TransformControlsFix>
 
       {<ENTCNode key={reloadGraphID} fakeScene={fakeScene} node={node} />}
     </>
@@ -111,44 +116,46 @@ export function AdaptTC({ node, onScreenPass = () => {} }) {
 //   return height * camera.aspect
 // }
 
-function Screen({ fbo }) {
-  let camera = useThree((e) => e.camera)
-  let viewport = useThree((e) => e.viewport)
-  let size = useThree((e) => e.size)
-  let vp = viewport.getCurrentViewport(
-    camera,
-    camera.position.clone().add(new Vector3(0, 0, -0.5)),
-    size
-  )
+// function Screen({ fbo }) {
+//   let camera = useThree((e) => e.camera)
+//   let viewport = useThree((e) => e.viewport)
+//   let size = useThree((e) => e.size)
+//   let vp = viewport.getCurrentViewport(
+//     camera,
+//     camera.position.clone().add(new Vector3(0, 0, -0.5)),
+//     size
+//   )
 
-  // let w = visibleWidthAtZDepth(0, camera)
-  // let h = visibleHeightAtZDepth(0, camera)
-  return (
-    <>
-      {createPortal(
-        <mesh
-          renderOrder={-1}
-          frustumCulled={false}
-          position={[0, 0, -0.5]}
-          scale={1}
-        >
-          <planeBufferGeometry
-            args={[vp.width, vp.height]}
-          ></planeBufferGeometry>
-          <meshBasicMaterial
-            transparent={true}
-            map={fbo.texture}
-            side={DoubleSide}
-            color='#ffffff'
-            blending={NormalBlending}
-          ></meshBasicMaterial>
-        </mesh>,
-        camera
-      )}
-      <primitive object={camera}></primitive>
-    </>
-  )
-}
+//   // let w = visibleWidthAtZDepth(0, camera)
+//   // let h = visibleHeightAtZDepth(0, camera)
+//   return (
+//     <>
+//       {createPortal(
+//         <mesh
+//           renderOrder={-1}
+//           frustumCulled={false}
+//           position={[0, 0, -0.5]}
+//           scale={1}
+//         >
+//           <planeBufferGeometry
+//             args={[vp.width, vp.height]}
+//           ></planeBufferGeometry>
+//           <meshBasicMaterial
+//             transparent={true}
+//             map={fbo.texture}
+//             side={DoubleSide}
+//             color='#ffffff'
+//             blending={NormalBlending}
+//           ></meshBasicMaterial>
+//         </mesh>,
+//         camera
+//       )}
+//       <primitive object={camera}></primitive>
+//     </>
+//   )
+// }
+
+//
 
 export function ENTCNode({ node, fakeScene }) {
   let graphData = node?.userData?.effectNode
@@ -269,8 +276,6 @@ function TC({ node, nodeData, fakeScene }) {
       o3.__disabled = true
     }
   }, [o3, node, fakeScene])
-
-  //
 
   // let tt = 0
   return (

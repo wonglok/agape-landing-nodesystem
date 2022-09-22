@@ -536,23 +536,35 @@ let generateInside = (set, get) => {
       // console.log('todo save file for glb')
 
       let clonedRuntime = clone(runTimeGLB.scene)
-      let clonedForExport = clone(origGLB.scene)
+      // let clonedForExport = clone(origGLB.scene)
 
-      clonedRuntime.traverse((runtimeIt) => {
-        if (runtimeIt.userData.effectNode) {
-          clonedForExport.traverse((exportIt) => {
-            if (exportIt.userData.posMD5 === runtimeIt.userData.posMD5) {
-              exportIt.userData.effectNode = JSON.parse(
-                JSON.stringify(runtimeIt.userData.effectNode)
-              )
-            }
-          })
+      // clonedRuntime.traverse((runtimeIt) => {
+      //   if (runtimeIt.userData.effectNode) {
+      //     clonedForExport.traverse((exportIt) => {
+      //       if (exportIt.userData.posMD5 === runtimeIt.userData.posMD5) {
+      //         exportIt.userData.effectNode = JSON.parse(
+      //           JSON.stringify(runtimeIt.userData.effectNode)
+      //         )
+      //       }
+      //     })
+      //   }
+      // })
+
+      let removeList = []
+
+      clonedRuntime.traverse((it) => {
+        if (it.userData.removeBeforeExport) {
+          removeList.push(it)
         }
+      })
+
+      removeList.forEach((it) => {
+        it.removeFromParent()
       })
 
       //
 
-      let animations = origGLB.animations
+      let animations = clonedRuntime.animations || []
       let rawGltf = await get().exportGLB(clonedRuntime.children, animations)
 
       // let dracoMod = await remoteImport('/draco/draco_encoder_raw.js')
