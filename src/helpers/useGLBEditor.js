@@ -568,21 +568,41 @@ let generateInside = (set, get) => {
       // })
 
       let removeList = []
-
+      let actions = []
       clonedRuntime.traverse((it) => {
         if (it.userData.removeBeforeExport) {
           removeList.push(it)
         }
       })
 
+      clonedRuntime.traverse((it) => {
+        if (typeof it?.userData?.actionBeforeExport === 'function') {
+          actions.push(it.userData.actionBeforeExport)
+        }
+      })
+
+      await Promise.all(actions.map((e) => e())).catch(console.log)
+
       removeList.forEach((it) => {
         it.removeFromParent()
       })
 
-      //
+      // let removeList = []
 
-      let animations = runTimeGLB.animations || []
-      let rawGltf = await get().exportGLB(clonedRuntime.children, animations)
+      // clonedRuntime.traverse((it) => {
+      //   if (it.userData.removeBeforeExport) {
+      //     removeList.push(it)
+      //   }
+      // })
+
+      // removeList.forEach((it) => {
+      //   it.removeFromParent()
+      // })
+
+      // //
+
+      // let animations = runTimeGLB.animations || []
+      // let rawGltf = await get().exportGLB(clonedRuntime.children, animations)
 
       // let dracoMod = await remoteImport('/draco/draco_encoder_raw.js')
 
