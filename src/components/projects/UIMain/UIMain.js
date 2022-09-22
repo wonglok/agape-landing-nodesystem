@@ -44,7 +44,7 @@ function UIMainContent() {
   let rightPanelWidth = useGLBEditor((s) => s.rightPanelWidth)
   let setDrawerSize = useGLBEditor((s) => s.setDrawerSize)
   let drawerSize = useGLBEditor((s) => s.drawerSize)
-
+  let setOutlineSerach = useGLBEditor((s) => s.setOutlineSerach)
   //
   return (
     <>
@@ -82,9 +82,21 @@ function UIMainContent() {
                                 >
                                   <div
                                     style={{ height: '35' + 'px' }}
-                                    className='flex items-center justify-center bg-gray-300'
+                                    className=''
                                   >
-                                    <div>Scene Outline</div>
+                                    <div>
+                                      <input
+                                        type='text'
+                                        placeholder='Scene Outline Search'
+                                        className='w-full p-2 bg-gray-400 placeholder:text-white'
+                                        onKeyDown={(ev) => {
+                                          ev.stopPropagation()
+                                        }}
+                                        onInput={(ev) => {
+                                          setOutlineSerach(ev.target.value)
+                                        }}
+                                      ></input>
+                                    </div>
                                     {/*  */}
                                   </div>
                                   <ENSceneOutline

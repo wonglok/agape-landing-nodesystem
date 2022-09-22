@@ -38,6 +38,10 @@ let generateInside = (set, get) => {
 
   // console.log('generateInside')
   return {
+    outlineSearch: '',
+    setOutlineSerach: (v) => {
+      set({ outlineSearch: v })
+    },
     propsTab: 'mat',
     setPropsTab: (v) => {
       set({ propsTab: v })

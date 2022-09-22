@@ -3,6 +3,7 @@ import { useGLBEditor } from '@/helpers/useGLBEditor'
 export function ENOutlineNode({ level = 0, node }) {
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let setSelection = useGLBEditor((s) => s.setSelection)
+  let outlineSearch = useGLBEditor((s) => s.outlineSearch)
   return (
     <div
       className={'pl-0 mb-1 ml-1 border-l transition-all duration-50 ' + ''}
@@ -37,15 +38,22 @@ export function ENOutlineNode({ level = 0, node }) {
         }
       </div>
 
-      {node.children.map((kid) => {
-        return (
-          <ENOutlineNode
-            level={level + 1}
-            key={kid.uuid + 'outline'}
-            node={kid}
-          ></ENOutlineNode>
-        )
-      })}
+      {node.children
+        .filter((e) => {
+          if (outlineSearch) {
+            return e.name.toLowerCase().includes(outlineSearch)
+          }
+          return true
+        })
+        .map((kid) => {
+          return (
+            <ENOutlineNode
+              level={level + 1}
+              key={kid.uuid + 'outline'}
+              node={kid}
+            ></ENOutlineNode>
+          )
+        })}
     </div>
   )
 }
