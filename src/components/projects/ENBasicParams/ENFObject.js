@@ -30,8 +30,6 @@ export function ENFObject({ object }) {
     }
 
     //
-
-    //
     pane.addInput(object, 'position').on('change', () => {
       window.dispatchEvent(new CustomEvent('useTranslate', { detail: {} }))
     })
@@ -52,6 +50,7 @@ export function ENFObject({ object }) {
     }
   }, [object])
 
+  //
   return (
     <div
       onKeyDown={(ev) => {
@@ -64,3 +63,9 @@ export function ENFObject({ object }) {
     </div>
   )
 }
+
+//
+
+//
+
+//

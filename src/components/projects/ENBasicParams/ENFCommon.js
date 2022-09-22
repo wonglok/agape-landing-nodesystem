@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { FrontSide, BackSide, DoubleSide } from 'three140'
 import Pane from 'tweakpane'
+import { ENFTexture } from './Fields/ENFTexture'
 export function ENFCommon({ material }) {
   let refBasic = useRef()
 
@@ -32,6 +33,24 @@ export function ENFCommon({ material }) {
         material.emissive = material.emissive || new Color(v)
         material.emissive.set(v)
       },
+      get transmission() {
+        return material.transmission || 0.0
+      },
+      set transmission(v) {
+        material.transmission = v
+      },
+      get thickness() {
+        return material.thickness || 0.0
+      },
+      set thickness(v) {
+        material.thickness = v
+      },
+      get ior() {
+        return material.ior || 0.0
+      },
+      set ior(v) {
+        material.ior = v
+      },
       get roughness() {
         return material.roughness || 0.5
       },
@@ -44,7 +63,6 @@ export function ENFCommon({ material }) {
       set metalness(v) {
         material.metalness = v
       },
-
       get envMapIntenisty() {
         return material.envMapIntenisty || 1
       },
@@ -69,6 +87,12 @@ export function ENFCommon({ material }) {
       set side(v) {
         material.side = v
       },
+      get flatShading() {
+        return material.flatShading || true
+      },
+      set flatShading(v) {
+        material.flatShading = v
+      },
     }
     //
     //
@@ -78,6 +102,9 @@ export function ENFCommon({ material }) {
 
     pane.addInput(proxy, 'transparent')
     pane.addInput(proxy, 'opacity')
+    pane.addInput(proxy, 'transmission')
+    pane.addInput(proxy, 'thickness')
+    pane.addInput(proxy, 'ior')
     pane.addInput(proxy, 'roughness')
     pane.addInput(proxy, 'metalness')
 
@@ -88,6 +115,13 @@ export function ENFCommon({ material }) {
         FrontSide,
         BackSide,
         DoubleSide,
+      },
+    })
+
+    pane.addInput(proxy, 'flatShading', {
+      options: {
+        flat: true,
+        smooth: false,
       },
     })
 
@@ -105,7 +139,9 @@ export function ENFCommon({ material }) {
     >
       <button>Yo</button>
       <div className='mb-2'>{material?.name || 'Unknown'} </div>
+
       <div ref={refBasic}></div>
+      <ENFTexture material={material} field={'map'}></ENFTexture>
     </div>
   )
 }

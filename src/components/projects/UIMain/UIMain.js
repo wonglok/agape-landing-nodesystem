@@ -99,7 +99,6 @@ function UIMainContent() {
                                         }}
                                       ></input>
                                     </div>
-                                    {/*  */}
                                   </div>
                                   <ENSceneOutline
                                     height={varHeight - 35}
@@ -118,7 +117,7 @@ function UIMainContent() {
                                     style={{ height: '35' + 'px' }}
                                     className='flex items-center justify-center bg-gray-300'
                                   >
-                                    <div>Material Library</div>
+                                    <div>Helper</div>
                                   </div>
                                   <div
                                     className='w-full'
@@ -282,6 +281,7 @@ function LeftRight({
   left,
   right,
 }) {
+  //
   let [size, setSize] = useState(1)
   let [onoff, setOnOff] = useState(true)
 

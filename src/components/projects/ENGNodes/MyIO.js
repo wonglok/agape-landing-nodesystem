@@ -149,6 +149,7 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
           <cylinderBufferGeometry
             args={[2 / 5, 2 / 5, 2, 32, 32]}
           ></cylinderBufferGeometry>
+
           <meshStandardMaterial
             roughness={1}
             metalness={0.5}
