@@ -3,6 +3,7 @@ import { useGLBEditor } from '@/helpers/useGLBEditor'
 export function ENTopBarr() {
   let switchMode = useGLBEditor((s) => s.switchMode)
   let editorNavigationMode = useGLBEditor((s) => s.editorNavigationMode)
+  let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   return (
     <>
       <div className='absolute top-0 left-0'>
@@ -54,7 +55,42 @@ export function ENTopBarr() {
       {/*  */}
       {/*  */}
 
-      <div className='absolute top-0 right-0 z-10'>
+      <div className='absolute top-0 right-0 z-10 p-1'>
+        {activeSceneSelection && (
+          <div>
+            <button
+              className='p-1 mb-1 mr-1 bg-white'
+              onClick={() => {
+                window.dispatchEvent(
+                  new CustomEvent('useTranslate', { detail: {} })
+                )
+              }}
+            >
+              Translate
+            </button>
+            <button
+              className='p-1 mb-1 mr-1 bg-white'
+              onClick={() => {
+                window.dispatchEvent(
+                  new CustomEvent('useScale', { detail: {} })
+                )
+              }}
+            >
+              Scale
+            </button>
+            <button
+              className='p-1 mb-1 mr-1 bg-white'
+              onClick={() => {
+                window.dispatchEvent(
+                  new CustomEvent('useRotation', { detail: {} })
+                )
+              }}
+            >
+              Rotation
+            </button>
+          </div>
+        )}
+
         {/* <button
           onClick={() => {
             //

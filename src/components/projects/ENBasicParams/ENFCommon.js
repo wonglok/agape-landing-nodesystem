@@ -10,6 +10,8 @@ export function ENFCommon({ material }) {
       container: refBasic.current,
       ttile: 'material-commons',
     })
+
+    //
     let proxy = {
       get color() {
         return '#' + material.color.getHexString()
@@ -36,9 +38,13 @@ export function ENFCommon({ material }) {
   }, [material])
 
   return (
-    <div className='m-1 mr-5'>
+    <div className='m-1 mt-2'>
+      <div className='mb-2'>{material?.name || 'Unknown'} </div>
       <div ref={refBasic}></div>
-      <div></div>
     </div>
   )
 }
+
+//
+
+//

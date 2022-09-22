@@ -1,7 +1,8 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { ENFCommon } from './ENFCommon'
+import { ENFObject } from './ENFObject'
 
-export function ENBasicParams() {
+export function ENBasicParams({}) {
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
 
   return (
@@ -11,6 +12,7 @@ export function ENBasicParams() {
         <div className='w-full'>
           {/*  */}
           {/*  */}
+          <ENFObject object={activeSceneSelection}></ENFObject>
           <ENFCommon material={activeSceneSelection?.material}></ENFCommon>
           {/*  */}
           {/*  */}
