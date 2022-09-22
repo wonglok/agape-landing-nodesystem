@@ -11,6 +11,7 @@ export function ENFObject({ object }) {
       ttile: 'material-commons',
     })
     let proxy = {
+      //
       // get color() {
       //   return '#' + material.color.getHexString()
       // },
@@ -28,7 +29,6 @@ export function ENFObject({ object }) {
       //
     }
 
-    //
     //
     pane.addInput(object, 'position').on('change', () => {
       window.dispatchEvent(new CustomEvent('useTranslate', { detail: {} }))
