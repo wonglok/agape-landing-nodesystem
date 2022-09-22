@@ -204,7 +204,10 @@ function Parent({ node, data, mini }) {
 
   return (
     <group ref={ref2}>
-      <pointLight ref={ref}></pointLight>
+      <pointLight
+        userData={{ removeBeforeExport: true }}
+        ref={ref}
+      ></pointLight>
 
       {/* <Inbound socketName={'in0'} node={node} data={data} mini={mini}></Inbound>
       <Inbound socketName={'in1'} node={node} data={data} mini={mini}></Inbound>

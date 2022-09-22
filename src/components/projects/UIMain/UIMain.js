@@ -5,10 +5,12 @@ import { ENAssetDrawer } from '../ENAssetDrawer/ENAssetDrawer'
 import { ENCanvas } from '../ENCanvas/ENCanvas'
 // import { ENFiles } from '../ENFiles/ENFiles'
 import { ENGraph, OverlayHtml } from '../ENGraph/ENGraph'
+import { ENMaterialParams } from '../ENMaterialParams/ENMaterialParams'
 // import { ENLayers } from '../ENLayers/ENLayers'
 import { ENParams } from '../ENParams/ENParams'
 import { ENProjectGuard } from '../ENProjectGuard/ENProjectGuard'
 import { ENSceneOutline } from '../ENSceneOutline/ENSceneOutline'
+import { PropTabs } from './PropTabs'
 // import { ENTimeline } from '../ENTimeline/ENTimeline'
 
 export function UIMain() {
@@ -200,7 +202,24 @@ function UIMainContent() {
               return (
                 <div style={{ height: '100%' }}>
                   <ENProjectGuard>
-                    <ENParams></ENParams>
+                    <PropTabs
+                      tabs={[
+                        {
+                          name: 'mat',
+                          label: 'Material Params',
+                          compo: (
+                            <ENMaterialParams
+                              key={'matparams'}
+                            ></ENMaterialParams>
+                          ),
+                        },
+                        {
+                          name: 'node',
+                          label: 'Node Params',
+                          compo: <ENParams key={'nodeparams'}></ENParams>,
+                        },
+                      ]}
+                    ></PropTabs>
                   </ENProjectGuard>
 
                   {/*

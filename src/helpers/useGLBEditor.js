@@ -38,6 +38,11 @@ let generateInside = (set, get) => {
 
   // console.log('generateInside')
   return {
+    propsTab: 'mat',
+    setPropsTab: (v) => {
+      set({ propsTab: v })
+    },
+
     drawerSize: 175,
     setDrawerSize: (v) => {
       set({ drawerSize: v })
@@ -564,7 +569,7 @@ let generateInside = (set, get) => {
 
       //
 
-      let animations = clonedRuntime.animations || []
+      let animations = runTimeGLB.animations || []
       let rawGltf = await get().exportGLB(clonedRuntime.children, animations)
 
       // let dracoMod = await remoteImport('/draco/draco_encoder_raw.js')
