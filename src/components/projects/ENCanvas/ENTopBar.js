@@ -63,7 +63,6 @@ export function ENTopBarr() {
                 className='p-1 mb-1 mr-1 bg-white'
                 onClick={() => {
                   //
-
                   let cloned = clone(activeSceneSelection)
 
                   activeSceneSelection.parent.add(cloned)
