@@ -223,7 +223,7 @@ function TextureOptions({ onChoose, onSetNull, material, field, texture }) {
     pane.addInput(proxy, 'flipY')
 
     pane.addInput(proxy, 'generateMipmaps')
-    pane.addInput(proxy, 'premultiplyAlpha')
+    // pane.addInput(proxy, 'premultiplyAlpha')
     pane.addInput(proxy, 'encoding', {
       options: {
         sRGBEncoding,
@@ -241,20 +241,20 @@ function TextureOptions({ onChoose, onSetNull, material, field, texture }) {
       },
     })
 
-    pane.addInput(proxy, 'wrapS', {
-      options: {
-        RepeatWrapping,
-        ClampToEdgeWrapping,
-        MirroredRepeatWrapping,
-      },
-    })
-    pane.addInput(proxy, 'wrapT', {
-      options: {
-        RepeatWrapping,
-        ClampToEdgeWrapping,
-        MirroredRepeatWrapping,
-      },
-    })
+    // pane.addInput(proxy, 'wrapS', {
+    //   options: {
+    //     RepeatWrapping,
+    //     ClampToEdgeWrapping,
+    //     MirroredRepeatWrapping,
+    //   },
+    // })
+    // pane.addInput(proxy, 'wrapT', {
+    //   options: {
+    //     RepeatWrapping,
+    //     ClampToEdgeWrapping,
+    //     MirroredRepeatWrapping,
+    //   },
+    // })
 
     let btn = pane.addButton({ title: 'Switch to other texture' })
     btn.on('click', () => {
