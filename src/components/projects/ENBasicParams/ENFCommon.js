@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { FrontSide, BackSide, DoubleSide } from 'three140'
 import Pane from 'tweakpane'
 export function ENFCommon({ material }) {
   let refBasic = useRef()
@@ -50,7 +51,6 @@ export function ENFCommon({ material }) {
       set envMapIntenisty(v) {
         material.envMapIntenisty = v
       },
-
       get transparent() {
         return material.transparent || false
       },
@@ -62,6 +62,12 @@ export function ENFCommon({ material }) {
       },
       set opacity(v) {
         material.opacity = v
+      },
+      get side() {
+        return material.side || FrontSide
+      },
+      set side(v) {
+        material.side = v
       },
     }
     //
@@ -77,6 +83,14 @@ export function ENFCommon({ material }) {
 
     pane.addInput(proxy, 'envMapIntenisty')
 
+    pane.addInput(proxy, 'side', {
+      options: {
+        FrontSide,
+        BackSide,
+        DoubleSide,
+      },
+    })
+
     return () => {
       pane.dispose()
     }
@@ -89,6 +103,7 @@ export function ENFCommon({ material }) {
         ev.stopPropagation()
       }}
     >
+      <button>Yo</button>
       <div className='mb-2'>{material?.name || 'Unknown'} </div>
       <div ref={refBasic}></div>
     </div>
