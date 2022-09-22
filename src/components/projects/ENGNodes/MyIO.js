@@ -142,6 +142,7 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
           // args={[1, 1, 1]}
           // radius={1 / 5}
         >
+          {/*  */}
           {/* <cylinderBufferGeometry
             args={[2 / 5, 2 / 5, 0.5, 32, 32]}
           ></cylinderBufferGeometry> */}
@@ -149,8 +150,8 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
             args={[2 / 5, 2 / 5, 2, 32, 32]}
           ></cylinderBufferGeometry>
           <meshStandardMaterial
-            roughness={0.5}
-            metalness={1}
+            roughness={1}
+            metalness={0.5}
             color={'white'}
           ></meshStandardMaterial>
         </mesh>
@@ -175,8 +176,8 @@ export function MyIO({ effectNode, io, idx, node, socket, e, total }) {
           ></cylinderBufferGeometry>
 
           <meshStandardMaterial
-            roughness={0.5}
-            metalness={1}
+            roughness={1}
+            metalness={0.5}
             color={'white'}
           ></meshStandardMaterial>
         </mesh>
