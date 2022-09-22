@@ -32,6 +32,19 @@ export function ENFCommon({ material }) {
         material.emissive.set(v)
       },
 
+      get roughness() {
+        return material.roughness || 0.5
+      },
+      set roughness(v) {
+        material.roughness = v
+      },
+      get metalness() {
+        return material.metalness || 0.0
+      },
+      set metalness(v) {
+        material.metalness = v
+      },
+
       get envMapIntenisty() {
         return material.envMapIntenisty || 1
       },
@@ -40,6 +53,8 @@ export function ENFCommon({ material }) {
       },
     }
     //
+    pane.addInput(proxy, 'roughness')
+    pane.addInput(proxy, 'metalness')
     pane.addInput(proxy, 'color')
     pane.addInput(proxy, 'emissive')
     pane.addInput(proxy, 'envMapIntenisty')
