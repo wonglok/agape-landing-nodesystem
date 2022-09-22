@@ -599,8 +599,6 @@ let generateInside = (set, get) => {
       //   it.removeFromParent()
       // })
 
-      // //
-
       let animations = runTimeGLB.animations || []
       let rawGltf = await get().exportGLB(clonedRuntime.children, animations)
 
