@@ -601,8 +601,8 @@ let generateInside = (set, get) => {
 
       // //
 
-      // let animations = runTimeGLB.animations || []
-      // let rawGltf = await get().exportGLB(clonedRuntime.children, animations)
+      let animations = runTimeGLB.animations || []
+      let rawGltf = await get().exportGLB(clonedRuntime.children, animations)
 
       // let dracoMod = await remoteImport('/draco/draco_encoder_raw.js')
 
