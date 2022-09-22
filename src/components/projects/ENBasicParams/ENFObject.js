@@ -8,7 +8,7 @@ export function ENFObject({ object }) {
 
     let pane = new Pane({
       container: refBasic.current,
-      ttile: 'material-commons',
+      ttile: 'object-properties',
     })
     let proxy = {
       //

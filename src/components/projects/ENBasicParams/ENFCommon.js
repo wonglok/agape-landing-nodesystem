@@ -141,7 +141,10 @@ export function ENFCommon({ material }) {
       <div className='mb-2'>{material?.name || 'Unknown'} </div>
 
       <div ref={refBasic}></div>
-      <ENFTexture material={material} field={'map'}></ENFTexture>
+      <div className='w-1/2 mt-3'>
+        <ENFTexture material={material} field={'map'}></ENFTexture>
+        <ENFTexture material={material} field={'emissiveMap'}></ENFTexture>
+      </div>
     </div>
   )
 }
