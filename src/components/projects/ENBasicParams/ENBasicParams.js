@@ -10,11 +10,9 @@ export function ENBasicParams({}) {
       {activeSceneSelection?.material?.type === 'MeshPhysicalMaterial' ||
       activeSceneSelection?.material?.type === 'MeshStandardMaterial' ? (
         <div className='w-full'>
-          {/*  */}
-          {/*  */}
           <ENFObject object={activeSceneSelection}></ENFObject>
           <ENFCommon material={activeSceneSelection?.material}></ENFCommon>
-          {/*  */}
+
           {/*  */}
           {/* <div className='w-full whitespace-pre-wrap'>
             {JSON.stringify(activeSceneSelection?.material, null, '  ')}
