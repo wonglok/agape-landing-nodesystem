@@ -1,22 +1,42 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
+import { ENFCommonMaterial } from './ENFCommonMaterial'
+import { ENFColor } from './Fields/ENFColor'
 
 export function ENMaterialParams() {
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
 
   return (
-    <div>
-      <div>{activeSceneSelection?.material?.type}</div>
+    <>
       {(activeSceneSelection?.material?.type === 'MeshPhysicalMaterial' ||
         activeSceneSelection?.material?.type === 'MeshStandardMaterial') && (
-        <div>
+        <div className='w-full'>
           {/*  */}
-
-          <div>{JSON.stringify(activeSceneSelection?.material)}</div>
-          <div>{JSON.stringify(activeSceneSelection?.material)}</div>
+          {/*  */}
+          <div id='ENFCommonMaterial01'></div>
+          <ENFCommonMaterial
+            material={activeSceneSelection?.material}
+          ></ENFCommonMaterial>
+          {/*  */}
+          {/*  */}
+          {/* <div className='w-full whitespace-pre-wrap'>
+            {JSON.stringify(activeSceneSelection?.material, null, '  ')}
+          </div> */}
           {/*  */}
           {/*  */}
         </div>
       )}
-    </div>
+    </>
   )
 }
+
+//
+
+//
+
+//
+
+//
+
+//
+
+//

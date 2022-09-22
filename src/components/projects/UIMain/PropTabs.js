@@ -4,8 +4,8 @@ export function PropTabs({ tabs }) {
   let propsTab = useGLBEditor((s) => s.propsTab)
   let setPropsTab = useGLBEditor((s) => s.setPropsTab)
   return (
-    <div>
-      <div>
+    <>
+      <div style={{ height: '40px' }}>
         {tabs.map((e) => {
           return (
             <button
@@ -24,13 +24,13 @@ export function PropTabs({ tabs }) {
           )
         })}
       </div>
-      <div>
+      <div style={{ height: 'calc(100% - 40px - 25px)', overflow: 'scroll' }}>
         {tabs
           .filter((e) => e.name === propsTab)
           .map((e) => {
             return e.compo
           })}
       </div>
-    </div>
+    </>
   )
 }
