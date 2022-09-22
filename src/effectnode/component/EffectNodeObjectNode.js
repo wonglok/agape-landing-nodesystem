@@ -89,11 +89,27 @@ export function EffectNodeObjectNode({
 
             inputs.forEach((input, idx) => {
               let answer = false
-
+              on(input._id, (v) => {
+                answer = v
+              })
               //
               let api = {
                 stream: (onReceive) => {
-                  on(input._id, onReceive)
+                  let myanswer = false
+                  let canSend = true
+                  on(input._id, (v) => {
+                    myanswer = v
+                    onReceive(v)
+                  })
+                  let tt = setInterval(() => {
+                    if (myanswer) {
+                      if (canSend) {
+                        canSend = false
+                        clearInterval(tt)
+                        onReceive(myanswer)
+                      }
+                    }
+                  }, 0)
                 },
                 get ready() {
                   return new Promise((resolve) => {
@@ -106,10 +122,6 @@ export function EffectNodeObjectNode({
                   })
                 },
               }
-
-              on(input._id, (v) => {
-                answer = v
-              })
 
               portsAPIMap.set(`in${idx}`, api)
             })

@@ -23,7 +23,7 @@ export function ENGAddGraphNode() {
   //
   return (
     <>
-      <div className='w-full h-full bg-white backdrop-blur-lg bg-opacity-25'>
+      <div className='w-full h-full bg-white backdrop-blur-lg bg-opacity-75'>
         <div className='flex items-center w-full h-8 pl-2 bg-yellow-300 border-b border-yellow-200'>
           Add Modules
         </div>
