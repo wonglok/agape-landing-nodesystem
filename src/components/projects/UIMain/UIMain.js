@@ -73,7 +73,7 @@ function UIMainContent() {
                         <ENProjectGuard>
                           <UpDown
                             getDefaultSize={() => {
-                              return (window.innerHeight - 175) / 2
+                              return ((window.innerHeight - 175) / 5) * 2.5
                             }}
                             NS={'ENSceneOutline-up-down'}
                             up={(varHeight) => {
@@ -137,9 +137,9 @@ function UIMainContent() {
                         <UpDown
                           NS={'param-graph'}
                           getDefaultSize={() => {
-                            return (window.innerHeight - 175) / 2
+                            return ((window.innerHeight - 175) / 5) * 3
                           }}
-                          up={(size) => (
+                          up={(up) => (
                             <div
                               className='relative w-full h-full'
                               style={{
@@ -156,12 +156,12 @@ function UIMainContent() {
                               <OverlayHtml></OverlayHtml>
                             </div>
                           )}
-                          down={(down) => (
+                          down={(up) => (
                             <div
                               className='w-full'
                               style={{
                                 height:
-                                  window.innerHeight - drawerSize - down + 'px',
+                                  window.innerHeight - drawerSize - up + 'px',
                               }}
                             >
                               <ENProjectGuard
