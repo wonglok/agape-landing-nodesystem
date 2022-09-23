@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { Suspense } from 'react'
 import { Color, sRGBEncoding } from 'three'
 import { EXRLoader } from 'three-stdlib'
-import { LinearEncoding, ShaderMaterial } from 'three140'
+import { Clock, LinearEncoding, ShaderMaterial } from 'three140'
 
 export default function Viseme() {
   return (
@@ -35,9 +35,9 @@ export default function Viseme() {
 }
 
 function Content() {
-  let glb = useGLTF(`/vat/vat1/vat.glb`)
-  let offsets = useLoader(EXRLoader, `/vat/vat1/offsets.002.exr`)
-  let normals = useLoader(EXRLoader, `/vat/vat1/normals.002.exr`)
+  let glb = useGLTF(`/vat/cloth/vat.glb`)
+  let offsets = useLoader(EXRLoader, `/vat/cloth/offsets.004.exr`)
+  let normals = useLoader(EXRLoader, `/vat/cloth/normals.004.exr`)
 
   useEffect(() => {
     let clears = []
@@ -75,15 +75,21 @@ function Content() {
           `,
         })
 
-        let i = 0
-        let tt = setInterval(() => {
-          it.material.uniforms.progress.value = i / 100
-          i++
-          i = i % 100
-        }, 16.68)
+        let tt
+        let clock = new Clock()
+        let hh = () => {
+          let dt = clock.getDelta()
+          tt = requestAnimationFrame(hh)
+          it.material.uniforms.progress.value += (dt / 250) * 60
+
+          if (it.material.uniforms.progress.value > 1) {
+            it.material.uniforms.progress.value = 0
+          }
+        }
+        tt = requestAnimationFrame(hh)
 
         clears.push(() => {
-          clearInterval(tt)
+          cancelAnimationFrame(tt)
         })
       }
     })
