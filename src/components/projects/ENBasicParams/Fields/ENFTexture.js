@@ -8,9 +8,9 @@ import {
   EquirectangularReflectionMapping,
   EquirectangularRefractionMapping,
   CubeUVReflectionMapping,
-  RepeatWrapping,
-  ClampToEdgeWrapping,
-  MirroredRepeatWrapping,
+  // RepeatWrapping,
+  // ClampToEdgeWrapping,
+  // MirroredRepeatWrapping,
 } from 'three'
 import { Vector2 } from 'three140'
 import Pane from 'tweakpane'
