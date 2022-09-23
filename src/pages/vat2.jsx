@@ -56,36 +56,6 @@ function Content() {
 
     glb.scene.traverse((it) => {
       if (it.geometry) {
-        // it.material = new ShaderMaterial({
-        //   uniforms: {
-        //     offsetsTex: { value: offsets },
-        //     normalsTex: { value: normals },
-        //     progress: { value: 0 },
-        //   },
-        //   side: DoubleSide,
-        //   vertexShader: `
-        //     uniform sampler2D offsetsTex;
-        //     uniform sampler2D normalsTex;
-        //     uniform float progress;
-
-        //     varying vec3 vNormals;
-        //     attribute vec2 uv2;
-        //     void main (void) {
-        //       vec4 offsetData = texture2D(offsetsTex,vec2(uv2.x, 1.0 - progress));
-        //       vec4 normalsData = texture2D(normalsTex,vec2(uv2.x, 1.0 - progress));
-
-        //       vNormals = (normalsData.xzy);
-        //       gl_Position = projectionMatrix * modelViewMatrix * (vec4(position + offsetData.xzy, 1.0));
-        //     }
-        //   `,
-        //   fragmentShader: `
-        //     varying vec3 vNormals;
-        //     void main (void) {
-        //         gl_FragColor = vec4(vNormals, 1.0);
-        //     }
-        //   `,
-        // })
-
         let tasks = []
         let onLoop = (v) => tasks.push(v)
 
@@ -95,14 +65,7 @@ function Content() {
 
         let hh = () => {
           tt = requestAnimationFrame(hh)
-
           tasks.forEach((t) => t())
-          // let dt = clock.getDelta()
-          // it.material.uniforms.progress.value += (1 / 250) * 24 * dt
-
-          // if (it.material.uniforms.progress.value > 1) {
-          //   it.material.uniforms.progress.value = 0
-          // }
         }
         tt = requestAnimationFrame(hh)
 
