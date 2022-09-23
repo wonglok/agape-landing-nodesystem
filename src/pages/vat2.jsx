@@ -42,7 +42,7 @@ function Content() {
   useEffect(() => {
     let clears = []
     offsets.generateMipmaps = true
-    normals.generateMipmaps = true
+    normals.generateMipmaps = false
     //
     glb.scene.traverse((it) => {
       if (it.geometry) {
