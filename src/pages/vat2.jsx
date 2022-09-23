@@ -1,4 +1,4 @@
-import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
+import { Environment, OrbitControls, Text, useGLTF } from '@react-three/drei'
 import { Canvas, useLoader, useThree } from '@react-three/fiber'
 import { useEffect } from 'react'
 import { Suspense } from 'react'
@@ -29,7 +29,7 @@ export default function Viseme() {
           st.gl.outputEncoding = sRGBEncoding
         }}
       >
-        <Suspense fallback={null}>
+        <Suspense fallback={<Text>Loading</Text>}>
           <Content></Content>
         </Suspense>
 
