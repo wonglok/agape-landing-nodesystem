@@ -29,7 +29,7 @@ const DiamondMaterial = shaderMaterial(
     resolution: new THREE.Vector2(),
     offsets: null,
     normals: null,
-    progress: 0.5,
+    progress: 0.0,
   },
   /*glsl*/ `
   varying vec3 vWorldPosition;

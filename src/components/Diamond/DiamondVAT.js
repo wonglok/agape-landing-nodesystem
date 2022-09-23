@@ -60,7 +60,7 @@ export function DiamondVAT() {
           <EffectComposer disableNormalPass multisampling={4}>
             <Bloom
               luminanceThreshold={2}
-              intensity={1.5 * 0.5}
+              intensity={1.5 * 0.1}
               levels={9}
               mipmapBlur={true}
             />
@@ -70,7 +70,20 @@ export function DiamondVAT() {
             ></ChromaticAberration> */}
           </EffectComposer>
         </Suspense>
-        <OrbitControls object-position={[0, 0, 5.5]}></OrbitControls>
+        <OrbitControls
+          // object-position={}
+          ref={(ref) => {
+            let st = {
+              x: -7.835019417135571,
+              y: 14.676439571211883,
+              z: -11.590578690672567,
+            }
+            ref.object.position.set(st.x, st.y, st.z)
+            // setInterval(() => {
+            //   console.log(ref.object.position)
+            // })
+          }}
+        ></OrbitControls>
       </Canvas>
     </>
   )
