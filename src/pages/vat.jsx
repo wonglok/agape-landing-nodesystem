@@ -120,6 +120,8 @@ function Content() {
 //     return (dot(value, bitSh));
 //   }
 
+//
+
 //   float3 tex1 = tex2Dlod (_AnimVertexTex1, texCoords);
 // float3 tex2 = tex2Dlod (_AnimVertexTex2, texCoords);
 // float positionX = DecodeFloatRG (tex1.rg);
