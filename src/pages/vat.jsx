@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { Suspense } from 'react'
 import { Color, sRGBEncoding } from 'three'
 import { EXRLoader } from 'three-stdlib'
-import { Clock, LinearEncoding, ShaderMaterial } from 'three140'
+import { Clock, DoubleSide, LinearEncoding, ShaderMaterial } from 'three140'
 
 export default function Viseme() {
   return (
@@ -52,6 +52,7 @@ function Content() {
             normalsTex: { value: normals },
             progress: { value: 0 },
           },
+          side: DoubleSide,
           vertexShader: `
             uniform sampler2D offsetsTex;
             uniform sampler2D normalsTex;
