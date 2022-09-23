@@ -64,7 +64,7 @@ function Content() {
               vec4 offsetData = texture2D(offsetsTex,vec2(uv2.x, 1.0 - progress));
               vec4 normalsData = texture2D(normalsTex,vec2(uv2.x, 1.0 - progress));
 
-              vNormals = normalMatrix * normalsData.xzy;
+              vNormals = normalMatrix * (normalsData.xzy);
               gl_Position = projectionMatrix * modelViewMatrix * (vec4(position + offsetData.xzy, 1.0));
             }
           `,
