@@ -73,12 +73,13 @@ export function DiamondVAT() {
         <OrbitControls
           // object-position={}
           ref={(ref) => {
-            let st = {
-              x: -7.835019417135571,
-              y: 14.676439571211883,
-              z: -11.590578690672567,
-            }
-            ref.object.position.set(st.x, st.y, st.z)
+            setInterval(() => {
+              console.log(ref.object.position.toArray())
+            })
+
+            ref.object.position.fromArray([
+              4.487140146400737, 6.571302870246687, -2.9255183574158945,
+            ])
             // setInterval(() => {
             //   console.log(ref.object.position)
             // })
