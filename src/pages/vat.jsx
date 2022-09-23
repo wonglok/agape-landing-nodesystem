@@ -41,8 +41,8 @@ function Content() {
 
   useEffect(() => {
     let clears = []
-    offsets.encoding = LinearEncoding
-    normals.encoding = LinearEncoding
+    offsets.generateMipmaps = true
+    normals.generateMipmaps = true
     //
     glb.scene.traverse((it) => {
       if (it.geometry) {
