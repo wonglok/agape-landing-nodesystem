@@ -35,9 +35,9 @@ export default function Viseme() {
 }
 
 function Content() {
-  let glb = useGLTF(`/vat/cloth/vat.glb`)
-  let offsets = useLoader(EXRLoader, `/vat/cloth/offsets.004.exr`)
-  let normals = useLoader(EXRLoader, `/vat/cloth/normals.004.exr`)
+  let glb = useGLTF(`/vat/cloth3/vat_works.glb`)
+  let offsets = useLoader(EXRLoader, `/vat/cloth3/offsets.exr`)
+  let normals = useLoader(EXRLoader, `/vat/cloth3/normals.exr`)
 
   useEffect(() => {
     let clears = []
