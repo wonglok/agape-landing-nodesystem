@@ -44,6 +44,7 @@ function Content() {
     offsets.generateMipmaps = true
     normals.generateMipmaps = false
     //
+
     glb.scene.traverse((it) => {
       if (it.geometry) {
         it.material = new ShaderMaterial({
@@ -81,7 +82,7 @@ function Content() {
         let hh = () => {
           let dt = clock.getDelta()
           tt = requestAnimationFrame(hh)
-          it.material.uniforms.progress.value += dt * (1 / 35)
+          it.material.uniforms.progress.value += (1 / 250) * 24 * dt
 
           if (it.material.uniforms.progress.value > 1) {
             it.material.uniforms.progress.value = 0
