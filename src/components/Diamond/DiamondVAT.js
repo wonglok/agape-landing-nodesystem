@@ -37,7 +37,7 @@ export function DiamondVAT() {
             />
           </group>
 
-          <Sphere position={[5, 0, 0]}>
+          {/* <Sphere position={[5, 0, 0]}>
             <meshStandardMaterial
               emissive={'#ff94ff'}
               color={'green'}
@@ -49,7 +49,7 @@ export function DiamondVAT() {
               emissive={'#ffc874'}
               color={'blue'}
             ></meshStandardMaterial>
-          </Sphere>
+          </Sphere> */}
 
           <ambientLight intensity={0.5} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
