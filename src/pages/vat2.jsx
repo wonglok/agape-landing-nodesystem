@@ -4,7 +4,13 @@ import { useEffect } from 'react'
 import { Suspense } from 'react'
 import { Color, sRGBEncoding } from 'three'
 import { EXRLoader } from 'three-stdlib'
-import { Clock, DoubleSide, LinearEncoding, ShaderMaterial } from 'three140'
+import {
+  Clock,
+  DoubleSide,
+  LinearEncoding,
+  MeshPhysicalMaterial,
+  ShaderMaterial,
+} from 'three140'
 
 export default function Viseme() {
   return (
@@ -76,6 +82,14 @@ function Content() {
             }
           `,
         })
+
+        let material = new MeshPhysicalMaterial({})
+
+        material.onBeforeCompile = (shader) => {
+          //
+          //
+          //
+        }
 
         let tt
         let clock = new Clock()
