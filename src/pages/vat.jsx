@@ -80,7 +80,7 @@ function Content() {
         let hh = () => {
           let dt = clock.getDelta()
           tt = requestAnimationFrame(hh)
-          it.material.uniforms.progress.value += (dt / 250) * 60
+          it.material.uniforms.progress.value += (dt / 250) * 60 * 0.25
 
           if (it.material.uniforms.progress.value > 1) {
             it.material.uniforms.progress.value = 0
