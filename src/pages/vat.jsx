@@ -35,13 +35,11 @@ export default function Viseme() {
 }
 
 function Content() {
-  let glb = useGLTF(`/vat/vat.glb`)
-  let offsets = useLoader(EXRLoader, `/vat/offsets.002.exr`)
-  let normals = useLoader(EXRLoader, `/vat/normals.002.exr`)
+  let glb = useGLTF(`/vat/vat1/vat.glb`)
+  let offsets = useLoader(EXRLoader, `/vat/vat1/offsets.002.exr`)
+  let normals = useLoader(EXRLoader, `/vat/vat1/normals.002.exr`)
 
   useEffect(() => {
-    //
-
     let clears = []
     offsets.encoding = LinearEncoding
     normals.encoding = LinearEncoding
@@ -65,10 +63,9 @@ function Content() {
               vec4 offsetData = texture2D(offsetsTex,vec2(uv2.x, 1.0 - progress));
               vec4 normalsData = texture2D(normalsTex,vec2(uv2.x, 1.0 - progress));
 
-              vNormals = normalsData.rgb;
+              vNormals = normalMatrix * normalsData.xzy;
               gl_Position = projectionMatrix * modelViewMatrix * (vec4(position + offsetData.xzy, 1.0));
             }
-
           `,
           fragmentShader: `
             varying vec3 vNormals;
