@@ -55,7 +55,7 @@ export function DiamondVAT() {
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
 
-          <Environment preset='studio' background></Environment>
+          <Environment preset='sunset' background></Environment>
 
           <EffectComposer disableNormalPass multisampling={4}>
             <Bloom
@@ -108,7 +108,7 @@ function Load({
     }
 
     if (ref.current) {
-      ref.current.material.progress += (delta / 60) * 24
+      ref.current.material.progress += (delta / 60) * 24 * 0.25
 
       if (ref.current.material.progress >= 1.0) {
         ref.current.material.progress = 0.0
