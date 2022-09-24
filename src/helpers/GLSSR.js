@@ -7,7 +7,7 @@ import { SSREffect } from 'screen-space-reflections'
 import { useFrame, useThree } from '@react-three/fiber'
 
 import { defaultSSROptions } from 'screen-space-reflections'
-import { Pane } from 'tweakpane'
+import Pane from 'tweakpane'
 import { Vector3 } from 'three140'
 import { generateUUID } from 'three/src/math/MathUtils'
 
@@ -72,7 +72,6 @@ export const GLSSR = forwardRef(function ImplementationOfEffect({}, ref) {
     ssrEffect.i = 0
     return ssrEffect
   }, [camera, scene])
-
   //
 
   let nowPos = new Vector3()
@@ -102,6 +101,7 @@ GLSSR.key = generateUUID()
 
 export class SSRDebugGUI {
   constructor(ssrEffect, params = defaultSSROptions) {
+    //
     const pane = new Pane()
     this.pane = pane
     pane.containerElem_.style.userSelect = 'none'

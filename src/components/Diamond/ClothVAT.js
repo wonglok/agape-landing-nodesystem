@@ -19,8 +19,9 @@ import { IcosahedronBufferGeometry } from 'three140'
 import { generateUUID } from 'three/src/math/MathUtils'
 import { EXRLoader } from 'three-stdlib'
 import { RefractionMaterialYo } from './RefractionMaterialYo'
+import { DoubleSide } from 'three'
 
-export function DiamondVAT() {
+export function ClothVAT() {
   return (
     <>
       <Canvas>
@@ -30,9 +31,9 @@ export function DiamondVAT() {
               title='yo'
               color='#ffffff'
               axis={'z'}
-              url={`/vat/bricks/rigid.glb`}
+              url={`/vat/cloth3/vat_works.glb`}
               geoQuery={(glb) => {
-                return glb.scene.getObjectByName('export_mesh').geometry
+                return glb.scene.getObjectByName('export_mesh001').geometry
               }}
             />
           </group>
@@ -100,8 +101,8 @@ function Load({
   title = 'yoyo',
   axis = 'x',
 }) {
-  let offsets = useLoader(EXRLoader, `/vat/bricks/offsets.001.exr`)
-  let normals = useLoader(EXRLoader, `/vat/bricks/normals.001.exr`)
+  let offsets = useLoader(EXRLoader, `/vat/cloth3/offsets.exr`)
+  let normals = useLoader(EXRLoader, `/vat/cloth3/normals.exr`)
 
   const sq2 = useGLTF(url)
   let geo = geoQuery(sq2)
@@ -143,6 +144,7 @@ function Load({
                 normals={normals}
                 offsets={offsets}
                 {...config}
+                side={DoubleSide}
                 toneMapped={false}
               />
             )}
