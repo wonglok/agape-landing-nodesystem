@@ -25,7 +25,7 @@ export function DiamondVAT() {
     <>
       <Canvas>
         <Suspense fallback={null}>
-          <group position={[0, 0, 0]} rotation={[Math.PI * -0.35, 0, 0]}>
+          <group position={[0, 0, 0]} rotation={[Math.PI * 0, 0, 0]}>
             <Load
               title='yo'
               color='#ff94ff'
@@ -71,15 +71,14 @@ export function DiamondVAT() {
           </EffectComposer>
         </Suspense>
         <OrbitControls
+          object-position={[
+            6.365197946548601, 4.5521377883928285, -3.2615030924821307,
+          ]}
           // object-position={}
           ref={(ref) => {
-            setInterval(() => {
-              console.log(ref.object.position.toArray())
-            })
-
-            ref.object.position.fromArray([
-              4.487140146400737, 6.571302870246687, -2.9255183574158945,
-            ])
+            // setInterval(() => {
+            //   console.log(ref.object.position.toArray())
+            // })
             // setInterval(() => {
             //   console.log(ref.object.position)
             // })

@@ -92,9 +92,9 @@ let getMat = (onLoop, normals, offsets) => {
     roughness: 0.0,
     metalness: 0.5,
     side: DoubleSide,
-    reflectivity: 1.0,
+    reflectivity: 0.5,
     transmission: 1.0,
-    ior: 1.25,
+    ior: 1.5,
     thickness: 5,
   })
 
@@ -191,7 +191,7 @@ let getMat = (onLoop, normals, offsets) => {
       `#include <begin_vertex>`,
       /* glsl */ `
           vec4 offsetData = texture2D(offsetsTex,vec2(uv2.x, 1.0 - progress));
-          vec3 transformed = vec3( position + offsetData.rgb );
+          vec3 transformed = vec3( position + offsetData.xzy );
         `
     )
 
@@ -210,7 +210,7 @@ let getMat = (onLoop, normals, offsets) => {
             vec4 normalsData = texture2D(normalsTex,vec2(uv2.x, 1.0 - progress));
 
 
-          vec3 objectNormal = normalize(vec3( normalsData ));
+          vec3 objectNormal = normalize(vec3( normalsData.xzy ));
 
           // #ifdef USE_TANGENT
           //   vec3 objectTangent = vec3( tangent.xyz );
