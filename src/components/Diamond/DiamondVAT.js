@@ -28,7 +28,7 @@ export function DiamondVAT() {
           <group position={[0, 0, 0]} rotation={[Math.PI * 0, 0, 0]}>
             <Load
               title='yo'
-              color='#ff94ff'
+              color='#ffffff'
               axis={'z'}
               url={`/vat/bricks/rigid.glb`}
               geoQuery={(glb) => {
@@ -55,7 +55,7 @@ export function DiamondVAT() {
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
 
-          <Environment preset='sunset' background></Environment>
+          <Environment preset='warehouse' background></Environment>
 
           <EffectComposer disableNormalPass multisampling={4}>
             <Bloom
@@ -72,7 +72,7 @@ export function DiamondVAT() {
         </Suspense>
         <OrbitControls
           object-position={[
-            6.365197946548601, 4.5521377883928285, -3.2615030924821307,
+            -0.938944768727402, 5.422066540446001, -3.571254399471269,
           ]}
           // object-position={}
           ref={(ref) => {
@@ -116,6 +116,7 @@ function Load({
     fastChroma: true,
   })
   useFrame((_, delta) => {
+    console.log(_.camera.position.toArray())
     if (config.autoRotate) {
       ref.current.rotation[axis] += delta * 0.25 * 0.0
     }

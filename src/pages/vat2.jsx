@@ -34,8 +34,13 @@ export default function Viseme() {
         </Suspense>
 
         <Environment background preset='apartment'></Environment>
-        <OrbitControls></OrbitControls>
-        <gridHelper args={[100, 100, 0xff0000, 0xffff00]}></gridHelper>
+        <OrbitControls
+          object-position={[
+            -0.938944768727402, 5.422066540446001, -3.571254399471269,
+          ]}
+        ></OrbitControls>
+        {/*  */}
+        {/* <gridHelper args={[100, 100, 0xff0000, 0xffff00]}></gridHelper> */}
         {/* <OverlayContentAdapter></OverlayContentAdapter> */}
       </Canvas>
     </div>
