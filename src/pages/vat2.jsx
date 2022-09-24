@@ -211,7 +211,7 @@ let getMat = (onLoop, normals, offsets) => {
             vec4 normalsData = texture2D(normalsTex,vec2(uv2.x, 1.0 - progress));
 
 
-          vec3 objectNormal = normalize(vec3( normalsData.xzy ));
+          vec3 objectNormal = normalize(vec3( normal + normalsData.xzy ));
 
           // #ifdef USE_TANGENT
           //   vec3 objectTangent = vec3( tangent.xyz );
