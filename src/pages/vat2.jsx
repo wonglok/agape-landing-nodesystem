@@ -87,13 +87,14 @@ function Content() {
 }
 let getMat = (onLoop, normals, offsets) => {
   let matt = new MeshPhysicalMaterial({
-    color: new Color('#ffffff'),
+    color: new Color('#00ffff'),
     transparent: true,
     roughness: 0.0,
     metalness: 0.5,
     side: DoubleSide,
     reflectivity: 0.5,
     transmission: 1.0,
+    flatShading: true,
     ior: 1.5,
     thickness: 5,
   })
