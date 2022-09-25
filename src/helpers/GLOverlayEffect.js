@@ -32,10 +32,6 @@ export const GLOverlayEffect = forwardRef(function EffectFuncy({}, ref) {
 
 //
 
-//
-
-//
-
 // const SSR = /*#__PURE__*/ forwardRef(function SSR(_ref, ref) {
 //   let { ENABLE_BLUR = true, USE_MRT = true, ...props } = _ref
 //   const { invalidate } = useThree()
@@ -73,3 +69,11 @@ export const GLOverlayEffect = forwardRef(function EffectFuncy({}, ref) {
 //     object: effect,
 //   })
 // })
+
+//
+
+//
+
+//
+
+//
