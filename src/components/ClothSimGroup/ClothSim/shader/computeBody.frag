@@ -40,7 +40,7 @@ springForce /= mass;
 
 acceleration += springForce;
 
-vec3 windZ = vec3(0.0, 0.0, -2.0 * hash(time));
+vec3 windZ = vec3(0.0, 0.0, -3.0 * hash(time));
 windZ /= mass;
 acceleration += windZ;
 
