@@ -15,10 +15,10 @@ import {
   ShaderMaterial,
 } from 'three140'
 import { CustomGPU } from './CustomGPU'
-import fragmentShaderForce from './shader/fragmentShaderForce.frag'
 import fragmentShaderVel from './shader/fragmentShaderVel.frag'
 import fragmentShaderPos from './shader/fragmentShaderPos.frag'
 import fragmentShaderOffset from './shader/fragmentShaderOffset.frag'
+import computeBody from './shader/computeBody.frag'
 import { Core } from '@/helpers/Core'
 import md5 from 'md5'
 import displayFragment from './shader/display.frag'
@@ -49,7 +49,7 @@ export class MyCloth extends Object3D {
     let meta0 = this.gpu.createTexture()
     let pos0 = this.gpu.createTexture()
     let vel0 = this.gpu.createTexture()
-    let force0 = this.gpu.createTexture()
+    // let offset0 = this.gpu.createTexture()
     let offset0 = this.gpu.createTexture()
 
     let i = 0
@@ -83,10 +83,20 @@ export class MyCloth extends Object3D {
     //
 
     // and fill in here the texture data...
-    let forceVar = this.gpu.addVariable(
-      'textureForce',
-      fragmentShaderForce,
-      force0
+    // let forceVar = this.gpu.addVariable(
+    //   'textureForce',
+    //   fragmentShaderForce,
+    //   offset0
+    // )
+
+    let updatedFragmentShaderVel = fragmentShaderVel.replace(
+      `#chunk-computeBody`,
+      `${computeBody}`
+    )
+
+    let updatedFragmentShaderPos = fragmentShaderPos.replace(
+      `#chunk-computeBody`,
+      `${computeBody}`
     )
 
     let offsetVar = this.gpu.addVariable(
@@ -97,35 +107,35 @@ export class MyCloth extends Object3D {
 
     let velVar = this.gpu.addVariable(
       'textureVelocity',
-      fragmentShaderVel,
+      updatedFragmentShaderVel,
       pos0
     )
 
     let posVar = this.gpu.addVariable(
       'texturePosition',
-      fragmentShaderPos,
+      updatedFragmentShaderPos,
       vel0
     )
 
     //
     //
 
-    forceVar.material.uniforms.time = { value: 0 }
+    // forceVar.material.uniforms.time = { value: 0 }
     velVar.material.uniforms.time = { value: 0 }
     posVar.material.uniforms.time = { value: 0 }
     offsetVar.material.uniforms.time = { value: 0 }
 
-    forceVar.material.uniforms.delta = { value: 0 }
+    // forceVar.material.uniforms.delta = { value: 0 }
     velVar.material.uniforms.delta = { value: 0 }
     posVar.material.uniforms.delta = { value: 0 }
     offsetVar.material.uniforms.delta = { value: 0 }
 
-    forceVar.material.uniforms.meta0 = { value: meta0 }
+    // forceVar.material.uniforms.meta0 = { value: meta0 }
     velVar.material.uniforms.meta0 = { value: meta0 }
     posVar.material.uniforms.meta0 = { value: meta0 }
     offsetVar.material.uniforms.meta0 = { value: meta0 }
 
-    forceVar.material.uniforms.mouse = { value: mouse }
+    // forceVar.material.uniforms.mouse = { value: mouse }
     velVar.material.uniforms.mouse = { value: mouse }
     posVar.material.uniforms.mouse = { value: mouse }
     offsetVar.material.uniforms.mouse = { value: mouse }
@@ -134,25 +144,25 @@ export class MyCloth extends Object3D {
     // Add variable dependencies
     this.gpu.setVariableDependencies(offsetVar, [
       offsetVar,
-      forceVar,
+      // forceVar,
       velVar,
       posVar,
     ])
-    this.gpu.setVariableDependencies(forceVar, [
-      offsetVar,
-      forceVar,
-      velVar,
-      posVar,
-    ])
+    // this.gpu.setVariableDependencies(forceVar, [
+    //   offsetVar,
+    //   forceVar,
+    //   velVar,
+    //   posVar,
+    // ])
     this.gpu.setVariableDependencies(velVar, [
       offsetVar,
-      forceVar,
+      // forceVar,
       velVar,
       posVar,
     ])
     this.gpu.setVariableDependencies(posVar, [
       offsetVar,
-      forceVar,
+      // forceVar,
       velVar,
       posVar,
     ])
@@ -168,7 +178,8 @@ export class MyCloth extends Object3D {
     //
     this.getTexAPos = () => this.gpu.getCurrentRenderTarget(posVar).texture
     this.getTexAVel = () => this.gpu.getCurrentRenderTarget(velVar).texture
-    this.getTexAForce = () => this.gpu.getCurrentRenderTarget(forceVar).texture
+    this.getTexAOffset = () =>
+      this.gpu.getCurrentRenderTarget(offsetVar).texture
 
     //
     this.buff = new BufferGeometry()
@@ -186,7 +197,7 @@ export class MyCloth extends Object3D {
         time: { value: 0 },
         delta: { value: 0 },
         pos0: { value: null },
-        force0: { value: null },
+        offset0: { value: null },
         vel0: { value: null },
       },
       vertexShader: displayVertex,
@@ -210,7 +221,7 @@ export class MyCloth extends Object3D {
       this.mat.uniforms.delta.value = dt
       this.mat.uniforms.pos0.value = this.getTexAPos()
       this.mat.uniforms.vel0.value = this.getTexAPos()
-      this.mat.uniforms.force0.value = this.getTexAForce()
+      this.mat.uniforms.offset0.value = this.getTexAOffset()
     })
 
     this.pts = new Points(this.buff, this.mat)
@@ -228,7 +239,8 @@ MyCloth.key = md5(
     fragmentShaderVel +
     fragmentShaderPos +
     displayFragment +
-    displayVertex
+    displayVertex +
+    computeBody
 )
 extend({ MyCloth })
 
