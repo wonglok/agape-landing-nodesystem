@@ -22,7 +22,7 @@ acceleration += gravity;
 
 // 2. apply the spring force
 float restLength = yAnchor - offsets.y;
-float springConstant = 0.25;
+float springConstant = 1.25;
 
 // Vector pointing from anchor to point position
 vec3 springForce = vec3(nowPos.x - anchor.x, nowPos.y - anchor.y, nowPos.z - anchor.z);
@@ -47,9 +47,9 @@ acceleration += windZ;
 vec3 hand;
 float mDist = length(mouse - nowPos.xyz);
 if (mDist < 25.0) {
-  hand = normalize(mouse - nowPos.xyz) * 1.5;
+  hand = normalize(mouse - nowPos.xyz) * 2.0;
 } else {
-  hand = normalize(mouse - nowPos.xyz) * -1.5;
+  hand = normalize(mouse - nowPos.xyz) * -2.0;
 }
 
 hand /= mass;
