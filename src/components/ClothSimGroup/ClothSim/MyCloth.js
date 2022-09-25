@@ -80,8 +80,6 @@ export class MyCloth extends Object3D {
 
     //
 
-    //
-
     // and fill in here the texture data...
     // let forceVar = this.gpu.addVariable(
     //   'textureForce',

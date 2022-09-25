@@ -7,9 +7,9 @@ vec4 nowPos = texture2D( texturePosition, uv );
 vec4 offsets = texture2D( textureOffset, uv );
 vec4 velocity = texture2D( textureVelocity, uv );
 
-float anchorHeight = 20.0;
+float anchorHeight = 100.0;
 float yAnchor = anchorHeight;
-vec3 anchor = vec3( offsets.x, offsets.y + yAnchor, offsets.z );
+vec3 anchor = vec3( offsets.x, yAnchor, offsets.z );
 
 // Newton's law: F = M * A
 float mass = 25.0;
@@ -27,6 +27,7 @@ float springConstant = 0.25;
 
 // Vector pointing from anchor to point position
 vec3 springForce = vec3(nowPos.x - anchor.x, nowPos.y - anchor.y, nowPos.z - anchor.z);
+
 // length of the vector
 float distance = length( springForce );
 // stretch is the difference between the current distance and restLength
@@ -37,7 +38,17 @@ springForce = normalize(springForce);
 springForce *= (springConstant * stretch);
 
 springForce /= mass;
+
 acceleration += springForce;
+
+vec3 windZ = vec3(0.0, 0.0, -2.0 * hash(time));
+windZ /= mass;
+acceleration += windZ;
+
+vec3 windX = vec3(-2.0 * hash(time), 0.0, 0.0);
+windX /= mass;
+acceleration += windX;
+
 
 velocity.rgb += acceleration;
 velocity.rgb *= damping;
