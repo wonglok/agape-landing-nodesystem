@@ -8,7 +8,7 @@ void main (void) {
 
   gl_Position = projectionMatrix * modelViewMatrix * pos0data;
 
-  gl_PointSize = 1.5;
+  gl_PointSize = 1.0;
 }
 
 //

@@ -1,6 +1,6 @@
 uniform float time;
 
-uniform vec2 mouse;
+uniform vec3 mouse;
 uniform sampler2D meta0;
 uniform float delta;
 
