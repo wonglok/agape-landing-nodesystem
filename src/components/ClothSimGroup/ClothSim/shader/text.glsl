@@ -1,10 +1,7 @@
-uniform float time;
+uniform sampler2D tOffsets;
+uniform float uTime;
 
-uniform vec2 mouse;
-uniform sampler2D meta0;
-uniform float delta;
-
-#include <common>
+varying vec2 vUv;
 
 float hash(float n) { return fract(sin(n) * 1e4); }
 
@@ -15,28 +12,25 @@ float noise(float x) {
   return mix(hash(i), hash(i + 1.0), u);
 }
 
-
-void main (void) {
-  //
-  vec2 uv = vec2(gl_FragCoord.x, gl_FragCoord.y) / resolution.xy;
-
+void main() {
+  vec2 uv = gl_FragCoord.xy / resolution.xy;
 
   float damping = 0.98;
 
-  vec4 nowPos = texture2D( texturePosition, uv ).xyzw;
-  vec4 offsets = texture2D( textureOffset, uv ).xyzw;
-  vec4 velocity = texture2D( textureVelocity, uv ).xyzw;
+  vec4 nowPos = texture2D( tPositions, uv ).xyzw;
+  vec4 offsets = texture2D( tOffsets, uv ).xyzw;
+  vec2 velocity = vec2(nowPos.z, nowPos.w);
 
-  float anchorHeight = 5.0;
+  float anchorHeight = 100.0;
   float yAnchor = anchorHeight;
-  vec3 anchor = vec3( offsets.x, yAnchor, 0.0 );
+  vec2 anchor = vec2( -(uTime * 50.0) + offsets.x, yAnchor + 0.0 * (noise(uTime) * 30.0) );
 
   // Newton's law: F = M * A
   float mass = 24.0;
-  vec3 acceleration = vec3(0.0, 0.0, 0.0);
+  vec2 acceleration = vec2(0.0, 0.0);
 
   // 1. apply gravity's force:
-  vec3 gravity = vec3(0.0, 2.0, 0.0);
+  vec2 gravity = vec2(0.0, 2.0);
   gravity /= mass;
   acceleration += gravity;
 
@@ -46,7 +40,7 @@ void main (void) {
   float springConstant = 0.2;
 
   // Vector pointing from anchor to point position
-  vec3 springForce = vec3(nowPos.x - anchor.x, nowPos.y - anchor.y, nowPos.z - anchor.z);
+  vec2 springForce = vec2(nowPos.x - anchor.x, nowPos.y - anchor.y);
   // length of the vector
   float distance = length( springForce );
   // stretch is the difference between the current distance and restLength
@@ -59,12 +53,11 @@ void main (void) {
   springForce /= mass;
   acceleration += springForce;
 
-  velocity.rgb += acceleration;
-  velocity.rgb *= damping;
+  velocity += acceleration;
+  velocity *= damping;
 
   //
-  vec3 newPosition = vec3(nowPos.x - velocity.x, nowPos.y - velocity.y, nowPos.z - velocity.z);
+  vec2 newPosition = vec2(nowPos.x - velocity.x, nowPos.y - velocity.y);
   // Write new position out
-  gl_FragColor = vec4(newPosition.x, newPosition.y, newPosition.z, 1.0);
-
+  gl_FragColor = vec4(newPosition.x, newPosition.y, velocity.x, velocity.y);
 }

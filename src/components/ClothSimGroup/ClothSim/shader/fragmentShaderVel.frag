@@ -1,110 +1,70 @@
 uniform float time;
-uniform float delta;
-uniform sampler2D meta0;
+
 uniform vec2 mouse;
+uniform sampler2D meta0;
+uniform float delta;
 
+#include <common>
 
-mat3 rotateQ(vec3 axis, float rad) {
-    float hr = rad / 2.0;
-    float s = sin( hr );
-    vec4 q = vec4(axis * s, cos( hr ));
-    vec3 q2 = q.xyz + q.xyz;
-    vec3 qq2 = q.xyz * q2;
-    vec2 qx = q.xx * q2.yz;
-    float qy = q.y * q2.z;
-    vec3 qw = q.w * q2.xyz;
+float hash(float n) { return fract(sin(n) * 1e4); }
 
-    return mat3(
-        1.0 - (qq2.y + qq2.z),  qx.x - qw.z,            qx.y + qw.y,
-        qx.x + qw.z,            1.0 - (qq2.x + qq2.z),  qy - qw.x,
-        qx.y - qw.y,            qy + qw.x,              1.0 - (qq2.x + qq2.y)
-    );
+float noise(float x) {
+  float i = floor(x);
+  float f = fract(x);
+  float u = f * f * (3.0 - 2.0 * f);
+  return mix(hash(i), hash(i + 1.0), u);
 }
-
-
-mat3 rotateX(float rad) {
-    float c = cos(rad);
-    float s = sin(rad);
-    return mat3(
-        1.0, 0.0, 0.0,
-        0.0, c, s,
-        0.0, -s, c
-    );
-}
-
-mat3 rotateY(float rad) {
-    float c = cos(rad);
-    float s = sin(rad);
-    return mat3(
-        c, 0.0, -s,
-        0.0, 1.0, 0.0,
-        s, 0.0, c
-    );
-}
-
-mat3 rotateZ(float rad) {
-    float c = cos(rad);
-    float s = sin(rad);
-    return mat3(
-        c, s, 0.0,
-        -s, c, 0.0,
-        0.0, 0.0, 1.0
-    );
-}
-
-/*
-
-  float ks = 1.0;
-  float kd = 1.0;
-  vec3 p1 = vec3(0.0);
-  vec3 p2 = vec3(0.0);
-  float L0 = 0.5;
-  vec3 v1 = vec3(0.0);
-  vec3 v2 = vec3(0.0);
-
-  vec3 f1 = -(ks * (abs(p1 - p2) - L0) + kd * ((v1 - v2) * (p1 - p2)) / abs(p1 - p2)) * (p1 - p2) / abs(p1 - p2);
-  vec3 f2 = -f1;
-
-  //
-
-  //
-
-  // vec3 motion = pos + vel * delta;
-  // vec3 velocity = vel + (gravity + force / mass) * delta;
-
-*/
 
 
 void main (void) {
-
-  vec2 uv = gl_FragCoord.xy / resolution;
-
-  vec4 forceData = texture2D(textureForce, uv);
-  vec4 velData = texture2D(textureVelocity, uv);
-  vec4 posData = texture2D(texturePosition, uv);
-  vec4 metaData = texture2D(meta0, uv);
-
-  float mass = 1.0;
-  vec3 gravity = vec3(0.0, 0.0, 0.0);
+  //
+  vec2 uv = vec2(gl_FragCoord.x, gl_FragCoord.y) / resolution.xy;
 
 
-  if (posData.w == 0.0) {
-    posData.x = (uv.x * 2.0 - 1.0) * 10.0;
-    posData.y = 0.0;
-    posData.z = (uv.y * 2.0 - 1.0) * 10.0;
-    posData.w = 1.0;
-  }
+  float damping = 0.98;
 
-  velData.xyz += (gravity + forceData.xyz / mass) * delta;
+  vec4 nowPos = texture2D( texturePosition, uv ).xyzw;
+  vec4 offsets = texture2D( textureOffset, uv ).xyzw;
+  vec4 velocity = texture2D( textureVelocity, uv ).xyzw;
 
-  // if (metaData.z > 0.0) {
-  //   velData.xyz = vec3(0.0);
-  // }
+  float anchorHeight = 5.0;
+  float yAnchor = anchorHeight;
+  vec3 anchor = vec3( offsets.x, yAnchor, 0.0 );
 
-  velData.w = 1.0;
-  gl_FragColor = vec4(velData.x, velData.y, velData.z, velData.w);
+  // Newton's law: F = M * A
+  float mass = 24.0;
+  vec3 acceleration = vec3(0.0, 0.0, 0.0);
+
+  // 1. apply gravity's force:
+  vec3 gravity = vec3(0.0, 2.0, 0.0);
+  gravity /= mass;
+  acceleration += gravity;
+
+
+  // 2. apply the spring force
+  float restLength = yAnchor - offsets.y;
+  float springConstant = 0.2;
+
+  // Vector pointing from anchor to point position
+  vec3 springForce = vec3(nowPos.x - anchor.x, nowPos.y - anchor.y, nowPos.z - anchor.z);
+  // length of the vector
+  float distance = length( springForce );
+  // stretch is the difference between the current distance and restLength
+  float stretch =  distance - restLength;
+
+  // Calculate springForce according to Hooke's Law
+  springForce = normalize(springForce);
+  springForce *= (springConstant * stretch);
+
+  springForce /= mass;
+  acceleration += springForce;
+
+  velocity.rgb += acceleration;
+  velocity.rgb *= damping;
+
+  //
+  vec3 newPosition = vec3(nowPos.x - velocity.x, nowPos.y - velocity.y, nowPos.z - velocity.z);
+  // Write new position out
+  gl_FragColor = vec4(velocity.x, velocity.y, velocity.z, 1.0);
+
 }
-
-//
-
-

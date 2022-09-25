@@ -103,6 +103,7 @@ void main (void) {
         continue;
       }
       //
+      //
       float xx = x;
       float yy = y;
 
@@ -128,9 +129,9 @@ void main (void) {
       f1.y = (stiff * (norm.y / dist));
       f1.z = (stiff * (norm.z / dist));
 
-      f1.x = clamp(f1.x, -0.05, 0.05);
-      f1.y = clamp(f1.y, -0.05, 0.05);
-      f1.z = clamp(f1.z, -0.05, 0.05);
+      // f1.x = clamp(f1.x, -0.05, 0.05);
+      // f1.y = clamp(f1.y, -0.05, 0.05);
+      // f1.z = clamp(f1.z, -0.05, 0.05);
 
       forceData.xyz += -f1;
     }
@@ -149,5 +150,10 @@ void main (void) {
 }
 
 //
+
+
+
+
+
 
 

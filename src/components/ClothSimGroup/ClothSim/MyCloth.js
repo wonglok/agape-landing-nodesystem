@@ -18,6 +18,7 @@ import { CustomGPU } from './CustomGPU'
 import fragmentShaderForce from './shader/fragmentShaderForce.frag'
 import fragmentShaderVel from './shader/fragmentShaderVel.frag'
 import fragmentShaderPos from './shader/fragmentShaderPos.frag'
+import fragmentShaderOffset from './shader/fragmentShaderOffset.frag'
 import { Core } from '@/helpers/Core'
 import md5 from 'md5'
 import displayFragment from './shader/display.frag'
@@ -49,6 +50,7 @@ export class MyCloth extends Object3D {
     let pos0 = this.gpu.createTexture()
     let vel0 = this.gpu.createTexture()
     let force0 = this.gpu.createTexture()
+    let offset0 = this.gpu.createTexture()
 
     let i = 0
     for (let y = 0; y < this.sizeY; y++) {
@@ -81,11 +83,16 @@ export class MyCloth extends Object3D {
     //
 
     // and fill in here the texture data...
-
     let forceVar = this.gpu.addVariable(
       'textureForce',
       fragmentShaderForce,
       force0
+    )
+
+    let offsetVar = this.gpu.addVariable(
+      'textureOffset',
+      fragmentShaderOffset,
+      offset0
     )
 
     let velVar = this.gpu.addVariable(
@@ -106,24 +113,49 @@ export class MyCloth extends Object3D {
     forceVar.material.uniforms.time = { value: 0 }
     velVar.material.uniforms.time = { value: 0 }
     posVar.material.uniforms.time = { value: 0 }
+    offsetVar.material.uniforms.time = { value: 0 }
 
     forceVar.material.uniforms.delta = { value: 0 }
     velVar.material.uniforms.delta = { value: 0 }
     posVar.material.uniforms.delta = { value: 0 }
+    offsetVar.material.uniforms.delta = { value: 0 }
 
     forceVar.material.uniforms.meta0 = { value: meta0 }
     velVar.material.uniforms.meta0 = { value: meta0 }
     posVar.material.uniforms.meta0 = { value: meta0 }
+    offsetVar.material.uniforms.meta0 = { value: meta0 }
 
     forceVar.material.uniforms.mouse = { value: mouse }
     velVar.material.uniforms.mouse = { value: mouse }
     posVar.material.uniforms.mouse = { value: mouse }
+    offsetVar.material.uniforms.mouse = { value: mouse }
 
     //
     // Add variable dependencies
-    this.gpu.setVariableDependencies(forceVar, [forceVar, velVar, posVar])
-    this.gpu.setVariableDependencies(velVar, [forceVar, velVar, posVar])
-    this.gpu.setVariableDependencies(posVar, [forceVar, velVar, posVar])
+    this.gpu.setVariableDependencies(offsetVar, [
+      offsetVar,
+      forceVar,
+      velVar,
+      posVar,
+    ])
+    this.gpu.setVariableDependencies(forceVar, [
+      offsetVar,
+      forceVar,
+      velVar,
+      posVar,
+    ])
+    this.gpu.setVariableDependencies(velVar, [
+      offsetVar,
+      forceVar,
+      velVar,
+      posVar,
+    ])
+    this.gpu.setVariableDependencies(posVar, [
+      offsetVar,
+      forceVar,
+      velVar,
+      posVar,
+    ])
 
     // Check for completeness
     let error = this.gpu.init()
