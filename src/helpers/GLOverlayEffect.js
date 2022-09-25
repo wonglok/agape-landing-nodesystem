@@ -8,7 +8,6 @@ uniform float opacity;
 void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
 	outputColor = vec4((opacity) * (inputColor.rgb), inputColor.a);
 }
-
 `
 
 export const screenOpacity = new Uniform(1)
@@ -22,6 +21,8 @@ export class CustomEffect extends Effect {
   }
 }
 
+//
+
 // Effect component
 export const GLOverlayEffect = forwardRef(function EffectFuncy({}, ref) {
   const effect = useMemo(() => new CustomEffect({}), [])
@@ -29,7 +30,12 @@ export const GLOverlayEffect = forwardRef(function EffectFuncy({}, ref) {
 })
 
 //
+//
 
+//
+//
+
+//
 //
 
 // const SSR = /*#__PURE__*/ forwardRef(function SSR(_ref, ref) {
@@ -53,7 +59,6 @@ export const GLOverlayEffect = forwardRef(function EffectFuncy({}, ref) {
 //   useEffect(() => {
 //     if (api && api.enabled) {
 //       var _api$selected
-
 //       if ((_api$selected = api.selected) != null && _api$selected.length) {
 //         effect.selection.set(api.selected)
 //         invalidate()
@@ -69,11 +74,7 @@ export const GLOverlayEffect = forwardRef(function EffectFuncy({}, ref) {
 //     object: effect,
 //   })
 // })
-
 //
-
 //
-
 //
-
 //

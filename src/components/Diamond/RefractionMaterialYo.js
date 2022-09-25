@@ -50,7 +50,8 @@ const DiamondMaterial = shaderMaterial(
     projectionMatrixInv = inverse(projectionMatrix);
     viewMatrixInv = inverse(viewMatrix);
     vWorldPosition = (modelMatrix * vec4(position + offsetsData.xzy, 1.0)).xyz;
-    vNormal = (viewMatrixInv * vec4(normalMatrix * normalsData.xzy, 0.0)).xyz;
+    vNormal = (viewMatrixInv * vec4(normalsData.xzy, 0.0)).xyz;
+    // vNormal = (viewMatrixInv * vec4(normalMatrix * normalsData.xzy, 0.0)).xyz;
     viewDirection = normalize(vWorldPosition - cameraPosition);
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position + offsetsData.xzy, 1.0);
   }`,
