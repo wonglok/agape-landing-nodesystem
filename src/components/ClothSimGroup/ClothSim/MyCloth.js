@@ -264,13 +264,13 @@ let getClothMaterial = ({ getter }) => {
     thickness: 10,
   })
 
-  //
+  ///public/bg/flower@1x.png
   new TextureLoader().loadAsync(`/bg/john-16-33.png`).then((tex) => {
     tex.encoding = sRGBEncoding
     tex.generateMipmaps = true
 
-    // mat.roughnessMap = tex
-    // mat.metalnessMap = tex
+    mat.roughnessMap = tex
+    mat.metalnessMap = tex
     mat.map = tex
     // mat.transmissionMap = tex
     mat.emissiveMap = tex
