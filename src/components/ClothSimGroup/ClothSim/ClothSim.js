@@ -12,7 +12,7 @@ export function ClothSim() {
   let [ready, setReady] = useState(false)
   let point = new Vector3(0, -100, 200)
   useEffect(() => {
-    setReady(true)
+    setReady(Math.random())
   }, [])
 
   let wall = useRef()
@@ -57,23 +57,32 @@ export function ClothSim() {
         }}
         position={[0, 0, 0.0]}
         args={[1000, 1000, 0.1]}
-      >
-        <meshStandardMaterial
-          transparent={true}
-          opacity={0}
-        ></meshStandardMaterial>
-      </Box>
+        visible={false}
+      ></Box>
       {/*  */}
-      {ready && (
-        <myCloth
-          args={[{ gl, mouse: point }]}
-          dispose={function () {
-            this.dispose()
-          }}
-          key={MyCloth.key}
-        ></myCloth>
-      )}
+      {ready && <Yo key={ready} gl={gl} point={point} ready={ready}></Yo>}
       {/*  */}
+    </group>
+  )
+}
+
+function Yo({ gl, point, ready }) {
+  let ref = useRef()
+  useEffect(() => {}, [])
+  return (
+    <group
+      onClick={() => {
+        ref.current.load()
+      }}
+    >
+      <myCloth
+        ref={ref}
+        args={[{ gl, mouse: point }]}
+        dispose={function () {
+          this.dispose()
+        }}
+        key={MyCloth.key + ready}
+      ></myCloth>
     </group>
   )
 }

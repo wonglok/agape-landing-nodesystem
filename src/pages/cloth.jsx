@@ -6,7 +6,7 @@ const Page = () => {
     <>
       <ClothSim></ClothSim>
       <OrbitControls
-        object-position={[0, 150, 150]}
+        object-position={[0, 150, 250]}
         object-far={5000}
         object-near={1}
       ></OrbitControls>
@@ -34,7 +34,5 @@ async function getStaticProps() {
 
 export { getStaticProps }
 export default Page
-
-//
 
 //

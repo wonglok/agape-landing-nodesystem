@@ -244,6 +244,34 @@ export class MyCloth extends Object3D {
     this.plane.frustumCulled = false
     this.add(this.plane)
 
+    let arr = [
+      `/bg/flower@1x.png`,
+      `/bg/john-16-33.png`,
+      `/bg/red@1x.png`,
+      `/bg/anthem@1x.png`,
+    ]
+    let cursor = 0
+
+    let load = ({ mat }) => {
+      new TextureLoader().loadAsync(arr[cursor]).then((tex) => {
+        tex.encoding = sRGBEncoding
+        tex.generateMipmaps = true
+
+        // mat.roughnessMap = tex
+        // mat.metalnessMap = tex
+        mat.map = tex
+        mat.emissiveMap = tex
+        mat.emissive = new Color('#ffffff')
+        cursor++
+        cursor = cursor % arr.length
+      })
+    }
+
+    this.load = () => {
+      load({ mat: this.plane.material })
+    }
+
+    //
     this.core.onClean(() => {
       this.clear()
       this.plane.removeFromParent()
@@ -254,43 +282,18 @@ export class MyCloth extends Object3D {
 let getClothMaterial = ({ getter }) => {
   let mat = new MeshPhysicalMaterial({
     color: '#ffffff',
-    emissive: new Color('#ffffff'),
+
     side: DoubleSide,
     transparent: true,
     transmission: 1.0,
-    metalness: 0.1,
-    roughness: 0.5,
+    metalness: 0.0,
+    roughness: 0.0,
     ior: 1.5,
     reflectivity: 0.5,
-    thickness: 10,
+    thickness: 50,
   })
 
   ///public/bg/flower@1x.png
-  let arr = [
-    `/bg/flower@1x.png`,
-    `/bg/john-16-33.png`,
-    `/bg/red@1x.png`,
-    `/bg/anthem@1x.png`,
-  ]
-  let cursor = 0
-
-  let load = () => {
-    new TextureLoader().loadAsync(arr[cursor]).then((tex) => {
-      tex.encoding = sRGBEncoding
-      tex.generateMipmaps = true
-
-      // mat.roughnessMap = tex
-      // mat.metalnessMap = tex
-      mat.map = tex
-      mat.emissiveMap = tex
-      cursor++
-      cursor = cursor % arr.length
-    })
-  }
-  load()
-  window.addEventListener('click', () => {
-    load()
-  })
 
   //
   mat.onBeforeCompile = (shader) => {
