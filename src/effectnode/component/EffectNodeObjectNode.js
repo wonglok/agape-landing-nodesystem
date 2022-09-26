@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Codes } from '../store/codes'
-import { useEffectNode } from '../store/useEffectNode'
+// import { useEffectNode } from '../store/useEffectNode'
 // import { useENEditor } from '@/vfx-studio/store/use-en-editor'
 
 export function EffectNodeObjectNode({

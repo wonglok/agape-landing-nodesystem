@@ -1,13 +1,14 @@
 //
 
-import { useEffectNode } from '@/effectnode/store/useEffectNode'
+// import { useEffectNode } from '@/effectnode/store/useEffectNode'
+import { Codes } from '@/effectnode/store/codes'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { useState } from 'react'
 
 export function ENGAddGraphNode() {
   let [str, setStr] = useState('')
 
-  let codes = useEffectNode((s) => s.codes)
+  // let codes = useEffectNode((s) => s.codes)
 
   let selectCodeToAdd = useGLBEditor((s) => s.selectCodeToAdd)
   let setCurosrMode = useGLBEditor((s) => s.setCurosrMode)
@@ -37,7 +38,7 @@ export function ENGAddGraphNode() {
             setStr(ev.target.value || '')
             if (ev.key === 'Enter') {
               //
-              let firstCode = codes.filter((it) => {
+              let firstCode = Codes.filter((it) => {
                 return (it.title || '').indexOf(str) !== -1
               })[0]
               if (firstCode) {
@@ -50,23 +51,21 @@ export function ENGAddGraphNode() {
         ></textarea>
 
         <div className='p-2 pt-3 '>
-          {codes
-            .filter((it) => {
-              return (it.title || '').indexOf(str) !== -1
-            })
-            .map((e) => {
-              return (
-                <div
-                  key={e.key}
-                  onClick={() => {
-                    addCode({ title: e.title })
-                  }}
-                  className='mb-1 cursor-pointer'
-                >
-                  {e.title}
-                </div>
-              )
-            })}
+          {Codes.filter((it) => {
+            return (it.title || '').indexOf(str) !== -1
+          }).map((e) => {
+            return (
+              <div
+                key={e.key}
+                onClick={() => {
+                  addCode({ title: e.title })
+                }}
+                className='mb-1 cursor-pointer'
+              >
+                {e.title}
+              </div>
+            )
+          })}
         </div>
         {/*  */}
       </div>

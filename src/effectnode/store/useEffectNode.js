@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { Codes } from './codes'
+// import { Codes } from './codes'
 import { get as getIDX, set as setIDX } from 'idb-keyval'
 import { verifyPermission } from '@/components/projects/FileSystem/FileSystem'
 
@@ -16,10 +16,10 @@ export const useEffectNode = create((set, get) => {
       set({ screenPass: v })
     },
 
-    codes: Codes,
-    setCodes: (v) => {
-      set({ codes: v })
-    },
+    // codes: Codes,
+    // setCodes: (v) => {
+    //   set({ codes: v })
+    // },
     passArray: [],
     setPassArray: (v) => {
       set({ passArray: v })
