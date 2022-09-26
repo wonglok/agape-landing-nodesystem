@@ -258,7 +258,7 @@ let getClothMaterial = ({ getter }) => {
     transparent: true,
     transmission: 1.0,
     metalness: 0.1,
-    roughness: 0.1,
+    roughness: 0.5,
     ior: 1.5,
     reflectivity: 0.5,
     thickness: 10,
@@ -324,13 +324,8 @@ let getClothMaterial = ({ getter }) => {
       `
 
     let transformV3 = `
-
-          vec3 transformed = vec3( nPos );
-
+      vec3 transformed = vec3( nPos );
     `
-
-    // let atEndV = `
-    // `
 
     shader.vertexShader = shader.vertexShader.replace(
       `void main() {`,
@@ -341,6 +336,7 @@ let getClothMaterial = ({ getter }) => {
       `#include <begin_vertex>`,
       `${transformV3}`
     )
+
     shader.vertexShader = shader.vertexShader.replace(
       `#include <beginnormal_vertex>`,
       `${transformV3Normal}`
