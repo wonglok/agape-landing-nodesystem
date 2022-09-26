@@ -265,15 +265,30 @@ let getClothMaterial = ({ getter }) => {
   })
 
   ///public/bg/flower@1x.png
-  new TextureLoader().loadAsync(`/bg/john-16-33.png`).then((tex) => {
-    tex.encoding = sRGBEncoding
-    tex.generateMipmaps = true
+  let arr = [
+    `/bg/flower@1x.png`,
+    `/bg/john-16-33.png`,
+    `/bg/red@1x.png`,
+    `/bg/anthem@1x.png`,
+  ]
+  let cursor = 0
 
-    mat.roughnessMap = tex
-    mat.metalnessMap = tex
-    mat.map = tex
-    // mat.transmissionMap = tex
-    mat.emissiveMap = tex
+  let load = () => {
+    new TextureLoader().loadAsync(arr[cursor]).then((tex) => {
+      tex.encoding = sRGBEncoding
+      tex.generateMipmaps = true
+
+      mat.roughnessMap = tex
+      mat.metalnessMap = tex
+      mat.map = tex
+      mat.emissiveMap = tex
+      cursor++
+      cursor = cursor % arr.length
+    })
+  }
+  load()
+  window.addEventListener('click', () => {
+    load()
   })
 
   //
