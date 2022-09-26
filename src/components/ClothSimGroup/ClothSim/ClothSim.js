@@ -43,6 +43,11 @@ export function ClothSim() {
 
           point.copy(ev.point)
         }}
+        onPointerDown={(ev) => {
+          // console.log(ev.point.x, ev.point.y, ev.point.z)
+
+          point.copy(ev.point)
+        }}
         position={[0, 0, 0.0]}
         args={[1000, 1000, 0.1]}
       >
