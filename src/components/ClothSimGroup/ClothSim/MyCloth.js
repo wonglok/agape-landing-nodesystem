@@ -229,7 +229,7 @@ export class MyCloth extends Object3D {
     // this.add(this.pts)
 
     this.plane = new Mesh(
-      new PlaneBufferGeometry(200, 200, this.sizeX, this.sizeY),
+      new PlaneBufferGeometry(200, 200, this.sizeX * 2.0, this.sizeY * 2.0),
       getClothMaterial({
         getter: () => {
           return this.getTexAPos()
