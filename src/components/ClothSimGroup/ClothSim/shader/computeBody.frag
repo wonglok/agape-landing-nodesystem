@@ -7,7 +7,7 @@ vec4 nowPos = texture2D( texturePosition, uv );
 vec4 offsets = texture2D( textureOffset, uv );
 vec4 velocity = texture2D( textureVelocity, uv );
 
-float anchorHeight = 101.0;
+float anchorHeight = 110.0;
 float yAnchor = anchorHeight;
 vec3 anchor = vec3( offsets.x, yAnchor + offsets.y * 0.0, offsets.z );
 
