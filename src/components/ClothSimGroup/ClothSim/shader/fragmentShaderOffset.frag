@@ -16,8 +16,8 @@ void main (void) {
 
   if (offsetPosData.w == 0.0) {
     offsetPosData.x = (uv.x * 2.0 - 1.0) * 100.0;
-    offsetPosData.y = (uv.y * 2.0 - 1.0) * -100.0;
-    offsetPosData.z = 0.0;
+    offsetPosData.z = (uv.y * 2.0 - 1.0) * -100.0;
+    offsetPosData.y = 0.0;
     offsetPosData.w = 1.0;
   }
 
