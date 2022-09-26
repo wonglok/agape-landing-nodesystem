@@ -38,6 +38,7 @@ export function ClothSim() {
       </Sphere>
       {/*  */}
       <Box
+        //
         ref={wall}
         onPointerMove={(ev) => {
           // console.log(ev.point.x, ev.point.y, ev.point.z)
@@ -65,5 +66,23 @@ export function ClothSim() {
     </group>
   )
 }
+
+//
+
+//
+
+//
+
+//
+
+//
+
+//
+
+//
+
+//
+
+//
 
 //
