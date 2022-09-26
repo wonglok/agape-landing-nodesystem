@@ -177,6 +177,7 @@ export class MyCloth extends Object3D {
       console.error(error)
     }
 
+    //
     this.clock = new Clock()
 
     //

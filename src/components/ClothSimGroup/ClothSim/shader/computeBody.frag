@@ -42,7 +42,7 @@ springForce /= mass;
 acceleration += springForce;
 
 //
-vec3 wind = vec3(normalize(vec3(0.0, 0.0, 1.0)) * hash(time * 0.5) * -0.25);
+vec3 wind = vec3(normalize(vec3(mouse)) * hash(time * 0.5) * -1.25);
 wind /= mass;
 acceleration += wind;
 
@@ -50,9 +50,9 @@ acceleration += wind;
 vec3 hand;
 float mDist = length(mouse - nowPos.xyz);
 if (mDist < 25.0) {
-  hand = normalize(mouse - nowPos.xyz) * -1.5;
+  hand = normalize(mouse - nowPos.xyz) * -1.0;
 } else {
-  hand = normalize(mouse - nowPos.xyz) * -1.5;
+  hand = normalize(mouse - nowPos.xyz) * -1.0;
 }
 
 hand /= mass;
