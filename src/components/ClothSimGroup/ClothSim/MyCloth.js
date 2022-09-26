@@ -38,8 +38,8 @@ export class MyCloth extends Object3D {
     }
 
     this.gl = gl
-    this.sizeX = 256
-    this.sizeY = 256
+    this.sizeX = 512
+    this.sizeY = 512
     this.count = this.sizeX * this.sizeY
     this.gpu = new CustomGPU(this.sizeX, this.sizeY, this.gl)
     // Compute!
@@ -280,7 +280,7 @@ let getClothMaterial = ({ getter }) => {
         vec4 nPosL = texture2D(cloth, vec2(uv.x + seg, uv.y));
         vec4 nPosR = texture2D(cloth, vec2(uv.x - seg, uv.y));
 
-        vec3 objectNormal = normalize(nPos.rgb - ((nPosU.rgb + nPosD.rgb + nPosL.rgb + nPosR.rgb)) / 4.0);
+        vec3 objectNormal = normalize(nPos.rgb - normalize((nPosU.rgb + nPosD.rgb + nPosL.rgb + nPosR.rgb)));
       `
 
     let transformV3 = `
