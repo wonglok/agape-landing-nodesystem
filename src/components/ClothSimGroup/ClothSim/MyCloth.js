@@ -250,11 +250,11 @@ let getClothMaterial = ({ getter }) => {
     color: '#ff00ff',
     side: DoubleSide,
     transmission: 1,
-    roughness: 0,
-    ior: 1.5,
+    roughness: 0.3,
+    ior: 1.0,
     reflectivity: 1.0,
-    thickness: 15,
-    metalness: 0.1,
+    thickness: 1,
+    metalness: 0.5,
   })
 
   mat.onBeforeCompile = (shader) => {
@@ -266,7 +266,7 @@ let getClothMaterial = ({ getter }) => {
     }
 
     let atBeginV = `
-    uniform sampler2D cloth;
+      uniform sampler2D cloth;
     `
 
     let transformV3Normal = `
@@ -280,7 +280,12 @@ let getClothMaterial = ({ getter }) => {
         vec4 nPosL = texture2D(cloth, vec2(uv.x + seg, uv.y));
         vec4 nPosR = texture2D(cloth, vec2(uv.x - seg, uv.y));
 
-        vec3 objectNormal = normalize(nPos.rgb - normalize((nPosU.rgb + nPosD.rgb + nPosL.rgb + nPosR.rgb)));
+        vec3 objectNormal = normalize((
+          normalize(nPosU.rgb - nPos.rgb) +
+          normalize(nPosD.rgb - nPos.rgb) +
+          normalize(nPosL.rgb - nPos.rgb) +
+          normalize(nPosR.rgb - nPos.rgb)
+        ) / 4.0) ;
       `
 
     let transformV3 = `

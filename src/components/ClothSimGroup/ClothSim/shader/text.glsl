@@ -37,7 +37,7 @@ void main() {
 
   // 2. apply the spring force
   float restLength = yAnchor - offsets.y;
-  float springConstant = 0.2;
+  float springConstant = 10.2;
 
   // Vector pointing from anchor to point position
   vec2 springForce = vec2(nowPos.x - anchor.x, nowPos.y - anchor.y);
