@@ -257,8 +257,8 @@ let getClothMaterial = ({ getter }) => {
     side: DoubleSide,
     transparent: true,
     transmission: 1.0,
-    metalness: 0.5,
-    roughness: 0.5,
+    metalness: 0.1,
+    roughness: 0.1,
     ior: 1.5,
     reflectivity: 0.5,
     thickness: 10,
@@ -267,7 +267,10 @@ let getClothMaterial = ({ getter }) => {
   //
   new TextureLoader().loadAsync(`/bg/john-16-33.png`).then((tex) => {
     tex.encoding = sRGBEncoding
-    tex.generateMipmaps = false
+    tex.generateMipmaps = true
+
+    // mat.roughnessMap = tex
+    // mat.metalnessMap = tex
     mat.map = tex
     // mat.transmissionMap = tex
     mat.emissiveMap = tex

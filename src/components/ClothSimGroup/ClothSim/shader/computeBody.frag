@@ -42,10 +42,9 @@ springForce /= mass;
 acceleration += springForce;
 
 //
-vec3 wind = vec3(normalize(mouse) * hash(time * 0.15) * 3.0);
+vec3 wind = vec3(normalize(mouse) * hash(time * 0.5) * 3.0);
 wind /= mass;
 acceleration += wind;
-
 
 //
 vec3 hand;
