@@ -286,7 +286,7 @@ let getClothMaterial = ({ getter }) => {
     let transformV3Normal = `
         vec4 nPos = texture2D(cloth, uv);
 
-        float seg = 1.0 / 256.0;
+        float seg = 1.0 / 512.0;
 
         vec4 nPosU = texture2D(cloth, vec2(uv.x, uv.y + seg));
         vec4 nPosD = texture2D(cloth, vec2(uv.x, uv.y - seg));
