@@ -265,6 +265,7 @@ let getClothMaterial = ({ getter }) => {
   //
   new TextureLoader().loadAsync(`/bg/john-16-33.png`).then((tex) => {
     tex.encoding = sRGBEncoding
+    tex.generateMipmaps = true
     mat.map = tex
     // mat.transmissionMap = tex
     mat.emissiveMap = tex
