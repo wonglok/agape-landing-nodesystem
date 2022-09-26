@@ -10,7 +10,7 @@ vec4 velocity = texture2D( textureVelocity, uv );
 
 float anchorHeight = 100.0;
 float yAnchor = anchorHeight;
-vec3 anchor = vec3( offsets.x, yAnchor + offsets.y * 0.0, offsets.z );
+vec3 anchor = vec3( offsets.x, yAnchor + offsets.y, offsets.z );
 
 // Newton's law: F = M * A
 float mass = 24.0;
