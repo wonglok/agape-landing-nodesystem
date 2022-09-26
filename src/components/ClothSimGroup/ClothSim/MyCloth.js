@@ -278,8 +278,8 @@ let getClothMaterial = ({ getter }) => {
       tex.encoding = sRGBEncoding
       tex.generateMipmaps = true
 
-      mat.roughnessMap = tex
-      mat.metalnessMap = tex
+      // mat.roughnessMap = tex
+      // mat.metalnessMap = tex
       mat.map = tex
       mat.emissiveMap = tex
       cursor++
