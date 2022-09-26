@@ -52,7 +52,7 @@ export class MyCloth extends Object3D {
     // Create initial state float textures
     let meta0 = this.gpu.createTexture()
     let pos0 = this.gpu.createTexture()
-    pos0.generateMipmaps = true
+    // pos0.generateMipmaps = true
 
     let vel0 = this.gpu.createTexture()
     // let offset0 = this.gpu.createTexture()
@@ -245,6 +245,7 @@ export class MyCloth extends Object3D {
 
     this.core.onClean(() => {
       this.clear()
+      this.plane.removeFromParent()
     })
   }
 }
@@ -265,7 +266,7 @@ let getClothMaterial = ({ getter }) => {
   //
   new TextureLoader().loadAsync(`/bg/john-16-33.png`).then((tex) => {
     tex.encoding = sRGBEncoding
-    tex.generateMipmaps = true
+    tex.generateMipmaps = false
     mat.map = tex
     // mat.transmissionMap = tex
     mat.emissiveMap = tex

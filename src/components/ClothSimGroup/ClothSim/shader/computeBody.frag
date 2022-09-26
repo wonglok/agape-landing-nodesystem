@@ -40,9 +40,9 @@ springForce /= mass;
 
 acceleration += springForce;
 
-vec3 windZ = vec3(normalize(mouse)  * hash(time) * 2.0);
-windZ /= mass;
-acceleration += windZ;
+vec3 wind = vec3(normalize(mouse)  * hash(time) * 5.0);
+wind /= mass;
+acceleration += wind;
 
 vec3 hand;
 float mDist = length(mouse - nowPos.xyz);
@@ -60,5 +60,7 @@ velocity.rgb *= damping;
 
 //
 vec3 newPosition = vec3(nowPos.x - velocity.x, nowPos.y - velocity.y, nowPos.z - velocity.z);
+
+//
 
 //

@@ -10,7 +10,7 @@ export function ClothSim() {
   let gl = useThree((s) => s.gl)
   let mouse = useThree((s) => s.mouse)
   let [ready, setReady] = useState(false)
-  let point = new Vector3(0, -200, 0)
+  let point = new Vector3(0, 200, 0)
   useEffect(() => {
     setReady(true)
   }, [])
@@ -42,11 +42,13 @@ export function ClothSim() {
         //
         ref={wall}
         onPointerMove={(ev) => {
+          //
           // console.log(ev.point.x, ev.point.y, ev.point.z)
 
           point.copy(ev.point)
         }}
         onPointerDown={(ev) => {
+          //
           // console.log(ev.point.x, ev.point.y, ev.point.z)
 
           point.copy(ev.point)
@@ -64,7 +66,7 @@ export function ClothSim() {
         <myCloth
           args={[{ gl, mouse: point }]}
           dispose={function () {
-            this.core.clean()
+            this.dispose()
           }}
           key={MyCloth.key}
         ></myCloth>
