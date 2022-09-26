@@ -51,6 +51,7 @@ export class MyCloth extends Object3D {
     let meta0 = this.gpu.createTexture()
     let pos0 = this.gpu.createTexture()
     pos0.generateMipmaps = true
+
     let vel0 = this.gpu.createTexture()
     // let offset0 = this.gpu.createTexture()
     let offset0 = this.gpu.createTexture()
