@@ -7,9 +7,11 @@ const Page = () => {
       <ClothSim></ClothSim>
       <OrbitControls
         object-position={[0, 150, 150]}
-        object-far={100000}
+        object-far={5000}
         object-near={1}
       ></OrbitControls>
+
+      {/*  */}
       <Environment preset='apartment' background></Environment>
     </>
   )
