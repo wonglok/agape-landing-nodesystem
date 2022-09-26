@@ -36,6 +36,7 @@ export function ClothSim() {
           metalness={0.1}
         ></meshPhysicalMaterial>
       </Sphere>
+      {/*  */}
       <Box
         ref={wall}
         onPointerMove={(ev) => {
@@ -64,3 +65,5 @@ export function ClothSim() {
     </group>
   )
 }
+
+//
