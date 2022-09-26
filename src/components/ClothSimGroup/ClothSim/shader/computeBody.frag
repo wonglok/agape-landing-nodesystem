@@ -1,22 +1,23 @@
 //
 // vec2 uv = vec2(gl_FragCoord.x, gl_FragCoord.y) / resolution.xy;
 
-float damping = 0.98;
+// float damping = 0.98;
+float damping = 0.985;
 
 vec4 nowPos = texture2D( texturePosition, uv );
 vec4 offsets = texture2D( textureOffset, uv );
 vec4 velocity = texture2D( textureVelocity, uv );
 
-float anchorHeight = 110.0;
+float anchorHeight = 100.0;
 float yAnchor = anchorHeight;
 vec3 anchor = vec3( offsets.x, yAnchor + offsets.y * 0.0, offsets.z );
 
 // Newton's law: F = M * A
-float mass = 25.0;
+float mass = 24.0;
 vec3 acceleration = vec3(0.0, 0.0, 0.0);
 
 // 1. apply gravity's force:
-vec3 gravity = vec3(0.0, 2.0, 0.0);
+vec3 gravity = vec3(0.0, 1.0, 0.0);
 gravity /= mass;
 acceleration += gravity;
 
@@ -40,10 +41,13 @@ springForce /= mass;
 
 acceleration += springForce;
 
-vec3 wind = vec3(normalize(mouse)  * hash(time * 0.15) * 3.0);
+//
+vec3 wind = vec3(normalize(mouse) * hash(time * 0.15) * 3.0);
 wind /= mass;
 acceleration += wind;
 
+
+//
 vec3 hand;
 float mDist = length(mouse - nowPos.xyz);
 if (mDist < 25.0) {
@@ -55,6 +59,8 @@ if (mDist < 25.0) {
 hand /= mass;
 acceleration += hand;
 
+
+//
 velocity.rgb += acceleration;
 velocity.rgb *= damping;
 
