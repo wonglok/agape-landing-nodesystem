@@ -163,7 +163,7 @@ function ResetLayoutBtn() {
         })
       }}
     >
-      <div className='mr-1'>Auto Resize for Grid</div>
+      <div className='mr-1'>Grid Auto Resize</div>
       <div
         className={
           'inline-flex w-8 rounded-full transition-all duration-500 ' +
