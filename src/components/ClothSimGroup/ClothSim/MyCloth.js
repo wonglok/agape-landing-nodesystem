@@ -4,6 +4,7 @@ import {
   BufferAttribute,
   BufferGeometry,
   Clock,
+  Color,
   InstancedBufferGeometry,
   Mesh,
   MeshPhysicalMaterial,
@@ -14,6 +15,7 @@ import {
   PlaneBufferGeometry,
   Points,
   ShaderMaterial,
+  TextureLoader,
 } from 'three140'
 import { CustomGPU } from './CustomGPU'
 import fragmentShaderVel from './shader/fragmentShaderVel.frag'
@@ -24,7 +26,7 @@ import { Core } from '@/helpers/Core'
 import md5 from 'md5'
 import displayFragment from './shader/display.frag'
 import displayVertex from './shader/display.vert'
-import { DoubleSide } from 'three'
+import { DoubleSide, sRGBEncoding } from 'three'
 
 export class MyCloth extends Object3D {
   constructor({ gl, mouse }) {
@@ -250,15 +252,25 @@ export class MyCloth extends Object3D {
 let getClothMaterial = ({ getter }) => {
   let mat = new MeshPhysicalMaterial({
     color: '#ffffff',
+    emissive: new Color('#ffffff'),
     side: DoubleSide,
-    transmission: 1,
-    roughness: 0.3,
-    ior: 1.5,
-    reflectivity: 1.0,
-    thickness: 50,
+    // transmission: 0.1,
     metalness: 0.5,
+    roughness: 0.5,
+    // ior: 1.5,
+    // reflectivity: 1.0,
+    // thickness: 50,
   })
 
+  //
+  new TextureLoader().loadAsync(`/bg/john-16-33.png`).then((tex) => {
+    tex.encoding = sRGBEncoding
+    mat.map = tex
+    // mat.transmissionMap = tex
+    mat.emissiveMap = tex
+  })
+
+  //
   mat.onBeforeCompile = (shader) => {
     //
     shader.uniforms.cloth = {

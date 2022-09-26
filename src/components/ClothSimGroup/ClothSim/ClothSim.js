@@ -6,6 +6,7 @@ import { MyCloth } from './MyCloth'
 
 export function ClothSim() {
   //
+
   let gl = useThree((s) => s.gl)
   let mouse = useThree((s) => s.mouse)
   let [ready, setReady] = useState(false)
