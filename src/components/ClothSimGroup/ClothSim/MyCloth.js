@@ -255,12 +255,13 @@ let getClothMaterial = ({ getter }) => {
     color: '#ffffff',
     emissive: new Color('#ffffff'),
     side: DoubleSide,
-    // transmission: 0.1,
+    transparent: true,
+    transmission: 1.0,
     metalness: 0.5,
     roughness: 0.5,
-    // ior: 1.5,
-    // reflectivity: 1.0,
-    // thickness: 50,
+    ior: 1.5,
+    reflectivity: 0.5,
+    thickness: 10,
   })
 
   //
