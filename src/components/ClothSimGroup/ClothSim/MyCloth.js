@@ -50,6 +50,7 @@ export class MyCloth extends Object3D {
     // Create initial state float textures
     let meta0 = this.gpu.createTexture()
     let pos0 = this.gpu.createTexture()
+    pos0.generateMipmaps = true
     let vel0 = this.gpu.createTexture()
     // let offset0 = this.gpu.createTexture()
     let offset0 = this.gpu.createTexture()
@@ -247,13 +248,13 @@ export class MyCloth extends Object3D {
 
 let getClothMaterial = ({ getter }) => {
   let mat = new MeshPhysicalMaterial({
-    color: '#ff00ff',
+    color: '#ffffff',
     side: DoubleSide,
     transmission: 1,
     roughness: 0.3,
-    ior: 1.0,
+    ior: 1.5,
     reflectivity: 1.0,
-    thickness: 1,
+    thickness: 50,
     metalness: 0.5,
   })
 
