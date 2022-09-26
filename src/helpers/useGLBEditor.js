@@ -138,6 +138,7 @@ let generateInside = (set, get) => {
       }
 
       let codes = useEffectNode.getState().codes //
+
       let effectNode = activeSceneSelection?.userData?.effectNode
       let code = codes.find((s) => s.title === codeID)
 

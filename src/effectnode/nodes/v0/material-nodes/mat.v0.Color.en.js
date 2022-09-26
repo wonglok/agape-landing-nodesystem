@@ -56,7 +56,6 @@ export async function nodeData({ defaultData, nodeID }) {
 //
 
 export function effect({ node, mini, data, setComponent }) {
-  console.log(123)
   let applyToIt = (v) => {
     mini.ready.itself.then((it) => {
       it.material = v

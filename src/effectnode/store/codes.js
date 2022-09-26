@@ -1,4 +1,5 @@
 import path from 'path'
+import { useEffectNode } from './useEffectNode'
 let r = require.context('../nodes/', true, /\.en\.js$/, 'lazy')
 
 function importAll(r) {
@@ -22,3 +23,7 @@ function importAll(r) {
 }
 
 export const Codes = importAll(r)
+
+setTimeout(() => {
+  useEffectNode.getState().setCodes(Codes)
+})
