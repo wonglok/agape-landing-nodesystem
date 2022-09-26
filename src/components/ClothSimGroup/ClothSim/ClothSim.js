@@ -10,7 +10,7 @@ export function ClothSim() {
   let gl = useThree((s) => s.gl)
   let mouse = useThree((s) => s.mouse)
   let [ready, setReady] = useState(false)
-  let point = new Vector3(0, 0, 200)
+  let point = new Vector3(0, -100, 200)
   useEffect(() => {
     setReady(true)
   }, [])

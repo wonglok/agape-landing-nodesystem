@@ -22,7 +22,7 @@ acceleration += gravity;
 
 // 2. apply the spring force
 float restLength = yAnchor - offsets.y;
-float springConstant = 2.0;
+float springConstant = 15.0;
 
 // Vector pointing from anchor to point position
 vec3 springForce = vec3(nowPos.x - anchor.x, nowPos.y - anchor.y, nowPos.z - anchor.z);
