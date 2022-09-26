@@ -27,7 +27,7 @@ export function ClothSim() {
   })
   return (
     <group>
-      <Sphere ref={ball} args={[25, 32, 32]}>
+      <Sphere ref={ball} args={[15, 32, 32]}>
         <meshPhysicalMaterial
           transmission={1}
           roughness={0}
@@ -35,6 +35,8 @@ export function ClothSim() {
           reflectivity={1.0}
           thickness={20}
           metalness={0.1}
+          transparent={true}
+          opacity={0.5}
         ></meshPhysicalMaterial>
       </Sphere>
       {/*  */}

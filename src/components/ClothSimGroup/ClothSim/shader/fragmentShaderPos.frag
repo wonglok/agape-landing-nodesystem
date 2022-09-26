@@ -26,8 +26,8 @@ void main (void) {
 
   if (posData.w == 0.0) {
     posData.x = (uv.x * 2.0 - 1.0) * 100.0;
-    posData.y = (uv.y * 2.0 - 1.0) * 100.0;
-    posData.z = 0.0;
+    posData.y = 0.0;
+    posData.z = (uv.y * 2.0 - 1.0) * -100.0;
     posData.w = 1.0;
     gl_FragColor = vec4(posData.x, posData.y, posData.z, 1.0);
 

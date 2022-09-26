@@ -6,7 +6,7 @@ const Page = () => {
     <>
       <ClothSim></ClothSim>
       <OrbitControls
-        object-position={[0, 0, 150]}
+        object-position={[0, 150, 150]}
         object-far={100000}
         object-near={1}
       ></OrbitControls>

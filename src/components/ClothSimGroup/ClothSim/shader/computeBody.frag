@@ -17,7 +17,7 @@ float mass = 24.0;
 vec3 acceleration = vec3(0.0, 0.0, 0.0);
 
 // 1. apply gravity's force:
-vec3 gravity = vec3(0.0, 5.0, 0.0);
+vec3 gravity = vec3(0.0, 3.0, 0.0);
 gravity /= mass;
 acceleration += gravity;
 
