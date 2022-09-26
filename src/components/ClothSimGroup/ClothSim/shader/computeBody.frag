@@ -55,7 +55,6 @@ if (mDist < 25.0) {
 hand /= mass;
 acceleration += hand;
 
-
 velocity.rgb += acceleration;
 velocity.rgb *= damping;
 

@@ -5,7 +5,7 @@ import { Core } from './Core'
 export const ConfigCanvas = {
   mode: 'concurrent',
   shadows: true,
-  gl: { antialias: false, logarithmicDepthBuffer: true },
+  gl: { antialias: false },
   onCreated: (st) => {
     st.scene.background = new Color('#ffffff')
     st.gl.physicallyCorrectLights = true

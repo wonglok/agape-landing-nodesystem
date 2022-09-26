@@ -5,6 +5,7 @@ import {
   BufferGeometry,
   Clock,
   InstancedBufferGeometry,
+  Mesh,
   MeshPhysicalMaterial,
   // Mesh,
   // MeshStandardMaterial,
@@ -23,6 +24,7 @@ import { Core } from '@/helpers/Core'
 import md5 from 'md5'
 import displayFragment from './shader/display.frag'
 import displayVertex from './shader/display.vert'
+import { DoubleSide } from 'three'
 
 export class MyCloth extends Object3D {
   constructor({ gl, mouse }) {
@@ -218,18 +220,98 @@ export class MyCloth extends Object3D {
       this.mat.uniforms.time.value = et
       this.mat.uniforms.delta.value = dt
       this.mat.uniforms.pos0.value = this.getTexAPos()
-      this.mat.uniforms.vel0.value = this.getTexAPos()
+      this.mat.uniforms.vel0.value = this.getTexAVel()
       this.mat.uniforms.offset0.value = this.getTexAOffset()
     })
 
-    this.pts = new Points(this.buff, this.mat)
-    this.pts.frustumCulled = false
-    this.add(this.pts)
+    // this.pts = new Points(this.buff, this.mat)
+    // this.pts.frustumCulled = false
+    // this.add(this.pts)
+
+    this.plane = new Mesh(
+      new PlaneBufferGeometry(200, 200, this.sizeX, this.sizeY),
+      getClothMaterial({
+        getter: () => {
+          return this.getTexAPos()
+        },
+      })
+    )
+    this.plane.frustumCulled = false
+    this.add(this.plane)
 
     this.core.onClean(() => {
-      this.pts.removeFromParent()
+      this.clear()
     })
   }
+}
+
+let getClothMaterial = ({ getter }) => {
+  let mat = new MeshPhysicalMaterial({
+    color: '#ff00ff',
+    side: DoubleSide,
+    transmission: 1,
+    roughness: 0,
+    ior: 1.5,
+    reflectivity: 1.0,
+    thickness: 15,
+    metalness: 0.1,
+  })
+
+  mat.onBeforeCompile = (shader) => {
+    //
+    shader.uniforms.cloth = {
+      get value() {
+        return getter()
+      },
+    }
+
+    let atBeginV = `
+    uniform sampler2D cloth;
+    `
+
+    let transformV3Normal = `
+        vec4 nPos = texture2D(cloth, uv);
+
+        float seg = 1.0 / 256.0;
+
+        vec4 nPosU = texture2D(cloth, vec2(uv.x, uv.y + seg));
+        vec4 nPosD = texture2D(cloth, vec2(uv.x, uv.y - seg));
+
+        vec4 nPosL = texture2D(cloth, vec2(uv.x + seg, uv.y));
+        vec4 nPosR = texture2D(cloth, vec2(uv.x - seg, uv.y));
+
+
+        vec3 objectNormal = normalize(((nPosU.rgb - nPosD.rgb) + (nPosL.rgb - nPosR.rgb)) / 2.0);
+      `
+
+    let transformV3 = `
+
+          vec3 transformed = vec3( nPos );
+
+    `
+
+    // let atEndV = `
+    // `
+
+    shader.vertexShader = shader.vertexShader.replace(
+      `void main() {`,
+      `${atBeginV.trim()} void main() {`
+    )
+
+    shader.vertexShader = shader.vertexShader.replace(
+      `#include <begin_vertex>`,
+      `${transformV3}`
+    )
+    shader.vertexShader = shader.vertexShader.replace(
+      `#include <beginnormal_vertex>`,
+      `${transformV3Normal}`
+    )
+
+    //
+    shader.vertexShader = `${shader.vertexShader.replace(``, ``)}`
+    //
+  }
+  return mat
 }
 
 MyCloth.key = md5(
