@@ -280,8 +280,7 @@ let getClothMaterial = ({ getter }) => {
         vec4 nPosL = texture2D(cloth, vec2(uv.x + seg, uv.y));
         vec4 nPosR = texture2D(cloth, vec2(uv.x - seg, uv.y));
 
-
-        vec3 objectNormal = normalize(((nPosU.rgb - nPosD.rgb) + (nPosL.rgb - nPosR.rgb)) / 2.0);
+        vec3 objectNormal = normalize(nPos.rgb - ((nPosU.rgb + nPosD.rgb + nPosL.rgb + nPosR.rgb)) / 4.0);
       `
 
     let transformV3 = `
