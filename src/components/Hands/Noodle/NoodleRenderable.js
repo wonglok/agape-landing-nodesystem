@@ -2,7 +2,6 @@
 import {
   // Vector3,
   // BufferAttribute,
-  // CylinderBufferGeometry,
   // InstancedBufferAttribute,
   // InstancedBufferGeometry,
   // Vector2,

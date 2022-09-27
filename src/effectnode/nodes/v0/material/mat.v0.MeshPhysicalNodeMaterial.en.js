@@ -1,6 +1,9 @@
 import { getID } from '@/helpers/getID'
-import { NodeMaterial } from 'three140/examples/jsm/nodes/Nodes'
-import { MeshPhysicalMaterial } from 'three140'
+import { MeshPhysicalMaterial } from 'three'
+import { NodeMaterial } from 'three/examples/jsm/nodes/Nodes'
+
+//BoxGeometry,
+// import { Mesh, MeshStandardMaterial } from 'three140'
 // import { materialAlphaTest } from 'three/examples/jsm/nodes/Nodes'
 
 export async function nodeData({ defaultData, nodeID }) {
@@ -48,54 +51,32 @@ export async function nodeData({ defaultData, nodeID }) {
     uniforms: [],
 
     //
-
-    //
-    //
   }
 }
 
-// object.protected
-
 export function effect({ node, mini, data, setComponent }) {
+  //
   let applyToIt = (v) => {
     mini.ready.itself.then((it) => {
       it.material = v
     })
   }
-  let physicalMaterialInstance = new MeshPhysicalMaterial()
-  let nodeMaterial = NodeMaterial.fromMaterial(physicalMaterialInstance)
 
-  applyToIt(nodeMaterial)
+  let inside = new MeshPhysicalMaterial({
+    color: 'white',
+  })
+  let physicalMaterialInstance = NodeMaterial.fromMaterial(inside)
+
+  applyToIt(physicalMaterialInstance)
 
   node.raw.inputs.forEach((it) => {
     node[`in_${it.name}`].stream((v) => {
-      nodeMaterial[`${it.name}Node`] = v
+      //
+      physicalMaterialInstance[`${it.name}Node`] = v
+
+      applyToIt(physicalMaterialInstance)
     })
   })
-
-  //
-
-  // node.in_color.stream((v) => {
-  //   nodeMaterial.colorNode = v
-  // })
-
-  // node.in_map.stream((v) => {
-  //   nodeMaterial.mapNode = v
-  // })
-
-  // node.in_normalMap.stream((v) => {
-  //   nodeMaterial.normalMapNode = v
-  // })
-
-  //
-
-  // console.log(data.raw)
 }
-
-//
-
-//
-
-//
 
 //

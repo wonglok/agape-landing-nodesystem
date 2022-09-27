@@ -3,7 +3,7 @@ import { Environment } from '@react-three/drei'
 import { useLoader, useThree } from '@react-three/fiber'
 import { Suspense, useEffect } from 'react'
 import { EquirectangularReflectionMapping } from 'three140'
-import { RGBELoader } from 'three140/examples/jsm/loaders/RGBELoader'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
 export function EnvOutlet() {
   let hdrLink = useEffectNode((s) => s.hdrLink)

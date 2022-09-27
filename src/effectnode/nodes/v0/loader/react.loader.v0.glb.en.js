@@ -1,8 +1,8 @@
 import { EffectNodeRuntime } from '@/effectnode/component/EffectNodeRuntime'
 import { getID } from '@/helpers/getID'
 import { useEffect, useState } from 'react'
-import { DRACOLoader } from 'three140/examples/jsm/loaders/DRACOLoader'
-import { GLTFLoader } from 'three140/examples/jsm/loaders/GLTFLoader'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 // import { Bloom, EffectComposer, Noise } from '@react-three/postprocessing'
 
 export async function nodeData({ defaultData, nodeID }) {
@@ -33,12 +33,13 @@ export async function nodeData({ defaultData, nodeID }) {
     ],
 
     //
-    material: [],
+    material: [
+      //
+    ],
 
     //
     // uniforms: [
     //   ...defs.uniforms,
-
     //   // {
     //   //   id: getID(),
     //   //   nodeID,

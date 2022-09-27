@@ -2,7 +2,6 @@ import { Core } from '@/helpers/Core'
 import {
   Vector3,
   // BufferAttribute,
-  // CylinderBufferGeometry,
   // InstancedBufferAttribute,
   // InstancedBufferGeometry,
   // Vector2,

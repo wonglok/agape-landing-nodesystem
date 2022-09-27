@@ -57,7 +57,7 @@ export function DiamondVAT2() {
 
           <Environment preset='warehouse' background></Environment>
 
-          <EffectComposer disableNormalPass multisampling={4}>
+          <EffectComposer multisampling={4}>
             <Bloom
               luminanceThreshold={2}
               intensity={1.5 * 0.1}

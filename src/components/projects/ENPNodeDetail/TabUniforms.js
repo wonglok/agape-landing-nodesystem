@@ -25,8 +25,11 @@ export function TabUnifroms({ node }) {
     }
   }, [])
 
+  let onSaveNow = (mm) => () => {
+    window.dispatchEvent(new CustomEvent('pulse-node', { detail: node }))
+  }
   let onSaveLater = (mm) => () => {
-    window.dispatchEvent(new CustomEvent('reload-node', { detail: node }))
+    // window.dispatchEvent(new CustomEvent('reload-node', { detail: node }))
     window.dispatchEvent(new CustomEvent('reload-3d-gui', { detail: node }))
     reload((s) => s + 1)
   }
@@ -158,6 +161,7 @@ export function TabUnifroms({ node }) {
                     label={mm.name}
                     value={mm.value}
                     onSaveLater={onSaveLater(mm)}
+                    onSave={onSaveNow(mm)}
                     onRemove={onRemove(mm)}
                   ></TextureInput>
                 )}
@@ -169,6 +173,7 @@ export function TabUnifroms({ node }) {
                     label={mm.name}
                     value={mm.value}
                     onSaveLater={onSaveLater(mm)}
+                    onSave={onSaveNow(mm)}
                     onRemove={onRemove(mm)}
                   ></GLBInput>
                 )}
@@ -181,6 +186,7 @@ export function TabUnifroms({ node }) {
                     label={mm.name}
                     value={mm.value}
                     onSaveLater={onSaveLater(mm)}
+                    onSave={onSaveNow(mm)}
                     onRemove={onRemove(mm)}
                   ></BoolInput>
                 )}
@@ -192,6 +198,7 @@ export function TabUnifroms({ node }) {
                     label={mm.name}
                     value={mm.value}
                     onSaveLater={onSaveLater(mm)}
+                    onSave={onSaveNow(mm)}
                     onRemove={onRemove(mm)}
                   ></TextInput>
                 )}
@@ -203,6 +210,7 @@ export function TabUnifroms({ node }) {
                     label={mm.name}
                     value={mm.value}
                     onSaveLater={onSaveLater(mm)}
+                    onSave={onSaveNow(mm)}
                     onRemove={onRemove(mm)}
                   ></GLSLInput>
                 )}
@@ -215,6 +223,7 @@ export function TabUnifroms({ node }) {
                     label={mm.name}
                     value={mm.value}
                     onSaveLater={onSaveLater(mm)}
+                    onSave={onSaveNow(mm)}
                     onRemove={onRemove(mm)}
                   ></FloatInput>
                 )}
@@ -227,6 +236,7 @@ export function TabUnifroms({ node }) {
                     label={mm.name}
                     value={mm.value}
                     onSaveLater={onSaveLater(mm)}
+                    onSave={onSaveNow(mm)}
                     onRemove={onRemove(mm)}
                   ></Vector2Input>
                 )}
@@ -239,6 +249,7 @@ export function TabUnifroms({ node }) {
                     label={mm.name}
                     value={mm.value}
                     onSaveLater={onSaveLater(mm)}
+                    onSave={onSaveNow(mm)}
                     onRemove={onRemove(mm)}
                   ></Vector3Input>
                 )}
@@ -251,6 +262,7 @@ export function TabUnifroms({ node }) {
                     label={mm.name}
                     value={mm.value}
                     onSaveLater={onSaveLater(mm)}
+                    onSave={onSaveNow(mm)}
                     onRemove={onRemove(mm)}
                   ></Vector4Input>
                 )}
@@ -262,6 +274,7 @@ export function TabUnifroms({ node }) {
                     label={mm.name}
                     value={mm.value}
                     onSaveLater={onSaveLater(mm)}
+                    onSave={onSaveNow(mm)}
                     onRemove={onRemove(mm)}
                   ></ColorInput>
                 )}
@@ -273,6 +286,7 @@ export function TabUnifroms({ node }) {
                     label={mm.name}
                     value={mm.value}
                     onSaveLater={onSaveLater(mm)}
+                    onSave={onSaveNow(mm)}
                     onRemove={onRemove(mm)}
                   ></ButtonInput>
                 )}
@@ -329,6 +343,7 @@ function ColorInput({
           onSaveLater()
         }, 15)
       })
+
     if (!object.protected && ENABLE_REMOVE_BTN) {
       const btn = pane.addButton({
         title: 'Remove',

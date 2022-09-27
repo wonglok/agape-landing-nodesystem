@@ -1,6 +1,6 @@
 import { useLoader, useThree } from '@react-three/fiber'
 import { TextureLoader } from 'three140'
-import { RGBELoader } from 'three140/examples/jsm/loaders/RGBELoader'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 import { EquirectangularReflectionMapping, sRGBEncoding } from 'three140'
 import { useEffect } from 'react'
 

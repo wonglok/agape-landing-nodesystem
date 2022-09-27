@@ -100,121 +100,142 @@ export function ENPNodeDetail() {
             {/*  */}
 
             {/*  */}
-            {paramsTab === 'conns' && (
-              <>
-                <div>
-                  <div className='p-2 text-xl'>Node Removal</div>
-                  <div className='p-2'>
-                    <div key={node._id}>
-                      {/*  */}
-                      {/*  */}
 
-                      <button
-                        className='p-2 bg-red-200'
-                        onClick={() => {
-                          if (!window.confirm('remove?')) {
-                            return
-                          }
-                          //
-                          //
-                          removeNode(node)
-                          // effectNode.connections
+            <div className='relative p-3 bg-yellow-100'>
+              {
+                <>
+                  <div>
+                    <div className='p-2 text-xl'>Remove Node</div>
+                    <div className='p-2'>
+                      <div key={node._id}>
+                        {/*  */}
+                        {/*  */}
 
-                          effectNode.connections
-                            .filter((it) => {
-                              return (
-                                it.input.nodeID === node._id ||
-                                it.output.nodeID === node._id
-                              )
-                            })
-                            .forEach((conn) => {
-                              removeLink(conn)
-                            })
-                          setActiveNodeID('')
-                          refreshSystem()
-                        }}
-                      >
-                        {`Remove this node and it's connections.`}
-                      </button>
+                        <button
+                          className='px-2 py-2 bg-red-200 border-2 border-red-500 rounded-2xl'
+                          onClick={() => {
+                            if (!window.confirm('remove?')) {
+                              return
+                            }
+                            //
+                            //
+                            removeNode(node)
+                            // effectNode.connections
+
+                            effectNode.connections
+                              .filter((it) => {
+                                return (
+                                  it.input.nodeID === node._id ||
+                                  it.output.nodeID === node._id
+                                )
+                              })
+                              .forEach((conn) => {
+                                removeLink(conn)
+                              })
+                            setActiveNodeID('')
+                            refreshSystem()
+                          }}
+                        >
+                          Remove Node & Links
+                          <div className='px-2 py-2 m-1 bg-white rounded-xl'>
+                            Node: {`${node.displayTitle}`}
+                          </div>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className='p-2'>
-                  <div className='mb-3 text-xl'>Connections Removal</div>
-                  {effectNode.connections.length === 0 && (
-                    <div className='mb-3'>No Connections...</div>
-                  )}
+                  <div className='p-2 text-xl'>Remove Connections</div>
+                  <div className='p-2'>
+                    {effectNode.connections.length === 0 && (
+                      <div className='mb-3'>No Connections...</div>
+                    )}
 
-                  <div className=''>
-                    {effectNode.connections
-                      .filter((e) => {
-                        return e.input.nodeID === node._id
-                      })
-                      .map((conn) => {
-                        return (
-                          <div key={conn._id}>
-                            {/*  */}
-                            {/*  */}
-                            {/*  */}
+                    <div className=''>
+                      {effectNode.connections
+                        .filter((e) => {
+                          return e.input.nodeID === node._id
+                        })
+                        .map((conn) => {
+                          return (
+                            <div key={conn._id}>
+                              {/*  */}
+                              {/*  */}
+                              {/*  */}
 
-                            <button
-                              className='p-2 bg-red-200'
-                              onClick={() => {
-                                //
-                                removeLink(conn)
-                                //
-                              }}
-                            >
-                              Remov Link:
-                              <NodeLabel
-                                nodeID={conn.output.nodeID}
-                                socketID={conn.output._id}
-                                nodes={nodes}
-                              />
-                            </button>
-                          </div>
-                        )
-                      })}
+                              <button
+                                className='p-2 bg-red-200 border-2 border-red-500 rounded-2xl'
+                                onClick={() => {
+                                  //
+                                  removeLink(conn)
+                                  //
+                                }}
+                              >
+                                <div className='mb-1 textp-center'>
+                                  Remove Link
+                                </div>
+                                <NodeLabel
+                                  nodeID={conn.output.nodeID}
+                                  socketID={conn.output._id}
+                                  nodes={nodes}
+                                />
+                              </button>
+                            </div>
+                          )
+                        })}
+                    </div>
+                    <div className=''>
+                      {effectNode.connections
+                        .filter((e) => {
+                          return e.output.nodeID === node._id
+                        })
+                        .map((conn) => {
+                          //
+                          return (
+                            <div key={conn._id}>
+                              {/*  */}
+                              {/*  */}
+                              {/*  */}
+
+                              <button
+                                className='p-2 bg-red-200 border-2 border-red-500 rounded-2xl'
+                                onClick={() => {
+                                  //
+                                  removeLink(conn)
+                                  //
+                                }}
+                              >
+                                <div className='mb-1 textp-center'>
+                                  Remove Link
+                                </div>
+                                <NodeLabel
+                                  nodeID={conn.input.nodeID}
+                                  socketID={conn.input._id}
+                                  nodes={nodes}
+                                />
+                              </button>
+                            </div>
+                          )
+                        })}
+                    </div>
                   </div>
-                  <div className=''>
-                    {effectNode.connections
-                      .filter((e) => {
-                        return e.output.nodeID === node._id
-                      })
-                      .map((conn) => {
-                        //
-                        console.log(conn)
-
-                        //
-                        return (
-                          <div key={conn._id}>
-                            {/*  */}
-                            {/*  */}
-                            {/*  */}
-
-                            <button
-                              className='p-2 bg-red-200'
-                              onClick={() => {
-                                //
-                                removeLink(conn)
-                                //
-                              }}
-                            >
-                              Remove Link:{' '}
-                              <NodeLabel
-                                nodeID={conn.input.nodeID}
-                                socketID={conn.input._id}
-                                nodes={nodes}
-                              />
-                            </button>
-                          </div>
-                        )
-                      })}
-                  </div>
+                </>
+              }
+              {paramsTab === 'conns' && (
+                <div className='absolute top-0 left-0 flex items-center justify-center w-full h-full bg-yellow-500 backdrop-blur-sm bg-opacity-50'>
+                  <button
+                    className='p-3 px-6 bg-yellow-300 border-2 border-yellow-100 rounded-xl'
+                    onClick={() => {
+                      //
+                      setParamsTab('')
+                      //
+                    }}
+                  >
+                    Enable Remove Buttons
+                  </button>
                 </div>
-              </>
-            )}
+              )}
+            </div>
           </div>
 
           {/*  */}
@@ -232,8 +253,13 @@ function NodeLabel({ nodeID, nodes, socketID }) {
   let socketIDX = combiend.findIndex((e) => e._id === socketID)
 
   return (
-    <span className='px-2 py-1 bg-gray-200 rounded-lg'>
-      Remote Node: {node?.displayTitle} at {socket?.name || socketIDX} Socket
-    </span>
+    <div>
+      <div className='px-2 py-2 text-left rounded-t-xl bg-gray-50'>
+        <>Node: {node?.displayTitle}</>
+      </div>
+      <div className='px-2 py-2 text-left bg-gray-200 rounded-b-xl'>
+        Socket: {socket?.name || socketIDX}
+      </div>
+    </div>
   )
 }

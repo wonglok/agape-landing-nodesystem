@@ -69,7 +69,7 @@ export function Diamond() {
 
           <Environment preset='apartment' background></Environment>
 
-          <EffectComposer disableNormalPass multisampling={4}>
+          <EffectComposer multisampling={4}>
             <Bloom
               luminanceThreshold={2}
               intensity={1.5}

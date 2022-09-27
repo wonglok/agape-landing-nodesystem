@@ -1,6 +1,6 @@
 import {
   BufferAttribute,
-  CylinderBufferGeometry,
+  CylinderGeometry,
   InstancedBufferAttribute,
   InstancedBufferGeometry,
   Vector2,
@@ -19,7 +19,7 @@ export class NoodleGeo {
     const radius = 1
     const length = 1
 
-    const cylinderBufferGeo = new CylinderBufferGeometry(
+    const cylinderBufferGeo = new CylinderGeometry(
       radius,
       radius,
       length,

@@ -1,6 +1,6 @@
 import { getID } from '@/helpers/getID'
 import { Color } from 'three'
-import { UniformNode } from 'three140/examples/jsm/nodes/Nodes'
+import { UniformNode } from 'three/examples/jsm/nodes/Nodes'
 
 export async function nodeData({ defaultData, nodeID }) {
   return {
@@ -38,8 +38,6 @@ export async function nodeData({ defaultData, nodeID }) {
 //
 
 //
-
-//
 export function effect({ node, mini, data, setComponent }) {
   let colorObj = new Color(data.value.color)
   let uniform = new UniformNode(colorObj)
@@ -51,15 +49,14 @@ export function effect({ node, mini, data, setComponent }) {
 
   //
   //
-  //
-
-  // AllNodes.
   // let applyToIt = (v) => {
   //   mini.ready.itself.then((it) => {
   //     it.material = v
   //   })
   // }
   //
+  //
+
   // let physicalMaterialInstance = new MeshPhysicalMaterial()
   // let nodeMaterial = NodeMaterial.fromMaterial(physicalMaterialInstance)
   // applyToIt(nodeMaterial)

@@ -141,7 +141,6 @@ export function Effects({}) {
             // camera?: THREE.Camera;
             // scene?: THREE.Scene;
             multisampling={0}
-            disableNormalPass
           >
             {/* <Noise premultiply={true} opacity={0.8} /> */}
             {/*

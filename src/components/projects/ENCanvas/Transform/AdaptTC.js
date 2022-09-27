@@ -91,7 +91,7 @@ export function AdaptTC({ node, children, onScreenPass = () => {} }) {
       )} */}
 
       {/* <Screen fbo={fbo}></Screen> */}
-      <TransformControlsFix fakeScene={fakeScene}></TransformControlsFix>
+      {/* <TransformControlsFix fakeScene={fakeScene}></TransformControlsFix> */}
 
       {<ENTCNode key={reloadGraphID} fakeScene={fakeScene} node={node} />}
     </>

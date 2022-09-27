@@ -15,12 +15,12 @@ import {
   SphereBufferGeometry,
   Vector3,
 } from 'three140'
-import { GLTFExporter } from 'three140/examples/jsm/exporters/GLTFExporter'
-import { DRACOLoader } from 'three140/examples/jsm/loaders/DRACOLoader'
-import { GLTFLoader } from 'three140/examples/jsm/loaders/GLTFLoader'
-import { clone } from 'three140/examples/jsm/utils/SkeletonUtils'
+import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { clone } from 'three/examples/jsm/utils/SkeletonUtils'
 
-//
+//.
 import { WebIO } from '@gltf-transform/core'
 import { DracoMeshCompression } from '@gltf-transform/extensions'
 

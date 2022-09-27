@@ -1,9 +1,9 @@
 import slugify from 'slugify'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
-import { DRACOLoader } from 'three140/examples/jsm/loaders/DRACOLoader'
-import { GLTFLoader } from 'three140/examples/jsm/loaders/GLTFLoader'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import create from 'zustand'
-import { GLTFExporter } from 'three140/examples/jsm/exporters/GLTFExporter'
+import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter'
 import { DracoMeshCompression } from '@gltf-transform/extensions'
 import { WebIO } from '@gltf-transform/core'
 

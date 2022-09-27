@@ -172,11 +172,7 @@ export function EffectsLanding() {
 
   return (
     <group>
-      <EffectComposer
-        disableNormalPass={false}
-        stencilBuffer={false}
-        multisampling={4}
-      >
+      <EffectComposer multisampling={0}>
         <Noise opacity={1} premultiply={true}></Noise>
         <Noise opacity={0.5} premultiply={true}></Noise>
         {!GPUTier.isMobile && GPUTier.tier >= 3 && (

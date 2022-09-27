@@ -4,7 +4,6 @@ import {
   //
   // InstancedMesh,
   // PlaneBufferGeometry,
-  // CylinderBufferGeometry,
   FrontSide,
   InstancedBufferAttribute,
   InstancedBufferGeometry,

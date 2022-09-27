@@ -44,7 +44,9 @@ export function NodeSingle({ effectNode, node }) {
     if (!sel || (sel && !sel[0])) {
       setActiveNodeID('')
     }
-  }, [sel, setActiveNodeID])
+
+    return () => {}
+  }, [node, sel, setActiveNodeID])
 
   if (!node) {
     return <></>
