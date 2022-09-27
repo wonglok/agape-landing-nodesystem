@@ -127,7 +127,7 @@ export function HtmlHeader() {
             data-style='max-height: 860px'
           />
         </section>
-        <section className='relative pb-40 mt-40 bg-slate-100 bg-opacity-75'>
+        <section className='relative pb-40  bg-slate-100 bg-opacity-75'>
           <div
             className='absolute top-0 left-0 right-0 bottom-auto w-full'
             data-style='height: 80px'
@@ -149,7 +149,7 @@ export function HtmlHeader() {
           </div>
           <div className='container mx-auto'>
             <div className='flex flex-wrap items-center'>
-              <div className='w-10/12 px-12 ml-auto mr-auto -mt-32 md:w-6/12 lg:w-4/12 md:px-4'>
+              <div className='w-10/12 ml-auto mr-auto -mt-32 lg:px-12 md:w-6/12 lg:w-4/12 md:px-4'>
                 <div className='relative flex flex-col w-full min-w-0 mb-6 break-words bg-pink-600 rounded-lg shadow-lg'>
                   <img
                     alt='...'
@@ -300,36 +300,67 @@ export function HtmlHeader() {
                     src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-btn.png'
                     className='absolute w-full align-middle rounded shadow-lg'
                     data-style='max-width: 100px; left: 145px; top: -29px; z-index: 3'
+                    style={{
+                      maxWidth: '100px',
+                      top: '-29',
+                      left: '145px',
+                    }}
                   />
                   <img
                     alt='...'
                     src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-profile-card.png'
                     className='absolute w-full align-middle rounded-lg shadow-lg'
                     data-style='max-width: 210px; left: 260px; top: -160px'
+                    style={{
+                      maxWidth: '210px',
+                      top: '-160px',
+                      left: '260px',
+                    }}
                   />
                   <img
                     alt='...'
                     src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-info-card.png'
                     className='absolute w-full align-middle rounded-lg shadow-lg'
                     data-style='max-width: 180px; left: 40px; top: -225px; z-index: 2'
+                    style={{
+                      maxWidth: '180px',
+                      top: '-225px',
+                      left: '40px',
+                      zIndex: 2,
+                    }}
                   />
                   <img
                     alt='...'
                     src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-info-2.png'
                     className='absolute w-full align-middle rounded-lg shadow-2xl'
                     data-style='max-width: 200px; left: -50px; top: 25px'
+                    style={{
+                      maxWidth: '200px',
+                      top: '25px',
+                      left: '-50px',
+                    }}
                   />
                   <img
                     alt='...'
                     src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-menu.png'
                     className='absolute w-full align-middle rounded shadow-lg'
                     data-style='max-width: 580px; left: -20px; top: 210px'
+                    style={{
+                      maxWidth: '580px',
+                      top: '210px',
+                      left: '-20px',
+                    }}
                   />
                   <img
                     alt='...'
                     src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-btn-pink.png'
                     className='absolute w-full align-middle rounded shadow-xl'
                     data-style='max-width: 120px; left: 195px; top: 95px'
+                    style={{
+                      maxWidth: '120px',
+                      top: '95px',
+                      left: '195px',
+                    }}
                   />
                 </div>
               </div>
@@ -639,9 +670,9 @@ export function HtmlHeader() {
           </div>
         </section>
         {/*  */}
-        <section className='relative pt-32 pb-16 bg-slate-200'>
-          <div
-            className='absolute top-0 left-0 right-0 bottom-auto w-full'
+        <section className='relative pt-32 pb-16  bg-slate-200'>
+          {/* <div
+            className='absolute top-0 left-0 right-0 bottom-auto w-full '
             data-style='height: 80px'
           >
             <svg
@@ -654,13 +685,14 @@ export function HtmlHeader() {
               y='0'
             >
               <polygon
-                className='fill-current text-slate-200'
+                className='opacity-50 fill-current text-slate-200'
                 points='2560 0 2560 100 0 100'
               ></polygon>
             </svg>
-          </div>
-          <div className='container mx-auto'>
-            <div className='relative z-10 flex flex-wrap justify-center px-12 py-16 -mt-64 bg-white rounded-lg shadow-xl'>
+          </div> */}
+          {/* bg-opacity-80 */}
+          <div className='container mx-auto '>
+            <div className='relative z-10 flex flex-wrap justify-center px-12 py-16 -mt-64 bg-white rounded-lg shadow-xl '>
               <div className='w-full text-center lg:w-8/12'>
                 <p className='text-4xl text-center'>
                   <span role='img' aria-label='love'>
@@ -697,7 +729,7 @@ export function HtmlHeader() {
             </div>
           </div>
         </section>
-        <footer className='relative pt-8 pb-6 bg-slate-200'>
+        <footer className='relative pt-8 pb-6 bg-slate-200 bg-opacity-80'>
           <div
             className='absolute top-0 left-0 right-0 bottom-auto w-full -mt-20 overflow-hidden pointer-events-none'
             data-style='height: 80px'

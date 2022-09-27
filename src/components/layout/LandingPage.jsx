@@ -26,7 +26,23 @@ const LandingPage = ({ router, children }) => {
         left: 0,
       }}
       dpr={typeof window === 'undefined' ? 1 : window.devicePixelRatio / 0.75}
-      {...ConfigCanvas}
+      {...{
+        mode: 'concurrent',
+        shadows: true,
+        gl: { antialias: true, logarithmicDepthBuffer: true },
+        onCreated: (st) => {
+          st.scene.background = new Color('#ffffff')
+          st.gl.physicallyCorrectLights = true
+          st.gl.outputEncoding = sRGBEncoding
+          st.gl.shadowMap.enabled = true
+
+          Core.now.canvas = Core.makeDisposableNode({ name: 'canvas' }).sub
+          for (let kn in st) {
+            Core.now.canvas.now[kn] = st[kn]
+          }
+          st.gl.setAnimationLoop(Core.work)
+        },
+      }}
       // gl={{ antialias: false, logarithmicDepthBuffer: true }}
       // onCreated={(st) => {
       //   st.scene.background = new Color('#ffffff')
