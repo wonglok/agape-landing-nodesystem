@@ -1,3 +1,5 @@
+let path = require('path')
+
 const nextConfig = {
   webpack(config, { isServer }) {
     // audio support
@@ -25,6 +27,17 @@ const nextConfig = {
       exclude: /node_modules/,
       use: ['raw-loader', 'glslify-loader'],
     })
+
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+        'three/nodes$': path.resolve(
+          __dirname,
+          './node_modules/three/examples/jsm/nodes/Nodes.js'
+        ),
+      },
+    }
 
     return config
   },

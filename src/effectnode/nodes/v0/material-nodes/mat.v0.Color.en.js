@@ -40,7 +40,7 @@ export async function nodeData({ defaultData, nodeID }) {
 //
 export function effect({ node, mini, data, setComponent }) {
   let colorObj = new Color(data.value.color)
-  let uniform = new UniformNode(colorObj)
+  let uniform = new UniformNode(colorObj, 'color')
 
   data.uniforms['color']((v) => {
     colorObj.set(v.value)

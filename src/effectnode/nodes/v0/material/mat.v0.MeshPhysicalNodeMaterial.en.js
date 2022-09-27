@@ -1,7 +1,7 @@
 import { getID } from '@/helpers/getID'
 import { MeshPhysicalMaterial } from 'three'
-import { NodeMaterial } from 'three/examples/jsm/nodes/Nodes'
-
+import * as Nodes from 'three/examples/jsm/nodes/Nodes'
+import { nodeFrame } from 'three/examples/jsm/renderers/webgl/nodes/WebGLNodes'
 //BoxGeometry,
 // import { Mesh, MeshStandardMaterial } from 'three140'
 // import { materialAlphaTest } from 'three/examples/jsm/nodes/Nodes'
@@ -54,6 +54,12 @@ export async function nodeData({ defaultData, nodeID }) {
   }
 }
 
+if (typeof window !== 'undefined') {
+  setInterval(() => {
+    nodeFrame.update()
+  })
+}
+
 export function effect({ node, mini, data, setComponent }) {
   //
   let applyToIt = (v) => {
@@ -62,21 +68,30 @@ export function effect({ node, mini, data, setComponent }) {
     })
   }
 
-  let inside = new MeshPhysicalMaterial({
-    color: 'white',
-  })
-  let physicalMaterialInstance = NodeMaterial.fromMaterial(inside)
+  //
+  let physicalMaterialInstance = Nodes.NodeMaterial.fromMaterial(
+    new MeshPhysicalMaterial()
+  )
 
+  //
   applyToIt(physicalMaterialInstance)
 
   node.raw.inputs.forEach((it) => {
     node[`in_${it.name}`].stream((v) => {
       //
       physicalMaterialInstance[`${it.name}Node`] = v
+      physicalMaterialInstance.needsUpdate = true
 
+      //
       applyToIt(physicalMaterialInstance)
     })
   })
+
+  //
 }
+
+//
+
+//
 
 //
