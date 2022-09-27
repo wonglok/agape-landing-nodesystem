@@ -37,7 +37,6 @@ export async function nodeData({ defaultData, nodeID }) {
       //
     ],
 
-    //
     // uniforms: [
     //   ...defs.uniforms,
     //   // {
@@ -49,6 +48,7 @@ export async function nodeData({ defaultData, nodeID }) {
     //   //   `,
     //   // },
     // ],
+    //
 
     uniforms: [
       {

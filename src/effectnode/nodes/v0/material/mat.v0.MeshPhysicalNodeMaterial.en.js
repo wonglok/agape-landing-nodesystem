@@ -1,6 +1,14 @@
 import { getID } from '@/helpers/getID'
 import { MeshPhysicalMaterial } from 'three'
-import * as Nodes from 'three/examples/jsm/nodes/Nodes'
+import {
+  NodeMaterial,
+  checker,
+  mul,
+  add,
+  uv,
+  vec2,
+  timerLocal,
+} from 'three/examples/jsm/nodes/Nodes'
 //BoxGeometry,
 // import { Mesh, MeshStandardMaterial } from 'three140'
 // import { materialAlphaTest } from 'three/examples/jsm/nodes/Nodes'
@@ -41,26 +49,40 @@ export async function nodeData({ defaultData, nodeID }) {
     ],
 
     //
-    outputs: [{ _id: getID(), type: 'output', nodeID }],
+    outputs: [
+      //
+      { _id: getID(), type: 'output', nodeID },
+    ],
 
     //
-    uniforms: [],
-
-    //
+    uniforms: [
+      //
+    ],
   }
 }
-
+let orig = new WeakMap()
 export function effect({ node, mini, data, setComponent }) {
   //
   let applyToIt = (v) => {
     mini.ready.itself.then((it) => {
+      if (!orig.has(it)) {
+        orig.set(it, it.material)
+      }
       it.material = v
+
+      it.userData.onBeforeExport = () => {
+        it.material = orig.get(it)
+      }
     })
   }
 
   //
-  let physicalMaterialInstance = Nodes.NodeMaterial.fromMaterial(
+  let physicalMaterialInstance = NodeMaterial.fromMaterial(
     new MeshPhysicalMaterial()
+  )
+
+  physicalMaterialInstance.emissiveNode = checker(
+    mul(add(uv(), vec2(timerLocal(-0.05), 0)), 20)
   )
 
   //
@@ -68,11 +90,8 @@ export function effect({ node, mini, data, setComponent }) {
 
   node.raw.inputs.forEach((it) => {
     node[`in_${it.name}`].stream((v) => {
-      //
       physicalMaterialInstance[`${it.name}Node`] = v
       physicalMaterialInstance.needsUpdate = true
-
-      //
       applyToIt(physicalMaterialInstance)
     })
   })

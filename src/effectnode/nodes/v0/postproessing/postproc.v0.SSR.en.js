@@ -64,13 +64,17 @@ export async function nodeData({ defaultData, nodeID }) {
 
 export async function effect({ node, mini, data, setComponent }) {
   let props = {
-    USE_MRT: false,
+    temporalResolve: true,
+    STRETCH_MISSED_RAYS: true,
+    USE_MRT: true,
     USE_NORMALMAP: true,
     USE_ROUGHNESSMAP: true,
     ENABLE_JITTERING: true,
+    ENABLE_BLUR: false,
+    DITHERING: false,
     temporalResolveMix: 0.5,
     temporalResolveCorrectionMix: 0.5,
-    maxSamples: 5,
+    maxSamples: 3,
     resolutionScale: 1,
     blurMix: 0.5,
     blurKernelSize: 8,
@@ -78,7 +82,7 @@ export async function effect({ node, mini, data, setComponent }) {
     rayStep: 0.5,
     intensity: 3.5,
     maxRoughness: 1,
-    jitter: 1,
+    jitter: 0.15,
     jitterSpread: 0.5,
     jitterRough: 0.5,
     roughnessFadeOut: 1,
@@ -88,7 +92,7 @@ export async function effect({ node, mini, data, setComponent }) {
     maxDepthDifference: 7,
     maxDepth: 3,
     thickness: 3,
-    ior: 1.05,
+    ior: 1.35,
   }
 
   return await doSharedPostProc({

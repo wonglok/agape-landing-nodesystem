@@ -579,8 +579,8 @@ let generateInside = (set, get) => {
       })
 
       clonedRuntime.traverse((it) => {
-        if (typeof it?.userData?.actionBeforeExport === 'function') {
-          actions.push(it.userData.actionBeforeExport)
+        if (typeof it?.userData?.onBeforeExport === 'function') {
+          actions.push(it.userData.onBeforeExport)
         }
       })
 
