@@ -41,11 +41,8 @@ export async function nodeData({ defaultData, nodeID }) {
       { _id: getID(), name: 'opacity', type: 'input', nodeID },
     ],
 
-    // at least 1
-    outputs: [
-      //
-      { _id: getID(), type: 'output', nodeID },
-    ],
+    //
+    outputs: [{ _id: getID(), type: 'output', nodeID }],
 
     //
     uniforms: [],
