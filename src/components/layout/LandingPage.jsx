@@ -27,9 +27,7 @@ const LandingPage = ({ router, children }) => {
       }}
       dpr={typeof window === 'undefined' ? 1 : window.devicePixelRatio / 0.75}
       {...{
-        mode: 'concurrent',
-        shadows: true,
-        gl: { antialias: true, logarithmicDepthBuffer: true },
+        gl: { antialias: false, logarithmicDepthBuffer: false },
         onCreated: (st) => {
           st.scene.background = new Color('#ffffff')
           st.gl.physicallyCorrectLights = true
