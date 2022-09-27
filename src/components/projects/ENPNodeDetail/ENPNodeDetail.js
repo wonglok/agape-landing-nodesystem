@@ -99,9 +99,8 @@ export function ENPNodeDetail() {
             {/*  */}
             {/*  */}
 
-            <div className='h-1 border-black boder-b'></div>
-            {/* paramsTab === 'conns' &&  */}
-            {
+            {/*  */}
+            {paramsTab === 'conns' && (
               <>
                 <div>
                   <div className='p-2 text-xl'>Node Removal</div>
@@ -141,12 +140,13 @@ export function ENPNodeDetail() {
                   </div>
                 </div>
 
-                <div>
-                  <div className='p-2 text-xl'>Connections</div>
+                <div className='p-2'>
+                  <div className='mb-3 text-xl'>Connections Removal</div>
                   {effectNode.connections.length === 0 && (
-                    <div className='p-2'>No Connections...</div>
+                    <div className='mb-3'>No Connections...</div>
                   )}
-                  <div className='p-2'>
+
+                  <div className=''>
                     {effectNode.connections
                       .filter((e) => {
                         return e.input.nodeID === node._id
@@ -166,18 +166,27 @@ export function ENPNodeDetail() {
                                 //
                               }}
                             >
-                              Remove this input connection. {` ` + conn._id}
+                              Remov Link:
+                              <NodeLabel
+                                nodeID={conn.output.nodeID}
+                                socketID={conn.output._id}
+                                nodes={nodes}
+                              />
                             </button>
                           </div>
                         )
                       })}
                   </div>
-                  <div className='p-2'>
+                  <div className=''>
                     {effectNode.connections
                       .filter((e) => {
                         return e.output.nodeID === node._id
                       })
                       .map((conn) => {
+                        //
+                        console.log(conn)
+
+                        //
                         return (
                           <div key={conn._id}>
                             {/*  */}
@@ -192,7 +201,12 @@ export function ENPNodeDetail() {
                                 //
                               }}
                             >
-                              Remove this output connection. {` ` + conn._id}
+                              Remove Link:{' '}
+                              <NodeLabel
+                                nodeID={conn.input.nodeID}
+                                socketID={conn.input._id}
+                                nodes={nodes}
+                              />
                             </button>
                           </div>
                         )
@@ -200,7 +214,7 @@ export function ENPNodeDetail() {
                   </div>
                 </div>
               </>
-            }
+            )}
           </div>
 
           {/*  */}
@@ -208,5 +222,18 @@ export function ENPNodeDetail() {
         </>
       )}
     </>
+  )
+}
+
+function NodeLabel({ nodeID, nodes, socketID }) {
+  let node = nodes.find((e) => e.nodeID === nodeID)
+  let combiend = [...node.inputs, ...node.outputs]
+  let socket = combiend.find((e) => e._id === socketID)
+  let socketIDX = combiend.findIndex((e) => e._id === socketID)
+
+  return (
+    <span className='px-2 py-1 bg-gray-200 rounded-lg'>
+      Remote Node: {node?.displayTitle} at {socket?.name || socketIDX} Socket
+    </span>
   )
 }
