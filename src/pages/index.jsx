@@ -3,7 +3,7 @@ import { EffectsLanding } from '@/components/canvas/EffectsLanding/EffectsLandin
 // import { ItemHTML } from '@/components/canvas/ItemHTML/ItemHTML'
 import { NightHDR } from '@/components/canvas/NYCJourney/NightHDR'
 import { NYCJourney } from '@/components/canvas/NYCJourney/NYCJourey'
-import { HtmlHeader } from '@/components/landing/HtmlHeader'
+// import { HtmlHeader } from '@/components/landing/HtmlHeader'
 // import { YoSpin } from '@/components/canvas/YoSpin/YoSpin'
 import { useScrollStore } from '@/helpers/useScrollStore'
 //
@@ -48,7 +48,7 @@ const Page = () => {
     </>
   )
 }
-Page.layout = 'Landing'
+Page.layout = 'PromotePage'
 
 Page.SEO = function SEO() {
   let ref = useRef()

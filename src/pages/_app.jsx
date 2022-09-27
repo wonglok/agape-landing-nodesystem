@@ -8,7 +8,7 @@ import { useSystemStore } from '@/helpers/useSystemStore'
 import { PromotePage } from '@/components/layout/PromotePage'
 import { Loader } from '@react-three/drei'
 import { ToastContainer } from 'react-toastify'
-import { LandingPage } from '@/components/layout/LandingPage'
+// import { LandingPage } from '@/components/layout/LandingPage'
 
 function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
   const router = useRouter()
@@ -37,11 +37,11 @@ function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
               <Component router={router} {...pageProps}></Component>
             </PromotePage>
           )}
-          {Component.layout === 'Landing' && (
+          {/* {Component.layout === 'Landing' && (
             <LandingPage router={router} {...pageProps}>
               <Component router={router} {...pageProps}></Component>
             </LandingPage>
-          )}
+          )} */}
 
           {typeof Component.layout === 'undefined' && (
             <Component router={router} {...pageProps}></Component>
