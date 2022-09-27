@@ -69,7 +69,7 @@ export function ENPNodeDetail() {
                 Node: {node.displayTitle}
               </div>
             </div>
-            <div className='w-full bg-gray-200'>
+            {/* <div className='w-full bg-gray-200'>
               <div
                 onClick={() => {
                   //
@@ -88,17 +88,23 @@ export function ENPNodeDetail() {
               >
                 Node & Connection Settings
               </div>
-            </div>
-
-            {paramsTab === 'uniforms' && (
+            </div> */}
+            {/* paramsTab === 'uniforms' &&  */}
+            {
               <>
                 <TabUnifroms node={node}></TabUnifroms>
               </>
-            )}
+            }
+            {/*  */}
+            {/*  */}
+            {/*  */}
 
-            {paramsTab === 'conns' && (
+            <div className='h-1 border-black boder-b'></div>
+            {/* paramsTab === 'conns' &&  */}
+            {
               <>
                 <div>
+                  <div className='p-2 text-xl'>Node Removal</div>
                   <div className='p-2'>
                     <div key={node._id}>
                       {/*  */}
@@ -136,7 +142,7 @@ export function ENPNodeDetail() {
                 </div>
 
                 <div>
-                  <div className='p-2'>Connections</div>
+                  <div className='p-2 text-xl'>Connections</div>
                   {effectNode.connections.length === 0 && (
                     <div className='p-2'>No Connections...</div>
                   )}
@@ -194,7 +200,7 @@ export function ENPNodeDetail() {
                   </div>
                 </div>
               </>
-            )}
+            }
           </div>
 
           {/*  */}

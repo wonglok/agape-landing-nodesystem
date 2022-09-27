@@ -110,6 +110,8 @@ let generateInside = (set, get) => {
     setDown: (isDown) => {
       set({ isDown })
     },
+
+    //
     draggingIOID: false,
     setDraggingIOID: (v) => {
       set({ draggingIOID: v })

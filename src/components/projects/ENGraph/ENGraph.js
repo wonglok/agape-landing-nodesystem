@@ -12,8 +12,8 @@ import { AddItemCurosr } from '../ENGAddItemCurosr/ENGAddItemCurosr'
 import { ENGNodes } from '../ENGNodes/ENGNodes'
 import { ConnectedWires } from '../ENGConnectedWires/ConnectedWires'
 import { ENGDraggingWire } from '../ENGDraggingWire/ENGDraggingWire'
-import { EffectComposer, Noise } from '@react-three/postprocessing'
-import { GLSSR } from '@/helpers/GLSSR'
+// import { Bloom, EffectComposer, Noise } from '@react-three/postprocessing'
+// import { GLSSR } from '@/helpers/GLSSR'
 
 export function ENGraph() {
   return (

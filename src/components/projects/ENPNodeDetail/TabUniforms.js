@@ -52,7 +52,7 @@ export function TabUnifroms({ node }) {
         ev.stopPropagation()
       }}
     >
-      <div className='flex  mb-3'>
+      <div className='hidden mb-3'>
         <input
           type='text'
           className='p-2 bg-gray-200'
@@ -292,6 +292,7 @@ export function TabUnifroms({ node }) {
   )
 }
 
+let ENABLE_REMOVE_BTN = false
 function ColorInput({
   object = { value: { x: 0, y: 0, z: 0, w: 1 } },
   name = 'value',
@@ -328,7 +329,7 @@ function ColorInput({
           onSaveLater()
         }, 15)
       })
-    if (!object.protected) {
+    if (!object.protected && ENABLE_REMOVE_BTN) {
       const btn = pane.addButton({
         title: 'Remove',
         label: 'Remove', // optional
@@ -389,7 +390,7 @@ function Vector4Input({
         }, 15)
       })
 
-    if (!object.protected) {
+    if (!object.protected && ENABLE_REMOVE_BTN) {
       const btn = pane.addButton({
         title: 'Remove',
         label: 'Remove', // optional
@@ -451,7 +452,7 @@ function Vector3Input({
         }, 15)
       })
 
-    if (!object.protected) {
+    if (!object.protected && ENABLE_REMOVE_BTN) {
       const btn = pane.addButton({
         title: 'Remove',
         label: 'Remove', // optional
@@ -490,9 +491,12 @@ function Vector2Input({
 }) {
   let ref = useRef()
   useEffect(() => {
+    //
+
     const pane = new Pane({
       container: ref.current,
     })
+
     let tt = 0
     pane
       .addInput(object, name, {
@@ -513,7 +517,7 @@ function Vector2Input({
         }, 15)
       })
 
-    if (!object.protected) {
+    if (!object.protected && ENABLE_REMOVE_BTN) {
       const btn = pane.addButton({
         title: 'Remove',
         label: 'Remove', // optional
@@ -572,7 +576,7 @@ function FloatInput({
         }, 15)
       })
 
-    if (!object.protected) {
+    if (!object.protected && ENABLE_REMOVE_BTN) {
       const btn = pane.addButton({
         title: 'Remove',
         label: 'Remove', // optional
@@ -617,7 +621,7 @@ function GLSLInput({
       container: ref.current,
     })
 
-    if (!object.protected) {
+    if (!object.protected && ENABLE_REMOVE_BTN) {
       const btn = pane.addButton({
         title: 'Remove',
         label: 'Remove', // optional
@@ -718,7 +722,7 @@ function TextInput({
         }, 15)
       })
 
-    if (!object.protected) {
+    if (!object.protected && ENABLE_REMOVE_BTN) {
       const btn = pane.addButton({
         title: 'Remove',
         label: 'Remove', // optional
@@ -778,7 +782,7 @@ function BoolInput({
         }, 15)
       })
 
-    if (!object.protected) {
+    if (!object.protected && ENABLE_REMOVE_BTN) {
       const btn = pane.addButton({
         title: 'Remove',
         label: 'Remove', // optional
@@ -883,7 +887,7 @@ function TextureInput({
     })
 
     ///
-    if (!object.protected) {
+    if (!object.protected && ENABLE_REMOVE_BTN) {
       const btn = pane.addButton({
         title: 'Remove: ' + label,
         label: 'Remove', // optional
@@ -1015,7 +1019,7 @@ function GLBInput({
     })
 
     ///
-    if (!object.protected) {
+    if (!object.protected && ENABLE_REMOVE_BTN) {
       const btn = pane.addButton({
         title: 'Remove: ' + label,
         label: 'Remove', // optional

@@ -37,11 +37,20 @@ export function NodeSingle({ effectNode, node }) {
 
   let inc = useRef(0)
 
-  let sel = useSelect() || []
+  let sel = useSelect()
+  sel = sel || []
+
+  useEffect(() => {
+    if (!sel || (sel && !sel[0])) {
+      setActiveNodeID('')
+    }
+  }, [sel, setActiveNodeID])
 
   if (!node) {
     return <></>
   }
+
+  //
   return (
     <group ref={ref}>
       <RoundedBox

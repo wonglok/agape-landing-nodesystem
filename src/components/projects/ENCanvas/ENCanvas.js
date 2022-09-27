@@ -58,6 +58,9 @@ function Content() {
     })
   }, [])
 
+  //
+  //
+
   return (
     <group>
       {/* <color attach={'background'} args={['#cceeff']}></color> */}

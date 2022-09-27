@@ -8,7 +8,6 @@ export async function nodeData({ defaultData, nodeID }) {
     ...defaultData,
 
     //
-    //
     inputs: [
       //
       { _id: getID(), name: 'color', type: 'input', nodeID },
@@ -55,6 +54,8 @@ export async function nodeData({ defaultData, nodeID }) {
   }
 }
 
+// object.protected
+
 export function effect({ node, mini, data, setComponent }) {
   let applyToIt = (v) => {
     mini.ready.itself.then((it) => {
@@ -71,6 +72,8 @@ export function effect({ node, mini, data, setComponent }) {
       nodeMaterial[`${it.name}Node`] = v
     })
   })
+
+  //
 
   // node.in_color.stream((v) => {
   //   nodeMaterial.colorNode = v
