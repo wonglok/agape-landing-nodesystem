@@ -752,7 +752,7 @@ export function HtmlHeader() {
           <div className='container px-4 mx-auto'>
             <div className='flex flex-wrap'>
               <div className='w-full px-4 md:w-6/12'>
-                <h4 className='text-3xl font-semibold'>Let's keep in touch!</h4>
+                <h4 className='text-3xl font-semibold'>{`Let's keep in touch!`}</h4>
                 <h5 className='mt-0 mb-2 text-lg text-slate-600'>
                   Find us on any of these platforms, we respond 1-2 business
                   days.
