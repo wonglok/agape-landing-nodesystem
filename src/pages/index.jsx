@@ -105,7 +105,13 @@ Page.SEO = function SEO() {
 function ScrollContentt() {
   return (
     <>
-      <HtmlHeader />
+      <div
+        style={{ height: '200vh' }}
+        className='flex items-center justify-center w-screen  bg-blue-200 bg-opacity-50'
+      >
+        <div className='text-2xl text-gray-200'>Page 2</div>
+      </div>
+      {/* <HtmlHeader /> */}
       {/* <div style={{ height: '800vh' }}></div> */}
       {/* <div
         style={{ height: '100vh' }}
@@ -113,12 +119,7 @@ function ScrollContentt() {
       >
         <div className='text-2xl text-gray-200'>Page 1</div>
       </div>
-      <div
-        style={{ height: '100vh' }}
-        className='flex items-center justify-center w-screen  bg-blue-200 bg-opacity-50'
-      >
-        <div className='text-2xl text-gray-200'>Page 2</div>
-      </div>
+
       <div
         style={{ height: '100vh' }}
         className='flex items-center justify-center w-screen bg-blue-200 bg-opacity-50'
