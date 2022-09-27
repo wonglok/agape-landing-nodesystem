@@ -25,7 +25,6 @@ const LandingPage = ({ router, children }) => {
         top: 0,
         left: 0,
       }}
-      dpr={typeof window === 'undefined' ? 1 : window.devicePixelRatio / 0.75}
       {...{
         gl: { antialias: false, logarithmicDepthBuffer: false },
         onCreated: (st) => {
