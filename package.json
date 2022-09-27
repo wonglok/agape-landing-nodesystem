@@ -58,7 +58,7 @@
     "slugify": "^1.6.5",
     "three": "^0.144.0",
     "three-mesh-bvh": "^0.5.15",
-    "three-stdlib": "^2.12.1",
+    "three-stdlib": "^2.17.0",
     "three144": "npm:three@^0.144.0",
     "three140": "npm:three@^0.140.0",
     "tweakpane": "^1.5.6",
