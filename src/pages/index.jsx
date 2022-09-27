@@ -48,7 +48,7 @@ const Page = () => {
     </>
   )
 }
-Page.layout = 'PromotePage'
+Page.layout = 'Landing'
 
 Page.SEO = function SEO() {
   let ref = useRef()

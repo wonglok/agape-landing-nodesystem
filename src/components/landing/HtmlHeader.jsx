@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 export function HtmlHeader() {
   return (
     <>
@@ -77,7 +78,7 @@ export function HtmlHeader() {
           </div>
         </nav>
         <section
-          className='relative flex items-center h-screen pt-16 header'
+          className='relative flex items-center h-screen pt-16 bg-black header bg-opacity-50'
           data-style='max-height: 860px'
         >
           <div className='container flex flex-wrap items-center mx-auto'>
@@ -461,10 +462,10 @@ export function HtmlHeader() {
                     Complex Documentation
                   </h3>
                   <p className='mt-4 text-lg leading-relaxed text-slate-500'>
-                    This extension comes a lot of fully coded examples that help
+                    {`This extension comes a lot of fully coded examples that help
                     you get started faster. You can adjust the colors and also
                     the programming language. You can change the text and images
-                    and you're good to go.
+                    and you're good to go.`}
                   </p>
                   <ul className='mt-6 list-none'>
                     <li className='py-2'>
@@ -538,7 +539,7 @@ export function HtmlHeader() {
             </div>
           </div>
         </section>
-        <section className='relative block z-1 bg-slate-600'>
+        <section className='relative block z-1 bg-slate-600 bg-opacity-70 '>
           <div className='container mx-auto'>
             <div className='flex flex-wrap justify-center'>
               <div className='w-full px-4 -mt-24 lg:w-12/12'>
@@ -584,7 +585,7 @@ export function HtmlHeader() {
             </div>
           </div>
         </section>
-        <section className='py-20 overflow-hidden bg-slate-600'>
+        <section className='py-20 overflow-hidden bg-slate-600 bg-opacity-70'>
           <div className='container pb-64 mx-auto'>
             <div className='flex flex-wrap justify-center'>
               <div className='w-full px-12 ml-auto mr-auto md:w-5/12 md:px-4 md:mt-64'>
@@ -637,6 +638,7 @@ export function HtmlHeader() {
             </div>
           </div>
         </section>
+        {/*  */}
         <section className='relative pt-32 pb-16 bg-slate-200'>
           <div
             className='absolute top-0 left-0 right-0 bottom-auto w-full'
