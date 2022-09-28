@@ -3,7 +3,7 @@ export function HtmlHeader() {
   return (
     <>
       <section>
-        <nav className='fixed top-0 z-50 flex flex-wrap items-center justify-between w-full px-2 shadow-lg'>
+        <nav className='fixed top-0 z-50 flex flex-wrap items-center justify-between w-full  bg-black shadow-lg bg-opacity-50'>
           <div className='flex items-center justify-center w-full py-4 text-sm text-white bg-black'>
             <div className='mr-3'>AGAPE ENGINE ALPHA PASS</div>
             <a href='/'>
@@ -14,7 +14,7 @@ export function HtmlHeader() {
               />
             </a>
           </div>
-          <div className='container flex flex-wrap items-center justify-center px-4 mx-auto'>
+          <div className='container flex flex-wrap items-center justify-center px-4 mx-auto '>
             <div className='relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start'>
               <a
                 className='inline-block py-2 mr-4 text-sm font-bold leading-relaxed uppercase whitespace-nowrap text-slate-200'
