@@ -3,6 +3,7 @@ import { EffectsLanding } from '@/components/canvas/EffectsLanding/EffectsLandin
 // import { ItemHTML } from '@/components/canvas/ItemHTML/ItemHTML'
 import { NightHDR } from '@/components/canvas/NYCJourney/NightHDR'
 import { NYCJourney } from '@/components/canvas/NYCJourney/NYCJourey'
+import { HtmlHeader } from '@/components/landing/HtmlHeader'
 // import { HtmlHeader } from '@/components/landing/HtmlHeader'
 // import { YoSpin } from '@/components/canvas/YoSpin/YoSpin'
 import { useScrollStore } from '@/helpers/useScrollStore'
@@ -105,13 +106,13 @@ Page.SEO = function SEO() {
 function ScrollContentt() {
   return (
     <>
-      <div
+      {/* <div
         style={{ height: '200vh' }}
         className='flex items-center justify-center w-screen  bg-blue-200 bg-opacity-50'
       >
         <div className='text-2xl text-gray-200'>Page 2</div>
-      </div>
-      {/* <HtmlHeader /> */}
+      </div> */}
+      <HtmlHeader />
       {/* <div style={{ height: '800vh' }}></div> */}
       {/* <div
         style={{ height: '100vh' }}

@@ -557,6 +557,7 @@ export function HtmlHeader() {
               </div>
             </div>
           </div>
+
           <div className='flex flex-wrap justify-center mt-24 text-center'>
             <div className='w-full px-12 md:w-6/12 md:px-4'>
               <h2 className='text-4xl font-semibold'>
@@ -569,11 +570,9 @@ export function HtmlHeader() {
               </p>
             </div>
           </div>
-        </section>
-        <section className='relative block z-1 bg-slate-600 bg-opacity-70 '>
-          <div className='container mx-auto'>
+          <div className='container mx-auto mt-24'>
             <div className='flex flex-wrap justify-center'>
-              <div className='w-full px-4 -mt-24 lg:w-12/12'>
+              <div className='w-full px-4 lg:w-12/12'>
                 <div className='flex flex-wrap'>
                   <div className='w-full px-4 lg:w-4/12'>
                     <h5 className='pb-4 text-xl font-semibold text-center'>
@@ -616,7 +615,28 @@ export function HtmlHeader() {
             </div>
           </div>
         </section>
-        <section className='py-20 overflow-hidden bg-slate-600 bg-opacity-70'>
+
+        <section className='relative py-20  bg-slate-600 bg-opacity-70'>
+          {/* <div
+            className='absolute top-0 left-0 right-0 bottom-auto w-full'
+            style={{ height: '80px', top: '-80px' }}
+          >
+            <svg
+              className='absolute bottom-0 overflow-hidden'
+              xmlns='http://www.w3.org/2000/svg'
+              preserveAspectRatio='none'
+              version='1.1'
+              viewBox='0 0 2560 100'
+              x='0'
+              y='0'
+            >
+              <polygon
+                className='fill-current text-slate-600'
+                points='2560 0 2560 100 0 100'
+              ></polygon>
+            </svg>
+          </div> */}
+
           <div className='container pb-64 mx-auto'>
             <div className='flex flex-wrap justify-center'>
               <div className='w-full px-12 ml-auto mr-auto md:w-5/12 md:px-4 md:mt-64'>
@@ -670,7 +690,7 @@ export function HtmlHeader() {
           </div>
         </section>
         {/*  */}
-        <section className='relative pt-32 pb-16  bg-slate-200'>
+        <section className='relative pt-32 pb-16  bg-slate-600 bg-opacity-70'>
           {/* <div
             className='absolute top-0 left-0 right-0 bottom-auto w-full '
             data-style='height: 80px'
@@ -749,7 +769,7 @@ export function HtmlHeader() {
               ></polygon>
             </svg>
           </div>
-          <div className='container px-4 mx-auto'>
+          <div className='container px-4 pt-24 mx-auto'>
             <div className='flex flex-wrap'>
               <div className='w-full px-4 md:w-6/12'>
                 <h4 className='text-3xl font-semibold'>{`Let's keep in touch!`}</h4>
