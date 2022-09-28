@@ -26,7 +26,7 @@ const LandingPage = ({ router, children }) => {
         left: 0,
       }}
       {...{
-        gl: { antialias: false, logarithmicDepthBuffer: false },
+        gl: { antialias: false, logarithmicDepthBuffer: true },
         onCreated: (st) => {
           st.scene.background = new Color('#ffffff')
           st.gl.physicallyCorrectLights = true
