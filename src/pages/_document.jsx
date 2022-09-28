@@ -4,6 +4,11 @@ export default function Document() {
   return (
     <Html>
       <Head>
+        <link
+          rel='stylesheet'
+          href='/font/fontawesome-free-6.2.0-web/css/all.min.css'
+        />
+
         <script
           data-partytown-config
           dangerouslySetInnerHTML={{

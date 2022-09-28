@@ -10,7 +10,7 @@ export function HtmlHeader() {
                 className='inline-block py-2 mr-4 text-sm font-bold leading-relaxed uppercase whitespace-nowrap text-slate-700'
                 href='/learning-lab/tailwind-starter-kit/presentation'
               >
-                Tailwind Starter Kit
+                Agape Effect Node Engine
               </a>
               <button
                 className='block px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer lg:hidden focus:outline-none'

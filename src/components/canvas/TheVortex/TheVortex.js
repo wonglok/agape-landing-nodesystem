@@ -23,14 +23,20 @@ import {
 import { CustomGPU } from './CustomGPU'
 import { vortexComputeShader } from './computeShader'
 import { NoodleO3 } from './NoodleO3'
-import { Core } from '@/helpers/Core'
 import { extend } from '@react-three/fiber'
 import { generateUUID } from 'three/src/math/MathUtils'
+import { Core } from '@/helpers/Core'
 
 export class TheVortex extends Object3D {
   constructor({ enableDetection } = {}) {
     super()
 
+    Core.ready.canvas.then((canvas) => {
+      this.setup()
+    })
+    // console.log()
+  }
+  setup() {
     this.core = Core.makeDisposableNode({ name: 'vortex' }).sub
     let gl = Core.now.canvas.now.gl
 
@@ -305,10 +311,6 @@ export class TheVortex extends Object3D {
     this.core.onLoop((dt) => {
       noodleO3.track({ trackers: [], lerp: 1, dt })
     })
-
-    //
-    //
-    //
   }
 }
 
