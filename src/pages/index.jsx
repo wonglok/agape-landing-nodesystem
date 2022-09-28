@@ -5,9 +5,11 @@ import { NightHDR } from '@/components/canvas/NYCJourney/NightHDR'
 import { NYCJourney } from '@/components/canvas/NYCJourney/NYCJourey'
 import { TheVortex } from '@/components/canvas/TheVortex/TheVortex'
 import { HtmlHeader } from '@/components/landing/HtmlHeader'
+import { UIContent } from '@/helpers/UIContent'
 // import { HtmlHeader } from '@/components/landing/HtmlHeader'
 // import { YoSpin } from '@/components/canvas/YoSpin/YoSpin'
 import { useScrollStore } from '@/helpers/useScrollStore'
+import { Sphere } from '@react-three/drei'
 //
 // import { Loader } from '@react-three/drei'
 // import {
@@ -39,7 +41,7 @@ const Page = () => {
       {/*  */}
       {/*  */}
       {/*  */}
-      <Suspense fallback={<theVortex key={TheVortex.key}></theVortex>}>
+      <Suspense fallback={null}>
         <NightHDR></NightHDR>
         <NYCJourney></NYCJourney>
       </Suspense>

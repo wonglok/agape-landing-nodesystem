@@ -90,3 +90,17 @@
     background-position: 50% 0%;
   }
 }
+
+.loader-triangle-7 #Artboard {
+  stroke-dasharray: 0 226;
+  animation: anm-tr7-dash 1s ease-in-out alternate infinite;
+}
+
+@keyframes anm-tr7-dash {
+  from {
+    stroke-dasharray: 0 226;
+  }
+  to {
+    stroke-dasharray: 226 0;
+  }
+}

@@ -28,6 +28,8 @@ const LandingPage = ({ router, children }) => {
       {...{
         gl: { antialias: false, logarithmicDepthBuffer: true },
         onCreated: (st) => {
+          st.events.connect(document.body)
+
           st.scene.background = new Color('#000000')
           st.gl.physicallyCorrectLights = true
           st.gl.outputEncoding = sRGBEncoding

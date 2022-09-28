@@ -1,9 +1,10 @@
 import { useGLTF } from '@react-three/drei'
-import { useScrollStore } from '@/helpers/useScrollStore'
+import { useReady, useScrollStore } from '@/helpers/useScrollStore'
 import { useEffect, useMemo, useRef } from 'react'
-import { useFrame, useThree } from '@react-three/fiber'
+import { createPortal, useFrame, useThree } from '@react-three/fiber'
 import { AnimationMixer, Vector3 } from 'three140'
 import { TheVortex } from '../TheVortex/TheVortex'
+import { MathUtils } from 'three'
 
 let max = 45.156355645706554
 let scheduleStartTime = {
@@ -40,6 +41,9 @@ let order = [
 ]
 
 export function NYCJourney() {
+  let rot = useRef()
+  let rot2 = useRef()
+
   let glb = useGLTF(`/scene/journey/NYC_Expo_30.glb`)
 
   let myTime = useRef(0)
@@ -57,6 +61,11 @@ export function NYCJourney() {
     //
   }, [glb, mixer])
 
+  let setLoading = useReady((s) => s.setLoading)
+  useEffect(() => {
+    setLoading(false)
+  }, [])
+
   useEffect(() => {
     glb.cameras.forEach((cam) => {
       cam.userData.oldPos = cam.position.clone()
@@ -67,8 +76,8 @@ export function NYCJourney() {
 
     return useScrollStore.subscribe((v) => {
       myTime.current = v.smooth * max
-      if (myTime.current <= 0) {
-        myTime.current = 0
+      if (myTime.current <= 0.5) {
+        myTime.current = 0.5
       }
       if (myTime.current >= max) {
         myTime.current = max
@@ -89,14 +98,22 @@ export function NYCJourney() {
     }
   })
 
-  useFrame(({ camera, size }, dt) => {
+  useFrame(({ camera, size, mouse }, dt) => {
     //
+    if (rot2.current) {
+      // rot2.current.rotation.x = mouse.x * 0.0
+      // rot2.current.rotation.y = mouse.y * 0.0
+    }
 
     mixer.setTime(myTime.current)
 
     let sorted = glb.cameras
 
     let getRun = (cam) => {
+      // if (rot?.current?.position.length() === 0.0) {
+      //   return true
+      // }
+
       let info = orderTime.find((e) => e.name === cam.name)
 
       let now = myTime.current
@@ -109,9 +126,11 @@ export function NYCJourney() {
     }
     for (let cam of sorted) {
       cam.played = cam.played || 0
+
       if (!cam.userData.nowPos) {
         return
       }
+
       if (!cam.userData.oldPos) {
         return
       }
@@ -141,7 +160,6 @@ export function NYCJourney() {
           cam.getWorldPosition(camera.position)
           cam.getWorldQuaternion(camera.quaternion)
 
-          //
           camera.fov = cam.fov * 0.0 + 40 + adder
           camera.near = cam.near
           camera.far = cam.far
@@ -151,8 +169,19 @@ export function NYCJourney() {
     }
   })
 
+  let scene = useThree((s) => s.scene)
+  let camera = useThree((s) => s.camera)
+
   return (
     <group>
+      {createPortal(
+        <group ref={rot}>
+          <group ref={rot2}>
+            <primitive object={camera}></primitive>
+          </group>
+        </group>,
+        scene
+      )}
       <primitive object={glb.scene}></primitive>
       <group position={[0, 1.5, 0]}>
         <group position={[5.523, 6.087, -14.196]}>
