@@ -25,7 +25,7 @@ const Multiverse = ({ router, children }) => {
         left: 0,
       }}
       {...ConfigCanvas}
-      // mode='concurrent'
+      //
       // shadows
       // gl={{ antialias: false, logarithmicDepthBuffer: true }}
       // onCreated={(st) => {

@@ -7,7 +7,6 @@ export default function Hands() {
   return (
     <div className='w-full h-full bg-white'>
       <Canvas
-        mode='concurrent'
         style={{
           backgroundColor: 'white',
           position: 'absolute',

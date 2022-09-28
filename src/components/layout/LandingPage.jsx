@@ -19,7 +19,7 @@ import { Core } from '@/helpers/Core'
 const LandingPage = ({ router, children }) => {
   return (
     <Canvas
-      // mode='concurrent'
+      //
       style={{
         position: 'absolute',
         top: 0,

@@ -1513,14 +1513,14 @@
     utility-types "^3.10.0"
     zustand "^3.5.13"
 
-"@react-three/fiber@^8.8.4":
-  version "8.8.4"
-  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-8.8.4.tgz#22880605e15921526390e765bc5557cd5169afa1"
-  integrity sha512-Jy1rRwf+NucHASE3h46jWNWhE0mJxMoAIH4msJH+9tlrth0VcWdYqg98TD7CBW+7mPfkFrUhbvV203LH21IhQA==
+"@react-three/fiber@^8.0.27":
+  version "8.8.6"
+  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-8.8.6.tgz#9bb135e863642be74f6da0a18584e46fbb5ef670"
+  integrity sha512-K9yRqe72yGttNSzbz9v5rAveoRHD4sg3e1DBYc0H3bOnlotn1QaWdBECLnh5ve+HndidwKi4mRCY6hiz6+KqFg==
   dependencies:
     "@babel/runtime" "^7.17.8"
     "@types/react-reconciler" "^0.26.7"
-    its-fine "^1.0.2"
+    its-fine "^1.0.4"
     react-reconciler "^0.27.0"
     react-use-measure "^2.1.1"
     scheduler "^0.21.0"
@@ -4628,10 +4628,10 @@ isstream@~0.1.2:
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
   integrity sha512-Yljz7ffyPbrLpLngrMtZ7NduUgVvi6wG9RJ9IUcyCd59YQ911PBJphODUcbOVbqYfxe1wuYf/LJ8PauMRwsM/g==
 
-its-fine@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/its-fine/-/its-fine-1.0.2.tgz#0b4a861dea1d561251ac81565585aeba5893776f"
-  integrity sha512-EztmS3Wi9qH4FnhK3NkEyldMbDRKDaSJ3/4M7pH1BXG+IxF4xRV8Q5Ste5q0uJAPAGmXFqBpcsrXOTBi6DYcCQ==
+its-fine@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/its-fine/-/its-fine-1.0.4.tgz#1d4956ecdb724247bee68094338ef991bc036f26"
+  integrity sha512-6nco3aUwt6isNlGLAhXLDV8y8X42J9dqRi8pY2vLaONUczUUbPaFAch1s3nfq6QfT05RTCNJ11B/GsWci1RUmQ==
   dependencies:
     "@types/react-reconciler" "^0.28.0"
 
@@ -4796,11 +4796,6 @@ kaitai-struct@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/kaitai-struct/-/kaitai-struct-0.10.0.tgz#f0619a056ee4420387d821175ca0a92d3761f712"
   integrity sha512-81oxVi/OY+LrzgrONX7ciD1wtvq24nb2M9iYixRiQG+1hrDrDRqFVWuQzF1fUexh3Sg/ol6eMAz1MOVYFouzUg==
-
-ktx-parse@^0.2.1:
-  version "0.2.2"
-  resolved "https://registry.npmjs.org/ktx-parse/-/ktx-parse-0.2.2.tgz"
-  integrity sha512-cFBc1jnGG2WlUf52NbDUXK2obJ+Mo9WUkBRvr6tP6CKxRMvZwDDFNV3JAS4cewETp5KyexByfWm9sm+O8AffiQ==
 
 ktx-parse@^0.4.5:
   version "0.4.5"
@@ -6957,7 +6952,7 @@ three-mesh-bvh@^0.5.15:
   resolved "https://registry.npmjs.org/three-mesh-bvh/-/three-mesh-bvh-0.5.15.tgz"
   integrity sha512-jxE5iGjcoEMiyxUs7hMeZL6jBXBz9973ilqhXPhKlA1f7eitjIxRTtu7UWVQy+PhxXTsknmPzWmN5c+uAa/anA==
 
-three-stdlib@2.17.0:
+three-stdlib@2.17.0, three-stdlib@^2.12.1:
   version "2.17.0"
   resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.17.0.tgz#5915b110ec6dbf07e0e653bd59889293c7b93407"
   integrity sha512-m19X4+ajh+2EJIVcjB288LgbqTli5b8kFahJlg9oNCBfaL8geCgEoM4OUirgV0Ez6Lr58N1MPBR6LjJt7ALfKQ==
@@ -6969,22 +6964,6 @@ three-stdlib@2.17.0:
     draco3d "^1.4.1"
     fflate "^0.6.9"
     ktx-parse "^0.4.5"
-    mmd-parser "^1.0.4"
-    opentype.js "^1.3.3"
-    potpack "^1.0.1"
-    zstddec "^0.0.2"
-
-three-stdlib@^2.12.1:
-  version "2.12.1"
-  resolved "https://registry.npmjs.org/three-stdlib/-/three-stdlib-2.12.1.tgz"
-  integrity sha512-G3SSsCOBiWa0sjjPt+K28ikQ84Plm/ZVUozMfWagK59kZqBWcaPVXpOThkAgvdBpm2zCWLW3edAoW/4XIbljVQ==
-  dependencies:
-    "@babel/runtime" "^7.16.7"
-    "@webgpu/glslang" "^0.0.15"
-    chevrotain "^10.1.2"
-    draco3d "^1.4.1"
-    fflate "^0.6.9"
-    ktx-parse "^0.2.1"
     mmd-parser "^1.0.4"
     opentype.js "^1.3.3"
     potpack "^1.0.1"
@@ -7015,6 +6994,11 @@ three-stdlib@^2.8.11:
   version "0.144.0"
   resolved "https://registry.yarnpkg.com/three/-/three-0.144.0.tgz#2818517169f8ff94eea5f664f6ff1fcdcd436cc8"
   integrity sha512-R8AXPuqfjfRJKkYoTQcTK7A6i3AdO9++2n8ubya/GTU+fEHhYKu1ZooRSCPkx69jbnzT7dD/xEo6eROQTt2lJw==
+
+three@^0.142.0:
+  version "0.142.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.142.0.tgz#89e226a16221f212eb1d40f0786604b711f28aed"
+  integrity sha512-ESjPO+3geFr+ZUfVMpMnF/eVU2uJPOh0e2ZpMFqjNca1wApS9lJb7E4MjwGIczgt9iuKd8PEm6Pfgp2bJ92Xtg==
 
 through2@^0.6.3:
   version "0.6.5"

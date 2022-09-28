@@ -21,7 +21,7 @@ import { Color, sRGBEncoding } from 'three'
 const PromotePage = ({ router, children }) => {
   return (
     <Canvas
-      // mode='concurrent'
+      //
       style={{
         position: 'absolute',
         top: 0,

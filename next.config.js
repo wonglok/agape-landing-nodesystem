@@ -34,7 +34,11 @@ const nextConfig = {
         ...config.resolve.alias,
         'three/nodes$': path.resolve(
           __dirname,
-          './node_modules/three/examples/jsm/nodes/Nodes.js'
+          './node_modules/three144/examples/jsm/nodes/Nodes.js'
+        ),
+        'three-nodes': path.resolve(
+          __dirname,
+          './node_modules/three144/examples/jsm/nodes/'
         ),
       },
     }
