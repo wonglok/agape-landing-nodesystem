@@ -1,3 +1,7 @@
+import { useScrollStore } from '@/helpers/useScrollStore'
+import { useEffect } from 'react'
+import { useRef } from 'react'
+
 /* eslint-disable @next/next/no-img-element */
 export function HtmlHeader() {
   return (
@@ -106,11 +110,7 @@ export function HtmlHeader() {
           }}
         >
           <div className='absolute bottom-0 left-0 flex items-center justify-center w-full mb-3 text-center text-white'>
-            <div className='container-chev -translate-y-24'>
-              <div className='chevron'></div>
-              <div className='chevron'></div>
-              <div className='chevron'></div>
-            </div>
+            <IconLoader></IconLoader>
           </div>
         </section>
         <section
@@ -988,5 +988,31 @@ export function HtmlHeader() {
         </footer>
       </section>
     </>
+  )
+}
+
+function IconLoader() {
+  let ref = useRef()
+
+  useEffect(() => {
+    //
+    //
+    return useScrollStore.subscribe((nst, pst) => {
+      //smooth
+      let v = nst.px / 150
+      if (v >= 1.0) {
+        v = 1.0
+      }
+      ref.current.style.opacity = 1.0 - v
+      console.log(nst.px)
+    })
+    //
+  }, [])
+  return (
+    <div ref={ref} className='container-chev -translate-y-24'>
+      <div className='chevron'></div>
+      <div className='chevron'></div>
+      <div className='chevron'></div>
+    </div>
   )
 }

@@ -83,7 +83,7 @@ Page.SEO = function SEO() {
       let scrollAmount = ref.current.scrollTop
       let total = ref.current.scrollHeight - window.innerHeight
 
-      setSmooth(scrollAmount / total, diff)
+      setSmooth(scrollAmount / total, diff, scrollAmount, total)
     }
 
     ttt = requestAnimationFrame(rAF)
