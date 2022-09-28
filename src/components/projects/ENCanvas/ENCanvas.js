@@ -22,17 +22,35 @@ import { PostProcCallers } from '@/effectnode/component/PostProcCallers'
 import { EnvOutlet } from './EnvOutlet'
 // import { useEffectNode } from '@/effectnode/store/useEffectNode'
 import { AdaptTC } from './Transform/AdaptTC'
-// import { sRGBEncoding } from 'three'
+import { sRGBEncoding } from 'three'
 import { ConfigCanvas } from '@/helpers/ConfigCanvas'
 import { useEffectNode } from '@/effectnode/store/useEffectNode'
-
+import { Core } from '@/helpers/Core'
+import { WebGLRenderer } from 'three144'
 //
 
 export function ENCanvas() {
   //
   return (
     <div className='relative w-full h-full'>
-      <Canvas {...ConfigCanvas} className='w-full h-full'>
+      <Canvas
+        gl={(canvas) => {
+          return new WebGLRenderer({ canvas, alpha: true })
+        }}
+        onCreated={(st) => {
+          // st.scene.background = new Color('#ffffff')
+          st.gl.physicallyCorrectLights = true
+          st.gl.outputEncoding = sRGBEncoding
+          // st.gl.shadowMap.enabled = true
+
+          Core.now.canvas = Core.makeDisposableNode({ name: 'canvas' }).sub
+          for (let kn in st) {
+            Core.now.canvas.now[kn] = st[kn]
+          }
+          st.gl.setAnimationLoop(Core.work)
+        }}
+        className='w-full h-full'
+      >
         <Content></Content>
         <PostProcCallers></PostProcCallers>
       </Canvas>

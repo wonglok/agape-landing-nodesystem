@@ -1,7 +1,7 @@
 import create from 'zustand'
 import { get as getIDX, set as setIDX } from 'idb-keyval'
 import { verifyPermission } from '@/components/projects/FileSystem/FileSystem'
-import { nodeFrame } from 'three/examples/jsm/renderers/webgl/nodes/WebGLNodes'
+import { nodeFrame } from 'three144/examples/jsm/renderers/webgl/nodes/WebGLNodes'
 
 const NS_HDR = 'NS_HDR'
 

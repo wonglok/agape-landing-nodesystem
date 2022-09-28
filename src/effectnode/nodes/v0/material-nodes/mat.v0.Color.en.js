@@ -1,6 +1,6 @@
 import { getID } from '@/helpers/getID'
 import { Color } from 'three'
-import { UniformNode } from 'three/examples/jsm/nodes/Nodes'
+import { UniformNode } from 'three144/examples/jsm/nodes/Nodes'
 
 export async function nodeData({ defaultData, nodeID }) {
   return {

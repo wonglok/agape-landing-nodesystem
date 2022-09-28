@@ -1,6 +1,6 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
-import { useMultiverse } from '@/helpers/useMultiverse'
 import { TransformControls } from '@react-three/drei'
+import { createPortal } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
 import { SceneTransformControl } from './SceneTransformControl'
 
@@ -34,6 +34,28 @@ export function TransformControlsFix({ fakeScene }) {
     // }
   }, [])
   //
+
+  // let ref = useRef()
+
+  // useEffect(() => {
+  //   const cb = (e) => e.key === 'Escape' && ref.current.reset()
+  //   document.addEventListener('keydown', cb)
+  //   return () => document.removeEventListener('keydown', cb)
+  // }, [])
+
+  // //
+  // return (
+  //   <>
+  //     {createPortal(
+  //       <TransformControls
+  //         ref={ref}
+  //         key={'123'}
+  //         object={activeSceneSelection}
+  //       ></TransformControls>,
+  //       fakeScene
+  //     )}
+  //   </>
+  // )
   return (
     activeSceneSelection && (
       <SceneTransformControl

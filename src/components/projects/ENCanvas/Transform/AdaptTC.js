@@ -4,6 +4,8 @@ import { useFrame, useThree, createPortal } from '@react-three/fiber'
 // import { HDRTex } from './HDRTex'
 import {
   Plane,
+  TrackballControls,
+  TransformControls,
   // FlyControls,
   // MapControls,
   // OrbitControls,
@@ -91,7 +93,7 @@ export function AdaptTC({ node, children, onScreenPass = () => {} }) {
       )} */}
 
       {/* <Screen fbo={fbo}></Screen> */}
-      {/* <TransformControlsFix fakeScene={fakeScene}></TransformControlsFix> */}
+      <TransformControlsFix fakeScene={fakeScene}></TransformControlsFix>
 
       {<ENTCNode key={reloadGraphID} fakeScene={fakeScene} node={node} />}
     </>

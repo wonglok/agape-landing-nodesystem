@@ -24,6 +24,7 @@ import {
 import { TransformControls } from 'three140/examples/jsm/controls/TransformControls.js'
 import { useMultiverse } from '@/helpers/useMultiverse'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
+// import { clone } from 'three/examples/jsm/utils/SkeletonUtils'
 
 export function SceneTransformControl({
   object = new Object3D(),
@@ -36,8 +37,9 @@ export function SceneTransformControl({
   useEffect(() => {
     let tc = new TransformControls(camera, gl.domElement)
     let o3 = object
-
+    tc.attach(o3)
     fakeScene.add(tc)
+    tc.mode = 'translate'
 
     tc.addEventListener('change', (ev) => {
       onChange(object)
@@ -64,6 +66,7 @@ export function SceneTransformControl({
       tc.setMode('scale')
     })
 
+    //
     tc.addEventListener('dragging-changed', (ev) => {
       let ctrl = useMultiverse.getState().controls
 
@@ -86,7 +89,9 @@ export function SceneTransformControl({
       }
     })
 
-    tc.attach(o3)
+    const cb = (e) => e.key === 'Escape' && tc.reset()
+
+    document.addEventListener('keydown', cb)
 
     return () => {
       canDo = false
@@ -95,5 +100,5 @@ export function SceneTransformControl({
     }
   }, [camera, fakeScene, object, onChange, gl.domElement])
 
-  return createPortal(<></>, fakeScene)
+  return null
 }

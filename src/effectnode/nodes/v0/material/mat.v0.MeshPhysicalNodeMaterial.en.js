@@ -8,7 +8,7 @@ import {
   uv,
   vec2,
   timerLocal,
-} from 'three/examples/jsm/nodes/Nodes'
+} from 'three144/examples/jsm/nodes/Nodes'
 // BoxGeometry,
 // import { Mesh, MeshStandardMaterial } from 'three140'
 // import { materialAlphaTest } from 'three/examples/jsm/nodes/Nodes'
