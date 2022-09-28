@@ -1,6 +1,6 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { TransformControls } from '@react-three/drei'
-import { createPortal } from '@react-three/fiber'
+import { createPortal, useThree } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
 import { SceneTransformControl } from './SceneTransformControl'
 
@@ -9,6 +9,8 @@ export function TransformControlsFix({ fakeScene }) {
 
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   // let ref = useRef()
+  let camera = useThree((s) => s.camera)
+  let gl = useThree((s) => s.gl)
 
   useEffect(() => {
     // let hh = (ev) => {
@@ -57,8 +59,13 @@ export function TransformControlsFix({ fakeScene }) {
   //   </>
   // )
   return (
-    activeSceneSelection && (
+    activeSceneSelection &&
+    camera &&
+    gl &&
+    fakeScene && (
       <SceneTransformControl
+        camera={camera}
+        gl={gl}
         object={activeSceneSelection}
         fakeScene={fakeScene}
       ></SceneTransformControl>

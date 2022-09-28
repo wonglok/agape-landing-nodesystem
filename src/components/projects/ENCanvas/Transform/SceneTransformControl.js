@@ -21,7 +21,7 @@ import {
 // import anime from 'animejs'
 // import { OnlineSystem } from '@/vfx-meta/online/OnlineSystem'
 // import { useMetaStore } from '@/vfx-meta/store/use-meta-store'
-import { TransformControls } from 'three140/examples/jsm/controls/TransformControls.js'
+import { TransformControls } from 'three144/examples/jsm/controls/TransformControls.js'
 import { useMultiverse } from '@/helpers/useMultiverse'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 // import { clone } from 'three/examples/jsm/utils/SkeletonUtils'
@@ -30,16 +30,20 @@ export function SceneTransformControl({
   object = new Object3D(),
   onChange = () => {},
   fakeScene,
+  camera,
+  gl,
 }) {
   //
-  let camera = useThree((s) => s.camera)
-  let gl = useThree((s) => s.gl)
   useEffect(() => {
     let tc = new TransformControls(camera, gl.domElement)
     let o3 = object
     tc.attach(o3)
     fakeScene.add(tc)
-    tc.mode = 'translate'
+    tc.setMode('translate')
+
+    let tttt = setInterval(() => {
+      //
+    })
 
     tc.addEventListener('change', (ev) => {
       onChange(object)
@@ -94,6 +98,7 @@ export function SceneTransformControl({
     document.addEventListener('keydown', cb)
 
     return () => {
+      clearInterval(tttt)
       canDo = false
       tc.visible = false
       tc.dispose()

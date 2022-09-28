@@ -18,7 +18,7 @@ import { DoubleSide, NormalBlending, Object3D, Vector3 } from 'three'
 // import { OnlineSystem } from '@/vfx-meta/online/OnlineSystem'
 // import { useMetaStore } from '@/vfx-meta/store/use-meta-store'/
 //Mesh, MeshBasicMaterial,
-import { Camera, Scene } from 'three140'
+import { Scene } from 'three144'
 // import { EnvLight } from '@/vfx-meta/game-vfx/EnvLight'
 // import { useRender } from '@/vfx-meta/store/use-render'
 import { SceneTransformControl } from './SceneTransformControl'
@@ -37,8 +37,8 @@ export function AdaptTC({ node, children, onScreenPass = () => {} }) {
   let size = useThree((s) => s.size)
   let fbo = useFBO(size.width, size.height)
 
-  let camQ = new Camera()
-  camQ.position.z = 1
+  // let camQ = new Camera()
+  // camQ.position.z = 1
 
   // let quad = useMemo(() => {
   //   return new Mesh(
@@ -76,7 +76,6 @@ export function AdaptTC({ node, children, onScreenPass = () => {} }) {
 
   useEffect(() => {
     onScreenPass(<GLOverlay fbo={fbo}></GLOverlay>)
-
     return () => {
       onScreenPass(null)
     }
