@@ -14,6 +14,7 @@ export function HtmlHeader() {
               />
             </a>
           </div>
+
           <div className='container flex flex-wrap items-center justify-center px-4 mx-auto '>
             <div className='relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start'>
               <a
@@ -104,8 +105,12 @@ export function HtmlHeader() {
             height: `100vh`,
           }}
         >
-          <div className='absolute bottom-0 left-0 w-full mb-3 text-center text-white'>
-            Scroll to Continue
+          <div className='absolute bottom-0 left-0 flex items-center justify-center w-full mb-3 text-center text-white'>
+            <div className='container-chev -translate-y-24'>
+              <div className='chevron'></div>
+              <div className='chevron'></div>
+              <div className='chevron'></div>
+            </div>
           </div>
         </section>
         <section
