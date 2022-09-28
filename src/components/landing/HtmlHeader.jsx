@@ -80,6 +80,9 @@ export function HtmlHeader() {
         <section
           className='relative flex items-center h-screen pt-16 bg-black header bg-opacity-50'
           data-style='max-height: 860px'
+          style={{
+            height: `calc(100vh + 120px)`,
+          }}
         >
           <div className='container flex flex-wrap items-center mx-auto'>
             <div className='w-full px-4 md:w-8/12 lg:w-6/12 xl:w-6/12'>
