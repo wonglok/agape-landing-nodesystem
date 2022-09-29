@@ -428,7 +428,7 @@ export function HtmlHeader() {
 
             <div className='flex flex-wrap justify-center mt-24 text-center'>
               <div className='w-full px-12 md:w-6/12 md:px-4'>
-                <h2 className='text-4xl font-semibold'>
+                <h2 className='text-4xl font-semibold text-white'>
                   Brands that uses Agape Engine
                 </h2>
                 <p className='mt-4 mb-4 text-lg leading-relaxed text-slate-500'>
