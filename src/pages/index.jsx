@@ -25,7 +25,6 @@ import { Sphere } from '@react-three/drei'
 //
 import { Suspense, useEffect } from 'react'
 import { useRef } from 'react'
-
 const Page = () => {
   // let viewport = useThree((s) => s.viewport)
   // let size = useThree((s) => s.size)

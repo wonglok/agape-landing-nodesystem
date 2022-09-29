@@ -1,6 +1,9 @@
+import { Core } from '@/helpers/Core'
 import { useScrollStore } from '@/helpers/useScrollStore'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { useEffect } from 'react'
 import { useRef } from 'react'
+import { YoCanvas } from './YoCanvas'
 
 /* eslint-disable @next/next/no-img-element */
 export function HtmlHeader() {
@@ -8,12 +11,12 @@ export function HtmlHeader() {
     <>
       <section>
         <nav className='fixed top-0 z-50 flex flex-wrap items-center justify-between w-full  bg-black shadow-lg bg-opacity-50'>
-          <div className='flex items-center justify-center w-full py-4 text-sm text-white bg-black'>
+          <div className='flex flex-col items-center justify-center w-full py-4 text-sm text-white bg-black lg:flex-row'>
             <div className='mr-3'>AGAPE ENGINE ALPHA PASS</div>
             <a href='/'>
               <img
                 src={`/site/navbar/alpha-pass.svg`}
-                className={'h-8'}
+                className={'h-8 mt-3 lg:mt-0'}
                 alt={'effectnode-alpha-pass'}
               />
             </a>
@@ -121,54 +124,41 @@ export function HtmlHeader() {
             height: `calc(100vh + 120px)`,
           }}
         >
-          <div className=' container flex flex-wrap items-center mx-auto'>
-            <div className='w-full px-4 md:w-8/12 lg:w-6/12 xl:w-6/12'>
-              <div className='pt-32 sm:pt-0'>
-                <h2 className='text-4xl font-semibold text-slate-600'>
-                  A beautiful extension for TailwindCSS.
-                </h2>
-                <p className='mt-4 text-lg leading-relaxed text-slate-500'>
-                  Tailwind Starter Kit is Free and Open Source. It does not
-                  change or add any CSS to the already one from
-                  <a
-                    href='https://tailwindcss.com/?ref=creativetim'
-                    className='text-slate-600'
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    TailwindCSS
-                  </a>
-                  . It features multiple HTML elements and it comes with dynamic
-                  components for ReactJS, Vue and Angular.
-                </p>
-                <div className='mt-12'>
-                  <a
-                    className='px-6 py-4 mb-1 mr-1 text-sm font-bold text-white uppercase bg-pink-500 rounded shadow outline-none get-started focus:outline-none active:bg-pink-600 hover:shadow-lg ease-linear transition-all duration-150'
-                    href='/learning-lab/tailwind-starter-kit/documentation/download'
-                  >
-                    Get started
-                  </a>
-                  <a
-                    href='https://github.com/creativetimofficial/tailwind-starter-kit'
-                    className='px-6 py-4 mb-1 ml-1 mr-1 text-sm font-bold text-white uppercase rounded shadow outline-none github-star focus:outline-none bg-slate-700 active:bg-slate-600 hover:shadow-lg'
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    Github Star
-                  </a>
+          <div className='container flex flex-wrap items-center justify-center mx-auto'>
+            <div className='w-10/12 mb-32'>
+              <div className='flex flex-col items-center justify-center pb-32'>
+                <img src={`/site/hero/your_world.png`} alt={'title'} />
+              </div>
+              <div className='pb-32 text-center sm:pt-0'>
+                <div className='flex flex-col items-center justify-center'>
+                  <img src={`/site/hero/agape.png`} alt={'hero'} />
                 </div>
               </div>
+              <div className='flex flex-col items-center justify-center pb-8'>
+                <img src={`/site/hero/unreal.png`} alt={'title'} />
+              </div>
+              <div className='flex flex-col items-center justify-center pb-8'>
+                <img
+                  src={`/site/hero/allow_you_to_create.png`}
+                  alt={'allow_you_to_create'}
+                />
+              </div>
+              <div className='flex flex-col items-center justify-center pb-24'>
+                <img
+                  src={`/site/hero/3d_assets_metaverse.png`}
+                  alt={'allow_you_to_create'}
+                />
+              </div>
+              <div className='flex flex-col items-center justify-center pb-64'>
+                <img src={`/site/hero/cta.png`} alt={'allow_you_to_create'} />
+              </div>
+
+              {/*  */}
             </div>
           </div>
-          <div
-            className='absolute top-0 right-0 w-10/12 pt-16 -mt-48 b-auto sm:w-6/12 sm:mt-0'
-            src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/ill_header_3.png'
-            alt='...'
-            data-style='max-height: 860px'
-          />
         </section>
 
-        <section className='relative pb-40  bg-slate-100 bg-opacity-75'>
+        <section className='relative pb-40  bg-black bg-opacity-75'>
           <div
             className='absolute top-0 left-0 right-0 bottom-auto w-full'
             data-style='height: 80px'
@@ -183,7 +173,7 @@ export function HtmlHeader() {
               y='0'
             >
               <polygon
-                className='opacity-75 fill-current text-slate-100'
+                className='text-black opacity-75 fill-current'
                 points='2560 0 2560 100 0 100'
               ></polygon>
             </svg>
@@ -191,94 +181,138 @@ export function HtmlHeader() {
           <div className='container mx-auto'>
             <div className='flex flex-wrap items-center'>
               <div className='w-10/12 ml-auto mr-auto -mt-32 lg:px-12 md:w-6/12 lg:w-4/12 md:px-4'>
-                <div className='relative flex flex-col w-full min-w-0 mb-6 break-words bg-pink-600 rounded-lg shadow-lg'>
-                  <img
-                    alt='...'
-                    src='https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=700&amp;q=80'
-                    className='w-full align-middle rounded-t-lg'
-                  />
-                  <blockquote className='relative p-8 mb-4'>
-                    <svg
-                      preserveAspectRatio='none'
-                      xmlns='http://www.w3.org/2000/svg'
-                      viewBox='0 0 583 95'
-                      className='absolute left-0 block w-full'
-                      data-style='height: 95px; top: -94px'
-                    >
-                      <polygon
-                        points='-30,95 583,95 583,65'
-                        className='text-pink-600 fill-current'
-                      ></polygon>
-                    </svg>
-                    <h4 className='text-xl font-bold text-white'>
-                      Great for your awesome project
-                    </h4>
-                    <p className='mt-2 font-light text-white text-md'>
-                      Putting together a page has never been easier than
-                      matching together pre-made components. From landing pages
-                      presentation to login areas, you can easily customise and
-                      built your pages.
-                    </p>
-                  </blockquote>
-                </div>
+                <Parallax>
+                  <div className='relative flex flex-col w-full min-w-0 mb-6 break-words border-4 border-pink-600 rounded-lg shadow-lg'>
+                    <div className='w-full align-middle  rounded-t-lg backdrop-blur-lg'>
+                      <YoCanvas></YoCanvas>
+                    </div>
+                    <blockquote className='relative p-8 bg-pink-600 '>
+                      <svg
+                        preserveAspectRatio='none'
+                        xmlns='http://www.w3.org/2000/svg'
+                        viewBox='0 0 583 95'
+                        className='absolute left-0 block w-full'
+                        style={{
+                          height: '95px',
+                          top: '-94px',
+                        }}
+                      >
+                        <polygon
+                          points='-30,95 583,95 583,65'
+                          className='text-pink-600 fill-current'
+                        ></polygon>
+                      </svg>
+                      <h4 className='text-xl font-bold text-white'>
+                        A Bridge from Blender to the Web
+                      </h4>
+                      <p className='mt-2 font-light text-white text-md'>
+                        Agape Effect Node tools not only bring your 3D assets to
+                        the web, but also empower them to carry VFX, animation
+                        across metaverses and different chains
+                      </p>
+                    </blockquote>
+                  </div>
+                </Parallax>
               </div>
               <div className='w-full px-4 md:w-6/12'>
                 <div className='flex flex-wrap'>
                   <div className='w-full px-4 md:w-6/12'>
-                    <div className='relative flex flex-col mt-4'>
-                      <div className='flex-auto px-4 py-5'>
-                        <div className='inline-flex items-center justify-center w-12 h-12 p-3 mb-5 text-center bg-white rounded-full shadow-lg text-slate-500'>
-                          <i className='fas fa-sitemap'></i>
+                    <div className='relative flex flex-col mt-4 text-white'>
+                      <div className='flex-auto px-4 py-5 '>
+                        <div className='inline-flex items-center justify-center mb-5 shadow-lg w-14 h-14 text-centerrounded-full'>
+                          <img
+                            className='w-full'
+                            src={`/site/bridge/realtime-web-editor.svg`}
+                          />
                         </div>
                         <h6 className='mb-1 text-xl font-semibold'>
-                          CSS Components
+                          Realtime Web Editor
                         </h6>
-                        <p className='mb-4 text-slate-500'>
-                          Tailwind Starter Kit comes with a huge number of Fully
-                          Coded CSS components.
-                        </p>
+                        <ol className='pl-5 list-disc'>
+                          <li className='mb-3 text-slate-300'>
+                            What you see and what you get
+                          </li>
+                          <li className='mb-4 text-slate-300'>
+                            For you create VFX and simulations, materials and
+                            more…
+                          </li>
+                        </ol>
                       </div>
                     </div>
-                    <div className='relative flex flex-col min-w-0'>
+                    <div className='relative flex flex-col min-w-0 text-white'>
                       <div className='flex-auto px-4 py-5'>
-                        <div className='inline-flex items-center justify-center w-12 h-12 p-3 mb-5 text-center bg-white rounded-full shadow-lg text-slate-500'>
-                          <i className='fas fa-drafting-compass'></i>
+                        <div className='inline-flex items-center justify-center mb-5 shadow-lg w-14 h-14 text-centerrounded-full'>
+                          <img
+                            className='w-full'
+                            src={`/site/bridge/realtime-web-editor.svg`}
+                          />
                         </div>
                         <h6 className='mb-1 text-xl font-semibold'>
-                          JavaScript Components
+                          Web Native Rendering
                         </h6>
-                        <p className='mb-4 text-slate-500'>
-                          We also feature many dynamic components for React, Vue
-                          and Angular.
-                        </p>
+                        <ol className='pl-5 list-disc'>
+                          <li className='mb-3 text-slate-300'>
+                            Fast for Mobile Deployment and Iteration
+                          </li>
+                          <li className='mb-4 text-slate-300'>
+                            Quick Development
+                          </li>
+                        </ol>
                       </div>
                     </div>
                   </div>
-                  <div className='w-full px-4 md:w-6/12'>
-                    <div className='relative flex flex-col min-w-0 mt-4'>
+                  <div className='w-full px-4 text-white md:w-6/12'>
+                    <div className='relative flex flex-col min-w-0'>
                       <div className='flex-auto px-4 py-5'>
-                        <div className='inline-flex items-center justify-center w-12 h-12 p-3 mb-5 text-center bg-white rounded-full shadow-lg text-slate-500'>
-                          <i className='fas fa-newspaper'></i>
+                        <div className='inline-flex items-center justify-center mb-5 shadow-lg w-14 h-14 text-centerrounded-full'>
+                          <img
+                            className='w-full'
+                            src={`/site/bridge/interotable.png`}
+                          />
                         </div>
-                        <h6 className='mb-1 text-xl font-semibold'>Pages</h6>
-                        <p className='mb-4 text-slate-500'>
-                          This extension also comes with 3 sample pages. They
-                          are fully coded so you can start working instantly.
-                        </p>
+                        <h6 className='mb-1 text-xl font-semibold'>
+                          Interotablity
+                        </h6>
+                        <ol className='pl-5 list-disc'>
+                          <li className='mb-4 text-slate-300'>
+                            Portable VFX Content Runnable Across Metaverse
+                          </li>
+                          <li className='mb-3 text-slate-300'>
+                            {/*  */}
+                            {/*  */}
+                            Embeded VFX JSON in GLB with a OpenSourced Metaverse
+                            Runtime
+                          </li>
+                        </ol>
                       </div>
                     </div>
                     <div className='relative flex flex-col min-w-0'>
                       <div className='flex-auto px-4 py-5'>
-                        <div className='inline-flex items-center justify-center w-12 h-12 p-3 mb-5 text-center bg-white rounded-full shadow-lg text-slate-500'>
-                          <i className='fas fa-file-alt'></i>
+                        <div className='inline-flex items-center justify-center mb-5 shadow-lg w-14 h-14 text-centerrounded-full'>
+                          <img
+                            className='w-full'
+                            src={`/site/bridge/realtime-web-editor.svg`}
+                          />
                         </div>
                         <h6 className='mb-1 text-xl font-semibold'>
-                          Documentation
+                          Creative Econoomy
                         </h6>
-                        <p className='mb-4 text-slate-500'>
-                          Built by developers for developers. You will love how
-                          easy is to to work with Tailwind Starter Kit.
-                        </p>
+                        <ol className='pl-5 list-disc'>
+                          <li className='mb-3 text-slate-300'>
+                            Fair Trade and Affordable Metaverse Ownership for
+                            All
+                          </li>
+                          <li className='mb-3 text-slate-300'>
+                            Low Entry Barrier
+                          </li>
+                          <li className='mb-3 text-slate-300'>
+                            Open Economy for GLB Centric Creative Content
+                          </li>
+                          <li className='mb-4 text-slate-300'>
+                            You can sell VFX shoes and buyer can use it in all
+                            compatible metaverses.
+                          </li>
+                        </ol>
                       </div>
                     </div>
                   </div>
@@ -392,6 +426,7 @@ export function HtmlHeader() {
                       left: '-20px',
                     }}
                   />
+
                   <img
                     alt='...'
                     src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-btn-pink.png'
@@ -991,6 +1026,40 @@ export function HtmlHeader() {
   )
 }
 
+function Parallax({ children }) {
+  let ref = useRef()
+  useEffect(() => {
+    //
+    //
+    return useScrollStore.subscribe((nst, pst) => {
+      //smooth
+
+      console.log(nst.smooth)
+
+      let v = ((0.35 - nst.smooth) / 0.1) * 50.0
+
+      // if (v >= 30) {
+      //   v = 30.0
+      // }
+      // if (v <= -30) {
+      //   v = -30.0
+      // }
+
+      ref.current.style.transform = `perspective(800px) rotateY(${v}deg) rotateX(${20}deg)`
+      ref.current.style.transition = `all 0.5s`
+
+      //
+      // console.log(nst.px)
+    })
+    //
+  }, [children])
+  return (
+    <div className='' ref={ref}>
+      {children}
+    </div>
+  )
+}
+
 function IconLoader() {
   let ref = useRef()
 
@@ -999,12 +1068,14 @@ function IconLoader() {
     //
     return useScrollStore.subscribe((nst, pst) => {
       //smooth
-      let v = nst.px / 150
+      let v = nst.smoothPX / 150
       if (v >= 1.0) {
         v = 1.0
       }
       ref.current.style.opacity = 1.0 - v
-      console.log(nst.px)
+
+      //
+      // console.log(nst.smoothPX)
     })
     //
   }, [])

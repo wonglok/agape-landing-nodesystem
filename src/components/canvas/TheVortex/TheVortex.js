@@ -30,7 +30,6 @@ import { Core } from '@/helpers/Core'
 export class TheVortex extends Object3D {
   constructor({ enableDetection } = {}) {
     super()
-
     Core.ready.canvas.then((canvas) => {
       this.setup()
     })
@@ -277,7 +276,7 @@ export class TheVortex extends Object3D {
     // Core.now.canvas.now.scene.add(renderable2)
     //
 
-    renderable.visible = false
+    renderable.visible = true
     this.add(renderable)
     this.core.onClean(() => {
       renderable.removeFromParent()

@@ -10,12 +10,17 @@ export const useScrollStore = create((set, get) => {
     total: 1,
     rotationX: 0,
     rotationY: 0,
+
+    smoothPX: 0,
     setSmooth: (now, dt, px = 0, total = 1) => {
       let smooth = get().smooth
 
       let ll = MathUtils.damp(smooth, now, 2, dt)
 
-      set({ smooth: ll, diff: ll - smooth, px, px, total })
+      let smoothPX = get().smoothPX
+      smoothPX = MathUtils.damp(smoothPX, px, 0.5, dt)
+
+      set({ smoothPX, smooth: ll, diff: ll - smooth, px, px, total })
     },
   }
 })
