@@ -571,7 +571,11 @@ export function HtmlHeader() {
               <div className='w-full px-4 mt-32 ml-auto mr-auto md:w-6/12'>
                 <div className='relative flex flex-wrap justify-center'>
                   <div className='w-full px-4 my-4 lg:w-6/12'>
-                    <a href={'/'} target='_blank' rel='noreferrer'>
+                    <a
+                      href={'https://www.youtube.com/watch?v=KtBUjfD-OY0'}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
                       <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden text-center break-words bg-black rounded-lg shadow-lg group rounded-3xl'>
                         <img
                           alt='agape'
