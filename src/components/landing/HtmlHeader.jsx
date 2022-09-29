@@ -624,23 +624,32 @@ export function HtmlHeader() {
                   </div>
                 </div>
               </div>
-              <div className='w-full px-12 mt-48 ml-auto mr-auto md:w-4/12 md:px-4'>
-                <div className='inline-flex items-center justify-center w-16 h-16 p-3 mb-6 text-center bg-white rounded-full shadow-lg text-slate-500'>
-                  <i className='text-xl fas fa-drafting-compass'></i>
-                </div>
-                <h3 className='mb-2 text-3xl font-semibold leading-normal'>
-                  Javascript Components
-                </h3>
-                <p className='mt-4 mb-4 text-lg font-light leading-relaxed text-slate-600'>
-                  In order to create a great User Experience some components
-                  require JavaScript. In this way you can manipulate the
-                  elements on the page and give more options to your users.
-                </p>
-                <p className='mt-4 mb-4 text-lg font-light leading-relaxed text-slate-600'>
-                  We created a set of Components that are dynamic and come to
-                  help you.
-                </p>
-                <div className='block pb-6'>
+              {
+                <div className='w-full px-12 mt-48 ml-auto mr-auto md:w-4/12 md:px-4'>
+                  <div className='inline-flex items-center justify-center w-16 h-16 p-3 mb-6 text-center bg-white rounded-full shadow-lg text-slate-500'>
+                    <i className='text-xl fas fa-drafting-compass'></i>
+                  </div>
+                  <h3 className='mb-2 text-3xl font-semibold leading-normal text-white'>
+                    Open Source and Affordable Metaverse for Many
+                  </h3>
+                  <p className='mt-4 mb-4 text-xs  font-light leading-relaxed text-slate-100'>
+                    Our vision is to make metaverse technology affordable for
+                    many by lowering server rental cost by optimization GPU and
+                    streaming process lowering entry barrier for web Devs
+                    Facilitating quick deployments
+                  </p>
+                  <p className='mt-4 mb-4 text-xs  font-light leading-relaxed text-slate-100'>
+                    Since Agape Effect Node Engine is an open source project we
+                    want to continue this movement with you. You can give this
+                    version a try to feel the design and also test the quality
+                    of the code!
+                  </p>
+                  <p className='mt-4 mb-4 text-xs  font-light leading-relaxed text-slate-100'>
+                    Get it free on Github and please help us spread the news
+                    with a Star
+                  </p>
+
+                  {/* <div className='block pb-6'>
                   <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
                     Alerts
                   </span>
@@ -665,92 +674,95 @@ export function HtmlHeader() {
                   <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
                     Tooltips
                   </span>
-                </div>
-                <a
+                </div> */}
+                  {/* <a
                   className='font-bold text-slate-700 hover:text-slate-500 ease-linear transition-all duration-150'
                   href='/learning-lab/tailwind-starter-kit/documentation/vue/alerts'
                 >
                   View all
                   <i className='ml-1 leading-relaxed fa fa-angle-double-right'></i>
-                </a>
-              </div>
+                </a> */}
+                </div>
+              }
             </div>
           </div>
-          <div className='container px-4 pt-48 pb-32 mx-auto'>
-            <div className='flex flex-wrap items-center'>
-              <div className='w-full px-12 ml-auto md:w-5/12 md:px-4'>
-                <div className='md:pr-12'>
-                  <div className='inline-flex items-center justify-center w-16 h-16 p-3 mb-6 text-center bg-white rounded-full shadow-lg text-slate-500'>
-                    <i className='text-xl fas fa-file-alt'></i>
-                  </div>
-                  <h3 className='text-3xl font-semibold'>
-                    Complex Documentation
-                  </h3>
-                  <p className='mt-4 text-lg leading-relaxed text-slate-500'>
-                    {`This extension comes a lot of fully coded examples that help
+          {false && (
+            <div className='container px-4 pt-48 pb-32 mx-auto'>
+              <div className='flex flex-wrap items-center'>
+                <div className='w-full px-12 ml-auto md:w-5/12 md:px-4'>
+                  <div className='md:pr-12'>
+                    <div className='inline-flex items-center justify-center w-16 h-16 p-3 mb-6 text-center bg-white rounded-full shadow-lg text-slate-500'>
+                      <i className='text-xl fas fa-file-alt'></i>
+                    </div>
+                    <h3 className='text-3xl font-semibold'>
+                      Complex Documentation
+                    </h3>
+                    <p className='mt-4 text-lg leading-relaxed text-slate-500'>
+                      {`This extension comes a lot of fully coded examples that help
                     you get started faster. You can adjust the colors and also
                     the programming language. You can change the text and images
                     and you're good to go.`}
-                  </p>
-                  <ul className='mt-6 list-none'>
-                    <li className='py-2'>
-                      <div className='flex items-center'>
-                        <div>
-                          <span className='inline-block px-2 py-1 mr-3 text-xs font-semibold uppercase rounded-full text-slate-500 bg-slate-50'>
-                            <i className='fas fa-fingerprint'></i>
-                          </span>
+                    </p>
+                    <ul className='mt-6 list-none'>
+                      <li className='py-2'>
+                        <div className='flex items-center'>
+                          <div>
+                            <span className='inline-block px-2 py-1 mr-3 text-xs font-semibold uppercase rounded-full text-slate-500 bg-slate-50'>
+                              <i className='fas fa-fingerprint'></i>
+                            </span>
+                          </div>
+                          <div>
+                            <h4 className='text-slate-500'>
+                              Built by Developers for Developers
+                            </h4>
+                          </div>
                         </div>
-                        <div>
-                          <h4 className='text-slate-500'>
-                            Built by Developers for Developers
-                          </h4>
+                      </li>
+                      <li className='py-2'>
+                        <div className='flex items-center'>
+                          <div>
+                            <span className='inline-block px-2 py-1 mr-3 text-xs font-semibold uppercase rounded-full text-slate-500 bg-slate-50'>
+                              <i className='fab fa-html5'></i>
+                            </span>
+                          </div>
+                          <div>
+                            <h4 className='text-slate-500'>
+                              Carefully crafted code for Components
+                            </h4>
+                          </div>
                         </div>
-                      </div>
-                    </li>
-                    <li className='py-2'>
-                      <div className='flex items-center'>
-                        <div>
-                          <span className='inline-block px-2 py-1 mr-3 text-xs font-semibold uppercase rounded-full text-slate-500 bg-slate-50'>
-                            <i className='fab fa-html5'></i>
-                          </span>
+                      </li>
+                      <li className='py-2'>
+                        <div className='flex items-center'>
+                          <div>
+                            <span className='inline-block px-2 py-1 mr-3 text-xs font-semibold uppercase rounded-full text-slate-500 bg-slate-50'>
+                              <i className='far fa-paper-plane'></i>
+                            </span>
+                          </div>
+                          <div>
+                            <h4 className='text-slate-500'>
+                              Dynamic Javascript Components
+                            </h4>
+                          </div>
                         </div>
-                        <div>
-                          <h4 className='text-slate-500'>
-                            Carefully crafted code for Components
-                          </h4>
-                        </div>
-                      </div>
-                    </li>
-                    <li className='py-2'>
-                      <div className='flex items-center'>
-                        <div>
-                          <span className='inline-block px-2 py-1 mr-3 text-xs font-semibold uppercase rounded-full text-slate-500 bg-slate-50'>
-                            <i className='far fa-paper-plane'></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className='text-slate-500'>
-                            Dynamic Javascript Components
-                          </h4>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-              <div className='w-full px-4 pt-24 mr-auto md:w-6/12 md:pt-0'>
-                <img
-                  alt='...'
-                  className='max-w-full rounded-lg shadow-xl'
-                  data-style='
+                <div className='w-full px-4 pt-24 mr-auto md:w-6/12 md:pt-0'>
+                  <img
+                    alt='...'
+                    className='max-w-full rounded-lg shadow-xl'
+                    data-style='
               transform: scale(1) perspective(1040px) rotateY(-11deg)
                 rotateX(2deg) rotate(2deg);
             '
-                  src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/documentation.png'
-                />
+                    src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/documentation.png'
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </section>
         <section className='relative py-20  bg-slate-600 bg-opacity-70'>
           {/* <div
@@ -773,46 +785,47 @@ export function HtmlHeader() {
             </svg>
           </div> */}
 
-          <div className='container pb-64 mx-auto'>
-            <div className='flex flex-wrap justify-center'>
-              <div className='w-full px-12 ml-auto mr-auto md:w-5/12 md:px-4 md:mt-64'>
-                <div className='inline-flex items-center justify-center w-16 h-16 p-3 mb-6 text-center bg-white rounded-full shadow-lg text-slate-500'>
-                  <i className='text-xl fas fa-code-branch'></i>
-                </div>
-                <h3 className='mb-2 text-3xl font-semibold leading-normal text-white'>
-                  Open Source
-                </h3>
-                <p className='mt-4 mb-4 text-lg font-light leading-relaxed text-slate-400'>
-                  Since
+          {false && (
+            <div className='container pb-64 mx-auto'>
+              <div className='flex flex-wrap justify-center'>
+                <div className='w-full px-12 ml-auto mr-auto md:w-5/12 md:px-4 md:mt-64'>
+                  <div className='inline-flex items-center justify-center w-16 h-16 p-3 mb-6 text-center bg-white rounded-full shadow-lg text-slate-500'>
+                    <i className='text-xl fas fa-code-branch'></i>
+                  </div>
+                  <h3 className='mb-2 text-3xl font-semibold leading-normal text-white'>
+                    Open Source
+                  </h3>
+                  <p className='mt-4 mb-4 text-lg font-light leading-relaxed text-slate-400'>
+                    Since
+                    <a
+                      href='https://tailwindcss.com/'
+                      className='text-slate-300'
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      TailwindCSS
+                    </a>
+                    is an open source project we wanted to continue this
+                    movement too. You can give this version a try to feel the
+                    design and also test the quality of the code!
+                  </p>
+                  <p className='mt-0 mb-4 text-lg font-light leading-relaxed text-slate-400'>
+                    Get it free on Github and please help us spread the news
+                    with a Star!
+                  </p>
                   <a
-                    href='https://tailwindcss.com/'
-                    className='text-slate-300'
+                    href='https://github.com/creativetimofficial/tailwind-starter-kit'
                     target='_blank'
+                    className='inline-block px-6 py-4 mt-4 mb-1 mr-1 text-sm font-bold text-white uppercase rounded shadow outline-none github-star focus:outline-none bg-slate-700 active:bg-slate-600 hover:shadow-lg'
                     rel='noreferrer'
                   >
-                    TailwindCSS
+                    Github Star
                   </a>
-                  is an open source project we wanted to continue this movement
-                  too. You can give this version a try to feel the design and
-                  also test the quality of the code!
-                </p>
-                <p className='mt-0 mb-4 text-lg font-light leading-relaxed text-slate-400'>
-                  Get it free on Github and please help us spread the news with
-                  a Star!
-                </p>
-                <a
-                  href='https://github.com/creativetimofficial/tailwind-starter-kit'
-                  target='_blank'
-                  className='inline-block px-6 py-4 mt-4 mb-1 mr-1 text-sm font-bold text-white uppercase rounded shadow outline-none github-star focus:outline-none bg-slate-700 active:bg-slate-600 hover:shadow-lg'
-                  rel='noreferrer'
-                >
-                  Github Star
-                </a>
-              </div>
-              <div className='relative w-full px-4 mt-32 ml-auto mr-auto md:w-4/12'>
-                <i
-                  className='fab fa-github text-slate-700'
-                  data-style='
+                </div>
+                <div className='relative w-full px-4 mt-32 ml-auto mr-auto md:w-4/12'>
+                  <i
+                    className='fab fa-github text-slate-700'
+                    data-style='
               font-size: 55em;
               position: absolute;
               top: -150px;
@@ -820,10 +833,11 @@ export function HtmlHeader() {
               left: auto;
               opacity: 0.8;
             '
-                ></i>
+                  ></i>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </section>
         {/* public/site/recognition/awards.png */}
         {/*  */}
