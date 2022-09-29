@@ -1011,21 +1011,21 @@ export function HtmlHeader() {
                     <i className='items-center justify-center inline-block p-3 mr-2 text-center bg-white rounded-full shadow-lg outline-none fab fa-twitter text-sky-400 font-lg align-center focus:outline-none'></i>
                   </a>
                   <a
-                    href='https://www.facebook.com/creativetim'
+                    href='https://www.facebook.com/'
                     target='_blank'
                     rel='noreferrer'
                   >
                     <i className='items-center justify-center inline-block p-3 mr-2 text-center bg-white rounded-full shadow-lg outline-none fab fa-facebook-square text-sky-600 font-lg align-center focus:outline-none'></i>
                   </a>
                   <a
-                    href='https://www.dribbble.com/creativetim'
+                    href='https://www.dribbble.com/'
                     target='_blank'
                     rel='noreferrer'
                   >
                     <i className='items-center justify-center inline-block p-3 mr-2 text-center text-pink-400 bg-white rounded-full shadow-lg outline-none fab fa-dribbble font-lg align-center focus:outline-none'></i>
                   </a>
                   <a
-                    href='https://www.github.com/creativetimofficial'
+                    href='https://www.github.com/wonglok'
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -1044,7 +1044,7 @@ export function HtmlHeader() {
                       <li>
                         <a
                           className='block pb-2 text-sm font-semibold text-slate-600 hover:text-slate-800'
-                          href='https://www.creative-tim.com/presentation'
+                          href='/'
                           target='_blank'
                           rel='noreferrer'
                         >
@@ -1054,7 +1054,7 @@ export function HtmlHeader() {
                       <li>
                         <a
                           className='block pb-2 text-sm font-semibold text-slate-600 hover:text-slate-800'
-                          href='https://creative-tim.com/blog'
+                          href='/'
                           target='_blank'
                           rel='noreferrer'
                         >
@@ -1064,7 +1064,7 @@ export function HtmlHeader() {
                       <li>
                         <a
                           className='block pb-2 text-sm font-semibold text-slate-600 hover:text-slate-800'
-                          href='https://www.github.com/creativetimofficial/tailwind-starter-kit'
+                          href='/'
                           target='_blank'
                           rel='noreferrer'
                         >
@@ -1074,7 +1074,7 @@ export function HtmlHeader() {
                       <li>
                         <a
                           className='block pb-2 text-sm font-semibold text-slate-600 hover:text-slate-800'
-                          href='https://www.creative-tim.com/bootstrap-themes/free'
+                          href='/'
                           target='_blank'
                           rel='noreferrer'
                         >
@@ -1091,7 +1091,7 @@ export function HtmlHeader() {
                       <li>
                         <a
                           className='block pb-2 text-sm font-semibold text-slate-600 hover:text-slate-800'
-                          href='https://github.com/creativetimofficial/tailwind-starter-kit/blob/master/LICENSE.md'
+                          href='https://github.com/wonglok/effctnode-forge/blob/master/LICENSE'
                           target='_blank'
                           rel='noreferrer'
                         >
