@@ -171,7 +171,6 @@ export function HtmlHeader() {
             </div>
           </div>
         </section>
-
         <section className='relative pb-40  bg-black bg-opacity-75'>
           <div
             className='absolute top-0 left-0 right-0 bottom-auto w-full'
@@ -426,6 +425,64 @@ export function HtmlHeader() {
                 </div>
               </div>
             </div>
+
+            <div className='flex flex-wrap justify-center mt-24 text-center'>
+              <div className='w-full px-12 md:w-6/12 md:px-4'>
+                <h2 className='text-4xl font-semibold'>
+                  Brands that uses Agape Engine
+                </h2>
+                <p className='mt-4 mb-4 text-lg leading-relaxed text-slate-500'>
+                  Tailwind Starter Kit is a completly new product built using
+                  our past experience in web templates. Take the examples we
+                  made for you and start playing with them.
+                </p>
+              </div>
+            </div>
+            <div className='container mx-auto mt-24'>
+              <div className='flex flex-wrap justify-center'>
+                <div className='w-full px-4 lg:w-12/12'>
+                  <div className='flex flex-wrap'>
+                    <div className='w-full px-4 lg:w-4/12'>
+                      <h5 className='pb-4 text-xl font-semibold text-center'>
+                        Login Page
+                      </h5>
+                      <div className='relative flex flex-col w-full min-w-0 mb-6 break-words bg-white rounded-lg shadow-lg hover:-mt-4 ease-linear transition-all duration-150'>
+                        <img
+                          alt='...'
+                          className='h-auto max-w-full align-middle border-none rounded-lg'
+                          src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/login.jpg'
+                        />
+                      </div>
+                    </div>
+                    <div className='w-full px-4 lg:w-4/12'>
+                      <h5 className='pb-4 text-xl font-semibold text-center'>
+                        Profile Page
+                      </h5>
+                      <div className='relative flex flex-col w-full min-w-0 mb-6 break-words bg-white rounded-lg shadow-lg hover:-mt-4 ease-linear transition-all duration-150'>
+                        <img
+                          alt='...'
+                          className='h-auto max-w-full align-middle border-none rounded-lg'
+                          src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/profile.jpg'
+                        />
+                      </div>
+                    </div>
+                    <div className='w-full px-4 lg:w-4/12'>
+                      <h5 className='pb-4 text-xl font-semibold text-center'>
+                        Landing Page
+                      </h5>
+                      <div className='relative flex flex-col w-full min-w-0 mb-6 break-words bg-white rounded-lg shadow-lg hover:-mt-4 ease-linear transition-all duration-150'>
+                        <img
+                          alt='...'
+                          className='h-auto max-w-full align-middle border-none rounded-lg'
+                          src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/landing.jpg'
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className='flex flex-wrap items-center pt-32'>
               <div className='w-full px-4 mt-32 ml-auto mr-auto md:w-6/12'>
                 <div className='relative flex flex-wrap justify-center'>
@@ -618,65 +675,7 @@ export function HtmlHeader() {
               </div>
             </div>
           </div>
-
-          <div className='flex flex-wrap justify-center mt-24 text-center'>
-            <div className='w-full px-12 md:w-6/12 md:px-4'>
-              <h2 className='text-4xl font-semibold'>
-                Beautiful Example Pages
-              </h2>
-              <p className='mt-4 mb-4 text-lg leading-relaxed text-slate-500'>
-                Tailwind Starter Kit is a completly new product built using our
-                past experience in web templates. Take the examples we made for
-                you and start playing with them.
-              </p>
-            </div>
-          </div>
-          <div className='container mx-auto mt-24'>
-            <div className='flex flex-wrap justify-center'>
-              <div className='w-full px-4 lg:w-12/12'>
-                <div className='flex flex-wrap'>
-                  <div className='w-full px-4 lg:w-4/12'>
-                    <h5 className='pb-4 text-xl font-semibold text-center'>
-                      Login Page
-                    </h5>
-                    <div className='relative flex flex-col w-full min-w-0 mb-6 break-words bg-white rounded-lg shadow-lg hover:-mt-4 ease-linear transition-all duration-150'>
-                      <img
-                        alt='...'
-                        className='h-auto max-w-full align-middle border-none rounded-lg'
-                        src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/login.jpg'
-                      />
-                    </div>
-                  </div>
-                  <div className='w-full px-4 lg:w-4/12'>
-                    <h5 className='pb-4 text-xl font-semibold text-center'>
-                      Profile Page
-                    </h5>
-                    <div className='relative flex flex-col w-full min-w-0 mb-6 break-words bg-white rounded-lg shadow-lg hover:-mt-4 ease-linear transition-all duration-150'>
-                      <img
-                        alt='...'
-                        className='h-auto max-w-full align-middle border-none rounded-lg'
-                        src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/profile.jpg'
-                      />
-                    </div>
-                  </div>
-                  <div className='w-full px-4 lg:w-4/12'>
-                    <h5 className='pb-4 text-xl font-semibold text-center'>
-                      Landing Page
-                    </h5>
-                    <div className='relative flex flex-col w-full min-w-0 mb-6 break-words bg-white rounded-lg shadow-lg hover:-mt-4 ease-linear transition-all duration-150'>
-                      <img
-                        alt='...'
-                        className='h-auto max-w-full align-middle border-none rounded-lg'
-                        src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/landing.jpg'
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </section>
-
         <section className='relative py-20  bg-slate-600 bg-opacity-70'>
           {/* <div
             className='absolute top-0 left-0 right-0 bottom-auto w-full'
@@ -750,6 +749,7 @@ export function HtmlHeader() {
             </div>
           </div>
         </section>
+        {/* public/site/recognition/awards.png */}
         {/*  */}
         <section className='relative pt-32 pb-16  bg-slate-600 bg-opacity-70'>
           {/* <div
@@ -773,23 +773,24 @@ export function HtmlHeader() {
           </div> */}
           {/* bg-opacity-80 */}
           <div className='container mx-auto '>
-            <div className='relative z-10 flex flex-wrap justify-center px-12 py-16 -mt-64 bg-white rounded-lg shadow-xl '>
+            <div className='relative z-10 flex flex-wrap justify-center px-12 py-12 -mt-64 bg-black shadow-xl rounded-3xl bg-opacity-50'>
               <div className='w-full text-center lg:w-8/12'>
-                <p className='text-4xl text-center'>
+                {/* <p className='text-4xl text-center'>
                   <span role='img' aria-label='love'>
                     😍
                   </span>
-                </p>
-                <h3 className='text-3xl font-semibold'>
-                  Do you love this Starter Kit?
+                </p> */}
+                <h3 className='mt-4 text-3xl font-semibold text-white'>
+                  Awards and Recognitions
                 </h3>
-                <p className='mt-4 mb-4 text-lg leading-relaxed text-slate-500'>
-                  Cause if you do, it can be yours now. Hit the buttons below to
-                  navigate to get the Free version for your next project. Build
-                  a new web app or give an old project a new look!
+                <p className='mt-4 mb-4 text-lg leading-relaxed text-slate-100'>
+                  The Award winning 3D Web Engine and Metaverse builder
                 </p>
-                <div className='flex flex-col mt-10 sm:block'>
-                  <a
+                <div className='flex flex-col mt-16 sm:block'>
+                  <div>
+                    <img src={`/site/recognition/awards.png`} />
+                  </div>
+                  {/* <a
                     className='px-6 py-4 mb-2 mr-1 text-sm font-bold text-white uppercase bg-pink-500 rounded shadow outline-none get-started focus:outline-none active:bg-pink-600 hover:shadow-lg ease-linear transition-all duration-150'
                     href='/learning-lab/tailwind-starter-kit/documentation/quick-start'
                   >
@@ -803,13 +804,83 @@ export function HtmlHeader() {
                   >
                     <i className='mr-1 text-lg fab fa-github'></i>
                     <span>Help With a Star</span>
-                  </a>
+                  </a> */}
                 </div>
-                <div className='mt-16 text-center'></div>
+                <div className='mt-10 text-center'></div>
               </div>
             </div>
           </div>
         </section>
+
+        {/*  */}
+        <section className='relative block py-24 bg-black bg-opacity-50 lg:pt-0'>
+          <div className='container px-4 mx-auto'>
+            <div className='flex flex-wrap justify-center pt-36'>
+              <div className='w-full px-4 lg:w-6/12'>
+                <div className='relative flex flex-col w-full min-w-0 mb-6 break-words rounded-lg shadow-lg bg-slate-200'>
+                  <div className='flex-auto p-5 lg:p-10'>
+                    <h4 className='text-2xl font-semibold'>
+                      Want to work with us?
+                    </h4>
+                    <p className='mt-1 mb-4 leading-relaxed text-slate-500'>
+                      Complete this form and we will get back to you in 24
+                      hours.
+                    </p>
+                    <div className='relative w-full mt-8 mb-3'>
+                      <label
+                        className='block mb-2 text-xs font-bold uppercase text-slate-600'
+                        htmlFor='full-name'
+                      >
+                        Full Name
+                      </label>
+                      <input
+                        type='text'
+                        className='w-full px-3 py-3 text-sm bg-white border-0 rounded shadow placeholder-slate-300 text-slate-600 focus:outline-none focus:ring ease-linear transition-all duration-150'
+                        placeholder='Full Name'
+                      />
+                    </div>
+                    <div className='relative w-full mb-3'>
+                      <label
+                        className='block mb-2 text-xs font-bold uppercase text-slate-600'
+                        htmlFor='email'
+                      >
+                        Email
+                      </label>
+                      <input
+                        type='email'
+                        className='w-full px-3 py-3 text-sm bg-white border-0 rounded shadow placeholder-slate-300 text-slate-600 focus:outline-none focus:ring ease-linear transition-all duration-150'
+                        placeholder='Email'
+                      />
+                    </div>
+                    <div className='relative w-full mb-3'>
+                      <label
+                        className='block mb-2 text-xs font-bold uppercase text-slate-600'
+                        htmlFor='message'
+                      >
+                        Message
+                      </label>
+                      <textarea
+                        rows='4'
+                        cols='80'
+                        className='w-full px-3 py-3 text-sm bg-white border-0 rounded shadow placeholder-slate-300 text-slate-600 focus:outline-none focus:ring'
+                        placeholder='Type a message...'
+                      ></textarea>
+                    </div>
+                    <div className='mt-6 text-center'>
+                      <button
+                        className='px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase rounded shadow outline-none bg-slate-800 active:bg-slate-600 hover:shadow-lg focus:outline-none ease-linear transition-all duration-150'
+                        type='button'
+                      >
+                        Send Message
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <footer className='relative pt-8 pb-6 bg-slate-200 bg-opacity-80'>
           <div
             className='absolute top-0 left-0 right-0 bottom-auto w-full -mt-20 overflow-hidden pointer-events-none'
