@@ -335,37 +335,92 @@ export function HtmlHeader() {
           <div className='container pb-20 mx-auto overflow-hidden'>
             <div className='flex flex-wrap items-center'>
               <div className='w-full px-12 mt-48 ml-auto mr-auto md:w-4/12 md:px-4'>
-                <div className='inline-flex items-center justify-center w-16 h-16 p-3 mb-6 text-center bg-white rounded-full shadow-lg text-slate-500'>
-                  <i className='text-xl fas fa-sitemap'></i>
+                <div className='inline-flex items-center justify-center w-16 h-16 p-0 mb-6 text-center  rounded-full shadow-lg'>
+                  <img src={`/site/editor/icon.png`} />
                 </div>
-                <h3 className='mb-2 text-3xl font-semibold leading-normal'>
+                <h3 className='mb-2 text-3xl font-semibold leading-normal text-white'>
                   Real-time Web Editor
                 </h3>
-                <p className='mt-4 mb-4 text-lg font-light leading-relaxed text-slate-600'>
+                <p className='mt-4 mb-4 text-lg font-light leading-relaxed text-slate-200'>
                   Allows you to bring your 3D assets to the web with
                 </p>
                 <div className='block pb-6'>
-                  <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
-                    VFX, Physics and particle simulation
-                  </span>
-                  <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
-                    Beautiful node based shaders
-                  </span>
-                  <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
-                    Lighting & Post processing
-                  </span>
+                  <ol className='pl-5 list-disc'>
+                    <li className='mb-3 text-slate-300'>
+                      VFX, Physics and particle simulation
+                    </li>
+                    <li className='mb-3 text-slate-300'>
+                      Beautiful node based shaders
+                    </li>
+                    <li className='mb-3 text-slate-300'>
+                      Lighting & Post processing
+                    </li>
+                  </ol>
                 </div>
-                <a
-                  className='font-bold text-slate-700 hover:text-slate-500 ease-linear transition-all duration-150'
-                  href='/learning-lab/tailwind-starter-kit/documentation/css/alerts'
-                >
-                  View All
-                  <i className='ml-1 leading-relaxed fa fa-angle-double-right'></i>
-                </a>
               </div>
               <div className='w-full px-4 mt-32 ml-auto mr-auto md:w-5/12'>
                 <div className='relative flex flex-col w-full min-w-0 mt-48 mb-6 md:mt-0'>
                   <img src={`/site/editor/agape-engine.png`}></img>
+                </div>
+              </div>
+            </div>
+
+            <div className='flex flex-wrap items-center'>
+              <div className='w-full px-4 mt-32 ml-auto mr-auto md:w-5/12'>
+                <div className='relative flex flex-col w-full min-w-0 mt-48 mb-6 md:mt-0'>
+                  <img src={`/site/interopable/exaplain.svg`}></img>
+                </div>
+              </div>
+              <div className='w-full px-12 mt-48 ml-auto mr-auto md:w-4/12 md:px-4'>
+                <div className='inline-flex items-center justify-center w-16 h-16 p-0 mb-6 text-center  rounded-full shadow-lg'>
+                  <img src={`/site/interopable/icon.png`} />
+                </div>
+                <h3 className='mb-2 text-3xl font-semibold leading-normal text-white'>
+                  Decentralized interoperability
+                </h3>
+                <p className='mt-4 mb-4 text-lg font-light leading-relaxed text-slate-200'>
+                  Wallgarden assets vs open assets
+                </p>
+                <div className='block pb-6'>
+                  <ol className='pl-5 list-disc'>
+                    <li className='mb-3 text-slate-300'>
+                      Agape tools empower 3D assets and NFTs to carry VFX,
+                      animation and
+                    </li>
+                    <li className='mb-3 text-slate-300'>
+                      potentially game logics across metaverses and different
+                      chains.
+                    </li>
+                    {/* <li className='mb-3 text-slate-300'></li> */}
+                  </ol>
+                </div>
+              </div>
+            </div>
+
+            <div className='flex flex-wrap items-center'>
+              <div className='w-full px-12 mt-48 ml-auto mr-auto md:w-4/12 md:px-4'>
+                <div className='inline-flex items-center justify-center w-16 h-16 p-0 mb-6 text-center  rounded-full shadow-lg'>
+                  <img src={`/site/editor/icon.png`} />
+                </div>
+                <h3 className='mb-2 text-3xl font-semibold leading-normal text-white'>
+                  Web Native
+                </h3>
+                <p className='mt-4 mb-4 text-lg font-light leading-relaxed text-slate-200'>
+                  Edit on the Web - What you see is what you get!
+                </p>
+                <div className='block pb-6'>
+                  <ol className='pl-5 list-disc'>
+                    <li className='mb-3 text-slate-300'>Fast for mobile</li>
+                    <li className='mb-3 text-slate-300'>Quick development</li>
+                  </ol>
+                  <div>
+                    <img src={`/site/native/alphapass.svg`} />
+                  </div>
+                </div>
+              </div>
+              <div className='w-full px-4 mt-32 ml-auto mr-auto md:w-5/12'>
+                <div className='relative flex flex-col w-full min-w-0 mt-48 mb-6 md:mt-0'>
+                  <img src={`/site/native/editor.svg`}></img>
                 </div>
               </div>
             </div>
