@@ -183,7 +183,7 @@ export function HtmlHeader() {
               <div className='w-10/12 ml-auto mr-auto -mt-32 lg:px-12 md:w-6/12 lg:w-4/12 md:px-4'>
                 <Parallax>
                   <div className='relative flex flex-col w-full min-w-0 mb-6 break-words border-4 border-pink-600 rounded-lg shadow-lg'>
-                    <div className='w-full align-middle  rounded-t-lg backdrop-blur-lg'>
+                    <div className='w-full align-middle  rounded-t-lg'>
                       <YoCanvas></YoCanvas>
                     </div>
                     <blockquote className='relative p-8 bg-pink-600 '>
@@ -244,7 +244,7 @@ export function HtmlHeader() {
                         <div className='inline-flex items-center justify-center mb-5 shadow-lg w-14 h-14 text-centerrounded-full'>
                           <img
                             className='w-full'
-                            src={`/site/bridge/realtime-web-editor.svg`}
+                            src={`/site/bridge/webnative.png`}
                           />
                         </div>
                         <h6 className='mb-1 text-xl font-semibold'>
@@ -291,19 +291,18 @@ export function HtmlHeader() {
                         <div className='inline-flex items-center justify-center mb-5 shadow-lg w-14 h-14 text-centerrounded-full'>
                           <img
                             className='w-full'
-                            src={`/site/bridge/realtime-web-editor.svg`}
+                            src={`/site/bridge/affordable.png`}
                           />
                         </div>
                         <h6 className='mb-1 text-xl font-semibold'>
-                          Creative Econoomy
+                          Affordable Metaverse Econoomy
                         </h6>
                         <ol className='pl-5 list-disc'>
                           <li className='mb-3 text-slate-300'>
-                            Fair Trade and Affordable Metaverse Ownership for
-                            All
+                            Metaverse Ownership for All
                           </li>
                           <li className='mb-3 text-slate-300'>
-                            Low Entry Barrier
+                            Fair Trade & Low Entry Barrier
                           </li>
                           <li className='mb-3 text-slate-300'>
                             Open Economy for GLB Centric Creative Content
@@ -1034,19 +1033,21 @@ function Parallax({ children }) {
     return useScrollStore.subscribe((nst, pst) => {
       //smooth
 
-      console.log(nst.smooth)
+      // console.log(nst.smooth)
 
-      let v = ((0.35 - nst.smooth) / 0.1) * 50.0
+      let v = ((0.35 - nst.smooth) / 0.1) * -30.0
 
-      // if (v >= 30) {
-      //   v = 30.0
-      // }
-      // if (v <= -30) {
-      //   v = -30.0
-      // }
+      if (v >= 30) {
+        v = 30.0
+      }
+      if (v <= -30) {
+        v = -30.0
+      }
 
-      ref.current.style.transform = `perspective(800px) rotateY(${v}deg) rotateX(${20}deg)`
-      ref.current.style.transition = `all 0.5s`
+      if (window.innerWidth >= 1920) {
+        ref.current.style.transform = `perspective(800px) translateZ(150px) scale(0.89) rotateY(${v}deg) rotateX(${20}deg)`
+        ref.current.style.transition = `all 0.5s`
+      }
 
       //
       // console.log(nst.px)

@@ -41,6 +41,7 @@ export function YoCanvas() {
       gl,
       scene,
       camera,
+      coutner: 0,
     }
 
     if (!Core.now.canvas) {
@@ -64,7 +65,15 @@ export function YoCanvas() {
     if (st.current) {
       let { gl, scene, camera } = st.current
 
-      gl.render(scene, camera)
+      st.current.counter += 1.0
+
+      if (window.innerWidth <= 767) {
+        if (st.current.counter <= 100) {
+          gl.render(scene, camera)
+        }
+      } else {
+        gl.render(scene, camera)
+      }
     }
     // renderer.current?.render()
   })
