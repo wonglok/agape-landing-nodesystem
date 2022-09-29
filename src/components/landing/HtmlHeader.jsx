@@ -482,14 +482,24 @@ export function HtmlHeader() {
                         <h5 className='pb-4 text-xl text-center text-slate-200'>
                           CocaCola
                         </h5>
-                        <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden break-words group rounded-3xl'>
+                        <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden break-words group rounded-2xl'>
                           <img
-                            alt='Querlo'
+                            alt='Cocacola'
+                            style={
+                              {
+                                // transform: `scale(1.01)`,
+                              }
+                            }
                             className='h-auto max-w-full align-middle border-none rounded-lg'
                             src='/site/logos-covers/t-coca.png'
                           />
                           <img
-                            alt='Querlo'
+                            alt='Cocacola'
+                            style={
+                              {
+                                // transform: `scale(1.01)`,
+                              }
+                            }
                             className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
                             src='/site/logos-covers/c-coca.png'
                           />
@@ -505,7 +515,7 @@ export function HtmlHeader() {
                         <h5 className='pb-4 text-xl text-center text-slate-200'>
                           Cadillac
                         </h5>
-                        <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden break-words group rounded-3xl'>
+                        <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden break-words group rounded-2xl'>
                           <img
                             alt='Cadillac'
                             className='h-auto max-w-full align-middle border-none rounded-lg'
@@ -513,6 +523,11 @@ export function HtmlHeader() {
                           />
                           <img
                             alt='Cadillac'
+                            style={
+                              {
+                                // transform: `scale(1.01)`,
+                              }
+                            }
                             className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
                             src='/site/logos-covers/c-cadilliac.png'
                           />
@@ -528,7 +543,7 @@ export function HtmlHeader() {
                         <h5 className='pb-4 text-xl text-center text-slate-200'>
                           AI Company Querlo
                         </h5>
-                        <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden break-words group rounded-3xl'>
+                        <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden break-words group rounded-2xl'>
                           <img
                             alt='Querlo'
                             className='h-auto max-w-full align-middle border-none rounded-lg'
@@ -536,6 +551,11 @@ export function HtmlHeader() {
                           />
                           <img
                             alt='Querlo'
+                            style={
+                              {
+                                // transform: `scale(1.01)`,
+                              }
+                            }
                             className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
                             src='/site/logos-covers/c-querlo.png'
                           />
