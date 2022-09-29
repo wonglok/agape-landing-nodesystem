@@ -424,10 +424,10 @@ export class LokLokWiggleDisplay {
     geometry.instanceCount = count
 
     let matConfig = {
-      color: new Color('#58519B').offsetHSL(0, 0, 0.3),
+      color: new Color('#58519B').offsetHSL(0, 0, 0.0),
       // color: new Color('#ffffff'),
-      emissive: new Color('#58519B').offsetHSL(0, 0, 0.3),
-      emissiveIntensity: 100.5,
+      emissive: new Color('#58519B').offsetHSL(0, 0, 0.0),
+      emissiveIntensity: 3.5,
 
       // emissive: new Color('#018888'),
       side: FrontSide,
@@ -566,7 +566,7 @@ export class LokLokWiggleDisplay {
             vec3 nPos = makeGeo();
             vec3 transformed = vec3( nPos );
 
-            `
+      `
 
       let transformV3Normal = `
 

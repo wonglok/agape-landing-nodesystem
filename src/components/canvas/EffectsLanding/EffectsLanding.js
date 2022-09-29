@@ -172,12 +172,12 @@ export function EffectsLanding() {
 
   return (
     <group>
-      <EffectComposer multisampling={0}>
+      <EffectComposer disableNormalPass multisampling={3}>
         <Noise opacity={1} premultiply={true}></Noise>
         <Noise opacity={0.5} premultiply={true}></Noise>
-        {!GPUTier.isMobile && GPUTier.tier >= 3 && (
+        {/* {!GPUTier.isMobile && GPUTier.tier >= 3 && (
           <GLSSR key={GLSSR.key}></GLSSR>
-        )}
+        )} */}
 
         {/* <SSR></SSR> */}
 

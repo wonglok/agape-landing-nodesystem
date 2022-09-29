@@ -100,7 +100,7 @@ export function YoCanvas() {
     // renderer.current?.render()
   })
   return (
-    <div ref={con}>
+    <div ref={con} className='backdrop-blur-lg'>
       <canvas className='w-full rounded-t-lg' ref={ref}></canvas>
     </div>
   )

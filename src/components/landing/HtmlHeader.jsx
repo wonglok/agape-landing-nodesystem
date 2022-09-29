@@ -119,10 +119,10 @@ export function HtmlHeader() {
         </nav>
         <section
           className='relative flex items-center h-screen pt-16 bg-black header bg-opacity-0'
-          data-style='max-height: 860px'
           style={{
             backgroundImage: `linear-gradient(180deg, rgba(0,0,0,1.0), rgba(0,0,0,0.3))`,
-            height: `calc(${height - 100}px)`,
+            minHeight: '100vh',
+            height: `calc(${height - 0}px)`,
           }}
         >
           <div className='absolute bottom-0 left-0 flex items-center justify-center w-full mb-3 text-center text-white'>
@@ -134,10 +134,11 @@ export function HtmlHeader() {
           data-style='max-height: 860px'
           style={{
             backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.0))`,
-            height: `calc(${height}px + 230px)`,
+            minHeight: '100vh',
+            height: `calc(${height}px + 0px)`,
           }}
         >
-          <div className='container flex flex-wrap items-center justify-center mx-auto'>
+          <div className='container flex flex-wrap items-center justify-center mx-auto mt-32'>
             <div className='w-10/12 mb-32'>
               <div className='flex flex-col items-center justify-center pb-32'>
                 <img src={`/site/hero/your_world.png`} alt={'title'} />
@@ -194,38 +195,38 @@ export function HtmlHeader() {
           <div className='container mx-auto'>
             <div className='flex flex-wrap items-center'>
               <div className='w-10/12 ml-auto mr-auto -mt-32 lg:px-12 md:w-6/12 lg:w-4/12 md:px-4'>
-                <Parallax>
-                  <div className='relative flex flex-col w-full min-w-0 mb-6 break-words border-4 border-pink-600 rounded-lg shadow-lg'>
-                    <div className='w-full align-middle  rounded-t-lg'>
-                      <YoCanvas></YoCanvas>
-                    </div>
-                    <blockquote className='relative p-8 bg-pink-600 '>
-                      <svg
-                        preserveAspectRatio='none'
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 583 95'
-                        className='absolute left-0 block w-full'
-                        style={{
-                          height: '95px',
-                          top: '-94px',
-                        }}
-                      >
-                        <polygon
-                          points='-30,95 583,95 583,65'
-                          className='text-pink-600 fill-current'
-                        ></polygon>
-                      </svg>
-                      <h4 className='text-xl font-bold text-white'>
-                        A Bridge from Blender to the Web
-                      </h4>
-                      <p className='mt-2 font-light text-white text-md'>
-                        Agape Effect Node tools not only bring your 3D assets to
-                        the web, but also empower them to carry VFX, animation
-                        across metaverses and different chains
-                      </p>
-                    </blockquote>
+                {/* <Parallax> */}
+                <div className='relative flex flex-col w-full min-w-0 mb-6 break-words border-4 border-pink-600 rounded-lg shadow-lg'>
+                  <div className='w-full align-middle  rounded-t-lg'>
+                    <YoCanvas></YoCanvas>
                   </div>
-                </Parallax>
+                  <blockquote className='relative p-8 bg-pink-600 '>
+                    <svg
+                      preserveAspectRatio='none'
+                      xmlns='http://www.w3.org/2000/svg'
+                      viewBox='0 0 583 95'
+                      className='absolute left-0 block w-full'
+                      style={{
+                        height: '95px',
+                        top: '-94px',
+                      }}
+                    >
+                      <polygon
+                        points='-30,95 583,95 583,65'
+                        className='text-pink-600 fill-current'
+                      ></polygon>
+                    </svg>
+                    <h4 className='text-xl font-bold text-white'>
+                      A Bridge from Blender to the Web
+                    </h4>
+                    <p className='mt-2 font-light text-white text-md'>
+                      Agape Effect Node tools not only bring your 3D assets to
+                      the web, but also empower them to carry VFX, animation
+                      across metaverses and different chains
+                    </p>
+                  </blockquote>
+                </div>
+                {/* </Parallax> */}
               </div>
               <div className='w-full px-4 md:w-6/12'>
                 <div className='flex flex-wrap'>
@@ -334,6 +335,12 @@ export function HtmlHeader() {
           </div>
           <div className='container pb-20 mx-auto overflow-hidden'>
             <div className='flex flex-wrap items-center'>
+              <div className='w-full px-4 mt-32 ml-auto mr-auto lg:order-3 md:w-5/12'>
+                <div className='relative flex flex-col w-full min-w-0 mt-48 mb-6 md:mt-0'>
+                  <img src={`/site/editor/agape-engine.png`}></img>
+                </div>
+              </div>
+
               <div className='w-full px-12 mt-48 ml-auto mr-auto md:w-4/12 md:px-4'>
                 <div className='inline-flex items-center justify-center w-16 h-16 p-0 mb-6 text-center  rounded-full shadow-lg'>
                   <img src={`/site/editor/icon.png`} />
@@ -356,11 +363,6 @@ export function HtmlHeader() {
                       Lighting & Post processing
                     </li>
                   </ol>
-                </div>
-              </div>
-              <div className='w-full px-4 mt-32 ml-auto mr-auto md:w-5/12'>
-                <div className='relative flex flex-col w-full min-w-0 mt-48 mb-6 md:mt-0'>
-                  <img src={`/site/editor/agape-engine.png`}></img>
                 </div>
               </div>
             </div>
@@ -398,6 +400,11 @@ export function HtmlHeader() {
             </div>
 
             <div className='flex flex-wrap items-center'>
+              <div className='w-full px-4 mt-32 ml-auto mr-auto lg:order-3 md:w-5/12'>
+                <div className='relative flex flex-col w-full min-w-0 mt-48 mb-6 md:mt-0'>
+                  <img src={`/site/native/editor.svg`}></img>
+                </div>
+              </div>
               <div className='w-full px-12 mt-48 ml-auto mr-auto md:w-4/12 md:px-4'>
                 <div className='inline-flex items-center justify-center w-16 h-16 p-0 mb-6 text-center  rounded-full shadow-lg'>
                   <img src={`/site/editor/icon.png`} />
@@ -416,11 +423,6 @@ export function HtmlHeader() {
                   <div>
                     <img src={`/site/native/alphapass.svg`} />
                   </div>
-                </div>
-              </div>
-              <div className='w-full px-4 mt-32 ml-auto mr-auto md:w-5/12'>
-                <div className='relative flex flex-col w-full min-w-0 mt-48 mb-6 md:mt-0'>
-                  <img src={`/site/native/editor.svg`}></img>
                 </div>
               </div>
             </div>
@@ -1024,14 +1026,15 @@ function Parallax({ children }) {
       if (v >= 30) {
         v = 30.0
       }
+
       if (v <= -30) {
         v = -30.0
       }
 
       if (window.innerWidth >= 1920) {
-        ref.current.style.transform = `perspective(800px) translateZ(150px) scale(0.89) rotateY(${v}deg) rotateX(${20}deg)`
-        ref.current.style.transition = `all 0.5s`
+        ref.current.style.transform = `perspective(800px) rotateY(${v}deg) rotateX(${v}deg)`
       }
+      ref.current.style.transition = `all 0.3s`
 
       //
       // console.log(nst.px)
@@ -1045,7 +1048,7 @@ function Parallax({ children }) {
   )
 }
 
-function IconLoader() {
+function IconLoader({ height }) {
   let ref = useRef()
 
   useEffect(() => {
@@ -1053,7 +1056,7 @@ function IconLoader() {
     //
     return useScrollStore.subscribe((nst, pst) => {
       //smooth
-      let v = nst.smoothPX / 180
+      let v = nst.smoothPX / 100
       if (v >= 1.0) {
         v = 1.0
       }
@@ -1063,7 +1066,7 @@ function IconLoader() {
       // console.log(nst.smoothPX)
     })
     //
-  }, [])
+  }, [height])
   return (
     <div ref={ref} className='container-chev -translate-y-24'>
       <div className='chevron'></div>
