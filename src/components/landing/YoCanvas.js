@@ -1,5 +1,5 @@
 import { Core } from '@/helpers/Core'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { PerspectiveCamera, Scene, Vector2, WebGLRenderer } from 'three144'
 import { Totem } from './Totem'
 
@@ -22,6 +22,25 @@ export function YoCanvas() {
   let ref = useRef()
   let con = useRef()
   let st = useRef()
+
+  let setupIsInViewport = (elem) => {
+    let bounding = elem.getBoundingClientRect()
+
+    return () => {
+      bounding = elem.getBoundingClientRect()
+
+      let inside =
+        bounding.top >= 0 &&
+        bounding.left >= 0 &&
+        bounding.bottom <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+        bounding.right <=
+          (window.innerWidth || document.documentElement.clientWidth)
+
+      return inside
+    }
+  }
+
   useEffect(() => {
     //
     //
@@ -31,6 +50,7 @@ export function YoCanvas() {
 
     v2.x = con.current.getBoundingClientRect().width
     gl.setSize(v2.x, v2.x, true)
+    gl.setPixelRatio(window.devicePixelRatio || 1.0)
 
     let scene = new Scene()
     let camera = new PerspectiveCamera(45, 1, 0.1, 1000)
@@ -41,6 +61,7 @@ export function YoCanvas() {
       gl,
       scene,
       camera,
+      inViewPort: setupIsInViewport(con.current),
       coutner: 0,
     }
 
@@ -60,20 +81,25 @@ export function YoCanvas() {
       gl.dispose()
     }
   }, [])
+
+  //
   useLoop(() => {
     //
-    if (st.current) {
+
+    if (st.current && st.current.inViewPort()) {
+      //
       let { gl, scene, camera } = st.current
 
-      st.current.counter += 1.0
+      //
+      gl.render(scene, camera)
 
-      if (window.innerWidth <= 767) {
-        if (st.current.counter <= 100) {
-          gl.render(scene, camera)
-        }
-      } else {
-        gl.render(scene, camera)
-      }
+      // if (window.innerWidth <= 767) {
+      //   if (st.current.counter <= 100) {
+      //     gl.render(scene, camera)
+      //     st.current.counter += 1.0
+      //   }
+      // } else {
+      // }
     }
     // renderer.current?.render()
   })

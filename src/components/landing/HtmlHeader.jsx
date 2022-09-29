@@ -10,7 +10,7 @@ export function HtmlHeader() {
   return (
     <>
       <section>
-        <nav className='fixed top-0 z-50 flex flex-wrap items-center justify-between w-full  bg-black shadow-lg bg-opacity-50'>
+        <nav className='top-0 z-50 flex flex-wrap items-center justify-between w-full bg-black shadow-lg lg:fixed lg:bg-opacity-50'>
           <div className='flex flex-col items-center justify-center w-full py-4 text-sm text-white bg-black lg:flex-row'>
             <div className='mr-3'>AGAPE ENGINE ALPHA PASS</div>
             <a href='/'>
@@ -22,20 +22,20 @@ export function HtmlHeader() {
             </a>
           </div>
 
-          <div className='container flex flex-wrap items-center justify-center px-4 mx-auto '>
+          <div className='container flex flex-wrap items-center justify-center px-4 mx-auto bg-black lg:bg-transparent  '>
             <div className='relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start'>
               <a
-                className='inline-block py-2 mr-4 text-sm font-bold leading-relaxed uppercase whitespace-nowrap text-slate-200'
+                className='py-2 mr-4 text-sm font-bold leading-relaxed uppercase lg:inline-block whitespace-nowrap text-slate-200'
                 href='/learning-lab/tailwind-starter-kit/presentation'
               >
                 Agape Effect Node 3D Engine
               </a>
-              <button
+              {/* <button
                 className='block px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid rounded outline-none cursor-pointer lg:hidden focus:outline-none'
                 type='button'
               >
                 <i className='fas fa-bars'></i>
-              </button>
+              </button> */}
             </div>
 
             <div
