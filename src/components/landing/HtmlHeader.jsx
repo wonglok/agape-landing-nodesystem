@@ -475,7 +475,7 @@ export function HtmlHeader() {
                   <div className='flex flex-wrap'>
                     <div className='w-full px-4 lg:w-4/12'>
                       <a
-                        href={'https://cadillac.agape.effectnode.com/'}
+                        href={'https://cocacola.agape.effectnode.com/room'}
                         target='_blank'
                         rel='noreferrer'
                       >

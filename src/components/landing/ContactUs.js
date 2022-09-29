@@ -14,7 +14,7 @@ export function ContactUs() {
         anime({
           targets: [div],
           scrollTop: contactus.offsetTop,
-          duration: 5000,
+          duration: 1000,
         })
         // div.scrollTop = 100
       }}
