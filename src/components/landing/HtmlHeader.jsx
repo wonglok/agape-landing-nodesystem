@@ -49,7 +49,7 @@ export function HtmlHeader() {
           className='relative flex items-center h-screen pt-16 bg-black header bg-opacity-0'
           style={{
             background: `rgb(0,0,0)`,
-            background: `linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 41%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.7) 100%)`,
+            background: `linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 41%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.5) 100%)`,
             // backgroundImage: `linear-gradient(180deg, rgba(0,0,0,1.0), rgba(0,0,0,0.3))`,
             minHeight: '100vh',
             height: `calc(${height - 0}px)`,
@@ -92,15 +92,14 @@ export function HtmlHeader() {
         <section
           className='relative flex items-start  bg-black header bg-opacity-0'
           style={{
-            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 41%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.0) 100%)`,
-            minHeight: '860px',
+            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 41%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.5) 100%)`,
           }}
         >
           <div className='container flex flex-wrap items-center justify-center mx-auto mt-0'>
-            <div className='w-10/12 '>
-              <div className='flex flex-col items-center justify-start pb-0'>
+            <div className='w-10/12 pt-10 '>
+              <div className='flex flex-col items-center justify-start '>
                 <svg
-                  className='w-full h-8'
+                  className='w-full h-8 -translate-y-10'
                   width='268px'
                   height='13px'
                   viewBox='0 0 268 13'
@@ -127,7 +126,7 @@ export function HtmlHeader() {
                   </g>
                 </svg>
               </div>
-              <div className='pb-32 mt-12 text-center sm:pt-0'>
+              <div className='mt-12 text-center sm:pt-0'>
                 <div className='flex flex-col items-center justify-center text-white lg:flex-row'>
                   <div className='p-3'>
                     <div className='p-3'>Unreal Engine</div>
@@ -181,25 +180,6 @@ export function HtmlHeader() {
           </div>
         </section>
         <section className='relative pb-40  bg-black bg-opacity-50'>
-          <div
-            className='absolute top-0 left-0 right-0 bottom-auto w-full'
-            data-style='height: 80px'
-          >
-            <svg
-              className='absolute bottom-0 overflow-hidden'
-              xmlns='http://www.w3.org/2000/svg'
-              preserveAspectRatio='none'
-              version='1.1'
-              viewBox='0 0 2560 100'
-              x='0'
-              y='0'
-            >
-              <polygon
-                className='text-black opacity-50 fill-current'
-                points='2560 0 2560 100 0 100'
-              ></polygon>
-            </svg>
-          </div>
           <div className='container mx-auto'>
             <div className='flex flex-wrap items-center'>
               <div className='w-10/12 mt-32 ml-auto mr-auto lg:px-12 md:w-6/12 lg:w-4/12 md:px-4'>
