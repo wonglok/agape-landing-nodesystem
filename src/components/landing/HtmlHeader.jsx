@@ -565,46 +565,62 @@ export function HtmlHeader() {
                         />
                       </div>
                     </a>
-
-                    <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden text-center break-words bg-black rounded-lg shadow-lg group rounded-3xl'>
-                      <img
-                        alt='agape'
-                        className='h-auto max-w-full align-middle border-none rounded-lg'
-                        src='/site/content/base/editor.png'
-                      />
-                      <img
-                        alt='agape'
-                        className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
-                        src='/site/content/cover/editor.png'
-                      />
-                    </div>
+                    <a
+                      href={'https://www.youtube.com/watch?v=C-3dFUm93us'}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden text-center break-words bg-black rounded-lg shadow-lg group rounded-3xl'>
+                        <img
+                          alt='agape'
+                          className='h-auto max-w-full align-middle border-none rounded-lg'
+                          src='/site/content/base/editor.png'
+                        />
+                        <img
+                          alt='agape'
+                          className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                          src='/site/content/cover/editor.png'
+                        />
+                      </div>
+                    </a>
                   </div>
                   <div className='w-full px-4 my-4 lg:w-6/12 lg:mt-16'>
-                    <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden text-center break-words bg-black rounded-lg shadow-lg group rounded-3xl'>
-                      <img
-                        alt='agape'
-                        className='h-auto max-w-full align-middle border-none rounded-lg'
-                        src='/site/content/base/metaverse.png'
-                      />
-                      <img
-                        alt='agape'
-                        className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
-                        src='/site/content/cover/metaverse.png'
-                      />
-                    </div>
-
-                    <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden text-center break-words bg-black rounded-lg shadow-lg group rounded-3xl'>
-                      <img
-                        alt='agape'
-                        className='h-auto max-w-full align-middle border-none rounded-lg'
-                        src='/site/content/base/github.png'
-                      />
-                      <img
-                        alt='agape'
-                        className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
-                        src='/site/content/cover/github.png'
-                      />
-                    </div>
+                    <a
+                      href={'https://agape.games/'}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden text-center break-words bg-black rounded-lg shadow-lg group rounded-3xl'>
+                        <img
+                          alt='agape'
+                          className='h-auto max-w-full align-middle border-none rounded-lg'
+                          src='/site/content/base/metaverse.png'
+                        />
+                        <img
+                          alt='agape'
+                          className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                          src='/site/content/cover/metaverse.png'
+                        />
+                      </div>
+                    </a>
+                    <a
+                      href={'https://github.com/wonglok/effctnode-forge'}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden text-center break-words bg-black rounded-lg shadow-lg group rounded-3xl'>
+                        <img
+                          alt='agape'
+                          className='h-auto max-w-full align-middle border-none rounded-lg'
+                          src='/site/content/base/github.png'
+                        />
+                        <img
+                          alt='agape'
+                          className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                          src='/site/content/cover/github.png'
+                        />
+                      </div>
+                    </a>
                   </div>
                 </div>
               </div>
