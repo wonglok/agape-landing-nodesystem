@@ -126,7 +126,7 @@ export function HtmlHeader() {
           }}
         >
           <div className='absolute bottom-0 left-0 flex items-center justify-center w-full mb-3 text-center text-white'>
-            <IconLoader></IconLoader>
+            <IconLoader height={height}></IconLoader>
           </div>
         </section>
         <section
@@ -1015,7 +1015,7 @@ function IconLoader() {
     //
     return useScrollStore.subscribe((nst, pst) => {
       //smooth
-      let v = nst.smoothPX / 150
+      let v = nst.smoothPX / 180
       if (v >= 1.0) {
         v = 1.0
       }
