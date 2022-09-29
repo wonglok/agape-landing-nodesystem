@@ -862,7 +862,7 @@ export function HtmlHeader() {
             </svg>
           </div> */}
           {/* bg-opacity-80 */}
-          <div className='container mx-auto '>
+          <div className='container mx-auto mt-10'>
             <div className='relative z-10 flex flex-wrap justify-center px-12 py-12 -mt-64 bg-black shadow-xl rounded-3xl bg-opacity-50'>
               <div className='w-full text-center lg:w-8/12'>
                 {/* <p className='text-4xl text-center'>
@@ -1004,7 +1004,7 @@ export function HtmlHeader() {
                 </h5>
                 <div className='mt-6'>
                   <a
-                    href='https://www.twitter.com/creativetim'
+                    href='https://twitter.com/0xgenoseed'
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -1032,26 +1032,7 @@ export function HtmlHeader() {
                     <i className='items-center justify-center inline-block p-3 mr-2 text-center bg-white rounded-full shadow-lg outline-none fab fa-github text-slate-800 font-lg align-center focus:outline-none'></i>
                   </a>
                 </div>
-                <p className='mt-6 text-sm font-semibold text-slate-500'>
-                  Currently v1.1.0. Code
-                  <a
-                    href='https://github.com/creativetimofficial/tailwind-starter-kit'
-                    className='text-slate-600'
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    licensed MIT
-                  </a>
-                  , docs
-                  <a
-                    href='https://creativecommons.org/licenses/by/4.0/'
-                    targe='_blank'
-                    className='text-slate-600'
-                  >
-                    CC BY 4.0
-                  </a>
-                  .
-                </p>
+                <p className='mt-6 text-sm font-semibold text-slate-500'></p>
               </div>
               <div className='w-full px-4 md:w-6/12'>
                 <div className='flex flex-wrap mb-6 items-top'>
@@ -1120,7 +1101,7 @@ export function HtmlHeader() {
                       <li>
                         <a
                           className='block pb-2 text-sm font-semibold text-slate-600 hover:text-slate-800'
-                          href='https://creative-tim.com/terms'
+                          href='/'
                           target='_blank'
                           rel='noreferrer'
                         >
@@ -1130,7 +1111,7 @@ export function HtmlHeader() {
                       <li>
                         <a
                           className='block pb-2 text-sm font-semibold text-slate-600 hover:text-slate-800'
-                          href='https://creative-tim.com/privacy'
+                          href='/'
                           target='_blank'
                           rel='noreferrer'
                         >
@@ -1140,7 +1121,7 @@ export function HtmlHeader() {
                       <li>
                         <a
                           className='block pb-2 text-sm font-semibold text-slate-600 hover:text-slate-800'
-                          href='https://creative-tim.com/contact-us'
+                          href='/'
                           target='_blank'
                           rel='noreferrer'
                         >
@@ -1157,14 +1138,13 @@ export function HtmlHeader() {
               <div className='w-full px-4 mx-auto text-center md:w-4/12'>
                 <div className='py-1 text-sm font-semibold text-slate-500'>
                   <a
-                    href='https://www.creative-tim.com'
+                    href='https://agape.effectnode.com/'
                     className='text-slate-500 hover:text-slate-800'
                     target='_blank'
                     rel='noreferrer'
                   >
-                    Creative Tim
+                    Made by Agape Powered by Effect Node Engine
                   </a>
-                  .
                 </div>
               </div>
             </div>
