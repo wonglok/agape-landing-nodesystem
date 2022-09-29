@@ -258,7 +258,7 @@ export function HtmlHeader() {
                 </div>
                 {/* </Parallax> */}
               </div>
-              <div className='w-full px-4 md:w-6/12'>
+              <div className='w-full px-4 lg:my-32 md:w-6/12'>
                 <div className='flex flex-wrap'>
                   <div className='w-full px-4 md:w-6/12'>
                     <div className='relative flex flex-col mt-4 text-white'>
@@ -397,7 +397,7 @@ export function HtmlHeader() {
               </div>
             </div>
 
-            <div className='flex flex-wrap items-center'>
+            <div className='flex flex-wrap items-center lg:my-32'>
               <div className='w-full px-4 mt-32 ml-auto mr-auto md:w-5/12'>
                 <div className='relative flex flex-col w-full min-w-0 mt-48 mb-6 md:mt-0'>
                   <img src={`/site/interopable/exaplain.svg`}></img>
@@ -429,7 +429,7 @@ export function HtmlHeader() {
               </div>
             </div>
 
-            <div className='flex flex-wrap items-center'>
+            <div className='flex flex-wrap items-center lg:my-32'>
               <div className='w-full px-4 mt-32 ml-auto mr-auto lg:order-3 md:w-5/12'>
                 <div className='relative flex flex-col w-full min-w-0 mt-48 mb-6 md:mt-0'>
                   <img src={`/site/native/editor.svg`}></img>
@@ -457,7 +457,7 @@ export function HtmlHeader() {
               </div>
             </div>
 
-            <div className='flex flex-wrap justify-center mt-24 text-center'>
+            <div className='flex flex-wrap justify-center mt-24 text-center lg:my-32'>
               <div className='w-full px-12 md:w-6/12 md:px-4'>
                 <h2 className='text-4xl font-semibold text-white'>
                   Brands that uses Agape Engine
@@ -551,63 +551,59 @@ export function HtmlHeader() {
               <div className='w-full px-4 mt-32 ml-auto mr-auto md:w-6/12'>
                 <div className='relative flex flex-wrap justify-center'>
                   <div className='w-full px-4 my-4 lg:w-6/12'>
-                    <div className='p-8 text-center rounded-lg shadow-lg bg-sky-500'>
+                    <a href={'/'} target='_blank' rel='noreferrer'>
+                      <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden text-center break-words bg-black rounded-lg shadow-lg group rounded-3xl'>
+                        <img
+                          alt='agape'
+                          className='h-auto max-w-full align-middle border-none rounded-lg'
+                          src='/site/content/base/trailer.png'
+                        />
+                        <img
+                          alt='agape'
+                          className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                          src='/site/content/cover/trailer.png'
+                        />
+                      </div>
+                    </a>
+
+                    <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden text-center break-words bg-black rounded-lg shadow-lg group rounded-3xl'>
                       <img
-                        alt='...'
-                        className='w-16 max-w-full p-2 mx-auto bg-white rounded-full shadow-md'
-                        src='https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/react.jpg'
+                        alt='agape'
+                        className='h-auto max-w-full align-middle border-none rounded-lg'
+                        src='/site/content/base/editor.png'
                       />
-                      <p className='mt-4 text-lg font-semibold text-white'>
-                        ReactJS
-                      </p>
-                      <p className='mt-2 text-base text-white opacity-75'>
-                        A JavaScript library for building user interfaces
-                        maintaned by Facebook and community of developers.
-                      </p>
-                    </div>
-                    <div className='p-8 mt-8 text-center rounded-lg shadow-lg bg-emerald-500'>
                       <img
-                        alt='...'
-                        className='w-16 max-w-full p-2 mx-auto bg-white rounded-full shadow-md'
-                        src='https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/vue.jpg'
+                        alt='agape'
+                        className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                        src='/site/content/cover/editor.png'
                       />
-                      <p className='mt-4 text-lg font-semibold text-white'>
-                        Vue.js
-                      </p>
-                      <p className='mt-2 text-base text-white opacity-75'>
-                        An open-source Model–view–viewmodel JavaScript framework
-                        for building user interfaces.
-                      </p>
                     </div>
                   </div>
                   <div className='w-full px-4 my-4 lg:w-6/12 lg:mt-16'>
-                    <div className='p-8 text-center bg-orange-500 rounded-lg shadow-lg'>
+                    <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden text-center break-words bg-black rounded-lg shadow-lg group rounded-3xl'>
                       <img
-                        alt='...'
-                        className='w-16 max-w-full p-2 mx-auto bg-white rounded-full shadow-md'
-                        src='https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/js.png'
+                        alt='agape'
+                        className='h-auto max-w-full align-middle border-none rounded-lg'
+                        src='/site/content/base/metaverse.png'
                       />
-                      <p className='mt-4 text-lg font-semibold text-white'>
-                        JavaScript
-                      </p>
-                      <p className='mt-2 text-base text-white opacity-75'>
-                        Object-oriented programming language that conforms to
-                        the ECMAScript specification.
-                      </p>
+                      <img
+                        alt='agape'
+                        className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                        src='/site/content/cover/metaverse.png'
+                      />
                     </div>
-                    <div className='p-8 mt-8 text-center bg-red-600 rounded-lg shadow-lg'>
+
+                    <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden text-center break-words bg-black rounded-lg shadow-lg group rounded-3xl'>
                       <img
-                        alt='...'
-                        className='w-16 max-w-full p-2 mx-auto bg-white rounded-full shadow-md'
-                        src='https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/angular.jpg'
+                        alt='agape'
+                        className='h-auto max-w-full align-middle border-none rounded-lg'
+                        src='/site/content/base/github.png'
                       />
-                      <p className='mt-4 text-lg font-semibold text-white'>
-                        Angular
-                      </p>
-                      <p className='mt-2 text-base text-white opacity-75'>
-                        a JavaScript-based open-source front-end web framework
-                        mainly maintained by Google.
-                      </p>
+                      <img
+                        alt='agape'
+                        className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                        src='/site/content/cover/github.png'
+                      />
                     </div>
                   </div>
                 </div>
