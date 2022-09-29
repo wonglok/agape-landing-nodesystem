@@ -42,9 +42,6 @@ export function YoCanvas() {
   }
 
   useEffect(() => {
-    //
-    //
-
     let gl = new WebGLRenderer({ canvas: ref.current, alpha: true })
     let v2 = new Vector2()
 
@@ -54,7 +51,7 @@ export function YoCanvas() {
 
     let scene = new Scene()
     let camera = new PerspectiveCamera(45, 1, 0.1, 1000)
-    camera.position.z = 33
+    camera.position.z = 35
     camera.lookAt(0, 0, 0)
     //
     st.current = {
@@ -62,7 +59,6 @@ export function YoCanvas() {
       scene,
       camera,
       inViewPort: setupIsInViewport(con.current),
-      coutner: 0,
     }
 
     if (!Core.now.canvas) {

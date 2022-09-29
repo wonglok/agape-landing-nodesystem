@@ -295,7 +295,7 @@ export function HtmlHeader() {
                           />
                         </div>
                         <h6 className='mb-1 text-xl font-semibold'>
-                          Affordable Metaverse Econoomy
+                          Affordable Metaverse Economy
                         </h6>
                         <ol className='pl-5 list-disc'>
                           <li className='mb-3 text-slate-300'>
