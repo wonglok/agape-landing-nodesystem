@@ -122,12 +122,17 @@ export function HtmlHeader() {
             rgba(0,0,0,0.7) 16%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0.7) 100%)`,
           }}
         >
-          <div className='container flex flex-wrap items-center justify-center mx-auto mt-0'>
+          <div className='container flex flex-wrap  items-center justify-center mx-auto mt-0'>
             <div className='w-10/12 -mt-96'>
-              <div className='mt-12 text-center sm:pt-0'>
-                <div className='flex flex-col items-center justify-center text-white group lg:flex-row'>
+              <div className='px-6 mt-12 text-center sm:pt-0'>
+                <div className='flex flex-col items-center justify-between text-white group lg:flex-row'>
                   <div className='p-3'>
-                    <div className='p-3 text-xl'>Unreal Engine</div>
+                    <div
+                      className='p-3 text-xl'
+                      style={{ textShadow: 'black 1px 0px 10px' }}
+                    >
+                      Unreal Engine
+                    </div>
                     <video
                       playsInline
                       className='h-full border-4 border-black '
@@ -144,7 +149,12 @@ export function HtmlHeader() {
                       href={`https://cadillac.agape.effectnode.com/`}
                       rel='noreferrer'
                     >
-                      <div className='p-3 text-xl'>Agape Engine</div>
+                      <div
+                        className='p-3 text-xl '
+                        style={{ textShadow: 'black 1px 0px 10px' }}
+                      >
+                        Agape Engine
+                      </div>
                       <video
                         playsInline
                         muted
@@ -464,21 +474,27 @@ export function HtmlHeader() {
                 <div className='w-full px-4 lg:w-12/12'>
                   <div className='flex flex-wrap'>
                     <div className='w-full px-4 lg:w-4/12'>
-                      <h5 className='pb-4 text-xl text-center text-slate-200'>
-                        CocaCola
-                      </h5>
-                      <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden break-words group rounded-3xl'>
-                        <img
-                          alt='Querlo'
-                          className='h-auto max-w-full align-middle border-none rounded-lg'
-                          src='/site/logos-covers/t-coca.png'
-                        />
-                        <img
-                          alt='Querlo'
-                          className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
-                          src='/site/logos-covers/c-coca.png'
-                        />
-                      </div>
+                      <a
+                        href={'https://cadillac.agape.effectnode.com/'}
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        <h5 className='pb-4 text-xl text-center text-slate-200'>
+                          CocaCola
+                        </h5>
+                        <div className='relative flex flex-col w-full min-w-0 mb-6 overflow-hidden break-words group rounded-3xl'>
+                          <img
+                            alt='Querlo'
+                            className='h-auto max-w-full align-middle border-none rounded-lg'
+                            src='/site/logos-covers/t-coca.png'
+                          />
+                          <img
+                            alt='Querlo'
+                            className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                            src='/site/logos-covers/c-coca.png'
+                          />
+                        </div>
+                      </a>
                     </div>
                     <div className='w-full px-4 lg:w-4/12'>
                       <a
