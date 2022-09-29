@@ -339,37 +339,20 @@ export function HtmlHeader() {
                   <i className='text-xl fas fa-sitemap'></i>
                 </div>
                 <h3 className='mb-2 text-3xl font-semibold leading-normal'>
-                  CSS Components
+                  Real-time Web Editor
                 </h3>
                 <p className='mt-4 mb-4 text-lg font-light leading-relaxed text-slate-600'>
-                  Every element that you need in a product comes built in as a
-                  component. All components fit perfectly with each other and
-                  can have different colours.
+                  Allows you to bring your 3D assets to the web with
                 </p>
                 <div className='block pb-6'>
                   <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
-                    Buttons
+                    VFX, Physics and particle simulation
                   </span>
                   <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
-                    Inputs
+                    Beautiful node based shaders
                   </span>
                   <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
-                    Labels
-                  </span>
-                  <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
-                    Menus
-                  </span>
-                  <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
-                    Navbars
-                  </span>
-                  <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
-                    Pagination
-                  </span>
-                  <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
-                    Progressbars
-                  </span>
-                  <span className='inline-block px-2 py-1 mt-2 mr-2 text-xs font-semibold uppercase bg-white rounded-full text-slate-500 last:mr-0'>
-                    Typography
+                    Lighting & Post processing
                   </span>
                 </div>
                 <a
