@@ -1,12 +1,25 @@
 import { Core } from '@/helpers/Core'
 import { useScrollStore } from '@/helpers/useScrollStore'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import { YoCanvas } from './YoCanvas'
 
 /* eslint-disable @next/next/no-img-element */
 export function HtmlHeader() {
+  let [height, setHeight] = useState(1024)
+  useEffect(() => {
+    let hh = () => {
+      setHeight(window.innerHeight)
+    }
+    hh()
+    window.addEventListener('resize', hh)
+    return () => {
+      window.removeEventListener('resize', hh)
+    }
+  })
+
+  //
   return (
     <>
       <section>
@@ -109,7 +122,7 @@ export function HtmlHeader() {
           data-style='max-height: 860px'
           style={{
             backgroundImage: `linear-gradient(180deg, rgba(0,0,0,1.0), rgba(0,0,0,0.3))`,
-            height: `100vh`,
+            height: `calc(${height - 100}px)`,
           }}
         >
           <div className='absolute bottom-0 left-0 flex items-center justify-center w-full mb-3 text-center text-white'>
@@ -121,7 +134,7 @@ export function HtmlHeader() {
           data-style='max-height: 860px'
           style={{
             backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.0))`,
-            height: `calc(100vh + 120px)`,
+            height: `calc(${height}px + 230px)`,
           }}
         >
           <div className='container flex flex-wrap items-center justify-center mx-auto'>
@@ -369,74 +382,7 @@ export function HtmlHeader() {
               </div>
               <div className='w-full px-4 mt-32 ml-auto mr-auto md:w-5/12'>
                 <div className='relative flex flex-col w-full min-w-0 mt-48 mb-6 md:mt-0'>
-                  <img
-                    alt='...'
-                    src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-btn.png'
-                    className='absolute w-full align-middle rounded shadow-lg'
-                    data-style='max-width: 100px; left: 145px; top: -29px; z-index: 3'
-                    style={{
-                      maxWidth: '100px',
-                      top: '-29',
-                      left: '145px',
-                    }}
-                  />
-                  <img
-                    alt='...'
-                    src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-profile-card.png'
-                    className='absolute w-full align-middle rounded-lg shadow-lg'
-                    data-style='max-width: 210px; left: 260px; top: -160px'
-                    style={{
-                      maxWidth: '210px',
-                      top: '-160px',
-                      left: '260px',
-                    }}
-                  />
-                  <img
-                    alt='...'
-                    src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-info-card.png'
-                    className='absolute w-full align-middle rounded-lg shadow-lg'
-                    data-style='max-width: 180px; left: 40px; top: -225px; z-index: 2'
-                    style={{
-                      maxWidth: '180px',
-                      top: '-225px',
-                      left: '40px',
-                      zIndex: 2,
-                    }}
-                  />
-                  <img
-                    alt='...'
-                    src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-info-2.png'
-                    className='absolute w-full align-middle rounded-lg shadow-2xl'
-                    data-style='max-width: 200px; left: -50px; top: 25px'
-                    style={{
-                      maxWidth: '200px',
-                      top: '25px',
-                      left: '-50px',
-                    }}
-                  />
-                  <img
-                    alt='...'
-                    src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-menu.png'
-                    className='absolute w-full align-middle rounded shadow-lg'
-                    data-style='max-width: 580px; left: -20px; top: 210px'
-                    style={{
-                      maxWidth: '580px',
-                      top: '210px',
-                      left: '-20px',
-                    }}
-                  />
-
-                  <img
-                    alt='...'
-                    src='https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/component-btn-pink.png'
-                    className='absolute w-full align-middle rounded shadow-xl'
-                    data-style='max-width: 120px; left: 195px; top: 95px'
-                    style={{
-                      maxWidth: '120px',
-                      top: '95px',
-                      left: '195px',
-                    }}
-                  />
+                  <img src={`/site/editor/agape-engine.png`}></img>
                 </div>
               </div>
             </div>
