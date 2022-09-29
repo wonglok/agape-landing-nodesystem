@@ -27,21 +27,30 @@ export function HtmlHeader() {
   return (
     <>
       <div>
-        <div className='absolute top-0 left-0 z-50 flex items-center justify-between w-full p-3'>
+        <div
+          className='fixed top-0 left-0 z-50 flex items-center justify-between w-full p-3 bg-black bg-opacity-40'
+          style={{
+            background: `linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.0) 100%)`,
+          }}
+        >
           <div className='flex-col items-start justify-start hidden w-1/3 lg:flex'>
             {/*  */}
-            <KickStarter></KickStarter>
-            <AlphaPass></AlphaPass>
+            {/* <KickStarter></KickStarter>
+            <AlphaPass></AlphaPass> */}
+            <img
+              src={`/site/navbar/agape.png`}
+              className='w-full ml-8 lg:w-64'
+            />
           </div>
-          <div className='flex items-start justify-start pt-2 pl-3 lg:p-3 lg:items-center lg:justify-center lg:w-1/3'>
-            <img src={`/site/navbar/logo.svg`} className='w-full lg:w-64' />
-          </div>
+          <div className='flex items-start justify-start pt-2 pl-3 lg:p-3 lg:items-center lg:justify-center lg:w-1/3'></div>
           {/*  */}
           {/*  */}
           {/*  */}
           <div className='flex flex-col items-end justify-end w-1/2 pt-4 pr-3 lg:w-1/3'>
             <ContactUs></ContactUs>
-            <StarEditor></StarEditor>
+            <a href={`/project`} target='_blank' rel='noreferrer'>
+              <StarEditor></StarEditor>
+            </a>
           </div>
         </div>
 
@@ -49,13 +58,13 @@ export function HtmlHeader() {
           className='relative flex items-center h-screen pt-16 bg-black header bg-opacity-0'
           style={{
             background: `rgb(0,0,0)`,
-            background: `linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 41%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.5) 100%)`,
+            background: `linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.0) 41%, rgba(0,0,0,0.0) 80%, rgba(0,0,0,0) 100%)`,
             // backgroundImage: `linear-gradient(180deg, rgba(0,0,0,1.0), rgba(0,0,0,0.3))`,
             minHeight: '100vh',
             height: `calc(${height - 0}px)`,
           }}
         ></section>
-        <div className='absolute bottom-0 left-0 flex items-center justify-center w-full mb-3 text-center text-white'>
+        <div className=' absolute bottom-0 left-0 flex items-center justify-center w-full mb-3 text-center text-white'>
           <div className=' flex items-center justify-center mb-12'>
             <div className=' flex flex-col items-center justify-center'>
               <IconLoader height={height}>
@@ -89,17 +98,70 @@ export function HtmlHeader() {
             </div>
           </div>
         </div>
+        <div className='h-32'></div>
+        <div
+          style={{
+            height: '195px',
+          }}
+          className='overflow-hidden overflow-x-hidden'
+        >
+          <div
+            style={{
+              background: 'rgba(0,0,0,0.7)',
+              height: '200px',
+              transform:
+                'skew(23deg, 20deg) scale(2.5) rotate(158deg) translateY(-100px)',
+            }}
+          ></div>
+        </div>
+
         <section
           className='relative flex items-start  bg-black header bg-opacity-0'
           style={{
-            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 41%, rgba(0,0,0,0.5) 80%, rgba(0,0,0,0.5) 100%)`,
+            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.7) 0%,
+            rgba(0,0,0,0.7) 16%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0.7) 100%)`,
           }}
         >
           <div className='container flex flex-wrap items-center justify-center mx-auto mt-0'>
-            <div className='w-10/12 pt-10 '>
+            <div className='w-10/12 -mt-96'>
+              <div className='mt-12 text-center sm:pt-0'>
+                <div className='flex flex-col items-center justify-center text-white group lg:flex-row'>
+                  <div className='p-3'>
+                    <div className='p-3 text-xl'>Unreal Engine</div>
+                    <video
+                      playsInline
+                      className='h-full border-4 border-black '
+                      style={{ height: '300px' }}
+                      muted
+                      autoPlay
+                      loop
+                      src={`/video/unreal.mp4`}
+                    ></video>
+                  </div>
+                  <div className='p-3'>
+                    <a
+                      target={'_blank'}
+                      href={`https://cadillac.agape.effectnode.com/`}
+                      rel='noreferrer'
+                    >
+                      <div className='p-3 text-xl'>Agape Engine</div>
+                      <video
+                        playsInline
+                        muted
+                        style={{ height: '300px' }}
+                        className='border-4 border-black'
+                        autoPlay
+                        loop
+                        src={`/video/web.mp4`}
+                      ></video>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
               <div className='flex flex-col items-center justify-start '>
                 <svg
-                  className='w-full h-8 -translate-y-10'
+                  className='w-full h-8 mt-24'
                   width='268px'
                   height='13px'
                   viewBox='0 0 268 13'
@@ -115,7 +177,7 @@ export function HtmlHeader() {
                     <g
                       id='Extra-Large'
                       transform='translate(-619.000000, -372.000000)'
-                      fill='#78F0F9'
+                      fill='#ffffff'
                       fillRule='nonzero'
                     >
                       <path
@@ -125,36 +187,6 @@ export function HtmlHeader() {
                     </g>
                   </g>
                 </svg>
-              </div>
-              <div className='mt-12 text-center sm:pt-0'>
-                <div className='flex flex-col items-center justify-center text-white lg:flex-row'>
-                  <div className='p-3'>
-                    <div className='p-3'>Unreal Engine</div>
-                    <video
-                      playsInline
-                      muted
-                      autoPlay
-                      loop
-                      src={`/video/unreal.mp4`}
-                    ></video>
-                  </div>
-                  <div className='p-3'>
-                    <a
-                      target={'_blank'}
-                      href={`https://cadillac.agape.effectnode.com/`}
-                      rel='noreferrer'
-                    >
-                      <div className='p-3'>Agape Engine</div>
-                      <video
-                        playsInline
-                        muted
-                        autoPlay
-                        loop
-                        src={`/video/web.mp4`}
-                      ></video>
-                    </a>
-                  </div>
-                </div>
               </div>
               {/* <div className='flex flex-col items-center justify-center pb-8'>
                 <img src={`/site/hero/unreal.png`} alt={'title'} />
@@ -179,7 +211,7 @@ export function HtmlHeader() {
             </div>
           </div>
         </section>
-        <section className='relative pb-40  bg-black bg-opacity-50'>
+        <section className='relative pb-40  bg-black bg-opacity-70'>
           <div className='container mx-auto'>
             <div className='flex flex-wrap items-center'>
               <div className='w-10/12 mt-32 ml-auto mr-auto lg:px-12 md:w-6/12 lg:w-4/12 md:px-4'>

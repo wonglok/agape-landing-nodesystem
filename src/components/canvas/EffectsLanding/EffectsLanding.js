@@ -196,7 +196,7 @@ export function EffectsLanding() {
         {/*
         <SMAA></SMAA> */}
 
-        {/* <Vignette></Vignette> */}
+        <Vignette opacity={0.85} darkness={1}></Vignette>
 
         {/* <Scanline></Scanline> */}
 

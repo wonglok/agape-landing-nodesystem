@@ -26,6 +26,8 @@ export const useScrollStore = create((set, get) => {
 
       let ll = MathUtils.damp(smooth, now, 2, dt)
 
+      console.log(ll)
+
       set({ smooth: ll, diff: ll - smooth, px, px, total })
     },
   }
@@ -33,7 +35,7 @@ export const useScrollStore = create((set, get) => {
 
 export const useReady = create((set, get) => {
   return {
-    loading: true,
+    loading: false,
     setLoading: (v) => {
       set({ loading: v })
     },

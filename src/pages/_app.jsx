@@ -20,6 +20,19 @@ function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
   }, [router, setRouter])
 
   let loading = useReady((s) => s.loading)
+  let setLoading = useReady((s) => s.setLoading)
+
+  useEffect(() => {
+    // if (Component.layout === 'Multiverse') {
+    //   setLoading(true)
+    // }
+    // if (Component.layout === 'PromotePage') {
+    //   setLoading(true)
+    // }
+    if (Component.layout === 'Landing') {
+      setLoading(true)
+    }
+  }, [])
 
   return (
     <>
