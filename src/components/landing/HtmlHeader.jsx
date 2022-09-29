@@ -135,7 +135,7 @@ export function HtmlHeader() {
                     </div>
                     <video
                       playsInline
-                      className='h-full border-4 border-black '
+                      className='h-full border-4 border-black  transition-all duration-200 hover:scale-150'
                       style={{ height: '300px' }}
                       muted
                       autoPlay
@@ -159,7 +159,7 @@ export function HtmlHeader() {
                         playsInline
                         muted
                         style={{ height: '300px' }}
-                        className='border-4 border-black'
+                        className='h-full border-4 border-black  transition-all duration-200 hover:scale-150'
                         autoPlay
                         loop
                         src={`/video/web.mp4`}
