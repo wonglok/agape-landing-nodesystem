@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import { AlphaPass } from './AlphaPass'
 import { ContactUs } from './ContactUs'
+import ContactUsForm from './ContactUsForm'
 import { KickStarter } from './Kickstarter'
 import { StarEditor } from './StarEditor'
 import { YoCanvas } from './YoCanvas'
@@ -566,7 +567,7 @@ export function HtmlHeader() {
                 </div>
               </div>
             </div>
-
+            {/*  */}
             <div className='flex flex-wrap items-center pt-32'>
               <div className='w-full px-4 mt-32 ml-auto mr-auto md:w-6/12'>
                 <div className='relative flex flex-wrap justify-center'>
@@ -931,71 +932,7 @@ export function HtmlHeader() {
           id={'contactus'}
           className='relative block py-24 bg-black bg-opacity-50 lg:pt-0'
         >
-          <div className='container px-4 mx-auto'>
-            <div className='flex flex-wrap justify-center pt-36'>
-              <div className='w-full px-4 lg:w-6/12'>
-                <div className='relative flex flex-col w-full min-w-0 mb-6 break-words rounded-lg shadow-lg bg-slate-200'>
-                  <div className='flex-auto p-5 lg:p-10'>
-                    <h4 className='text-2xl font-semibold'>
-                      Want to work with us?
-                    </h4>
-                    <p className='mt-1 mb-4 leading-relaxed text-slate-500'>
-                      Complete this form and we will get back to you in 24
-                      hours.
-                    </p>
-                    <div className='relative w-full mt-8 mb-3'>
-                      <label
-                        className='block mb-2 text-xs font-bold uppercase text-slate-600'
-                        htmlFor='full-name'
-                      >
-                        Full Name
-                      </label>
-                      <input
-                        type='text'
-                        className='w-full px-3 py-3 text-sm bg-white border-0 rounded shadow placeholder-slate-300 text-slate-600 focus:outline-none focus:ring ease-linear transition-all duration-150'
-                        placeholder='Full Name'
-                      />
-                    </div>
-                    <div className='relative w-full mb-3'>
-                      <label
-                        className='block mb-2 text-xs font-bold uppercase text-slate-600'
-                        htmlFor='email'
-                      >
-                        Email
-                      </label>
-                      <input
-                        type='email'
-                        className='w-full px-3 py-3 text-sm bg-white border-0 rounded shadow placeholder-slate-300 text-slate-600 focus:outline-none focus:ring ease-linear transition-all duration-150'
-                        placeholder='Email'
-                      />
-                    </div>
-                    <div className='relative w-full mb-3'>
-                      <label
-                        className='block mb-2 text-xs font-bold uppercase text-slate-600'
-                        htmlFor='message'
-                      >
-                        Message
-                      </label>
-                      <textarea
-                        rows='4'
-                        cols='80'
-                        className='w-full px-3 py-3 text-sm bg-white border-0 rounded shadow placeholder-slate-300 text-slate-600 focus:outline-none focus:ring'
-                        placeholder='Type a message...'
-                      ></textarea>
-                    </div>
-                    <div className='mt-6 text-center'>
-                      <button
-                        className='px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase rounded shadow outline-none bg-slate-800 active:bg-slate-600 hover:shadow-lg focus:outline-none ease-linear transition-all duration-150'
-                        type='button'
-                      >
-                        Send Message
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ContactUsForm></ContactUsForm>
         </section>
 
         <footer className='relative pt-8 pb-6 bg-slate-200 bg-opacity-80'>

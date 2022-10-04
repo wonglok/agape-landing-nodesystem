@@ -10,6 +10,7 @@ import { UIContent } from '@/helpers/UIContent'
 // import { YoSpin } from '@/components/canvas/YoSpin/YoSpin'
 import { useScrollStore } from '@/helpers/useScrollStore'
 import { Sphere } from '@react-three/drei'
+
 //
 // import { Loader } from '@react-three/drei'
 // import {
@@ -163,3 +164,7 @@ export default Page
 //
 
 //
+
+/*
+
+*/

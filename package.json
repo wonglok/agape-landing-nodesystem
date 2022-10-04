@@ -47,6 +47,7 @@
     "native-file-system-adapter": "^2.0.4",
     "next": "^12.2.3",
     "next-pwa": "^5.5.4",
+    "nodemailer": "^6.8.0",
     "postprocessing": "^6.28.5",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
