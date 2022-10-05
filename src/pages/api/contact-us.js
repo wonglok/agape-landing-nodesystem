@@ -36,12 +36,20 @@ ${body.message}
     // html: '<p>HTML version of the message</p>',
   }
 
-  await transporter.sendMail(mailJSON)
+  await transporter.sendMail(mailJSON).then(
+    (res) => {
+      console.log(res)
+      res.status(200).json({ data: `${JSON.stringify(body)}` })
+    },
+    (err) => {
+      console.error(err)
+      res.status(500).json({ data: `error` })
+    }
+  )
   //
 
   // Found the name.
   // Sends a HTTP success code
-  res.status(200).json({ data: `${JSON.stringify(body)}` })
 }
 
 //
