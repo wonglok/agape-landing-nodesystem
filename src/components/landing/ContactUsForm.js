@@ -7,6 +7,8 @@ export default function ContactUsForm() {
   })
   // Handles the submit event on form submit.
   const handleSubmit = async (event) => {
+    event.preventDefault()
+
     if (st.canSend) {
       setST({
         label: 'Sending....',
@@ -14,8 +16,11 @@ export default function ContactUsForm() {
       })
     }
 
+    if (!st.canSend) {
+      return
+    }
+
     // Stop the form from submitting and refreshing the page.
-    event.preventDefault()
 
     // Get data from the form.
     const data = {
