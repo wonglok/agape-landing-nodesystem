@@ -37,8 +37,8 @@ ${body.message}
   }
 
   await transporter.sendMail(mailJSON).then(
-    (res) => {
-      console.log(res)
+    (data) => {
+      console.log(data)
       res.status(200).json({ data: `${JSON.stringify(body)}` })
     },
     (err) => {
