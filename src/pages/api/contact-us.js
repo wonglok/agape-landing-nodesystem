@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-export default function handler(req, res) {
+export default async function handler(req, res) {
   // Get data submitted in request's body.
   const body = req.body
 
@@ -28,14 +28,15 @@ export default function handler(req, res) {
     to: 'lok@agape.games',
     subject: `Contact Form of ${body.name}`,
     text: `
-    Name: ${body.name}
-    Email:  ${body.email}
-    Message:
-    ${body.message}
+Name: ${body.name}
+Email:  ${body.email}
+Message:
+${body.message}
     `,
     // html: '<p>HTML version of the message</p>',
   }
-  transporter.sendMail(mailJSON)
+
+  await transporter.sendMail(mailJSON)
   //
 
   // Found the name.
