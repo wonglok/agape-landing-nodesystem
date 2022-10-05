@@ -1,6 +1,19 @@
+import { useState } from 'react'
+
 export default function ContactUsForm() {
+  let [st, setST] = useState({
+    label: `Send Message`,
+    canSend: true,
+  })
   // Handles the submit event on form submit.
   const handleSubmit = async (event) => {
+    if (st.canSend) {
+      setST({
+        label: 'Sending....',
+        canSend: false,
+      })
+    }
+
     // Stop the form from submitting and refreshing the page.
     event.preventDefault()
 
@@ -36,9 +49,22 @@ export default function ContactUsForm() {
       // If server returns the name submitted, that means the form works.
       const result = await response.json()
       console.log(result.data)
+
       alert(`Email sent successfully.`)
+      event.target.name.value = ''
+      event.target.email.value = ''
+      event.target.message.value = ''
+      setST({
+        label: `Send Message`,
+        canSend: true,
+      })
     } catch (e) {
       alert(`error, please try again`)
+
+      setST({
+        label: `Send Message`,
+        canSend: true,
+      })
     }
   }
 
@@ -110,7 +136,7 @@ export default function ContactUsForm() {
                     className='px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase rounded shadow outline-none bg-slate-800 active:bg-slate-600 hover:shadow-lg focus:outline-none ease-linear transition-all duration-150'
                     type='submit'
                   >
-                    Send Message
+                    {st.label}
                   </button>
                 </div>
               </div>
