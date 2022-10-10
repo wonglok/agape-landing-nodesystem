@@ -11,7 +11,7 @@ import { ToastContainer } from 'react-toastify'
 import { LandingPage } from '@/components/layout/LandingPage'
 import { useReady } from '@/helpers/useScrollStore'
 
-function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
+function App({ Component, pageProps = { title: 'index' } }) {
   const router = useRouter()
   const setRouter = useSystemStore((s) => s.setRouter)
 
@@ -26,14 +26,17 @@ function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
     // if (Component.layout === 'Multiverse') {
     //   setLoading(true)
     // }
+
     // if (Component.layout === 'PromotePage') {
     //   setLoading(true)
     // }
+
     if (Component.layout === 'Landing') {
       setLoading(true)
     }
   }, [])
 
+  //
   return (
     <>
       <Header title={pageProps.title} />
@@ -54,6 +57,7 @@ function App({ Component, pageProps = { title: 'index', sceneName: false } }) {
               <Component router={router} {...pageProps}></Component>
             </PromotePage>
           )}
+
           {Component.layout === 'Landing' && (
             <LandingPage router={router} {...pageProps}>
               <Component router={router} {...pageProps}></Component>
