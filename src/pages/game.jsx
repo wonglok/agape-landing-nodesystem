@@ -42,7 +42,6 @@ const Page = (props) => {
       >
         <meshStandardMaterial color={'#ff0000'}></meshStandardMaterial>
       </Box>
-
       <Suspense fallback={null}>
         <Companion
           frustumCulled={false}
@@ -54,7 +53,9 @@ const Page = (props) => {
         ></Companion>
       </Suspense>
 
-      {/* <Suspense fallback={null}>
+      {/*
+
+      <Suspense fallback={null}>
         <Companion
           frustumCulled={false}
           runActionName='sprint_forward'
