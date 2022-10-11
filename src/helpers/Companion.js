@@ -5,7 +5,12 @@ import { Object3D, Vector3 } from 'three'
 import { AnimationMixer } from 'three'
 import { useMultiverse } from './useMultiverse'
 import { clone } from 'three140/examples/jsm/utils/SkeletonUtils'
-import { Color, MeshPhysicalMaterial, MeshStandardMaterial } from 'three140'
+import {
+  Color,
+  MeshPhysicalMaterial,
+  MeshStandardMaterial,
+  Vector2,
+} from 'three140'
 import { TheVortex } from '@/components/canvas/TheVortex/TheVortex'
 
 export function Companion({
@@ -25,8 +30,8 @@ export function Companion({
   let player = useMultiverse((s) => s.player)
   let gltf = useGLTF(url)
   let ref = useRef()
-  let [walkTarget] = useState(() => new Object3D())
-  let [lookTarget] = useState(() => new Object3D())
+  // let [walkTarget] = useState(() => new Object3D())
+  // let [lookTarget] = useState(() => new Object3D())
 
   let root = useMemo(() => {
     if (!gltf) {
@@ -47,31 +52,30 @@ export function Companion({
     return cloned
   }, [gltf])
 
-  useEffect(() => {
-    walkTarget.position.fromArray(walkOffset)
-    player.add(walkTarget)
-    return () => {
-      walkTarget.removeFromParent()
-    }
-  }, [player, walkTarget, walkOffset])
+  // useEffect(() => {
+  //   walkTarget.position.fromArray(walkOffset)
+  //   player.add(walkTarget)
+  //   return () => {
+  //     walkTarget.removeFromParent()
+  //   }
+  // }, [player, walkTarget, walkOffset])
 
-  useEffect(() => {
-    lookTarget.position.x += walkOffset[0]
-    lookTarget.position.y += walkOffset[1]
-    lookTarget.position.z += walkOffset[2]
+  // useEffect(() => {
+  //   lookTarget.position.set(0, 0, 0)
+  //   lookTarget.position.x += walkOffset[0]
+  //   lookTarget.position.y += walkOffset[1]
+  //   lookTarget.position.z += walkOffset[2]
 
-    //
-    lookTarget.position.x += lookAtOffset[0]
-    lookTarget.position.y += lookAtOffset[1]
-    lookTarget.position.z += lookAtOffset[2]
+  //   lookTarget.position.x += lookAtOffset[0]
+  //   lookTarget.position.y += lookAtOffset[1]
+  //   lookTarget.position.z += lookAtOffset[2]
 
-    player.add(lookTarget)
-    return () => {
-      lookTarget.removeFromParent()
-    }
-  }, [player, lookTarget, lookAtOffset, walkOffset])
+  //   player.add(lookTarget)
+  //   return () => {
+  //     lookTarget.removeFromParent()
+  //   }
+  // }, [player, lookTarget, lookAtOffset, walkOffset])
 
-  //
   let [act, setAct] = useState({
     name: 'idle',
     inPlace: true,
@@ -120,22 +124,32 @@ export function Companion({
   let diff = new Vector3()
 
   let lookAtQ = new Object3D()
-  useFrame(({ camera }) => {
+  let v2center = new Vector2(0, 0)
+  let companionOffset = new Vector3(0, 0, 0)
+  let activeCollider = useMultiverse((s) => s.activeCollider)
+  let up = new Vector3(0, 1, 0)
+
+  useFrame(({ camera, raycaster }) => {
     if (ref.current) {
       // ref.current.getWorldPosition(h)
       // h.copy(player.position)
-      walkTarget.getWorldPosition(h)
-      lookTarget.getWorldPosition(l)
+      // walkTarget.getWorldPosition(h)
+      // lookTarget.getWorldPosition(l)
 
-      diff.copy(h).sub(ref.current.position).multiplyScalar(0.08)
+      companionOffset.set(0, 0, -4).applyQuaternion(camera.quaternion)
+      companionOffset.y = 0
+
+      h.copy(player.position).add(companionOffset)
+      //
+      diff
+        .copy(player.position)
+        .add(companionOffset)
+        .sub(ref.current.position)
+        .multiplyScalar(0.08)
+
       ref.current.position.addScaledVector(diff, 0.35 * speed)
 
-      lookAtQ.position.copy(ref.current.position)
-
-      if (ref.current.position.distanceTo(h) >= 0.5) {
-        lookAtQ.lookAt(h.x, lookAtQ.position.y, h.z)
-
-        ref.current.quaternion.slerp(lookAtQ.quaternion, 0.1)
+      if (ref.current.position.distanceTo(h) >= 0.3) {
         if (act && act.name !== runActionName) {
           setAct({
             name: runActionName,
@@ -143,12 +157,28 @@ export function Companion({
             repetiton: '' + Infinity,
           })
         }
-      } else {
-        lookAtQ.lookAt(l.x, lookAtQ.position.y, l.z)
-        ref.current.quaternion.slerp(lookAtQ.quaternion, 0.1)
 
-        // ref.current.position.y = player.position.y
-        // ref.current.lookAt(h.x, player.position.y, h.z)
+        ref.current.lookAt(h.x, ref.current.position.y, h.z)
+      } else {
+        if (activeCollider) {
+          raycaster.setFromCamera(v2center, camera)
+          let hitFirst = activeCollider.geometry.boundsTree.raycastFirst(
+            raycaster.ray
+          )
+
+          console.log(hitFirst)
+          if (hitFirst) {
+            let head = gltf.scene.getObjectByName('mixamorigHead')
+            head.lookAt(hitFirst.point)
+            lookAtQ.lookAt(
+              hitFirst.point.x,
+              lookAtQ.position.y,
+              hitFirst.point.z
+            )
+            ref.current.quaternion.slerp(lookAtQ.quaternion, 0.1)
+          }
+        }
+
         if (act && act.name !== 'idle-rifle') {
           setAct({
             name: 'idle-rifle',
@@ -203,10 +233,10 @@ function Gun() {
         it.material = new MeshStandardMaterial()
         it.material.color = new Color('#0000ff')
         it.material.ior = 1.5
-        it.material.reflectivity = 1.5
-        it.material.roughness = 0.3
+        it.material.reflectivity = 1
+        it.material.roughness = 1
         it.material.metalness = 0.5
-        it.material.transmission = 1
+        it.material.transmission = 0
       }
     })
   })

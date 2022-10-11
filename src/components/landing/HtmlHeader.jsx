@@ -9,7 +9,7 @@ import { ContactUs } from './ContactUs'
 import ContactUsForm from './ContactUsForm'
 import { CreateWorldTogether } from './CreateWorldTogetehr'
 import { EnterGame } from './EnterGame'
-import { KickStarter } from './Kickstarter'
+// import { KickStarter } from './Kickstarter'
 import { StarEditor } from './StarEditor'
 import { YoCanvas } from './YoCanvas'
 

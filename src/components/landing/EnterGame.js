@@ -20,6 +20,10 @@ export function EnterGame() {
                 opacity='0.6'
                 transform='translate(0.794702, 3.973510)'
                 fill='#191919'
+                className='opacity-30 fill-gray-800 hover:opacity-100 transition-all duration-200'
+                style={{
+                  transitionTimingFunction: `cubic-bezier(0, 0, 1, 1)`,
+                }}
               >
                 <rect
                   id='Rectangle'

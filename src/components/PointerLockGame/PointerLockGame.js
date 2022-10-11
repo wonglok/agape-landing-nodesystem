@@ -1,3 +1,4 @@
+import { Companion } from '@/helpers/Companion'
 import { ConnectKeyboard } from '@/helpers/ConnectKeyboard'
 import { ConnectPointerControls } from '@/helpers/ConnectPointerControls'
 import { ConnectSimulationPointer } from '@/helpers/ConnectSimulationPointer'
@@ -39,6 +40,13 @@ export function PointerLockGame() {
 
         <Suspense fallback={null}>
           <group>
+            <Companion
+              frustumCulled={false}
+              runActionName='sprint_forward'
+              url={`/scene/landing/swat-mo-1024.glb`}
+              speed={2}
+            ></Companion>
+
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectPointerControls></ConnectPointerControls>
             <ConnectSimulationPointer></ConnectSimulationPointer>
