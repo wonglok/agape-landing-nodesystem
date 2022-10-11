@@ -2,18 +2,19 @@ import { ConnectKeyboard } from '@/helpers/ConnectKeyboard'
 import { ConnectPointerControls } from '@/helpers/ConnectPointerControls'
 import { ConnectSimulationPointer } from '@/helpers/ConnectSimulationPointer'
 import { Player } from '@/helpers/Player'
-import { Box, useTexture } from '@react-three/drei'
+import { Box, Text, useTexture } from '@react-three/drei'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { Bloom, EffectComposer, SSR } from '@react-three/postprocessing'
 import {
   Controllers,
   Hands,
   Interactive,
+  useController,
   useXR,
   VRButton,
   XR,
 } from '@react-three/xr'
-import { Suspense, useEffect, useMemo } from 'react'
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import {
   Color,
   EquirectangularReflectionMapping,
@@ -93,22 +94,64 @@ function BG({ url }) {
 }
 
 function Walker({ children }) {
+  let [ctrler, setCtrler] = useState(false)
   let player = useXR((s) => s.player)
+  let session = useXR((s) => s.session)
   let pt = useMemo(() => {
     return new Vector3(0, 5, 0)
   }, [])
 
-  useFrame(() => {
-    player.position.lerp(pt, 0.1)
+  let isDown = useRef(false)
+
+  let temp = new Vector3()
+
+  useFrame(({ camera }, dt) => {
+    if (session) {
+      player.position.lerp(pt, 0.1)
+    } else {
+    }
+
+    if (isDown.current) {
+      temp.set(0, 0, -1)
+
+      //
+      if (ctrler === lefctController) {
+        temp.set(0, 0, 1)
+      }
+      if (ctrler === rightController) {
+        temp.set(0, 0, -1)
+      }
+
+      //
+      temp.applyQuaternion(camera.quaternion)
+
+      pt.addScaledVector(temp, 10 * dt)
+    }
   })
+
+  // const leftController = useController('left')
+  // console.log(leftController)
+
+  const rightController = useController('right')
+  const lefctController = useController('left')
+
   return (
     <group>
       <Interactive
+        onSelectStart={(event) => {
+          setCtrler(event.target)
+          isDown.current = true
+        }}
+        onSelectEnd={(event) => {
+          setCtrler(event.target)
+          isDown.current = false
+        }}
         onSelect={(event) => {
           //
           let target = event.intersection
           if (target) {
-            pt.copy(target.point)
+            // setCtrler(event.target)
+            // pt.copy(target.point)
           }
         }}
       >

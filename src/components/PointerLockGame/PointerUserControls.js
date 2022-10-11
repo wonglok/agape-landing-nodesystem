@@ -73,28 +73,34 @@ function GUI() {
   return (
     <>
       {mycontrols ? (
-        <UIContent>
-          <div className='fixed top-0 left-0 z-10  items-center justify-center hidden w-full gamebanner'>
-            <div className='inline-block px-6 py-3 m-3 bg-white'>Exit Game</div>
-          </div>
-
-          <div className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full gamenu'>
-            <div className='flex items-center justify-center w-64 h-64 bg-white rounded-3xl'>
-              <div>
-                <button
-                  className='p-3 mb-3 bg-gray-300 rounded-lg'
-                  onClick={() => {
-                    mycontrols.lock()
-                  }}
-                >
-                  Enter Game
-                </button>
+        <>
+          <UIContent>
+            <div className='fixed top-0 left-0 z-10  items-center justify-center hidden w-full gamebanner'>
+              <div className='inline-block px-6 py-3 m-3 bg-white rounded-2xl'>
+                <div className=' text-2xl text-center'>ESC Key to Exit</div>
+                <div className=' text-xs text-center text-gray-500'>
+                  ESC Key is at top left hand of the keyboard
+                </div>
               </div>
             </div>
-          </div>
 
+            <div className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full gamenu'>
+              <div className='flex items-center justify-center w-64 h-64 bg-white rounded-3xl'>
+                <div>
+                  <button
+                    className='p-3 mb-3 bg-gray-300 rounded-lg'
+                    onClick={() => {
+                      mycontrols.lock()
+                    }}
+                  >
+                    Enter Game
+                  </button>
+                </div>
+              </div>
+            </div>
+          </UIContent>
           <CrossHair></CrossHair>
-        </UIContent>
+        </>
       ) : null}
     </>
   )

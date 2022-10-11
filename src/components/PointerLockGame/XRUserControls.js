@@ -32,15 +32,16 @@ export function XRUserControls() {
     }
   }, [camera, gl, setCamera, setControls])
   let player = useXR((s) => s.player)
-  let isPresenting = useXR((s) => s.isPresenting)
-  useFrame(() => {
-    if (player && or && isPresenting) {
-      or.object.position.lerp(player.position, 0.1)
-      or.object.position.y += 1
-    }
-
-    if (or) {
-      or.update()
+  let session = useXR((s) => s.session)
+  useFrame(({ camera }) => {
+    if (player && session) {
+      camera.position.lerp(player.position, 0.1)
+      camera.position.y += 1
+    } else {
+      if (or) {
+        or.update()
+      } else {
+      }
     }
   })
 

@@ -20,7 +20,7 @@ export function PointerLockGame() {
   return (
     <>
       <Canvas
-        gl={{ logarithmicDepthBuffer: true, depth: false }}
+        gl={{ depth: false }}
         onCreated={(st) => {
           st.scene.background = new Color('#000000')
           st.camera.far = 3500
@@ -35,14 +35,10 @@ export function PointerLockGame() {
             levels={5}
             mipmapBlur={true}
           ></Bloom>
-          {/* <GLSSR></GLSSR> */}
         </EffectComposer>
 
         <Suspense fallback={null}>
           <group>
-            <Box args={[2500, 2500, 2500]}>
-              <meshStandardMaterial side={DoubleSide}></meshStandardMaterial>
-            </Box>
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectPointerControls></ConnectPointerControls>
             <ConnectSimulationPointer></ConnectSimulationPointer>
