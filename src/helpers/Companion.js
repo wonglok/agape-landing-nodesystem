@@ -86,9 +86,6 @@ export function Companion({
     return new AnimationMixer()
   }, [])
 
-  useFrame((st, dt) => {
-    mixer.update(dt)
-  })
   useEffect(() => {
     //
     let clip = gltf.animations.find((e) => e.name === act.name)
@@ -127,9 +124,11 @@ export function Companion({
   let v2center = new Vector2(0, 0)
   let companionOffset = new Vector3(0, 0, 0)
   let activeCollider = useMultiverse((s) => s.activeCollider)
-  let up = new Vector3(0, 1, 0)
 
-  useFrame(({ camera, raycaster }) => {
+  useFrame(({ camera, raycaster }, dt) => {
+    mixer.update(dt)
+
+    player.quaternion.copy(camera.quaternion)
     if (ref.current) {
       // ref.current.getWorldPosition(h)
       // h.copy(player.position)
@@ -147,7 +146,9 @@ export function Companion({
         .sub(ref.current.position)
         .multiplyScalar(0.08)
 
+      //
       ref.current.position.addScaledVector(diff, 0.35 * speed)
+      ref.current.lookAt(h.x, ref.current.position.y, h.z)
 
       if (ref.current.position.distanceTo(h) >= 0.3) {
         if (act && act.name !== runActionName) {
@@ -157,8 +158,6 @@ export function Companion({
             repetiton: '' + Infinity,
           })
         }
-
-        ref.current.lookAt(h.x, ref.current.position.y, h.z)
       } else {
         if (activeCollider) {
           raycaster.setFromCamera(v2center, camera)
@@ -174,7 +173,6 @@ export function Companion({
               lookAtQ.position.y,
               hitFirst.point.z
             )
-            ref.current.quaternion.slerp(lookAtQ.quaternion, 0.1)
           }
         }
 
