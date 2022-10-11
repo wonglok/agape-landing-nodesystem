@@ -749,7 +749,9 @@ export function HtmlHeader() {
             </div>
           )}
         </section>
+        {/*  */}
         <section className='relative py-20  bg-slate-600 bg-opacity-70'>
+          {/*  */}
           {/* <div
             className='absolute top-0 left-0 right-0 bottom-auto w-full'
             style={{ height: '80px', top: '-80px' }}
