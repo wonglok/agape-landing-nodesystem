@@ -15,7 +15,10 @@ import {
 import { PointerLockControls } from 'three-stdlib'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
-export function GameFloor({ glbURL = `/scene/newyork/NYC_Expo_30.glb` }) {
+export function GameFloor({
+  children,
+  glbURL = `/scene/newyork/NYC_Expo_30.glb`,
+}) {
   let glb = useGLTF(glbURL)
 
   let addNamedScene = useMultiverse((s) => s.addNamedScene)
@@ -86,6 +89,8 @@ export function GameFloor({ glbURL = `/scene/newyork/NYC_Expo_30.glb` }) {
   return (
     <group>
       {outletRneder}
+
+      {outletRneder && <>{children}</>}
       <EffectNodeRuntime glbObject={glb}></EffectNodeRuntime>
       {/* {enablePostProcessing && <PostProcCallers></PostProcCallers>} */}
     </group>

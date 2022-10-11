@@ -40,13 +40,6 @@ export function PointerLockGame() {
 
         <Suspense fallback={null}>
           <group>
-            <Companion
-              frustumCulled={false}
-              runActionName='sprint_forward'
-              url={`/scene/landing/swat-mo-1024.glb`}
-              speed={2}
-            ></Companion>
-
             <ConnectKeyboard></ConnectKeyboard>
             <ConnectPointerControls></ConnectPointerControls>
             <ConnectSimulationPointer></ConnectSimulationPointer>
@@ -54,10 +47,14 @@ export function PointerLockGame() {
             <PointerUserControls></PointerUserControls>
 
             <RGBE rgbeURL={rgbeURL}></RGBE>
-            <GameFloor
-              glbURL={gameFloor}
-              enablePostProcessing={true}
-            ></GameFloor>
+            <GameFloor glbURL={gameFloor} enablePostProcessing={true}>
+              <Companion
+                frustumCulled={false}
+                runActionName='sprint_forward'
+                url={`/scene/landing/swat-mo-1024.glb`}
+                speed={2}
+              ></Companion>
+            </GameFloor>
           </group>
         </Suspense>
       </Canvas>

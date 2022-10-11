@@ -166,7 +166,6 @@ export function Companion({
             raycaster.ray
           )
 
-          console.log(hitFirst)
           if (hitFirst) {
             let head = gltf.scene.getObjectByName('mixamorigHead')
             head.lookAt(hitFirst.point)
