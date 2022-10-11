@@ -750,6 +750,8 @@ export function HtmlHeader() {
           )}
         </section>
         {/*  */}
+
+        {/*  */}
         <section className='relative py-20  bg-slate-600 bg-opacity-70'>
           {/*  */}
           {/* <div
