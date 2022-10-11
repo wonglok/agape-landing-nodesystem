@@ -4,46 +4,36 @@ import { screenOpacity } from '@/helpers/GLOverlayEffect'
 import { UIContent } from '@/helpers/UIContent'
 import { useMultiverse } from '@/helpers/useMultiverse'
 import { Environment, useGLTF } from '@react-three/drei'
-import { useLoader, useThree } from '@react-three/fiber'
+import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import anime from 'animejs'
-import { useEffect, useState } from 'react'
-import { EquirectangularReflectionMapping } from 'three'
+import { Children, useEffect, useRef, useState } from 'react'
+import {
+  AnimationAction,
+  AnimationMixer,
+  EquirectangularReflectionMapping,
+} from 'three'
 import { PointerLockControls } from 'three-stdlib'
 import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
-export function GameFloor({
-  enablePostProcessing = true,
-  rgbeURL,
-  glbURL = `/scene/newyork/NYC_Expo_30.glb`,
-}) {
+export function GameFloor({ glbURL = `/scene/newyork/NYC_Expo_30.glb` }) {
   let glb = useGLTF(glbURL)
-  let rgbe = useLoader(RGBELoader, rgbeURL)
-  rgbe.mapping = EquirectangularReflectionMapping
 
   let addNamedScene = useMultiverse((s) => s.addNamedScene)
-  let scene = useThree((s) => s.scene)
-  let gl = useThree((s) => s.gl)
   let [outletRneder, setRender] = useState(null)
-  let setCamera = useMultiverse((s) => s.setCamera)
-  let setControls = useMultiverse((s) => s.setControls)
-  let camera = useThree((s) => s.camera)
-  let controls = useMultiverse((s) => s.controls)
-  let setLocked = useMultiverse((s) => s.setLocked)
-  let locked = useMultiverse((s) => s.locked)
+  let [mixer] = useState((s) => new AnimationMixer())
+  useFrame((s, dt) => {
+    mixer.update(dt)
+  })
+
   useEffect(() => {
-    setCamera(camera)
-
-    let controls = new PointerLockControls(camera, gl.domElement)
-    setControls(controls)
-
-    controls.addEventListener('lock', function () {
-      setLocked(true)
-    })
-
-    controls.addEventListener('unlock', function () {
-      setLocked(false)
-    })
     //
+    glb.animations.forEach((ani) => {
+      //
+      let act = mixer.clipAction(ani, glb.scene)
+
+      act.play()
+    })
+
     let prom = addNamedScene({ name: glbURL, scene: glb.scene })
 
     // setPostProcessing(false)
@@ -69,7 +59,6 @@ export function GameFloor({
       }
 
       screenOpacity.value = 0
-
       anime({
         targets: [screenOpacity],
         value: 1,
@@ -90,59 +79,15 @@ export function GameFloor({
       setTimeout(() => {
         setRender(<primitive object={glb.scene}></primitive>)
       })
-
-      //
     })
-    return () => {
-      controls.dispose()
-    }
-  }, [
-    gl,
-    glb,
-    scene,
-    addNamedScene,
-    setCamera,
-    camera,
-    setControls,
-    glbURL,
-    setLocked,
-  ])
+    return () => {}
+  }, [addNamedScene, glb, glbURL])
 
   return (
     <group>
-      {locked && (
-        <UIContent>
-          <div className='fixed top-0 left-0 z-10 bg-white'>
-            <div>isLocked</div>
-          </div>
-        </UIContent>
-      )}
-
-      <>
-        {!locked && (
-          <UIContent>
-            <div className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full'>
-              <div className='flex items-center justify-center w-64 h-64 bg-white rounded-3xl'>
-                <div>
-                  <button
-                    className='p-3 mb-3 bg-gray-300 rounded-lg'
-                    onClick={() => {
-                      //
-                      controls.lock()
-                    }}
-                  >
-                    Enter Game
-                  </button>
-                </div>
-              </div>
-            </div>
-          </UIContent>
-        )}
-      </>
       {outletRneder}
       <EffectNodeRuntime glbObject={glb}></EffectNodeRuntime>
-      <Environment map={rgbe} background></Environment>
-      {enablePostProcessing && <PostProcCallers></PostProcCallers>}
+      {/* {enablePostProcessing && <PostProcCallers></PostProcCallers>} */}
     </group>
   )
 }

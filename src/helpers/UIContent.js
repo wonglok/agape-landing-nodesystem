@@ -15,7 +15,7 @@ export function UIContent({ children, className }) {
         root.render(children)
         clean = () => {
           root.render(null)
-          doc.removeChild(div)
+          div.remove()
         }
       }
     })

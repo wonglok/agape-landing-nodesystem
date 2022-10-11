@@ -6,7 +6,7 @@ import { useEffectNode } from '../store/useEffectNode'
 
 export function PostProcCallers({}) {
   let passArray = useEffectNode((s) => s.passArray)
-  let setPassArray = useEffectNode((s) => s.setPassArray)
+  // let setPassArray = useEffectNode((s) => s.setPassArray)
   let screenPass = useEffectNode((s) => s.screenPass)
   // let setPassArray = useEffectNode((s) => s.setPassArray)
   // let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
@@ -20,7 +20,7 @@ export function PostProcCallers({}) {
   return (
     <>
       {/* <CameraFling></CameraFling> */}
-      <EffectComposer>
+      <EffectComposer multisampling={0}>
         {passArray.map((info, idx) => {
           let Compo =
             PROC[info.type] ||

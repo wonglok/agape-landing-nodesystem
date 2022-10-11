@@ -497,11 +497,11 @@ const useMultiverse = create((set, get) => {
       self.playerVelocity.y += self.playerIsOnGround ? 0 : delta * self.gravity
       self.player.position.addScaledVector(self.playerVelocity, delta)
 
-      console.log(self.controls.camera)
+      // console.log(self.controls.camera)
       // self.controls.getAzimuthalAngle
       // move the player
       const angle = self.controls.camera.rotation.y
-      console.log(angle)
+      // console.log(angle)
       if (self.fwdPressed) {
         self.tempVector.set(0, 0, -1).applyQuaternion(self.camera.quaternion) //.applyAxisAngle(self.upVector, angle)
         self.player.position.addScaledVector(

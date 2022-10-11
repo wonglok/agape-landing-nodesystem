@@ -5,13 +5,7 @@ import { Suspense } from 'react'
 import { Core } from '@/helpers/Core'
 
 export default function Page() {
-  return (
-    <Canvas onCreated={(st) => {}}>
-      <Suspense fallback={null}>
-        <PointerLockGame></PointerLockGame>
-      </Suspense>
-    </Canvas>
-  )
+  return <PointerLockGame></PointerLockGame>
 }
 
 Page.SEO = function Page() {

@@ -1,9 +1,94 @@
-import { useFrame, useThree } from '@react-three/fiber'
+import { EffectNodeRuntime } from '@/effectnode/component/EffectNodeRuntime'
+import { PostProcCallers } from '@/effectnode/component/PostProcCallers'
+import { screenOpacity } from '@/helpers/GLOverlayEffect'
+import { UIContent } from '@/helpers/UIContent'
+import { useMultiverse } from '@/helpers/useMultiverse'
+import { useLoader, useThree } from '@react-three/fiber'
+import anime from 'animejs'
+import { useEffect, useRef, useState } from 'react'
+import { PointerLockControls } from 'three-stdlib'
 
-export function PointerUserControls() {
+export function PointerUserControls({ children }) {
+  let setCamera = useMultiverse((s) => s.setCamera)
+  let setControls = useMultiverse((s) => s.setControls)
   let camera = useThree((s) => s.camera)
   let gl = useThree((s) => s.gl)
-  let scene = useThree((s) => s.scene)
-  //
-  return null
+  useEffect(() => {
+    let controls = new PointerLockControls(camera, gl.domElement)
+
+    let lock = function () {
+      console.log('locked')
+      let banners = document.querySelectorAll(`.gamebanner`)
+      for (let i = 0; i < banners.length; i++) {
+        //
+        banners[i].classList.remove('hidden')
+        banners[i].classList.add('flex')
+      }
+      let gamenu = document.querySelectorAll(`.gamenu`)
+      for (let i = 0; i < gamenu.length; i++) {
+        //
+        gamenu[i].classList.remove('flex')
+        gamenu[i].classList.add('hidden')
+      }
+    }
+
+    let unlock = function () {
+      console.log('unlocked')
+
+      let banners = document.querySelectorAll(`.gamebanner`)
+      for (let i = 0; i < banners.length; i++) {
+        //
+        banners[i].classList.add('hidden')
+        banners[i].classList.remove('flex')
+      }
+      let gamenu = document.querySelectorAll(`.gamenu`)
+      for (let i = 0; i < gamenu.length; i++) {
+        //
+        gamenu[i].classList.add('flex')
+        gamenu[i].classList.remove('hidden')
+      }
+    }
+    controls.addEventListener('unlock', unlock)
+    controls.addEventListener('lock', lock)
+    setCamera(camera)
+    setControls(controls)
+
+    return () => {
+      controls.removeEventListener('unlock', unlock)
+      controls.removeEventListener('lock', lock)
+      controls.dispose()
+    }
+  }, [camera, gl.domElement, setCamera, setControls])
+
+  return (
+    <>
+      <GUI></GUI>
+    </>
+  )
+}
+
+function GUI() {
+  let mycontrols = useMultiverse((s) => s.controls)
+  return (
+    <UIContent>
+      <div className='fixed top-0 left-0 z-10  items-center justify-center hidden w-full gamebanner'>
+        <div className='inline-block bg-white'>Exit Game</div>
+      </div>
+
+      <div className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full gamenu'>
+        <div className='flex items-center justify-center w-64 h-64 bg-white rounded-3xl'>
+          <div>
+            <button
+              className='p-3 mb-3 bg-gray-300 rounded-lg'
+              onClick={() => {
+                mycontrols.lock()
+              }}
+            >
+              Enter Game
+            </button>
+          </div>
+        </div>
+      </div>
+    </UIContent>
+  )
 }
