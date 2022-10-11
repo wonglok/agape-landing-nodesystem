@@ -7,6 +7,7 @@ import { useLoader, useThree } from '@react-three/fiber'
 import anime from 'animejs'
 import { useEffect, useRef, useState } from 'react'
 import { PointerLockControls } from 'three-stdlib'
+import { CrossHair } from './CrossHair'
 
 export function PointerUserControls({ children }) {
   let setCamera = useMultiverse((s) => s.setCamera)
@@ -70,25 +71,31 @@ export function PointerUserControls({ children }) {
 function GUI() {
   let mycontrols = useMultiverse((s) => s.controls)
   return (
-    <UIContent>
-      <div className='fixed top-0 left-0 z-10  items-center justify-center hidden w-full gamebanner'>
-        <div className='inline-block bg-white'>Exit Game</div>
-      </div>
-
-      <div className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full gamenu'>
-        <div className='flex items-center justify-center w-64 h-64 bg-white rounded-3xl'>
-          <div>
-            <button
-              className='p-3 mb-3 bg-gray-300 rounded-lg'
-              onClick={() => {
-                mycontrols.lock()
-              }}
-            >
-              Enter Game
-            </button>
+    <>
+      {mycontrols ? (
+        <UIContent>
+          <div className='fixed top-0 left-0 z-10  items-center justify-center hidden w-full gamebanner'>
+            <div className='inline-block px-6 py-3 m-3 bg-white'>Exit Game</div>
           </div>
-        </div>
-      </div>
-    </UIContent>
+
+          <div className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full gamenu'>
+            <div className='flex items-center justify-center w-64 h-64 bg-white rounded-3xl'>
+              <div>
+                <button
+                  className='p-3 mb-3 bg-gray-300 rounded-lg'
+                  onClick={() => {
+                    mycontrols.lock()
+                  }}
+                >
+                  Enter Game
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <CrossHair></CrossHair>
+        </UIContent>
+      ) : null}
+    </>
   )
 }
