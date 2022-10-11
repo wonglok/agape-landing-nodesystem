@@ -1,22 +1,30 @@
-import { EffectNodeRuntime } from '@/effectnode/component/EffectNodeRuntime'
-import { PostProcCallers } from '@/effectnode/component/PostProcCallers'
-import { Environment } from '@react-three/drei'
-import { useLoader } from '@react-three/fiber'
-import { Suspense } from 'react'
-import { EquirectangularReflectionMapping } from 'three'
-import { RGBELoader } from 'three-stdlib'
+import { ConnectKeyboard } from '@/helpers/ConnectKeyboard'
+import { ConnectPointerControls } from '@/helpers/ConnectPointerControls'
+import { ConnectSimulationPointer } from '@/helpers/ConnectSimulationPointer'
+import { Player } from '@/helpers/Player'
 import { GameFloor } from './GameFloor'
+import { PointerUserControls } from './PointerUserControls'
 
 export function PointerLockGame() {
-  let rgbe = useLoader(RGBELoader, `/hdr/BROADWAY_LAFAYETTE_STATION_2.hdr`)
-  rgbe.mapping = EquirectangularReflectionMapping
+  let gameFloor = `/scene/newyork/NYC_Expo_30.glb`
+  let rgbeURL = `/hdr/BROADWAY_LAFAYETTE_STATION_2.hdr`
 
+  //
   return (
     <group>
-      <GameFloor></GameFloor>
-      <Environment map={rgbe} background></Environment>
-      <PostProcCallers></PostProcCallers>
+      <ConnectKeyboard></ConnectKeyboard>
+      <ConnectPointerControls></ConnectPointerControls>
+      <ConnectSimulationPointer></ConnectSimulationPointer>
+      <Player visible={true}></Player>
+
+      <GameFloor
+        rgbeURL={rgbeURL}
+        glbURL={gameFloor}
+        enablePostProcessing={true}
+      ></GameFloor>
+
       {/*  */}
+      <PointerUserControls></PointerUserControls>
     </group>
   )
 }

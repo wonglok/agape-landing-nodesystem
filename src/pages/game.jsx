@@ -1,13 +1,12 @@
 import { PointerLockGame } from '@/components/PointerLockGame/PointerLockGame'
 import { Loader } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { EffectComposer } from '@react-three/postprocessing'
-import { BloomEffect } from 'postprocessing'
 import { Suspense } from 'react'
+import { Core } from '@/helpers/Core'
 
 export default function Page() {
   return (
-    <Canvas>
+    <Canvas onCreated={(st) => {}}>
       <Suspense fallback={null}>
         <PointerLockGame></PointerLockGame>
       </Suspense>
@@ -33,3 +32,5 @@ async function getStaticProps() {
 }
 
 export { getStaticProps }
+
+//

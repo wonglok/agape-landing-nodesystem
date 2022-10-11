@@ -18,7 +18,7 @@ import { useMultiverse } from './useMultiverse'
 let ttt = 0
 export function Floor({ url }) {
   let addNamedScene = useMultiverse((s) => s.addNamedScene)
-  let setPostProcessing = useMultiverse((s) => s.setPostProcessing)
+  // let setPostProcessing = useMultiverse((s) => s.setPostProcessing)
   let scene = useThree((s) => s.scene)
   let gl = useThree((s) => s.gl)
   let glb = useGLTF(url)
@@ -74,7 +74,7 @@ export function Floor({ url }) {
       //
     })
     return () => {}
-  }, [gl, glb, url, scene, addNamedScene, setPostProcessing])
+  }, [gl, glb, url, scene, addNamedScene])
 
   return (
     <group>
