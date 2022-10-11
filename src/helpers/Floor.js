@@ -11,8 +11,9 @@ import {
   SphereBufferGeometry,
   Vector3,
 } from 'three'
+// import { LineStuff } from './LineDrop/LineStuff'
+
 import { screenOpacity } from './GLOverlayEffect'
-import { LineStuff } from './LineDrop/LineStuff'
 import { useMultiverse } from './useMultiverse'
 
 let ttt = 0

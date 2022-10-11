@@ -93,38 +93,52 @@ export function GameFloor({
 
       //
     })
-    return () => {}
-  }, [gl, glb, scene, addNamedScene, setCamera, camera, setControls, glbURL])
+    return () => {
+      controls.dispose()
+    }
+  }, [
+    gl,
+    glb,
+    scene,
+    addNamedScene,
+    setCamera,
+    camera,
+    setControls,
+    glbURL,
+    setLocked,
+  ])
 
-  console.log(controls)
   return (
     <group>
-      <UIContent>
-        <>
-          {locked && (
-            <div className='fixed top-0 left-0 z-10 bg-white'>
-              <div>isLocked</div>
-            </div>
-          )}
+      {locked && (
+        <UIContent>
+          <div className='fixed top-0 left-0 z-10 bg-white'>
+            <div>isLocked</div>
+          </div>
+        </UIContent>
+      )}
 
-          {!locked && (
-            <div className='fixed top-0 left-0 z-10 bg-white'>
-              <div>
+      <>
+        {!locked && (
+          <UIContent>
+            <div className='fixed top-0 left-0 z-10 flex items-center justify-center w-full h-full'>
+              <div className='flex items-center justify-center w-64 h-64 bg-white rounded-3xl'>
                 <div>
                   <button
+                    className='p-3 mb-3 bg-gray-300 rounded-lg'
                     onClick={() => {
                       //
                       controls.lock()
                     }}
                   >
-                    Lock
+                    Enter Game
                   </button>
                 </div>
               </div>
             </div>
-          )}
-        </>
-      </UIContent>
+          </UIContent>
+        )}
+      </>
       {outletRneder}
       <EffectNodeRuntime glbObject={glb}></EffectNodeRuntime>
       <Environment map={rgbe} background></Environment>
