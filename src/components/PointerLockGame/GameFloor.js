@@ -85,7 +85,7 @@ export function GameFloor({ glbURL = `/scene/newyork/NYC_Expo_30.glb` }) {
 
   return (
     <group>
-      {outletRneder}
+      {outletRneder && <></>}
       <EffectNodeRuntime glbObject={glb}></EffectNodeRuntime>
       {/* {enablePostProcessing && <PostProcCallers></PostProcCallers>} */}
     </group>

@@ -1,11 +1,11 @@
 import { ConnectKeyboard } from '@/helpers/ConnectKeyboard'
 import { ConnectPointerControls } from '@/helpers/ConnectPointerControls'
 import { ConnectSimulationPointer } from '@/helpers/ConnectSimulationPointer'
-import { GLSSR } from '@/helpers/GLSSR'
 import { Player } from '@/helpers/Player'
 import { Box } from '@react-three/drei'
 import { Canvas, useLoader } from '@react-three/fiber'
 import { Bloom, EffectComposer, SSR } from '@react-three/postprocessing'
+import { Controllers, Hands, VRButton, XR } from '@react-three/xr'
 import { Suspense } from 'react'
 import { Color, DoubleSide } from 'three'
 import { GameFloor } from './GameFloor'
@@ -47,7 +47,6 @@ export function PointerLockGame() {
             <ConnectPointerControls></ConnectPointerControls>
             <ConnectSimulationPointer></ConnectSimulationPointer>
             <Player visible={false}></Player>
-
             <PointerUserControls></PointerUserControls>
 
             <RGBE rgbeURL={rgbeURL}></RGBE>
