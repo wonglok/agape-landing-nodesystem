@@ -103,7 +103,3 @@ export function effect({ node, mini, data, setComponent }) {
 }
 
 //
-
-//
-
-//

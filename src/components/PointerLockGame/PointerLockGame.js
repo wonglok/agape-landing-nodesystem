@@ -52,7 +52,7 @@ export function PointerLockGame() {
                 frustumCulled={false}
                 runActionName='sprint_forward'
                 url={`/scene/landing/swat-mo-1024.glb`}
-                speed={2}
+                speed={4}
               ></Companion>
             </GameFloor>
           </group>

@@ -135,7 +135,7 @@ export function Companion({
       // walkTarget.getWorldPosition(h)
       // lookTarget.getWorldPosition(l)
 
-      companionOffset.set(0, 0, -4).applyQuaternion(camera.quaternion)
+      companionOffset.set(0, 0, -3).applyQuaternion(camera.quaternion)
       companionOffset.y = 0
 
       h.copy(player.position).add(companionOffset)
