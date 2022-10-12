@@ -84,9 +84,9 @@ export function effect({ node, mini, data, setComponent }) {
     new MeshPhysicalMaterial()
   )
 
-  physicalMaterialInstance.emissiveNode = checker(
-    mul(add(uv(), vec2(timerLocal(-0.05), 0)), 20)
-  )
+  // physicalMaterialInstance.emissiveNode = checker(
+  //   mul(add(uv(), vec2(timerLocal(-0.05), 0)), 20)
+  // )
 
   //
   applyToIt(physicalMaterialInstance)

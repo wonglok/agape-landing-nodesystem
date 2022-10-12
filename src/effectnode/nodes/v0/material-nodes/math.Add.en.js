@@ -2,16 +2,6 @@ import { getID } from '@/helpers/getID'
 import { Color } from 'three'
 import { UniformNode } from 'three144/examples/jsm/nodes/Nodes'
 
-import {
-  NodeMaterial,
-  checker,
-  mul,
-  add,
-  uv,
-  vec2,
-  timerLocal,
-} from 'three144/examples/jsm/nodes/Nodes'
-
 export async function nodeData({ defaultData, nodeID }) {
   return {
     ...defaultData,
@@ -20,21 +10,26 @@ export async function nodeData({ defaultData, nodeID }) {
     //
     inputs: [
       //
-      { _id: getID(), type: 'input', name: 'slot0', nodeID },
-      { _id: getID(), type: 'input', name: 'slot1', nodeID },
+      { _id: getID(), type: 'input', nodeID },
     ],
-
-    //
-    //
 
     // at least 1
     outputs: [
       //
-      { _id: getID(), type: 'output', name: 'result', nodeID },
+      { _id: getID(), type: 'output', name: 'color', nodeID },
     ],
 
     //
-    uniforms: [],
+    uniforms: [
+      {
+        _id: getID(),
+        nodeID,
+        name: 'color',
+        type: 'color',
+        value: '#ff0000',
+        protected: true,
+      },
+    ],
 
     //
   }
@@ -43,35 +38,16 @@ export async function nodeData({ defaultData, nodeID }) {
 //
 
 //
-
 export function effect({ node, mini, data, setComponent }) {
-  let args = []
+  let colorObj = new Color(data.value.color)
+  let uniform = new UniformNode(colorObj, 'color')
 
-  let send = () => {
-    return mul(...args)
-  }
-
-  node.in0.stream((v) => {
-    console.log(v)
-    args[0] = v
-
-    if (args.length > 0) {
-      node['out_result'].pulse(send())
-    }
-  })
-
-  node.in1.stream((v) => {
-    console.log(v)
-
-    args[1] = v
-
-    if (args.length > 0) {
-      node['out_result'].pulse(send())
-    }
+  data.uniforms['color']((v) => {
+    colorObj.set(v.value)
+    node['out_color'].pulse(uniform)
   })
 
   //
-
   //
   // let applyToIt = (v) => {
   //   mini.ready.itself.then((it) => {
