@@ -1,6 +1,10 @@
 import { getID } from '@/helpers/getID'
 import { Color } from 'three'
-import { UniformNode } from 'three144/examples/jsm/nodes/Nodes'
+import {
+  MathNode,
+  OperatorNode,
+  UniformNode,
+} from 'three144/examples/jsm/nodes/Nodes'
 
 export async function nodeData({ defaultData, nodeID }) {
   return {
@@ -10,25 +14,26 @@ export async function nodeData({ defaultData, nodeID }) {
     //
     inputs: [
       //
-      { _id: getID(), type: 'input', nodeID },
+      { _id: getID(), type: 'input', name: 'inputA', nodeID },
+      { _id: getID(), type: 'input', name: 'inputB', nodeID },
     ],
 
     // at least 1
     outputs: [
       //
-      { _id: getID(), type: 'output', name: 'color', nodeID },
+      { _id: getID(), type: 'output', name: 'float', nodeID },
     ],
 
     //
     uniforms: [
-      {
-        _id: getID(),
-        nodeID,
-        name: 'color',
-        type: 'color',
-        value: '#ff0000',
-        protected: true,
-      },
+      // {
+      //   _id: getID(),
+      //   nodeID,
+      //   name: 'color',
+      //   type: 'color',
+      //   value: '#ff0000',
+      //   protected: true,
+      // },
     ],
 
     //
@@ -37,15 +42,25 @@ export async function nodeData({ defaultData, nodeID }) {
 
 //
 
-//
 export function effect({ node, mini, data, setComponent }) {
-  let colorObj = new Color(data.value.color)
-  let uniform = new UniformNode(colorObj, 'color')
+  //
+  let NULL_VALUE = new UniformNode(0, 'float')
+  //
+  const operatorNode = new OperatorNode('+', NULL_VALUE, NULL_VALUE)
 
-  data.uniforms['color']((v) => {
-    colorObj.set(v.value)
-    node['out_color'].pulse(uniform)
+  node.in_inputA.stream((v) => {
+    operatorNode.aNode.value = v.value
+
+    node.out_float.pulse(operatorNode)
   })
+
+  node.in_inputB.stream((v) => {
+    operatorNode.bNode.value = v.value
+
+    node.out_float.pulse(operatorNode)
+  })
+
+  //
 
   //
   //
@@ -66,13 +81,7 @@ export function effect({ node, mini, data, setComponent }) {
   //   })
   // })
   //
-  // node.in_color.stream((v) => {
-  //   nodeMaterial.colorNode = v
-  // })
-  //
-  // node.in_map.stream((v) => {
-  //   nodeMaterial.mapNode = v
-  // })
+
   //
   // node.in_normalMap.stream((v) => {
   //   nodeMaterial.normalMapNode = v

@@ -77,6 +77,7 @@ export function effect({ node, mini, data, setComponent }) {
         it.material = orig.get(it)
       }
     })
+    physicalMaterialInstance.needsUpdate = true
   }
 
   //
@@ -84,17 +85,13 @@ export function effect({ node, mini, data, setComponent }) {
     new MeshPhysicalMaterial()
   )
 
-  // physicalMaterialInstance.emissiveNode = checker(
-  //   mul(add(uv(), vec2(timerLocal(-0.05), 0)), 20)
-  // )
-
   //
   applyToIt(physicalMaterialInstance)
 
   node.raw.inputs.forEach((it) => {
     node[`in_${it.name}`].stream((v) => {
       physicalMaterialInstance[`${it.name}Node`] = v
-      physicalMaterialInstance.needsUpdate = true
+
       applyToIt(physicalMaterialInstance)
     })
   })
@@ -102,4 +99,6 @@ export function effect({ node, mini, data, setComponent }) {
   //
 }
 
+//
+//
 //

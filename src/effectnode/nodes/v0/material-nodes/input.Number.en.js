@@ -16,7 +16,7 @@ export async function nodeData({ defaultData, nodeID }) {
     // at least 1
     outputs: [
       //
-      { _id: getID(), type: 'output', name: 'number', nodeID },
+      { _id: getID(), type: 'output', name: 'float', nodeID },
     ],
 
     //
@@ -24,9 +24,9 @@ export async function nodeData({ defaultData, nodeID }) {
       {
         _id: getID(),
         nodeID,
-        name: 'number',
-        type: 'number',
-        value: '#ff0000',
+        name: 'float',
+        type: 'float',
+        value: 0,
         protected: true,
       },
     ],
@@ -37,16 +37,13 @@ export async function nodeData({ defaultData, nodeID }) {
 
 //
 export function effect({ node, mini, data, setComponent }) {
-  let numberObj = new Number(data.value.number)
-  let uniform = new UniformNode(numberObj, 'number')
+  let uniformNode = new UniformNode(0, 'float')
 
-  data.uniforms['number']((v) => {
-    uniform = new UniformNode(v.value, 'number')
-    node['out_number'].pulse(uniform)
+  data.uniforms['float']((v) => {
+    uniformNode.value = v.value
+    node['out_float'].pulse(uniformNode)
   })
 }
-
-//
 
 //
 

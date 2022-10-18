@@ -27,13 +27,6 @@ export function EffectNodeObject({
 
   //
   useEffect(() => {
-    // item.geometry?.computeBoundingSphere()
-    // let center = item.geometry.boundingSphere.center
-    // // let radius = item.geometry.boundingSphere.radius
-
-    // //
-    // let next = new Vector3()
-
     let mounter = new Object3D()
     // mounter.position.copy(next)
     let enRuntime = new ENTJCore({ name: item.name + getID() })
