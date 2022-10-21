@@ -1,10 +1,6 @@
 import { getID } from '@/helpers/getID'
 import { Color } from 'three'
-import {
-  MathNode,
-  OperatorNode,
-  UniformNode,
-} from 'three144/examples/jsm/nodes/Nodes'
+import { OperatorNode, UniformNode } from 'three144/examples/jsm/nodes/Nodes'
 
 export async function nodeData({ defaultData, nodeID }) {
   return {
@@ -38,11 +34,14 @@ export async function nodeData({ defaultData, nodeID }) {
   }
 }
 
+//
+
 export function effect({ node, mini, data, setComponent }) {
   //
   let NULL_VALUE = new UniformNode(0, 'float')
+  let NULL_VALUE2 = new UniformNode(0, 'float')
   //
-  const operatorNode = new OperatorNode('+', NULL_VALUE, NULL_VALUE)
+  const operatorNode = new OperatorNode('+', NULL_VALUE, NULL_VALUE2)
 
   data.uniforms['operand']((v) => {
     operatorNode.op = v.value
