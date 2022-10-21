@@ -35,12 +35,8 @@ export async function nodeData({ defaultData, nodeID }) {
       //   protected: true,
       // },
     ],
-
-    //
   }
 }
-
-//
 
 export function effect({ node, mini, data, setComponent }) {
   //
@@ -50,19 +46,14 @@ export function effect({ node, mini, data, setComponent }) {
 
   node.in_inputA.stream((v) => {
     operatorNode.aNode.value = v.value
-
     node.out_float.pulse(operatorNode)
   })
 
   node.in_inputB.stream((v) => {
     operatorNode.bNode.value = v.value
-
     node.out_float.pulse(operatorNode)
   })
 
-  //
-
-  //
   // let applyToIt = (v) => {
   //   mini.ready.itself.then((it) => {
   //     it.material = v
