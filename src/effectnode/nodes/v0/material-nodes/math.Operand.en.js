@@ -44,6 +44,11 @@ export function effect({ node, mini, data, setComponent }) {
   //
   const operatorNode = new OperatorNode('+', NULL_VALUE, NULL_VALUE)
 
+  data.uniforms['operand']((v) => {
+    operatorNode.op = v.value
+    node.out_float.pulse(operatorNode)
+  })
+
   node.in_inputA.stream((v) => {
     operatorNode.aNode.value = v.value
     node.out_float.pulse(operatorNode)
@@ -54,6 +59,8 @@ export function effect({ node, mini, data, setComponent }) {
     node.out_float.pulse(operatorNode)
   })
 }
+
+//
 
 //
 
