@@ -26,14 +26,14 @@ export async function nodeData({ defaultData, nodeID }) {
 
     //
     uniforms: [
-      // {
-      //   _id: getID(),
-      //   nodeID,
-      //   name: 'color',
-      //   type: 'color',
-      //   value: '#ff0000',
-      //   protected: true,
-      // },
+      {
+        _id: getID(),
+        nodeID,
+        name: 'operand',
+        type: 'text',
+        value: '+',
+        protected: true,
+      },
     ],
   }
 }
@@ -53,36 +53,7 @@ export function effect({ node, mini, data, setComponent }) {
     operatorNode.bNode.value = v.value
     node.out_float.pulse(operatorNode)
   })
-
-  // let applyToIt = (v) => {
-  //   mini.ready.itself.then((it) => {
-  //     it.material = v
-  //   })
-  // }
-  //
-  //
-
-  // let physicalMaterialInstance = new MeshPhysicalMaterial()
-  // let nodeMaterial = NodeMaterial.fromMaterial(physicalMaterialInstance)
-  // applyToIt(nodeMaterial)
-  // node.raw.inputs.forEach((it) => {
-  //   node[`in_${it.name}`].stream((v) => {
-  //     nodeMaterial[`${it.name}Node`] = v
-  //   })
-  // })
-  //
-
-  //
-  // node.in_normalMap.stream((v) => {
-  //   nodeMaterial.normalMapNode = v
-  // })
-  //
-  // console.log(data.raw)
 }
-
-//
-
-//
 
 //
 
