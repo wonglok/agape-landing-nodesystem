@@ -154,7 +154,7 @@ export function ENPNodeDetail() {
                     <div className=''>
                       {effectNode.connections
                         .filter((e) => {
-                          return e.input.nodeID === node._id
+                          return e.output.nodeID === node._id
                         })
                         .map((conn) => {
                           return (
@@ -187,7 +187,7 @@ export function ENPNodeDetail() {
                     <div className=''>
                       {effectNode.connections
                         .filter((e) => {
-                          return e.output.nodeID === node._id
+                          return e.input.nodeID === node._id
                         })
                         .map((conn) => {
                           //
@@ -198,7 +198,7 @@ export function ENPNodeDetail() {
                               {/*  */}
 
                               <button
-                                className='p-2 bg-red-200 border-2 border-red-500 rounded-2xl'
+                                className='p-2 mb-2 bg-red-200 border-2 border-red-500 rounded-2xl'
                                 onClick={() => {
                                   //
                                   removeLink(conn)
@@ -254,10 +254,10 @@ function NodeLabel({ nodeID, nodes, socketID }) {
 
   return (
     <div>
-      <div className='px-2 py-2 text-left rounded-t-xl bg-gray-50'>
+      {/* <div className='px-2 py-2 text-left rounded-t-xl bg-gray-50'>
         <>Node: {node?.displayTitle}</>
-      </div>
-      <div className='px-2 py-2 text-left bg-gray-200 rounded-b-xl'>
+      </div> */}
+      <div className='px-2 py-2 text-left bg-gray-200 rounded-xl'>
         Socket: {socket?.name || socketIDX}
       </div>
     </div>

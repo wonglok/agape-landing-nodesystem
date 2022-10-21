@@ -278,12 +278,16 @@ function TC({ node, nodeData, fakeScene }) {
     }
   }, [o3, node, fakeScene])
 
+  let gl = useThree((s) => s.gl)
   // let tt = 0
+  let camera = useThree((s) => s.camera)
   return (
     <>
       {nodeData.uniforms.some((e) => e.name === 'transformPosition') && (
         <SceneTransformControl
           fakeScene={fakeScene}
+          camera={camera}
+          gl={gl}
           object={o3}
           onChange={(o3) => {
             //

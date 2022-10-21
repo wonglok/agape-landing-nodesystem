@@ -63,7 +63,6 @@ export function effect({ node, mini, data, setComponent }) {
   //
 
   //
-  //
   // let applyToIt = (v) => {
   //   mini.ready.itself.then((it) => {
   //     it.material = v

@@ -103,7 +103,7 @@ export function SceneTransformControl({
       tc.visible = false
       tc.dispose()
     }
-  }, [camera, fakeScene, object, onChange, gl.domElement])
+  }, [camera, fakeScene, object, onChange, gl?.domElement])
 
   return null
 }
