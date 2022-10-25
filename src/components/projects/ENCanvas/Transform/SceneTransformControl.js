@@ -37,6 +37,11 @@ export function SceneTransformControl({
   //
   useEffect(() => {
     let tc = new TransformControls(camera, gl.domElement)
+    let parent = new Object3D()
+
+    if (!object.parent) {
+      object.parent = parent
+    }
     let o3 = object
     tc.attach(o3)
     fakeScene.add(tc)

@@ -17,7 +17,6 @@ export function PreviewerModelGLB({ parent, handle }) {
     })
   }, [handle])
   //
-
   return (
     <>
       {/*  */}
