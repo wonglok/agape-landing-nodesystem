@@ -101,13 +101,25 @@ function Content() {
       {activeGLBRuntimeObject?.scene && (
         <>
           <Select
+            multiple={true}
             onChange={(v) => {
+              //
+              v = v || []
+
+              console.log(v)
+              useGLBEditor.setState({ multipleSelection: v })
+
               let first = v[0]
               if (first) {
                 if (useGLBEditor.getState().enableSelect) {
                   setSelection(first)
                 }
               }
+              //
+
+              //!SECTION
+
+              //
             }}
           >
             {/*  */}
@@ -121,7 +133,6 @@ function Content() {
             glbObject={activeGLBRuntimeObject}
             glbRaw={activeGLBRawObject}
           ></EffectNodeRuntime>
-          {/*  */}
           {/*  */}
         </>
       )}
@@ -165,7 +176,29 @@ function Content() {
       )}
 
       <EnvOutlet></EnvOutlet>
+
+      <SelectionHighLight></SelectionHighLight>
     </group>
+  )
+}
+
+function SelectionHighLight() {
+  let multipleSelection = useGLBEditor((s) => s.multipleSelection)
+  multipleSelection = multipleSelection || []
+
+  return (
+    <>
+      {multipleSelection.map((sel) => {
+        return (
+          <group key={sel.uuid + 'gp'}>
+            <boxHelper args={[sel]}></boxHelper>
+          </group>
+        )
+      })}
+      <TransformControls>
+        <group></group>
+      </TransformControls>
+    </>
   )
 }
 

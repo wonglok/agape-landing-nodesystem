@@ -16,6 +16,7 @@ export function ENOutlineNode({ level = 0, node }) {
             // borderColor: `hsla(0.0,0%,${100.0 - (level + 2) * 2.0}%, 1.0)`,
           }}
         >
+          {/*  */}
           {(node?.name || '')
             .toLowerCase()
             .indexOf(outlineSearch.toLowerCase()) !== -1 && (

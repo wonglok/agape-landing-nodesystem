@@ -25,6 +25,7 @@ import {
 import { useMultiverse } from '@/helpers/useMultiverse'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { TransformControls } from './TCNew'
+import { Vector3 } from 'three140'
 // import { clone } from 'three/examples/jsm/utils/SkeletonUtils'
 
 export function SceneTransformControl({
@@ -47,12 +48,37 @@ export function SceneTransformControl({
     fakeScene.add(tc)
     tc.setMode('translate')
 
+    let cloned = new Object3D()
+    cloned.position.copy(o3.position)
+    cloned.rotation.copy(o3.rotation)
+    cloned.scale.copy(o3.scale)
+    let delta = new Vector3()
     let tttt = setInterval(() => {
       //
+
+      delta.copy(o3.position).sub(cloned.position)
+
+      cloned.position.copy(o3.position)
+      cloned.rotation.copy(o3.rotation)
+      cloned.scale.copy(o3.scale)
+
+      //
+
+      if (delta.length() > 0) {
+        ///!SECTION
+
+        useGLBEditor.getState().multipleSelection?.forEach((ms) => {
+          if (ms.uuid !== o3.uuid) {
+            //
+            ms.position.add(delta)
+          }
+        })
+      }
     })
 
     tc.addEventListener('change', (ev) => {
       onChange(object)
+
       window.dispatchEvent(new CustomEvent('transform-update', { detail: o3 }))
     })
 

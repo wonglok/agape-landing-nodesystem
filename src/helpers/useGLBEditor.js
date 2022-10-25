@@ -38,6 +38,10 @@ let generateInside = (set, get) => {
 
   // console.log('generateInside')
   return {
+    multipleSelection: [],
+    setMultipleSelection: (s) => {
+      set({ multipleSelection: s })
+    },
     enableSelect: true,
     outlineSearch: '',
     setOutlineSerach: (v) => {

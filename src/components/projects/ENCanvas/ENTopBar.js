@@ -11,6 +11,8 @@ export function ENTopBarr() {
   let loadGLB = useGLBEditor((s) => s.loadGLB)
   let refreshSystem = useGLBEditor((s) => s.refreshSystem)
   let setOutlineSerach = useGLBEditor((s) => s.setOutlineSerach)
+
+  let multipleSelection = useGLBEditor((s) => s.multipleSelection)
   return (
     <>
       <div className='absolute top-0 left-0 '>
@@ -140,13 +142,27 @@ export function ENTopBarr() {
                 className='p-1 mb-1 mr-1 bg-white'
                 onClick={() => {
                   //
-                  let cloned = clone(activeSceneSelection)
 
-                  activeSceneSelection.parent.add(cloned)
+                  if (multipleSelection.length > 0) {
+                    multipleSelection.forEach((it) => {
+                      let cloned = clone(it)
 
-                  cloned.position.x += 0.1
-                  cloned.position.z += 0.1
-                  setSelection(cloned)
+                      if (it.parent) {
+                        it.parent.add(cloned)
+                      }
+
+                      cloned.position.x += 0.1
+                      cloned.position.z += 0.1
+                    })
+                  } else {
+                    let cloned = clone(activeSceneSelection)
+
+                    activeSceneSelection.parent.add(cloned)
+
+                    cloned.position.x += 0.1
+                    cloned.position.z += 0.1
+                    setSelection(cloned)
+                  }
                 }}
               >
                 Duplicate
