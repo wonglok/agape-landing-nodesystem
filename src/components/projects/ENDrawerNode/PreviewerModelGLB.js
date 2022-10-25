@@ -19,6 +19,7 @@ export function PreviewerModelGLB({ parent, handle }) {
   //
   return (
     <>
+      {/*  */}
       {url && (
         <>
           <div className='h-full border-r' style={{ width: '300px' }}>
@@ -33,10 +34,13 @@ export function PreviewerModelGLB({ parent, handle }) {
                 //
                 openFile(handle, 'floor')
               }}
+              //
               className='inline-block p-2 my-1 text-white bg-blue-500 rounded-lg'
             >
               Open in Editor
             </button>
+            {/*  */}
+            {/*  */}
             {/* <button
               onClick={() => {
                 //
