@@ -40,17 +40,17 @@ export function ENBasicParams({}) {
           {/*  */}
           {/*  */}
         </div>
-      ) : (
-        <div className='p-2 m-2 bg-yellow-400'>
-          Mesh Stanadard / Physical Materail Not Found in the current selection
-        </div>
-      )}
+      ) : null}
     </>
   )
 }
 
 //
-
+/*
+<div className='p-2 m-2 bg-yellow-400'>
+          Mesh Stanadard / Physical Materail Not Found in the current selection
+        </div>
+*/
 //
 
 //
