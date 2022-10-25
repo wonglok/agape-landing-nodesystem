@@ -107,6 +107,7 @@ function Content() {
               v = v || []
 
               console.log(v)
+
               useGLBEditor.setState({ multipleSelection: v })
 
               let first = v[0]
