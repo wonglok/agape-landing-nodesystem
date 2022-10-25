@@ -9,19 +9,20 @@ import {
 } from 'three'
 
 import * as BufferGeometryUtils from 'three/examples/jsm/utils/BufferGeometryUtils.js'
+import { BufferGeometry } from 'three140'
 
 export async function sceneToCollider({ scene }) {
   //
   let gltfScene = scene
 
   //
-  const geometriesToBeMerged = []
+  let geometriesToBeMerged = []
   //
   gltfScene.updateMatrixWorld(true)
 
   let processList = []
   gltfScene.traverse((c) => {
-    if (c.geometry) {
+    if (c.geometry && !c.isSkinnedMesh) {
       processList.push(c)
     }
   })
@@ -49,7 +50,6 @@ export async function sceneToCollider({ scene }) {
       let geo = new BoxBufferGeometry(s.x, s.y, s.z)
       geo.translate(center.x, center.y, center.z)
 
-      //
       // let mesh = new Mesh(
       //   geo,
       //   new MeshBasicMaterial({
@@ -66,6 +66,7 @@ export async function sceneToCollider({ scene }) {
           geo.deleteAttribute(key)
         }
       }
+
       geometriesToBeMerged.push(geo)
     } else if (c.userData?.isSphere) {
       let cloned = c.geometry
@@ -108,6 +109,7 @@ export async function sceneToCollider({ scene }) {
           cloned.deleteAttribute(key)
         }
       }
+
       geometriesToBeMerged.push(cloned)
     }
     await new Promise((r) => r())
@@ -116,11 +118,22 @@ export async function sceneToCollider({ scene }) {
   }
   await new Promise((r) => r())
 
+  //
   // create the merged geometry
-  const combined = BufferGeometryUtils.mergeBufferGeometries(
-    geometriesToBeMerged,
-    false
-  )
+  let combined = []
+  try {
+    combined = BufferGeometryUtils.mergeBufferGeometries(
+      geometriesToBeMerged,
+      false
+    )
+  } catch (e) {
+    //
+  }
+  if (combined.length === 0) {
+    let bg = new BufferGeometry()
+    bg.copy(new BoxBufferGeometry(1000000000, 0.1, 1000000000))
+    combined = [bg]
+  }
 
   combined.boundsTree = new MeshBVH(combined, {
     // Which split strategy to use when constructing the BVH.

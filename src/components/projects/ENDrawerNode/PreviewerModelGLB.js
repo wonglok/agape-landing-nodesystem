@@ -30,7 +30,6 @@ export function PreviewerModelGLB({ parent, handle }) {
             className='flex flex-col items-center justify-center h-full border-r'
             style={{ width: '300px' }}
           >
-            {/*  */}
             <button
               onClick={() => {
                 //
