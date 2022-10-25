@@ -54,19 +54,19 @@ export function SceneTransformControl({
     cloned.scale.copy(o3.scale)
     let deltaPos = new Vector3()
     let deltaScale = new Vector3()
-    let deltaQuater = new Quaternion()
+    let deltaRot = new Vector3()
     let tttt = setInterval(() => {
       //
 
       deltaPos.copy(o3.position).sub(cloned.position)
       deltaScale.copy(o3.scale).sub(cloned.scale)
-      deltaQuater.copy(o3.quaternion).sub(cloned.quaternion)
+      deltaRot.x = o3.rotation.x - cloned.rotation.x
+      deltaRot.y = o3.rotation.y - cloned.rotation.y
+      deltaRot.z = o3.rotation.z - cloned.rotation.z
 
       cloned.position.copy(o3.position)
       cloned.quaternion.copy(o3.quaternion)
       cloned.scale.copy(o3.scale)
-
-      //
 
       if (deltaPos.length() > 0) {
         useGLBEditor.getState().multipleSelection?.forEach((ms) => {
@@ -83,10 +83,12 @@ export function SceneTransformControl({
           }
         })
       }
-      if (deltaQuater.length() > 0) {
+      if (deltaRot.length() > 0) {
         useGLBEditor.getState().multipleSelection?.forEach((ms) => {
           if (ms.uuid !== o3.uuid) {
-            ms.quaternion.copy(cloned.quaternion)
+            ms.rotation.x += deltaRot.x
+            ms.rotation.y += deltaRot.y
+            ms.rotation.z += deltaRot.z
           }
         })
       }
