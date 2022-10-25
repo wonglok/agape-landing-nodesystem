@@ -25,7 +25,7 @@ import {
 import { useMultiverse } from '@/helpers/useMultiverse'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
 import { TransformControls } from './TCNew'
-import { Vector3 } from 'three140'
+import { Quaternion, Vector3 } from 'three140'
 // import { clone } from 'three/examples/jsm/utils/SkeletonUtils'
 
 export function SceneTransformControl({
@@ -52,25 +52,41 @@ export function SceneTransformControl({
     cloned.position.copy(o3.position)
     cloned.rotation.copy(o3.rotation)
     cloned.scale.copy(o3.scale)
-    let delta = new Vector3()
+    let deltaPos = new Vector3()
+    let deltaScale = new Vector3()
+    let deltaQuater = new Quaternion()
     let tttt = setInterval(() => {
       //
 
-      delta.copy(o3.position).sub(cloned.position)
+      deltaPos.copy(o3.position).sub(cloned.position)
+      deltaScale.copy(o3.scale).sub(cloned.scale)
+      deltaQuater.copy(o3.quaternion).sub(cloned.quaternion)
 
       cloned.position.copy(o3.position)
-      cloned.rotation.copy(o3.rotation)
+      cloned.quaternion.copy(o3.quaternion)
       cloned.scale.copy(o3.scale)
 
       //
 
-      if (delta.length() > 0) {
-        ///!SECTION
-
+      if (deltaPos.length() > 0) {
         useGLBEditor.getState().multipleSelection?.forEach((ms) => {
           if (ms.uuid !== o3.uuid) {
-            //
-            ms.position.add(delta)
+            ms.position.add(deltaPos)
+          }
+        })
+      }
+
+      if (deltaScale.length() > 0) {
+        useGLBEditor.getState().multipleSelection?.forEach((ms) => {
+          if (ms.uuid !== o3.uuid) {
+            ms.scale.add(deltaScale)
+          }
+        })
+      }
+      if (deltaQuater.length() > 0) {
+        useGLBEditor.getState().multipleSelection?.forEach((ms) => {
+          if (ms.uuid !== o3.uuid) {
+            ms.quaternion.copy(cloned.quaternion)
           }
         })
       }
