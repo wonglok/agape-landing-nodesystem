@@ -5,7 +5,7 @@ import { ENOutlineNode } from './ENOutlineNode'
 
 export function ENSceneOutline({ height }) {
   let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
-
+  let outlineSearch = useGLBEditor((s) => s.outlineSearch)
   return (
     <div
       className='w-full px-1 py-12 pt-4 overflow-auto text-xs bg-white'
@@ -19,6 +19,7 @@ export function ENSceneOutline({ height }) {
           }
           return 0
         })
+
         .map((kid) => {
           return (
             <ENOutlineNode

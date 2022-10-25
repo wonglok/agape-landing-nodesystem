@@ -1,6 +1,7 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
+import { PointLight } from 'three'
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils'
-import { Object3D } from 'three140'
+import { DirectionalLight, Object3D } from 'three140'
 
 export function ENTopBarr() {
   let switchMode = useGLBEditor((s) => s.switchMode)
@@ -11,7 +12,7 @@ export function ENTopBarr() {
   let refreshSystem = useGLBEditor((s) => s.refreshSystem)
   return (
     <>
-      <div className='absolute top-0 left-0'>
+      <div className='absolute top-0 left-0 '>
         <button
           className={`select-none inline-block p-1 my-1 ml-1 mr-1 text-xs  ${
             editorNavigationMode === 'meta' ? 'bg-green-300' : 'bg-white'
@@ -20,7 +21,7 @@ export function ENTopBarr() {
             switchMode('meta')
           }}
         >
-          Collider Mode
+          Collider
         </button>
         <button
           className={`select-none inline-block p-1 my-1 ml-1 mr-1 text-xs  ${
@@ -30,7 +31,7 @@ export function ENTopBarr() {
             switchMode('floor')
           }}
         >
-          Flat Floor Mode
+          Floor
         </button>
         {/*  */}
         {/* <button
@@ -52,7 +53,7 @@ export function ENTopBarr() {
           }}
           //
         >
-          Orbit Mode
+          Orbit
         </button>
       </div>
 
@@ -97,7 +98,37 @@ export function ENTopBarr() {
                 // cloned.position.z += 0.1
               }}
             >
-              Import GLB
+              + GLB
+            </button>
+
+            <button
+              className='p-1 mb-1 mr-1 bg-white'
+              onClick={async () => {
+                let pl = new PointLight(0xff00ff, 50)
+                pl.name = 'PointLight'
+                pl.position.copy(activeSceneSelection.position)
+
+                activeSceneSelection.parent.add(pl)
+                setSelection(pl)
+                refreshSystem()
+              }}
+            >
+              + Point Light
+            </button>
+
+            <button
+              className='p-1 mb-1 mr-1 bg-white'
+              onClick={async () => {
+                let pl = new DirectionalLight(0xff00ff, 50)
+                pl.name = 'DirectionalLight'
+                pl.position.copy(activeSceneSelection.position)
+
+                activeSceneSelection.parent.add(pl)
+                setSelection(pl)
+                refreshSystem()
+              }}
+            >
+              + Dir Light
             </button>
 
             {activeSceneSelection.type === 'Mesh' && (

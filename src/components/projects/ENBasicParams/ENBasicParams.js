@@ -1,5 +1,8 @@
 import { useGLBEditor } from '@/helpers/useGLBEditor'
+import { Object3D } from 'three'
 import { ENFCommon } from './ENFCommon'
+import { ENFLightDir } from './ENFLightDir'
+import { ENFLightPt } from './ENFLightPt'
 import { ENFObject } from './ENFObject'
 
 export function ENBasicParams({}) {
@@ -7,10 +10,27 @@ export function ENBasicParams({}) {
 
   return (
     <>
+      {activeSceneSelection?.isObject3D && (
+        <>
+          <ENFObject object={activeSceneSelection}></ENFObject>
+        </>
+      )}
+
+      {activeSceneSelection?.isPointLight && (
+        <>
+          <ENFLightPt object={activeSceneSelection}></ENFLightPt>
+        </>
+      )}
+
+      {activeSceneSelection?.isDirectionalLight && (
+        <>
+          <ENFLightDir object={activeSceneSelection}></ENFLightDir>
+        </>
+      )}
+
       {activeSceneSelection?.material?.type === 'MeshPhysicalMaterial' ||
       activeSceneSelection?.material?.type === 'MeshStandardMaterial' ? (
         <div className='w-full'>
-          <ENFObject object={activeSceneSelection}></ENFObject>
           <ENFCommon material={activeSceneSelection?.material}></ENFCommon>
 
           {/*  */}
@@ -28,12 +48,6 @@ export function ENBasicParams({}) {
     </>
   )
 }
-
-//
-
-//
-
-//
 
 //
 
