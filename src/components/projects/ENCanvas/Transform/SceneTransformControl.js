@@ -21,9 +21,10 @@ import {
 // import anime from 'animejs'
 // import { OnlineSystem } from '@/vfx-meta/online/OnlineSystem'
 // import { useMetaStore } from '@/vfx-meta/store/use-meta-store'
-import { TransformControls } from 'three144/examples/jsm/controls/TransformControls.js'
+// import { TransformControls } from 'three144/examples/jsm/controls/TransformControls.js'
 import { useMultiverse } from '@/helpers/useMultiverse'
 import { useGLBEditor } from '@/helpers/useGLBEditor'
+import { TransformControls } from './TCNew'
 // import { clone } from 'three/examples/jsm/utils/SkeletonUtils'
 
 export function SceneTransformControl({
@@ -85,9 +86,11 @@ export function SceneTransformControl({
           onChange(object)
           setTimeout(() => {
             ctrl.enabled = setTo
+            useGLBEditor.setState({ enableSelect: setTo })
           }, 250)
         } else {
           ctrl.enabled = setTo
+          useGLBEditor.setState({ enableSelect: setTo })
           onChange(object)
         }
       }

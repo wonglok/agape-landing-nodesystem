@@ -19,6 +19,7 @@ export function ENFLightDir({ object }) {
         object.color = object.color || new Color(v)
         object.color.set(v)
       },
+      //
       // get emissive() {
       //   return '#' + material.emissive.getHexString()
       // },

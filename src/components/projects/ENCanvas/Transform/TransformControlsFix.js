@@ -12,6 +12,7 @@ export function TransformControlsFix({ fakeScene }) {
   let camera = useThree((s) => s.camera)
   let gl = useThree((s) => s.gl)
 
+  // enableSelect
   useEffect(() => {
     // let hh = (ev) => {
     //   let ctrl = useMultiverse.getState().controls

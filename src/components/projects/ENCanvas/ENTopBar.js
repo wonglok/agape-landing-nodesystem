@@ -10,6 +10,7 @@ export function ENTopBarr() {
   let setSelection = useGLBEditor((s) => s.setSelection)
   let loadGLB = useGLBEditor((s) => s.loadGLB)
   let refreshSystem = useGLBEditor((s) => s.refreshSystem)
+  let setOutlineSerach = useGLBEditor((s) => s.setOutlineSerach)
   return (
     <>
       <div className='absolute top-0 left-0 '>
@@ -105,11 +106,12 @@ export function ENTopBarr() {
               className='p-1 mb-1 mr-1 bg-white'
               onClick={async () => {
                 let pl = new PointLight(0xff00ff, 50)
-                pl.name = 'PointLight'
+                pl.name = 'PointLight_' + Math.random().toString().slice(2, 5)
                 pl.position.copy(activeSceneSelection.position)
 
                 activeSceneSelection.parent.add(pl)
                 setSelection(pl)
+                setOutlineSerach(pl.name)
                 refreshSystem()
               }}
             >
@@ -120,11 +122,13 @@ export function ENTopBarr() {
               className='p-1 mb-1 mr-1 bg-white'
               onClick={async () => {
                 let pl = new DirectionalLight(0xff00ff, 50)
-                pl.name = 'DirectionalLight'
+                pl.name =
+                  'DirectionalLight_' + Math.random().toString().slice(2, 5)
                 pl.position.copy(activeSceneSelection.position)
 
                 activeSceneSelection.parent.add(pl)
                 setSelection(pl)
+                setOutlineSerach(pl.name)
                 refreshSystem()
               }}
             >
@@ -155,6 +159,8 @@ export function ENTopBarr() {
                 if (window.confirm('remove?')) {
                   activeSceneSelection.removeFromParent()
                   setSelection(false)
+                  setOutlineSerach('')
+                  refreshSystem()
                 }
               }}
             >

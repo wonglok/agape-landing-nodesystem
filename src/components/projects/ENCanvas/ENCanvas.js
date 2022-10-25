@@ -101,11 +101,12 @@ function Content() {
       {activeGLBRuntimeObject?.scene && (
         <>
           <Select
-            box
             onChange={(v) => {
               let first = v[0]
               if (first) {
-                setSelection(first)
+                if (useGLBEditor.getState().enableSelect) {
+                  setSelection(first)
+                }
               }
             }}
           >

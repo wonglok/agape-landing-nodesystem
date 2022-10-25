@@ -38,6 +38,7 @@ let generateInside = (set, get) => {
 
   // console.log('generateInside')
   return {
+    enableSelect: true,
     outlineSearch: '',
     setOutlineSerach: (v) => {
       set({ outlineSearch: v })

@@ -33,8 +33,6 @@ export function UIMain() {
   )
 }
 
-//
-
 let tt = 0
 let vv = 0
 
@@ -45,6 +43,7 @@ function UIMainContent() {
   let setDrawerSize = useGLBEditor((s) => s.setDrawerSize)
   let drawerSize = useGLBEditor((s) => s.drawerSize)
   let setOutlineSerach = useGLBEditor((s) => s.setOutlineSerach)
+  let outlineSearch = useGLBEditor((s) => s.outlineSearch)
   //
   //
   //
@@ -97,6 +96,7 @@ function UIMainContent() {
                                         onInput={(ev) => {
                                           setOutlineSerach(ev.target.value)
                                         }}
+                                        value={outlineSearch}
                                       ></input>
                                     </div>
                                   </div>
