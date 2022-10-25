@@ -125,7 +125,7 @@ function UIMainContent() {
                                       height: sizeTD - varHeight - 35 + 'px',
                                     }}
                                   >
-                                    <div>1</div>
+                                    <div></div>
                                   </div>
                                 </div>
                               )

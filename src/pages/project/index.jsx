@@ -3,6 +3,7 @@ import { MyProjects } from '@/components/projects/MyProjects/MyProjects'
 import { ProjectNav } from '@/components/projects/ProjectNav/ProjectNav'
 import { useRouter } from 'next/router'
 
+// public
 export default function StudioHome() {
   let router = useRouter()
   return (
@@ -12,10 +13,21 @@ export default function StudioHome() {
         <ProjectNav></ProjectNav>
 
         <div className='container flex flex-col items-start justify-between px-6 pb-6 mx-auto my-12 border-b border-gray-300 lg:flex-row lg:items-center'>
-          <div>
+          <div className='flex'>
             <h4 className='text-2xl font-bold leading-tight text-gray-800'>
               My Projects
             </h4>
+            <div className='mx-3'>
+              <a
+                className='text-lg text-blue-500 underline'
+                href={`/scene/testdrive-pack/testdrive-pack.zip`}
+                download
+                target={'_blank'}
+                rel='noreferrer'
+              >
+                Download Sample Folder
+              </a>
+            </div>
           </div>
           <div className='mt-6 lg:mt-0'>
             {/* <a href='/'>
