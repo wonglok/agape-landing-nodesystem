@@ -23,7 +23,7 @@ import { EnvOutlet } from './EnvOutlet'
 // import { useEffectNode } from '@/effectnode/store/useEffectNode'
 import { AdaptTC } from './Transform/AdaptTC'
 import { sRGBEncoding } from 'three'
-import { ConfigCanvas } from '@/helpers/ConfigCanvas'
+// import { ConfigCanvas } from '@/helpers/ConfigCanvas'
 import { useEffectNode } from '@/effectnode/store/useEffectNode'
 import { Core } from '@/helpers/Core'
 import { WebGLRenderer } from 'three144'
@@ -77,10 +77,10 @@ function Content() {
   }, [])
 
   //
-  //
 
   return (
     <group>
+      {/*  */}
       {/* <color attach={'background'} args={['#cceeff']}></color> */}
 
       {/*  */}

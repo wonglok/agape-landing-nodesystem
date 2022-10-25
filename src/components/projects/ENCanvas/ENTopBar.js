@@ -135,7 +135,7 @@ export function ENTopBarr() {
               + Dir Light
             </button>
 
-            {activeSceneSelection.type === 'Mesh' && (
+            {activeSceneSelections && (
               <button
                 className='p-1 mb-1 mr-1 bg-white'
                 onClick={() => {
