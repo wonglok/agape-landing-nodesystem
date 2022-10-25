@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react'
-import { FrontSide, BackSide, DoubleSide } from 'three140'
+import { useEffect, useRef, useState } from 'react'
+import { FrontSide, BackSide, DoubleSide, MeshPhysicalMaterial } from 'three140'
 import Pane from 'tweakpane'
 import { ENFTexture } from './Fields/ENFTexture'
-export function ENFCommon({ material }) {
+export function ENFCommon({ object }) {
+  let material = object.material
   let refBasic = useRef()
-
+  let [yo, setYo] = useState(0)
   useEffect(() => {
     //
 
@@ -70,6 +71,9 @@ export function ENFCommon({ material }) {
         material.envMapIntenisty = v
       },
       get transparent() {
+        if (!material) {
+          return false
+        }
         return material.transparent || false
       },
       set transparent(v) {
@@ -99,7 +103,6 @@ export function ENFCommon({ material }) {
 
     pane.addInput(proxy, 'color')
     pane.addInput(proxy, 'emissive')
-
     pane.addInput(proxy, 'transparent')
     pane.addInput(proxy, 'opacity')
     pane.addInput(proxy, 'transmission')
@@ -125,10 +128,23 @@ export function ENFCommon({ material }) {
       },
     })
 
+    {
+      let btn = pane.addButton({ title: 'Upgrade to MeshPhysicalMaterial' })
+      btn.on('click', () => {
+        let old = object.material.clone()
+        delete old.definies
+        object.material = new MeshPhysicalMaterial({
+          ...old,
+        })
+
+        setYo((s) => s + 1)
+      })
+    }
+
     return () => {
       pane.dispose()
     }
-  }, [material])
+  }, [material, yo, object])
 
   return (
     <div
@@ -137,7 +153,6 @@ export function ENFCommon({ material }) {
         ev.stopPropagation()
       }}
     >
-      <button>Yo</button>
       <div className='mb-2'>{material?.name || 'Unknown'} </div>
 
       <div ref={refBasic}></div>

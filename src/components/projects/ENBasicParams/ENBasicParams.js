@@ -28,10 +28,14 @@ export function ENBasicParams({}) {
         </>
       )}
 
-      {activeSceneSelection?.material?.type === 'MeshPhysicalMaterial' ||
-      activeSceneSelection?.material?.type === 'MeshStandardMaterial' ? (
+      {(activeSceneSelection?.material?.type === 'MeshPhysicalMaterial' ||
+        activeSceneSelection?.material?.type === 'MeshStandardMaterial') &&
+      activeSceneSelection?.material ? (
         <div className='w-full'>
-          <ENFCommon material={activeSceneSelection?.material}></ENFCommon>
+          <ENFCommon
+            object={activeSceneSelection}
+            material={activeSceneSelection?.material}
+          ></ENFCommon>
 
           {/*  */}
           {/* <div className='w-full whitespace-pre-wrap'>
