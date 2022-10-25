@@ -173,10 +173,19 @@ export function ENTopBarr() {
               className='p-1 mb-1 mr-1 bg-white'
               onClick={() => {
                 if (window.confirm('remove?')) {
-                  activeSceneSelection.removeFromParent()
-                  setSelection(false)
-                  setOutlineSerach('')
-                  refreshSystem()
+                  if (multipleSelection.length > 0) {
+                    multipleSelection.forEach((activeSceneSelection) => {
+                      activeSceneSelection.removeFromParent()
+                      setSelection(false)
+                      setOutlineSerach('')
+                      refreshSystem()
+                    })
+                  } else {
+                    activeSceneSelection.removeFromParent()
+                    setSelection(false)
+                    setOutlineSerach('')
+                    refreshSystem()
+                  }
                 }
               }}
             >
