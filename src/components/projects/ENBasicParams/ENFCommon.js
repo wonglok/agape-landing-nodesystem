@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { FrontSide, BackSide, DoubleSide, MeshPhysicalMaterial } from 'three140'
+import { FrontSide, BackSide, DoubleSide, MeshPhysicalMaterial } from 'three'
 import Pane from 'tweakpane'
 import { ENFTexture } from './Fields/ENFTexture'
 export function ENFCommon({ object }) {
-  let material = object.material
+  let material = object.material || new MeshPhysicalMaterial({})
   let refBasic = useRef()
   let [yo, setYo] = useState(0)
   useEffect(() => {
@@ -132,9 +132,24 @@ export function ENFCommon({ object }) {
       let btn = pane.addButton({ title: 'Upgrade to MeshPhysicalMaterial' })
       btn.on('click', () => {
         let old = object.material.clone()
-        delete old.definies
+        delete old.defines
         object.material = new MeshPhysicalMaterial({
           ...old,
+          // opacity: 1,
+          // transparent: true,
+          // transmission: 1,
+          // thickness: 10,
+          // roughness: 0,
+          // metalness: 0,
+          // side: DoubleSide,
+          // flatShading: false,
+          map: old.map,
+          emissiveMap: old.emissiveMap || null,
+          normalMap: old.normalMap || null,
+          roughnessMap: old.roughnessMap || null,
+          metalnessMap: old.metalnessMap || null,
+          transmissionMap: old.transmissionMap || null,
+          bumpMap: old.bumpMap || null,
         })
 
         setYo((s) => s + 1)
