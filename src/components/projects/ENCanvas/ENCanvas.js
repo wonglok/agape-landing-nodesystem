@@ -65,7 +65,7 @@ function Content() {
   let activeGLBRuntimeObject = useGLBEditor((s) => s.activeGLBRuntimeObject)
   let editorNavigationMode = useGLBEditor((s) => s.editorNavigationMode)
   let setSelection = useGLBEditor((s) => s.setSelection)
-  let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
+  // let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
   let setOrbit = useGLBEditor((s) => s.setOrbit)
 
   // let [screenPass, setScreenPass] = useState(null)
@@ -91,12 +91,12 @@ function Content() {
         node={activeGLBRuntimeObject.scene}
       ></AdaptTC>
 
-      {activeSceneSelection && (
+      {/* {activeSceneSelection && (
         <boxHelper
           key={activeSceneSelection.uuid}
           args={[activeSceneSelection, 0xff0000]}
         ></boxHelper>
-      )}
+      )} */}
 
       {activeGLBRuntimeObject?.scene && (
         <>
@@ -196,9 +196,9 @@ function SelectionHighLight() {
           </group>
         )
       })}
-      <TransformControls>
+      {/* <TransformControls>
         <group></group>
-      </TransformControls>
+      </TransformControls> */}
     </>
   )
 }

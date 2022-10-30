@@ -37,11 +37,11 @@ export function SceneTransformControl({
 }) {
   //
   useEffect(() => {
-    let tc = new TransformControls(camera, gl.domElement)
-    let parent = new Object3D()
     if (!object) {
       return
     }
+    let tc = new TransformControls(camera, gl.domElement)
+    let parent = new Object3D()
     if (!object.parent) {
       object.parent = parent
     }

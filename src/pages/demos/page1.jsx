@@ -9,10 +9,10 @@ import Router from 'next/router'
 import { Suspense, useEffect } from 'react'
 import { Floor } from '@/helpers/Floor'
 import { Companion } from '@/helpers/Companion'
-// import { useMultiverse } from '@/helpers/useMultiverse'
 import anime from 'animejs'
 import { screenOpacity } from '@/helpers/GLOverlayEffect'
-import { TheVortex } from '@/components/canvas/TheVortex/TheVortex'
+// import { useMultiverse } from '@/helpers/useMultiverse'
+// import { TheVortex } from '@/components/canvas/TheVortex/TheVortex'
 // import { LineStuff } from '@/helpers/LineDrop/LineStuff'
 // import { useThree } from '@react-three/fiber'
 // import { Vector3 } from 'three'
@@ -54,7 +54,6 @@ const Page = (props) => {
       </Suspense>
 
       {/*
-
       <Suspense fallback={null}>
         <Companion
           frustumCulled={false}
@@ -65,7 +64,6 @@ const Page = (props) => {
           walkOffset={[1, 0, -0.01]}
         ></Companion>
       </Suspense>
-
       <Suspense fallback={null}>
         <Companion
           frustumCulled={false}
@@ -75,9 +73,9 @@ const Page = (props) => {
           lookAtOffset={[0, 0, -2]}
           walkOffset={[-1, 0, -0.01]}
         ></Companion>
-      </Suspense> */}
+      </Suspense>
+      */}
 
-      {/*  */}
       {/*  */}
       {/*  */}
 
@@ -88,7 +86,6 @@ const Page = (props) => {
     </>
   )
 }
-
 Page.layout = 'Multiverse'
 
 async function getStaticProps() {
