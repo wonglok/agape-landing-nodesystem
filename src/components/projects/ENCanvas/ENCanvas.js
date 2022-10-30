@@ -108,8 +108,8 @@ function Content() {
               v = v || []
 
               v.forEach((it) => {
-                if (it.userData.light && it.userData.light.isLight) {
-                  v.push(it.userData.light)
+                if (it.userData.hasLight && it.userData.hasLight.isLight) {
+                  v.push(it.userData.hasLight)
                 }
               })
 
@@ -212,13 +212,13 @@ function PLHelpers({ glbScene }) {
           <group key={s.key}>
             {s.isPointLight && (
               <pointLightHelper
-                userData={{ light: s }}
+                userData={{ hasLight: s }}
                 args={[s]}
               ></pointLightHelper>
             )}
             {s.isDirectionalLight && (
               <directionalLightHelper
-                userData={{ light: s }}
+                userData={{ hasLight: s }}
                 args={[s]}
               ></directionalLightHelper>
             )}
