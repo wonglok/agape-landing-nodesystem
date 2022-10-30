@@ -27,6 +27,7 @@ import { sRGBEncoding } from 'three'
 import { useEffectNode } from '@/effectnode/store/useEffectNode'
 import { Core } from '@/helpers/Core'
 import { WebGLRenderer } from 'three144'
+import { Scene } from 'three140'
 //
 
 export function ENCanvas() {
@@ -106,7 +107,11 @@ function Content() {
               //
               v = v || []
 
-              console.log(v)
+              v.forEach((it) => {
+                if (it.userData.light && it.userData.light.isLight) {
+                  v.push(it.userData.light)
+                }
+              })
 
               useGLBEditor.setState({ multipleSelection: v })
 
@@ -128,8 +133,16 @@ function Content() {
               key={activeGLBRuntimeObject.scene.uuid + 'display'}
               object={activeGLBRuntimeObject.scene}
             ></primitive>
+
+            <PLHelpers
+              glbScene={
+                (activeGLBRuntimeObject && activeGLBRuntimeObject.scene) ||
+                new Scene()
+              }
+            ></PLHelpers>
             {/*  */}
           </Select>
+
           <EffectNodeRuntime
             glbObject={activeGLBRuntimeObject}
             glbRaw={activeGLBRawObject}
@@ -180,6 +193,39 @@ function Content() {
 
       <SelectionHighLight></SelectionHighLight>
     </group>
+  )
+}
+function PLHelpers({ glbScene }) {
+  let sels = []
+
+  glbScene.traverse((it) => {
+    if (it.isPointLight) {
+      //
+      sels.push(it)
+    }
+  })
+
+  return (
+    <>
+      {sels.map((s) => {
+        return (
+          <group key={s.key}>
+            {s.isPointLight && (
+              <pointLightHelper
+                userData={{ light: s }}
+                args={[s]}
+              ></pointLightHelper>
+            )}
+            {s.isDirectionalLight && (
+              <directionalLightHelper
+                userData={{ light: s }}
+                args={[s]}
+              ></directionalLightHelper>
+            )}
+          </group>
+        )
+      })}
+    </>
   )
 }
 

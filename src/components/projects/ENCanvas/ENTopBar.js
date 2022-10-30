@@ -36,7 +36,7 @@ export function ENTopBarr() {
         >
           Floor
         </button>
-        {/*  */}
+
         {/* <button
         className={`select-none inline-block p-1 my-1 ml-1 mr-1 text-xs  ${
           editorNavigationMode === 'avatar' ? 'bg-green-300' : 'bg-white'
@@ -59,8 +59,6 @@ export function ENTopBarr() {
           Orbit
         </button>
       </div>
-
-      {/*  */}
 
       <div className='absolute top-0 right-0 z-10 p-1'>
         {activeSceneSelection && (

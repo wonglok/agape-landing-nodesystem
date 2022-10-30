@@ -2,6 +2,7 @@ import { useGLBEditor } from '@/helpers/useGLBEditor'
 
 export function ENOutlineNode({ level = 0, node }) {
   let activeSceneSelection = useGLBEditor((s) => s.activeSceneSelection)
+  let setMultipleSelection = useGLBEditor((s) => s.setMultipleSelection)
   let setSelection = useGLBEditor((s) => s.setSelection)
   let outlineSearch = useGLBEditor((s) => s.outlineSearch)
 
@@ -29,6 +30,7 @@ export function ENOutlineNode({ level = 0, node }) {
               }
               onClick={() => {
                 setSelection(node)
+                setMultipleSelection([node])
               }}
             >
               <div>
