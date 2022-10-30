@@ -142,16 +142,22 @@ export function ENTopBarr() {
                   //
 
                   if (multipleSelection.length > 0) {
-                    multipleSelection.forEach((it) => {
-                      let cloned = clone(it)
+                    multipleSelection
+                      .filter((e) => e)
+                      .forEach((it) => {
+                        console.log(it)
+                        if (it.isHelper) {
+                          return
+                        }
+                        let cloned = clone(it)
 
-                      if (it.parent) {
-                        it.parent.add(cloned)
-                      }
+                        if (it.parent) {
+                          it.parent.add(cloned)
+                        }
 
-                      cloned.position.x += 0.1
-                      cloned.position.z += 0.1
-                    })
+                        cloned.position.x += 0.1
+                        cloned.position.z += 0.1
+                      })
                   } else {
                     let cloned = clone(activeSceneSelection)
 
