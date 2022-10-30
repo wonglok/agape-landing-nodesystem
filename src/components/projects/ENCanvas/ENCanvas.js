@@ -107,18 +107,32 @@ function Content() {
               //
               v = v || []
 
-              v.forEach((it) => {
-                if (it.userData.hasLight && it.userData.hasLight.isLight) {
-                  v.push(it.userData.hasLight)
-                }
-              })
-
-              useGLBEditor.setState({ multipleSelection: v })
-
               let first = v[0]
               if (first) {
                 if (useGLBEditor.getState().enableSelect) {
                   setSelection(first)
+                  useGLBEditor.setState({ multipleSelection: v })
+
+                  v.forEach((it) => {
+                    if (it.userData.setSelectOne) {
+                      setSelection(it)
+                      v = [it.userData.setSelectOne]
+                    }
+                  })
+
+                  v.forEach((it) => {
+                    if (it.userData.hasLight && it.userData.hasLight.isLight) {
+                      v.push(it.userData.hasLight)
+                      setSelection(it.userData.hasLight)
+                    }
+                  })
+
+                  v = v.filter((e) => e)
+
+                  useGLBEditor.setState({ multipleSelection: v })
+                } else {
+                  setSelection(false)
+                  useGLBEditor.setState({ multipleSelection: [] })
                 }
               }
               //
@@ -199,7 +213,7 @@ function PLHelpers({ glbScene }) {
   let sels = []
 
   glbScene.traverse((it) => {
-    if (it.isPointLight) {
+    if (it.isLight) {
       //
       sels.push(it)
     }
@@ -217,10 +231,12 @@ function PLHelpers({ glbScene }) {
               ></pointLightHelper>
             )}
             {s.isDirectionalLight && (
-              <directionalLightHelper
-                userData={{ hasLight: s }}
-                args={[s]}
-              ></directionalLightHelper>
+              <>
+                <directionalLightHelper
+                  args={[s]}
+                  userData={{ hasLight: s }}
+                ></directionalLightHelper>
+              </>
             )}
           </group>
         )
