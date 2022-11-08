@@ -106,13 +106,11 @@ export function XRHealBuddies() {
 }
 
 function mapDecors({ mapScene }) {
-  let waterGeometry = new CircleGeometry(200, 32)
-
+  // let waterGeometry = new CircleGeometry(200, 32)
   // let ori = mapScene.getObjectByName('water')
   // ori.position.y = 0
   // ori.visible = true
   // waterObj.material.color = new Color("#ff0000");
-
   // let water = new Water(waterGeometry, {
   //   textureWidth: 512,
   //   textureHeight: 512,
@@ -128,7 +126,6 @@ function mapDecors({ mapScene }) {
   //   distortionScale: 15.7,
   //   fog: false,
   // })
-
   // setInterval(() => {
   //   water.material.uniforms.time.value = window.performance.now() / 1000 / 10
   // })
@@ -137,26 +134,23 @@ function mapDecors({ mapScene }) {
   // waterObj.rotation.copy(water.rotation);
   // waterObj.scale.copy(water.scale);
   // water.removeFromParent();
-
-  water.position.y = -0.6
-  water.rotation.x = -Math.PI / 2
-  water.frustumCulled = false
-  mapScene.add(water)
-
-  mapScene.traverse((it) => {
-    if (it.name === 'floorGlass') {
-      it.visible = false
-      it.material.side = DoubleSide
-    }
-  })
-
-  let plane = new Mesh(
-    new PlaneBufferGeometry(1000, 10000),
-    new MeshBasicMaterial({ side: DoubleSide, color: new Color('#ff0000') })
-  )
-  plane.rotation.x = Math.PI * -0.5
-  plane.position.y = 1
-  mapScene.add(plane)
+  // water.position.y = -0.6
+  // water.rotation.x = -Math.PI / 2
+  // water.frustumCulled = false
+  // mapScene.add(water)
+  // mapScene.traverse((it) => {
+  //   if (it.name === 'floorGlass') {
+  //     it.visible = false
+  //     it.material.side = DoubleSide
+  //   }
+  // })
+  // let plane = new Mesh(
+  //   new PlaneBufferGeometry(1000, 10000),
+  //   new MeshBasicMaterial({ side: DoubleSide, color: new Color('#ff0000') })
+  // )
+  // plane.rotation.x = Math.PI * 0
+  // plane.position.y = -0.5
+  // mapScene.add(plane)
 }
 
 function BG({ url }) {
