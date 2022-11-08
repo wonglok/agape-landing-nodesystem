@@ -132,12 +132,12 @@ const useMultiverse = create((set, get) => {
 
       set({ activeCollider: collider, colliderPromises: colliderPromises })
 
-      get().setPosition({ initPos: [0, 1.6, -5], lookAt: [0, 1.6, -6] })
+      get().setPosition({ initPos: [0, 1, -3], cameraOffset: [0, -3, 3] })
 
       return collider
     },
 
-    setPosition: ({ initPos = [0, 1, 0], lookAt = [0, -3, 5] }) => {
+    setPosition: ({ initPos = [0, 1, 0], lookAt = [0, 1, -1] }) => {
       let self = get()
       let controls = self.controls
       let camera = self.camera

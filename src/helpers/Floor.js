@@ -23,10 +23,9 @@ export function Floor({ url, mapDecors = () => null }) {
   let scene = useThree((s) => s.scene)
   let gl = useThree((s) => s.gl)
   let glb = useGLTF(url)
+  mapDecors({ mapScene: glb.scene })
 
   let [outletRneder, setRender] = useState(null)
-
-  mapDecors({ mapScene: glb.scene })
 
   //
   useEffect(() => {
