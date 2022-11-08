@@ -17,7 +17,7 @@ import { screenOpacity } from './GLOverlayEffect'
 import { useMultiverse } from './useMultiverse'
 
 let ttt = 0
-export function Floor({ url, children = () => null }) {
+export function Floor({ url, glbFnc = () => null }) {
   let addNamedScene = useMultiverse((s) => s.addNamedScene)
   // let setPostProcessing = useMultiverse((s) => s.setPostProcessing)
   let scene = useThree((s) => s.scene)
@@ -30,31 +30,36 @@ export function Floor({ url, children = () => null }) {
     // setPostProcessing(false)
     prom.then((it) => {
       // geo.scale(1, 0.01, 1)
-      // glb.scene.visible = false
-      // let applyGLB = (v) => {
-      //   if (glb) {
-      //     if (v === 0) {
-      //       glb.scene.visible = false
-      //     } else {
-      //       glb.scene.visible = true
-      //     }
-      //     glb.scene.traverse((it) => {
-      //       if (it.material) {
-      //         it.material.transparent = true
-      //         it.material.opacity = v
-      //       }
-      //     })
-      //   }
-      // }
-      // screenOpacity.value = 0
-      // anime({
-      //   targets: [screenOpacity],
-      //   value: 1,
-      //   duration: 7000,
-      //   update: () => {
-      //     applyGLB(screenOpacity.value)
-      //   },
-      // })
+
+      glb.scene.visible = false
+
+      let applyGLB = (v) => {
+        if (glb) {
+          if (v === 0) {
+            glb.scene.visible = false
+          } else {
+            glb.scene.visible = true
+          }
+          glb.scene.traverse((it) => {
+            if (it.material) {
+              it.material.transparent = true
+              it.material.opacity = v
+            }
+          })
+        }
+      }
+
+      screenOpacity.value = 0
+
+      anime({
+        targets: [screenOpacity],
+        value: 1,
+        duration: 7000,
+        update: () => {
+          applyGLB(screenOpacity.value)
+        },
+      })
+
       // glb.scene.traverse((it) => {
       //   if (it.isLight) {
       //     it.castShadow = true
@@ -62,9 +67,11 @@ export function Floor({ url, children = () => null }) {
       //   it.castShadow = true
       //   it.receiveShadow = true
       // })
-      // setTimeout(() => {
-      //   setRender(<primitive object={glb.scene}></primitive>)
-      // })
+
+      setTimeout(() => {
+        setRender(<primitive object={glb.scene}></primitive>)
+      })
+
       //
     })
     return () => {}
@@ -72,8 +79,9 @@ export function Floor({ url, children = () => null }) {
 
   return (
     <group>
-      {/* {children({ glb })} */}
-      {/* <EffectNodeRuntime key={url} glbObject={glb}></EffectNodeRuntime> */}
+      {glbFnc({ glb })}
+      {outletRneder}
+      <EffectNodeRuntime key={url} glbObject={glb}></EffectNodeRuntime>
     </group>
   )
 }

@@ -16,17 +16,12 @@ export function XRUserControls() {
     //
     let cleans = []
     let orbit = new OrbitControls(camera, gl.domElement)
-    camera.near = 0.01
-    camera.far = 200
     setCamera(camera)
     setControls(orbit)
     setOR(orbit)
 
-    orbit.object.position.set(0, 1, 0)
-    orbit.target.set(0, 1, -1)
-    // orbit.maxDistance = 0.1
-    // orbit.rotateSpeed = -1
-    orbit.enableDamping = true
+    orbit.object.position.set(0, 10, 0)
+    orbit.target.set(0, 0, -10)
 
     cleans.push(() => {
       orbit.enabled = false
