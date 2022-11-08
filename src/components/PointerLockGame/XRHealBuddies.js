@@ -2,7 +2,7 @@ import { ConnectKeyboard } from '@/helpers/ConnectKeyboard'
 import { ConnectPointerControls } from '@/helpers/ConnectPointerControls'
 import { ConnectSimulationPointer } from '@/helpers/ConnectSimulationPointer'
 import { Player } from '@/helpers/Player'
-import { Box, Text, useTexture } from '@react-three/drei'
+import { Box, Text, useGLTF, useTexture } from '@react-three/drei'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { Bloom, EffectComposer, SSR } from '@react-three/postprocessing'
 import {
@@ -70,9 +70,12 @@ export function XRHealBuddies() {
                 <Floor
                   glbFnc={({ glb }) => {
                     return (
-                      <HealthBuddiesWater
-                        mapScene={glb.scene}
-                      ></HealthBuddiesWater>
+                      <group>
+                        <HealthBuddiesWater
+                          mapScene={glb.scene}
+                        ></HealthBuddiesWater>
+                        <Cell></Cell>
+                      </group>
                     )
                   }}
                   url={gameFloor}
@@ -171,9 +174,7 @@ function BG({ url }) {
     scene.background = tex
   }, [scene, tex])
   return (
-    <>
-      <directionalLight position={[0, 10, 10]}></directionalLight>
-    </>
+    <>{/* <directionalLight position={[0, 10, 10]}></directionalLight> */}</>
   )
 }
 
@@ -246,3 +247,41 @@ function Walker({ children }) {
 }
 
 //XRHealBuddies
+
+function Cell() {
+  let glb = useGLTF(`/scene/health-buddies/cell-v1.glb`)
+
+  glb.scene.traverse((it) => {
+    if (it.name === 'NucleousFilling_low_cell_FILLING_0') {
+      it.material.roughness = 0.5
+      // it.material = new MeshPhysicalMaterial({
+      //   color: it.material.color,
+      //   roughnessMap: it.material.roughnessMap,
+      //   metalnessMap: it.material.metalnessMap,
+      //   map: it.material.map,
+      //   transparent: true,
+      //   transmission: 1,
+      //   thickness: 2,
+      // });
+    }
+  })
+  return (
+    <group
+      position={new Vector3()
+        .copy({
+          x: -8.944270133972168,
+          y: 1.9716475009918213 - 0.3,
+          z: -2.7631890773773193,
+        })
+        .toArray()}
+      rotation={[0, Math.PI * 0.5, 0.0]}
+    >
+      <pointLight position={[0, 1, 1]}></pointLight>
+      <primitive
+        rotation={[Math.PI * 0.15, 0, 0.0]}
+        scale={0.4}
+        object={glb.scene}
+      ></primitive>
+    </group>
+  )
+}
