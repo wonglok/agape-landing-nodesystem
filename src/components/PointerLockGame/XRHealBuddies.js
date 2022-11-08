@@ -18,6 +18,7 @@ import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import {
   CircleGeometry,
   Color,
+  DoubleSide,
   EquirectangularReflectionMapping,
   Mesh,
   RepeatWrapping,
@@ -131,15 +132,15 @@ function HealthBuddiesWater({}) {
     // if (Plane096_2) {
     //   Plane096_2.visible = false
     // }
-    // let Plane102 = mapScene.getObjectByName('Plane102')
-    // if (Plane102) {
-    //   Plane102.visible = false
-    // }
+    let Plane102 = mapScene.getObjectByName('Plane102')
+    if (Plane102) {
+      Plane102.visible = true
+    }
 
-    // let water = mapScene.getObjectByName('water')
-    // if (water) {
-    //   water.visible = false
-    // }
+    let water = mapScene.getObjectByName('water')
+    if (water) {
+      water.visible = false
+    }
 
     let floorGlass = mapScene.getObjectByName('floorGlass')
     if (floorGlass) {
@@ -198,6 +199,7 @@ function HealthBuddiesWater({}) {
         color: new Color('#837B2F'),
         roughness: 0.0,
         metalness: 1,
+        side: DoubleSide,
         normalMap: new TextureLoader().load(
           'texture/waternormals.jpg',
           function (texture) {
@@ -212,9 +214,10 @@ function HealthBuddiesWater({}) {
       })
     )
     waterSurfaceFake.frustumCulled = false
-    waterSurfaceFake.position.y = -0.5
-    waterSurfaceFake.rotation.x = 0.0
+    waterSurfaceFake.position.y = -0.8
+    // waterSurfaceFake.rotation.x = Math.PI / 2
     o3d.add(waterSurfaceFake)
+    o3d.frustumCulled = false
 
     // let waterSurface = new Water(waterGeometry, {
     //   textureWidth: 512,
@@ -274,9 +277,9 @@ function HealthBuddiesWater({}) {
       o3d,
       output: (
         <primitive
-          onClick={(ev) => {
-            console.log(ev.object?.name)
-          }}
+          // onClick={(ev) => {
+          //   console.log(ev.object?.name)
+          // }}
           object={o3d}
         ></primitive>
       ),
