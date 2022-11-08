@@ -19,6 +19,7 @@ import {
   CircleGeometry,
   Color,
   EquirectangularReflectionMapping,
+  Mesh,
   RepeatWrapping,
   sRGBEncoding,
   Vector3,
@@ -28,7 +29,7 @@ import { XRUserControls } from './XRUserControls'
 import { ConnectSimulation } from '@/helpers/ConnectSimulation'
 import { Floor } from '@/helpers/Floor'
 import { Water } from 'three-stdlib'
-import { Object3D, TextureLoader } from 'three140'
+import { MeshPhysicalMaterial, Object3D, TextureLoader } from 'three140'
 
 export function XRHealBuddies() {
   let gameFloor = `/scene/journey/NYC_Expo_30.glb`
@@ -52,10 +53,10 @@ export function XRHealBuddies() {
           <Suspense fallback={null}>
             <group
               onClick={(v) => {
-                console.log(v.object)
-                // if (v.object.n)
+                console.log(v.object?.name)
               }}
             >
+              {/* water */}
               {/* <Box args={[2500, 2500, 2500]}>
                 <meshStandardMaterial side={DoubleSide}></meshStandardMaterial>
               </Box> */}
@@ -67,27 +68,20 @@ export function XRHealBuddies() {
               <XRUserControls></XRUserControls>
 
               <Walker>
-                <Floor
-                  glbFnc={({ glb }) => {
-                    return (
-                      <group>
-                        <HealthBuddiesWater
-                          mapScene={glb.scene}
-                        ></HealthBuddiesWater>
-                        <Cell></Cell>
-                      </group>
-                    )
-                  }}
-                  url={gameFloor}
-                ></Floor>
+                <Floor visible={false} url={gameFloor}></Floor>
               </Walker>
-              <Player visible={false}></Player>
+              <Player visible={true}></Player>
             </group>
           </Suspense>
           <Controllers
             hideRaysOnBlur={false}
             rayMaterial={{ color: 'white' }}
           />
+
+          <Suspense fallback={null}>
+            <Cell></Cell>
+            <HealthBuddiesWater></HealthBuddiesWater>
+          </Suspense>
 
           {/*  */}
         </XR>
@@ -98,17 +92,77 @@ export function XRHealBuddies() {
   )
 }
 
-function HealthBuddiesWater({ mapScene }) {
-  let { o3d } = useMemo(() => {
+function HealthBuddiesWater({}) {
+  let glb = useGLTF(`/scene/health-buddies/medical002.glb`)
+  let mapScene = glb.scene
+  let { o3d, output } = useMemo(() => {
     let o3d = new Object3D()
-    let waterGeometry = new CircleGeometry(200, 32)
 
-    let ori = mapScene.getObjectByName('water')
-    ori.position.y -= 100000
-    ori.visible = false
+    // mapScene.userData.done = false
+    // if (mapScene.userData.done === true) {
+    //   return
+    // }
+    // mapScene.userData.done = true
+
+    // let boxGlass = mapScene.getObjectByName('boxGlass')
+    // if (boxGlass) {
+    //   boxGlass.visible = false
+    // }
+    // let Plane096_2 = mapScene.getObjectByName('Plane096_2')
+    // if (Plane096_2) {
+    //   Plane096_2.visible = false
+    // }
+    // let Plane102 = mapScene.getObjectByName('Plane102')
+    // if (Plane102) {
+    //   Plane102.visible = false
+    // }
+
+    // let water = mapScene.getObjectByName('water')
+    // if (water) {
+    //   water.visible = false
+    // }
+
+    // let floorGlass = mapScene.getObjectByName('floorGlass')
+    // if (floorGlass) {
+    //   floorGlass.visible = false
+    // }
+
+    // floorGlass.position.y = 0
+    // floorGlass.material.opacity = 0.5
+    // floorGlass.material.transparent = true
+
+    // let floorGlass2 = new Mesh(
+    //   floorGlass.geometry,
+    //   new MeshPhysicalMaterial({
+    //     opacity: 0.5,
+    //     transparent: true,
+    //     // transmission: 1,
+    //     // ior: 1.5,
+    //     // thickness: -1,
+    //     // reflectivity: 0.1,
+    //     // metalness: 0.0,
+    //     // roughness: 0.0,
+    //   })
+    // )
+    // floorGlass2.position.copy(floorGlass.position)
+    // o3d.add(floorGlass2)
+
+    // let ori = mapScene.getObjectByName('floorGlass')
+    // ori.material = new MeshPhysicalMaterial({
+    //   roughness: 0,
+    //   opacity: 0.3,
+    //   color: new Color('#ffffff'),
+    //   transparent: true,
+    //   // transmission: 1,
+    //   // thickness: 2,
+    //   // metalness: 0,
+    //   // ior: 1.5,
+    //   // reflectivity: 0,
+    // })
     // waterObj.material.color = new Color("#ff0000");
 
-    let water = new Water(waterGeometry, {
+    let waterGeometry = new CircleGeometry(200, 32)
+    let waterSurface = new Water(waterGeometry, {
       textureWidth: 512,
       textureHeight: 512,
       waterNormals: new TextureLoader().load(
@@ -125,42 +179,54 @@ function HealthBuddiesWater({ mapScene }) {
     })
 
     setInterval(() => {
-      water.material.uniforms.time.value = window.performance.now() / 1000 / 10
-    })
-    // waterObj.add(water.parent);
-    // waterObj.position.copy(water.position);
-    // waterObj.rotation.copy(water.rotation);
-    // waterObj.scale.copy(water.scale);
-    // water.removeFromParent();
+      waterSurface.position.y = -0.5
+      waterSurface.rotation.x = -Math.PI / 2
+      waterSurface.frustumCulled = false
 
-    water.position.y = -0.6
-    water.rotation.x = -Math.PI / 2
-    water.frustumCulled = false
-    mapScene.add(water)
+      waterSurface.material.uniforms.time.value =
+        window.performance.now() / 1000 / 10
+    })
+    // waterSurfaceObj.add(waterSurface.parent);
+    // waterSurfaceObj.position.copy(waterSurface.position);
+    // waterSurfaceObj.rotation.copy(waterSurface.rotation);
+    // waterSurfaceObj.scale.copy(waterSurface.scale);
+    // waterSurface.removeFromParent();
+
+    o3d.add(waterSurface)
 
     ////!SECTION
 
-    mapScene.traverse((it) => {
-      //
-      it.frustumCulled = false
+    // mapScene.traverse((it) => {
+    //   //
+    //   it.frustumCulled = false
 
-      if (it.name === 'ball') {
-        it.visible = false
-      }
+    //   if (it.name === 'ball') {
+    //     it.visible = false
+    //   }
 
-      if (it.name === 'floor012') {
-        it.visible = false
-      }
-    })
+    //   if (it.name === 'floor012') {
+    //     it.visible = false
+    //   }
+    // })
 
-    //
+    // //
 
     mapScene.removeFromParent()
     o3d.add(mapScene)
-    return { o3d }
+    return {
+      o3d,
+      output: (
+        <primitive
+          onClick={(ev) => {
+            console.log(ev.object?.name)
+          }}
+          object={o3d}
+        ></primitive>
+      ),
+    }
   }, [mapScene])
 
-  return <primitive object={o3d}></primitive>
+  return output
 }
 
 function BG({ url }) {
@@ -191,6 +257,10 @@ function Walker({ children }) {
   let temp = new Vector3()
 
   useFrame(({ camera }, dt) => {
+    camera.near = 0.1
+    camera.far = 100
+    camera.updateProjectionMatrix()
+
     if (session) {
       player.position.lerp(pt, 0.1)
     } else {

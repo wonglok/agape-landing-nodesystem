@@ -31,16 +31,17 @@ const useMultiverse = create((set, get) => {
     new RoundedBoxGeometry(1.0, 2.0, 1.0, 10, 0.5),
     new MeshPhysicalMaterial({
       color: new Color('#ffffff'),
-      transmission: 1,
+      transmission: 0,
       roughness: 0.5,
-      metalness: 0.4,
+      metalness: 1,
       transparent: true,
-      opacity: 0.5,
+      opacity: 1,
       ior: 1.4,
       reflectivity: 1,
       clearcoat: 1,
     })
   )
+  player.scale.setScalar(1)
 
   player.name = 'myavatar'
   player.geometry.translate(0, -0.5, 0)
@@ -48,6 +49,7 @@ const useMultiverse = create((set, get) => {
     radius: 0.5,
     segment: new Line3(new Vector3(), new Vector3(0, -1.0, 0.0)),
   }
+  player.visible = false
 
   let onlineProfile = {
     // //
@@ -132,7 +134,7 @@ const useMultiverse = create((set, get) => {
 
       set({ activeCollider: collider, colliderPromises: colliderPromises })
 
-      get().setPosition({ initPos: [0, 1.6, -5], lookAt: [0, 1.6, -6] })
+      get().setPosition({ initPos: [-2, 1.6, -3], lookAt: [-5, 1.6, -3.5] })
 
       return collider
     },
@@ -272,14 +274,14 @@ const useMultiverse = create((set, get) => {
       if (!self.camera) {
         return
       }
-      self.camera.near = 0.1
-      self.camera.updateProjectionMatrix()
 
-      if (self.player.position.distanceTo(self.camera.position) <= 2.5) {
-        self.player.visible = false
-      } else {
-        self.player.visible = true
-      }
+      // self.controls
+
+      // if (self.player.position.distanceTo(self.camera.position) <= 2.5) {
+      //   self.player.visible = false
+      // } else {
+      //   self.player.visible = true
+      // }
 
       self.playerVelocity.y += self.playerIsOnGround ? 0 : delta * self.gravity
       self.player.position.addScaledVector(self.playerVelocity, delta)
@@ -491,11 +493,11 @@ const useMultiverse = create((set, get) => {
         return
       }
 
-      if (self.player.position.distanceTo(self.camera.position) <= 2.5) {
-        self.player.visible = false
-      } else {
-        self.player.visible = true
-      }
+      // if (self.player.position.distanceTo(self.camera.position) <= 2.5) {
+      //   self.player.visible = false
+      // } else {
+      //   self.player.visible = true
+      // }
 
       self.playerVelocity.y += self.playerIsOnGround ? 0 : delta * self.gravity
       self.player.position.addScaledVector(self.playerVelocity, delta)
