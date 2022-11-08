@@ -29,7 +29,13 @@ import { XRUserControls } from './XRUserControls'
 import { ConnectSimulation } from '@/helpers/ConnectSimulation'
 import { Floor } from '@/helpers/Floor'
 import { Water } from 'three-stdlib'
-import { MeshPhysicalMaterial, Object3D, TextureLoader } from 'three140'
+import {
+  MeshBasicMaterial,
+  MeshPhysicalMaterial,
+  MeshStandardMaterial,
+  Object3D,
+  TextureLoader,
+} from 'three140'
 
 export function XRHealBuddies() {
   let gameFloor = `/scene/journey/NYC_Expo_30.glb`
@@ -80,8 +86,20 @@ export function XRHealBuddies() {
 
           <Suspense fallback={null}>
             <Cell></Cell>
+            {/* <directionalLight
+              intensity={0.1}
+              position={[-11, 1, -10]}
+            ></directionalLight> */}
             <HealthBuddiesWater></HealthBuddiesWater>
           </Suspense>
+
+          <EffectComposer>
+            <Bloom
+              mipmapBlur
+              intensity={0.051}
+              luminanceThreshold={0.2}
+            ></Bloom>
+          </EffectComposer>
 
           {/*  */}
         </XR>
@@ -108,6 +126,7 @@ function HealthBuddiesWater({}) {
     // if (boxGlass) {
     //   boxGlass.visible = false
     // }
+
     // let Plane096_2 = mapScene.getObjectByName('Plane096_2')
     // if (Plane096_2) {
     //   Plane096_2.visible = false
@@ -122,10 +141,19 @@ function HealthBuddiesWater({}) {
     //   water.visible = false
     // }
 
-    // let floorGlass = mapScene.getObjectByName('floorGlass')
-    // if (floorGlass) {
-    //   floorGlass.visible = false
-    // }
+    let floorGlass = mapScene.getObjectByName('floorGlass')
+    if (floorGlass) {
+      floorGlass.visible = true
+      floorGlass.material = new MeshBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.2,
+      })
+      floorGlass.geometry.computeBoundingSphere()
+      let center = floorGlass.geometry.boundingSphere.center.clone()
+      floorGlass.geometry.center()
+      floorGlass.geometry.translate(center.x, center.y, center.z)
+    }
 
     // floorGlass.position.y = 0
     // floorGlass.material.opacity = 0.5
@@ -134,14 +162,14 @@ function HealthBuddiesWater({}) {
     // let floorGlass2 = new Mesh(
     //   floorGlass.geometry,
     //   new MeshPhysicalMaterial({
-    //     opacity: 0.5,
-    //     transparent: true,
-    //     // transmission: 1,
-    //     // ior: 1.5,
-    //     // thickness: -1,
-    //     // reflectivity: 0.1,
-    //     // metalness: 0.0,
-    //     // roughness: 0.0,
+    //     // opacity: 0.5,
+    //     // transparent: true,
+    //     transmission: 1,
+    //     ior: 1.5,
+    //     thickness: 1,
+    //     reflectivity: 0.1,
+    //     metalness: 0.0,
+    //     roughness: 0.0,
     //   })
     // )
     // floorGlass2.position.copy(floorGlass.position)
@@ -162,37 +190,63 @@ function HealthBuddiesWater({}) {
     // waterObj.material.color = new Color("#ff0000");
 
     let waterGeometry = new CircleGeometry(200, 32)
-    let waterSurface = new Water(waterGeometry, {
-      textureWidth: 512,
-      textureHeight: 512,
-      waterNormals: new TextureLoader().load(
-        'texture/waternormals.jpg',
-        function (texture) {
-          texture.wrapS = texture.wrapT = RepeatWrapping
-        }
-      ),
-      sunDirection: new Vector3(),
-      sunColor: 0xffffff,
-      waterColor: 0x00ffff,
-      distortionScale: 15.7,
-      fog: false,
-    })
+    waterGeometry.rotateX(-Math.PI / 2)
+    let waterSurfaceFake = new Mesh(
+      waterGeometry,
+      new MeshPhysicalMaterial({
+        transparent: true,
+        color: new Color('#837B2F'),
+        roughness: 0.0,
+        metalness: 1,
+        normalMap: new TextureLoader().load(
+          'texture/waternormals.jpg',
+          function (texture) {
+            texture.repeat.set(50, 50)
+            setInterval(() => {
+              texture.offset.x += 0.00001
+              texture.offset.y += 0.00001
+            })
+            texture.wrapS = texture.wrapT = RepeatWrapping
+          }
+        ),
+      })
+    )
+    waterSurfaceFake.frustumCulled = false
+    waterSurfaceFake.position.y = -0.5
+    waterSurfaceFake.rotation.x = 0.0
+    o3d.add(waterSurfaceFake)
 
-    setInterval(() => {
-      waterSurface.position.y = -0.5
-      waterSurface.rotation.x = -Math.PI / 2
-      waterSurface.frustumCulled = false
+    // let waterSurface = new Water(waterGeometry, {
+    //   textureWidth: 512,
+    //   textureHeight: 512,
+    //   waterNormals: new TextureLoader().load(
+    //     'texture/waternormals.jpg',
+    //     function (texture) {
+    //       texture.wrapS = texture.wrapT = RepeatWrapping
+    //     }
+    //   ),
+    //   sunDirection: new Vector3(),
+    //   sunColor: 0xffffff,
+    //   waterColor: 0x00ffff,
+    //   distortionScale: 15.7,
+    //   fog: false,
+    // })
 
-      waterSurface.material.uniforms.time.value =
-        window.performance.now() / 1000 / 10
-    })
-    // waterSurfaceObj.add(waterSurface.parent);
-    // waterSurfaceObj.position.copy(waterSurface.position);
-    // waterSurfaceObj.rotation.copy(waterSurface.rotation);
-    // waterSurfaceObj.scale.copy(waterSurface.scale);
-    // waterSurface.removeFromParent();
+    // setInterval(() => {
+    //   waterSurface.position.y = -0.5
+    //   waterSurface.rotation.x = -Math.PI / 2
+    //   waterSurface.frustumCulled = false
 
-    o3d.add(waterSurface)
+    //   waterSurface.material.uniforms.time.value =
+    //     window.performance.now() / 1000 / 10
+    // })
+    // // waterSurfaceObj.add(waterSurface.parent);
+    // // waterSurfaceObj.position.copy(waterSurface.position);
+    // // waterSurfaceObj.rotation.copy(waterSurface.rotation);
+    // // waterSurfaceObj.scale.copy(waterSurface.scale);
+    // // waterSurface.removeFromParent();
+
+    // o3d.add(waterSurface)
 
     ////!SECTION
 
@@ -211,8 +265,11 @@ function HealthBuddiesWater({}) {
 
     // //
 
-    mapScene.removeFromParent()
     o3d.add(mapScene)
+
+    o3d.traverse((it) => {
+      it.frustumCulled = false
+    })
     return {
       o3d,
       output: (
