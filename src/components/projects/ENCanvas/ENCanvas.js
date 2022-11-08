@@ -114,20 +114,22 @@ function Content() {
                   useGLBEditor.setState({ multipleSelection: v })
 
                   v.forEach((it) => {
-                    if (it.userData.setSelectOne) {
-                      setSelection(it)
-                      v = [it.userData.setSelectOne]
-                    }
-                  })
-
-                  v.forEach((it) => {
                     if (it.userData.hasLight && it.userData.hasLight.isLight) {
                       v.push(it.userData.hasLight)
                       setSelection(it.userData.hasLight)
                     }
                   })
 
+                  v.forEach((it) => {
+                    if (it.userData.setSelectOne) {
+                      setSelection(it)
+                      v = [it.userData.setSelectOne]
+                    }
+                  })
+
                   v = v.filter((e) => e)
+                  v = v.filter((e) => !e.isHelper)
+                  v = v.filter((e) => !e.userData.excludeSelect)
 
                   useGLBEditor.setState({ multipleSelection: v })
                 } else {
@@ -226,7 +228,7 @@ function PLHelpers({ glbScene }) {
           <group key={s.key}>
             {s.isPointLight && (
               <pointLightHelper
-                userData={{ hasLight: s }}
+                userData={{ excludeSelect: true, hasLight: s }}
                 args={[s]}
               ></pointLightHelper>
             )}
@@ -234,7 +236,7 @@ function PLHelpers({ glbScene }) {
               <>
                 <directionalLightHelper
                   args={[s]}
-                  userData={{ hasLight: s }}
+                  userData={{ excludeSelect: true, hasLight: s }}
                 ></directionalLightHelper>
               </>
             )}

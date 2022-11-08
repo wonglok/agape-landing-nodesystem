@@ -80,7 +80,7 @@ const useMultiverse = create((set, get) => {
     rgtRotPressed: false,
 
     playerVelocity: new Vector3(),
-    resetPositon: new Vector3(0, 3, 3),
+    resetPositon: new Vector3(0, 0.5, 0),
     upVector: new Vector3(0, 1, 0),
     tempVector: new Vector3(),
     tempVector2: new Vector3(),
@@ -132,12 +132,12 @@ const useMultiverse = create((set, get) => {
 
       set({ activeCollider: collider, colliderPromises: colliderPromises })
 
-      get().setPosition({})
+      get().setPosition({ initPos: [0, 1.6, -5], lookAt: [0, 1.6, -6] })
 
       return collider
     },
 
-    setPosition: ({ initPos = [0, 5, 0], cameraOffset = [0, -3, 5] }) => {
+    setPosition: ({ initPos = [0, 1, 0], lookAt = [0, -3, 5] }) => {
       let self = get()
       let controls = self.controls
       let camera = self.camera
@@ -147,13 +147,14 @@ const useMultiverse = create((set, get) => {
       self.player.position.fromArray(initPos)
 
       camera.position.copy(self.player.position)
-      camera.position.x = initPos[0] + cameraOffset[0]
-      camera.position.y = initPos[1] + cameraOffset[1]
-      camera.position.z = initPos[2] + cameraOffset[2]
-      camera.lookAt(initPos[0], initPos[1], initPos[2])
+      camera.position.x = initPos[0]
+      camera.position.y = initPos[1]
+      camera.position.z = initPos[2]
+      camera.lookAt(lookAt[0], lookAt[1], lookAt[2])
 
       if (controls.target) {
-        controls.target.set(initPos[0], 0.0, initPos[2])
+        controls.object.position.fromArray(initPos)
+        controls.target.set(lookAt[0], lookAt[1], lookAt[2])
       }
       if (controls.update) {
         controls.update()
@@ -271,6 +272,8 @@ const useMultiverse = create((set, get) => {
       if (!self.camera) {
         return
       }
+      self.camera.near = 0.1
+      self.camera.updateProjectionMatrix()
 
       if (self.player.position.distanceTo(self.camera.position) <= 2.5) {
         self.player.visible = false

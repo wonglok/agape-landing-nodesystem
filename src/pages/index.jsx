@@ -153,7 +153,7 @@ async function getStaticProps() {
   return {
     props: {
       sceneName: 'index',
-      title: 'Effect Node Forge',
+      title: 'Agape Studio',
     },
   }
 }
