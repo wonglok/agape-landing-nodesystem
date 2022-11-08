@@ -17,13 +17,17 @@ import { screenOpacity } from './GLOverlayEffect'
 import { useMultiverse } from './useMultiverse'
 
 let ttt = 0
-export function Floor({ url, glbFnc = () => null }) {
+export function Floor({ url, mapDecors = () => null }) {
   let addNamedScene = useMultiverse((s) => s.addNamedScene)
   // let setPostProcessing = useMultiverse((s) => s.setPostProcessing)
   let scene = useThree((s) => s.scene)
   let gl = useThree((s) => s.gl)
   let glb = useGLTF(url)
+
+  mapDecors({ mapScene: glb.scene })
   let [outletRneder, setRender] = useState(null)
+
+  //
   useEffect(() => {
     let prom = addNamedScene({ name: url, scene: glb.scene })
 
@@ -79,7 +83,7 @@ export function Floor({ url, glbFnc = () => null }) {
 
   return (
     <group>
-      {glbFnc({ glb })}
+      {/* {glbFnc({ glb })} */}
       {outletRneder}
       <EffectNodeRuntime key={url} glbObject={glb}></EffectNodeRuntime>
     </group>

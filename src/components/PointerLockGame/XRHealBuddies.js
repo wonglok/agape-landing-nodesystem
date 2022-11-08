@@ -18,7 +18,10 @@ import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import {
   CircleGeometry,
   Color,
+  DoubleSide,
   EquirectangularReflectionMapping,
+  FrontSide,
+  Mesh,
   RepeatWrapping,
   sRGBEncoding,
   Vector3,
@@ -28,7 +31,13 @@ import { XRUserControls } from './XRUserControls'
 import { ConnectSimulation } from '@/helpers/ConnectSimulation'
 import { Floor } from '@/helpers/Floor'
 import { Water } from 'three-stdlib'
-import { Object3D, TextureLoader } from 'three140'
+import {
+  Math,
+  MeshBasicMaterial,
+  Object3D,
+  PlaneBufferGeometry,
+  TextureLoader,
+} from 'three140'
 
 export function XRHealBuddies() {
   let gameFloor = `/scene/journey/NYC_Expo_30.glb`
@@ -68,13 +77,14 @@ export function XRHealBuddies() {
 
               <Walker>
                 <Floor
-                  glbFnc={({ glb }) => {
-                    return (
-                      <HealthBuddiesWater
-                        mapScene={glb.scene}
-                      ></HealthBuddiesWater>
-                    )
-                  }}
+                  // glbFnc={({ glb }) => {
+                  //   return (
+                  //     <HealthBuddiesWater
+                  //       mapScene={glb.scene}
+                  //     ></HealthBuddiesWater>
+                  //   )
+                  // }}
+                  mapDecors={mapDecors}
                   url={gameFloor}
                 ></Floor>
               </Walker>
@@ -95,69 +105,58 @@ export function XRHealBuddies() {
   )
 }
 
-function HealthBuddiesWater({ mapScene }) {
-  let { o3d } = useMemo(() => {
-    let o3d = new Object3D()
-    let waterGeometry = new CircleGeometry(200, 32)
+function mapDecors({ mapScene }) {
+  let waterGeometry = new CircleGeometry(200, 32)
 
-    let ori = mapScene.getObjectByName('water')
-    ori.position.y -= 100000
-    ori.visible = false
-    // waterObj.material.color = new Color("#ff0000");
+  // let ori = mapScene.getObjectByName('water')
+  // ori.position.y = 0
+  // ori.visible = true
+  // waterObj.material.color = new Color("#ff0000");
 
-    let water = new Water(waterGeometry, {
-      textureWidth: 512,
-      textureHeight: 512,
-      waterNormals: new TextureLoader().load(
-        'texture/waternormals.jpg',
-        function (texture) {
-          texture.wrapS = texture.wrapT = RepeatWrapping
-        }
-      ),
-      sunDirection: new Vector3(),
-      sunColor: 0xffffff,
-      waterColor: 0x00ffff,
-      distortionScale: 15.7,
-      fog: false,
-    })
+  // let water = new Water(waterGeometry, {
+  //   textureWidth: 512,
+  //   textureHeight: 512,
+  //   waterNormals: new TextureLoader().load(
+  //     'texture/waternormals.jpg',
+  //     function (texture) {
+  //       texture.wrapS = texture.wrapT = RepeatWrapping
+  //     }
+  //   ),
+  //   sunDirection: new Vector3(),
+  //   sunColor: 0xffffff,
+  //   waterColor: 0x00ffff,
+  //   distortionScale: 15.7,
+  //   fog: false,
+  // })
 
-    setInterval(() => {
-      water.material.uniforms.time.value = window.performance.now() / 1000 / 10
-    })
-    // waterObj.add(water.parent);
-    // waterObj.position.copy(water.position);
-    // waterObj.rotation.copy(water.rotation);
-    // waterObj.scale.copy(water.scale);
-    // water.removeFromParent();
+  // setInterval(() => {
+  //   water.material.uniforms.time.value = window.performance.now() / 1000 / 10
+  // })
+  // waterObj.add(water.parent);
+  // waterObj.position.copy(water.position);
+  // waterObj.rotation.copy(water.rotation);
+  // waterObj.scale.copy(water.scale);
+  // water.removeFromParent();
 
-    water.position.y = -0.6
-    water.rotation.x = -Math.PI / 2
-    water.frustumCulled = false
-    mapScene.add(water)
+  water.position.y = -0.6
+  water.rotation.x = -Math.PI / 2
+  water.frustumCulled = false
+  mapScene.add(water)
 
-    ////!SECTION
+  mapScene.traverse((it) => {
+    if (it.name === 'floorGlass') {
+      it.visible = false
+      it.material.side = DoubleSide
+    }
+  })
 
-    mapScene.traverse((it) => {
-      //
-      it.frustumCulled = false
-
-      if (it.name === 'ball') {
-        it.visible = false
-      }
-
-      if (it.name === 'floor012') {
-        it.visible = false
-      }
-    })
-
-    //
-
-    mapScene.removeFromParent()
-    o3d.add(mapScene)
-    return { o3d }
-  }, [mapScene])
-
-  return <primitive object={o3d}></primitive>
+  let plane = new Mesh(
+    new PlaneBufferGeometry(1000, 10000),
+    new MeshBasicMaterial({ side: DoubleSide, color: new Color('#ff0000') })
+  )
+  plane.rotation.x = Math.PI * -0.5
+  plane.position.y = 1
+  mapScene.add(plane)
 }
 
 function BG({ url }) {
