@@ -134,7 +134,7 @@ const useMultiverse = create((set, get) => {
 
       set({ activeCollider: collider, colliderPromises: colliderPromises })
 
-      get().setPosition({ initPos: [-2, 1.6, -3], lookAt: [-5, 1.6, -3.5] })
+      // get().setPosition({ initPos: [-2, 1.6, -3], lookAt: [-5, 1.6, -3.5] })
 
       return collider
     },

@@ -23,9 +23,9 @@ export function XRUserControls() {
     setOR(orbit)
 
     orbit.object.position.set(0, 1, 0)
-    orbit.target.set(0, 0, -1)
-    orbit.maxDistance = 0.1
-    orbit.rotateSpeed = -1
+    orbit.target.set(0, 1, -1)
+    // orbit.maxDistance = 0.1
+    // orbit.rotateSpeed = -1
     orbit.enableDamping = true
 
     cleans.push(() => {
