@@ -20,7 +20,7 @@ export function XRUserControls() {
     setControls(orbit)
     setOR(orbit)
 
-    orbit.object.position.set(0, 10, 0)
+    orbit.object.position.set(0, 1, 0)
     orbit.target.set(0, 0, -10)
 
     cleans.push(() => {
@@ -36,7 +36,7 @@ export function XRUserControls() {
   useFrame(({ camera }) => {
     if (player && session) {
       camera.position.lerp(player.position, 0.1)
-      camera.position.y += 1
+      camera.position.y += -1
     } else {
       if (or) {
         or.update()
