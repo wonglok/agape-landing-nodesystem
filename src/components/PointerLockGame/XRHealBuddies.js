@@ -249,7 +249,7 @@ function Walker({ children }) {
   let player = useXR((s) => s.player)
   let session = useXR((s) => s.session)
   let pt = useMemo(() => {
-    return new Vector3(0, 5, 0)
+    return new Vector3(0, 1.3, 0)
   }, [])
 
   let isDown = useRef(false)
