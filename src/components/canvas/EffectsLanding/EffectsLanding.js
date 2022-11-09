@@ -173,8 +173,8 @@ export function EffectsLanding() {
     <group>
       {GPUTier?.tier === 3 && (
         <EffectComposer disableNormalPass multisampling={3}>
-          <Noise opacity={1} premultiply={true}></Noise>
-          <Noise opacity={0.5} premultiply={true}></Noise>
+          {/* <Noise opacity={1} premultiply={true}></Noise>
+          <Noise opacity={0.5} premultiply={true}></Noise> */}
           {/* {!GPUTier.isMobile && GPUTier.tier >= 3 && (
           <GLSSR key={GLSSR.key}></GLSSR>
         )} */}
@@ -195,10 +195,10 @@ export function EffectsLanding() {
             luminanceSmoothing={0.5}
             luminanceThreshold={0.2}
           ></Bloom>
-
+          {/*
           <ChromaticAberration
             offset={[diff * offsetX, diff * offsetY]}
-          ></ChromaticAberration>
+          ></ChromaticAberration> */}
 
           {/*
         <SMAA></SMAA> */}

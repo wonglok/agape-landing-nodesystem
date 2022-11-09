@@ -199,6 +199,8 @@ export function HtmlHeader() {
                   <div className='w-full align-middle  rounded-t-lg'>
                     <Canvas
                       onCreated={(st) => {
+                        let size = st.size
+                        st.gl.setSize(size.width, 300)
                         st.camera.position.z = 1
                       }}
                     >
@@ -216,10 +218,44 @@ export function HtmlHeader() {
                           `}
                           fragmentShader={`
                             varying vec2 vUv;
+
                               uniform float time;
+
+                              const mat2 m = mat2( 0.80,  0.60, -0.60,  0.80 );
+
+                              float noise( in vec2 p ) {
+                                return sin(p.x)*sin(p.y);
+                              }
+
+                              float fbm4( vec2 p ) {
+                                  float f = 0.0;
+                                  f += 0.5000 * noise( p ); p = m * p * 2.02;
+                                  f += 0.2500 * noise( p ); p = m * p * 2.03;
+                                  f += 0.1250 * noise( p ); p = m * p * 2.01;
+                                  f += 0.0625 * noise( p );
+                                  return f / 0.9375;
+                              }
+
+                              float fbm6( vec2 p ) {
+                                  float f = 0.0;
+                                  f += 0.500000*(0.5 + 0.5 * noise( p )); p = m*p*2.02;
+                                  f += 0.250000*(0.5 + 0.5 * noise( p )); p = m*p*2.03;
+                                  f += 0.125000*(0.5 + 0.5 * noise( p )); p = m*p*2.01;
+                                  f += 0.062500*(0.5 + 0.5 * noise( p )); p = m*p*2.04;
+                                  f += 0.031250*(0.5 + 0.5 * noise( p )); p = m*p*2.01;
+                                  f += 0.015625*(0.5 + 0.5 * noise( p ));
+                                  return f/0.96875;
+                              }
+
+                              float pattern (vec2 p) {
+                                float vout = fbm4( p + time + fbm6(  p + fbm4( p + time )) );
+                                return abs(vout);
+                              }
+
                               void main () {
-                                float ff = sin(time * 20.0 + 20.0 * sin(vUv.x) + pow(vUv.y, vUv.x) * cos(time) * 200.0 + vUv.x + vUv.y);
-                                gl_FragColor = vec4(ff, 0.0, ff, pow(ff, 100.0));
+                                float ff = 1.5 * sin(time * 20.0 + 200.0 * sin(vUv.x) + pow(vUv.y, vUv.x) * cos(time) * 200.0 + vUv.x + vUv.y);
+                                float gg = 2.0 * pow(pattern(vUv * 1.0 + ff / 15.0), 5.0);
+                                gl_FragColor = vec4(gg * 2.0 + 0.4 * ff, gg, gg * 2.0 + 0.4, 1.0);
                               }
                             `}
                         ></shaderMaterial>
