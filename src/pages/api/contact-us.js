@@ -25,8 +25,8 @@ export default async function handler(req, res) {
 
   let mailJSON = {
     from: process.env.EMAIL_FROM,
-    to: 'lok@agape.games',
-    subject: `Contact Form of ${body.name}`,
+    to: 'marketing@agape.games',
+    subject: `Contact Form of ${body.name} from Agape Site`,
     text: `
 Name: ${body.name}
 Email:  ${body.email}
