@@ -1,8 +1,11 @@
 import { Core } from '@/helpers/Core'
 import { useScrollStore } from '@/helpers/useScrollStore'
+import { Plane, ScreenQuad } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useEffect, useState } from 'react'
 import { useRef } from 'react'
+import { DoubleSide } from 'three'
+import { PlaneBufferGeometry } from 'three144'
 import { AlphaPass } from './AlphaPass'
 import { ArrowDown } from './ArrowDown'
 import { ContactUs } from './ContactUs'
@@ -25,6 +28,11 @@ export function HtmlHeader() {
     return () => {
       window.removeEventListener('resize', hh)
     }
+  })
+  let time = { value: 0 }
+
+  setInterval(() => {
+    time.value = performance.now() / 1000
   })
 
   //
@@ -189,7 +197,35 @@ export function HtmlHeader() {
                 {/* <Parallax> */}
                 <div className='relative flex flex-col w-full min-w-0 mb-6 break-words border-4 border-pink-600 rounded-lg shadow-lg'>
                   <div className='w-full align-middle  rounded-t-lg'>
-                    <YoCanvas></YoCanvas>
+                    <Canvas
+                      onCreated={(st) => {
+                        st.camera.position.z = 1
+                      }}
+                    >
+                      <Plane args={[3, 3]}>
+                        <shaderMaterial
+                          side={DoubleSide}
+                          uniforms={{ time }}
+                          key={Math.random()}
+                          vertexShader={`
+                            varying vec2 vUv;
+                            void main (void) {
+                              vUv = uv;
+                              gl_Position = vec4(position, 1.0);
+                            }
+                          `}
+                          fragmentShader={`
+                            varying vec2 vUv;
+                              uniform float time;
+                              void main () {
+                                float ff = sin(time * 20.0 + 20.0 * sin(vUv.x) + pow(vUv.y, vUv.x) * cos(time) * 200.0 + vUv.x + vUv.y);
+                                gl_FragColor = vec4(ff, 0.0, ff, pow(ff, 100.0));
+                              }
+                            `}
+                        ></shaderMaterial>
+                      </Plane>
+                    </Canvas>
+                    {/* <YoCanvas></YoCanvas> */}
                   </div>
                   <blockquote className='relative p-8 bg-pink-600 '>
                     <svg
@@ -436,7 +472,7 @@ export function HtmlHeader() {
                   <div className='flex flex-wrap'>
                     <div className='w-full px-4 lg:w-4/12'>
                       <a
-                        href={'https://cocacola.agape.effectnode.com/room'}
+                        href={'https://feeling.reflektor.digital/'}
                         target='_blank'
                         rel='noreferrer'
                       >
@@ -461,7 +497,7 @@ export function HtmlHeader() {
                                 // transform: `scale(1.01)`,
                               }
                             }
-                            className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                            className='absolute top-0 left-0 w-full h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
                             src='/site/logos-covers/c-coca.png'
                           />
                         </div>
@@ -489,7 +525,7 @@ export function HtmlHeader() {
                                 // transform: `scale(1.01)`,
                               }
                             }
-                            className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                            className='absolute top-0 left-0 w-full h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
                             src='/site/logos-covers/c-cadilliac.png'
                           />
                         </div>
@@ -517,7 +553,7 @@ export function HtmlHeader() {
                                 // transform: `scale(1.01)`,
                               }
                             }
-                            className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                            className='absolute top-0 left-0 w-full h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
                             src='/site/logos-covers/c-querlo.png'
                           />
                         </div>
@@ -545,7 +581,7 @@ export function HtmlHeader() {
                         />
                         <img
                           alt='agape'
-                          className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                          className='absolute top-0 left-0 w-full h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
                           src='/site/content/cover/trailer.png'
                         />
                       </div>
@@ -563,7 +599,7 @@ export function HtmlHeader() {
                         />
                         <img
                           alt='agape'
-                          className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                          className='absolute top-0 left-0 w-full h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
                           src='/site/content/cover/editor.png'
                         />
                       </div>
@@ -583,7 +619,7 @@ export function HtmlHeader() {
                         />
                         <img
                           alt='agape'
-                          className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                          className='absolute top-0 left-0 w-full h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
                           src='/site/content/cover/metaverse.png'
                         />
                       </div>
@@ -601,7 +637,7 @@ export function HtmlHeader() {
                         />
                         <img
                           alt='agape'
-                          className='absolute top-0 left-0 h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
+                          className='absolute top-0 left-0 w-full h-auto max-w-full align-middle border-none rounded-lg group-hover:-translate-y-full transition-all duration-700'
                           src='/site/content/cover/github.png'
                         />
                       </div>

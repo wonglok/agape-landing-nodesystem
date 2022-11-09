@@ -56,9 +56,11 @@ export function XRGame() {
               <ConnectSimulation></ConnectSimulation>
               <XRUserControls></XRUserControls>
 
-              <Walker>
-                <Floor url={gameFloor}></Floor>
-              </Walker>
+              <group rotation-y={Math.PI * 1} position={[0, -2, 0]}>
+                <Walker>
+                  <Floor url={gameFloor}></Floor>
+                </Walker>
+              </group>
               <Player visible={false}></Player>
             </group>
           </Suspense>

@@ -167,51 +167,58 @@ export function EffectsLanding() {
   const GPUTier = useDetectGPU()
 
   //
-  // console.log(GPUTier)
   //
 
   return (
     <group>
-      <EffectComposer disableNormalPass multisampling={3}>
-        <Noise opacity={1} premultiply={true}></Noise>
-        <Noise opacity={0.5} premultiply={true}></Noise>
-        {/* {!GPUTier.isMobile && GPUTier.tier >= 3 && (
+      {GPUTier?.tier === 3 && (
+        <EffectComposer disableNormalPass multisampling={3}>
+          <Noise opacity={1} premultiply={true}></Noise>
+          <Noise opacity={0.5} premultiply={true}></Noise>
+          {/* {!GPUTier.isMobile && GPUTier.tier >= 3 && (
           <GLSSR key={GLSSR.key}></GLSSR>
         )} */}
 
-        {/* <SSR></SSR> */}
+          {/* <SSR></SSR> */}
 
-        <Bloom
-          intensity={2.5}
-          mipmapBlur={true}
-          radius={0.4}
-          luminanceSmoothing={0.5}
-          luminanceThreshold={0.2}
-        ></Bloom>
+          {/* <Bloom
+            intensity={2.5}
+            mipmapBlur={true}
+            radius={0.4}
+            luminanceSmoothing={0.5}
+            luminanceThreshold={0.2}
+          ></Bloom> */}
+          <Bloom
+            intensity={3.5}
+            mipmapBlur={true}
+            radius={0.4}
+            luminanceSmoothing={0.5}
+            luminanceThreshold={0.2}
+          ></Bloom>
 
-        <ChromaticAberration
-          offset={[diff * offsetX, diff * offsetY]}
-        ></ChromaticAberration>
+          <ChromaticAberration
+            offset={[diff * offsetX, diff * offsetY]}
+          ></ChromaticAberration>
 
-        {/*
+          {/*
         <SMAA></SMAA> */}
 
-        <Vignette opacity={0.85} darkness={1}></Vignette>
+          <Vignette opacity={0.85} darkness={1}></Vignette>
 
-        {/* <Scanline></Scanline> */}
+          {/* <Scanline></Scanline> */}
 
-        {/* <BrightnessContrast
+          {/* <BrightnessContrast
           brightness={0.07}
           contrast={0.2}
         ></BrightnessContrast>
 
         <HueSaturation hue={hue} saturation={saturation}></HueSaturation> */}
 
-        {/* {<SSR key={'ssr'} {...props}></SSR>} */}
+          {/* {<SSR key={'ssr'} {...props}></SSR>} */}
 
-        {/* <LUT lut={texture}></LUT> */}
+          {/* <LUT lut={texture}></LUT> */}
 
-        {/* <ToneMapping
+          {/* <ToneMapping
           adaptive={true} // toggle adaptive luminance map usage
           resolution={256} // texture resolution of the luminance map
           middleGrey={1.5} // middle grey factor
@@ -219,7 +226,8 @@ export function EffectsLanding() {
           averageLuminance={1.0} // average luminance
           adaptationRate={1.0} // luminance adaptation rate
         /> */}
-      </EffectComposer>
+        </EffectComposer>
+      )}
     </group>
   )
 }

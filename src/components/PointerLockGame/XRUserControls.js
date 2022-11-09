@@ -20,8 +20,8 @@ export function XRUserControls() {
     setControls(orbit)
     setOR(orbit)
 
-    orbit.object.position.set(0, 1, 0)
-    orbit.target.set(0, 0, -10)
+    orbit.object.position.set(0, 5, 0)
+    orbit.target.set(0, 5, 10)
 
     cleans.push(() => {
       orbit.enabled = false

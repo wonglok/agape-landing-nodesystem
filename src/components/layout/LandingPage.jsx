@@ -26,14 +26,14 @@ const LandingPage = ({ router, children }) => {
         left: 0,
       }}
       {...{
-        gl: { antialias: false, logarithmicDepthBuffer: true },
+        gl: { antialias: true, logarithmicDepthBuffer: false },
         onCreated: (st) => {
           st.events.connect(document.body)
 
           st.scene.background = new Color('#000000')
           st.gl.physicallyCorrectLights = true
           st.gl.outputEncoding = sRGBEncoding
-          st.gl.shadowMap.enabled = true
+          st.gl.shadowMap.enabled = false
 
           Core.now.canvas = Core.makeDisposableNode({ name: 'canvas' }).sub
           for (let kn in st) {
