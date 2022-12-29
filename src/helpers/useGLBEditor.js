@@ -465,6 +465,7 @@ let generateInside = (set, get) => {
           create: true,
         }
       )
+
       let handle = await generative.getFileHandle('hello.en.glb', {
         create: true,
       })
